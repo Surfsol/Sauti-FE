@@ -61,9 +61,11 @@ const useStyles = makeStyles(theme => ({
   },
   watermark: {
     backgroundImage: `url(${splashImage})`,
-    backgroundSize: "10%",
+    backgroundSize: "40%",
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "center"
+    // backgroundPosition: "center"
+    backgroundPositionX: "47%",
+    backgroundPositionY: "15%"
   },
   whitebg: {
     backgroundColor: "white"
@@ -90,12 +92,6 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
-  // //hides control panel
-  // const [hidden, setHidden] = useState(false);
-
-  // function HideFilters() {
-  //   setHidden(!hidden);
-  // }
   //keys used for socialmedia
   const [keys, setKeys] = useState([]);
 
@@ -156,10 +152,10 @@ const GraphContainer = props => {
           <Grid
             container
             xs={12}
-            style={{ height: "30px" }}
+            //style={{ height: "30px" }}
             className={classes.whitebg}
           >
-            <Grid xs={3}>
+            <Grid xs={3} style={{ paddingBottom: "2%" }}>
               <Grid
                 container
                 spacing={2}
