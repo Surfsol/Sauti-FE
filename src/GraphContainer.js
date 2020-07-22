@@ -156,10 +156,10 @@ const GraphContainer = props => {
           <Grid
             container
             xs={12}
-            style={{ height: "30px" }}
+            //style={{ height: "30px" }}
             className={classes.whitebg}
           >
-            <Grid xs={3}>
+            <Grid xs={3} style={{ paddingBottom: "2%" }}>
               <Grid
                 container
                 spacing={2}
