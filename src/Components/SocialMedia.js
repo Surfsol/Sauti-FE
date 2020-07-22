@@ -47,7 +47,7 @@ const SocialMedia = () => {
     window.open(
       `https://twitter.com/intent/tweet?text=https://www.databank.sautiafrica.org/data${socialMediaLink}`,
       "",
-      "width=300,height=300"
+      "width=600,height=600"
     );
   }
 
@@ -55,7 +55,7 @@ const SocialMedia = () => {
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=https://www.databank.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`,
       "",
-      "width=300,height=300"
+      "width=600,height=600"
     );
   }
 

@@ -61,11 +61,11 @@ const useStyles = makeStyles(theme => ({
   },
   watermark: {
     backgroundImage: `url(${splashImage})`,
-    backgroundSize: "10%",
+    backgroundSize: "40%",
     backgroundRepeat: "no-repeat",
     // backgroundPosition: "center"
     backgroundPositionX: "47%",
-    backgroundPositionY: "50%"
+    backgroundPositionY: "15%"
   },
   whitebg: {
     backgroundColor: "white"
