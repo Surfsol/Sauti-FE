@@ -63,7 +63,9 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: `url(${splashImage})`,
     backgroundSize: "10%",
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "center"
+    // backgroundPosition: "center"
+    backgroundPositionX: "47%",
+    backgroundPositionY: "50%"
   },
   whitebg: {
     backgroundColor: "white"
@@ -90,12 +92,6 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
-  // //hides control panel
-  // const [hidden, setHidden] = useState(false);
-
-  // function HideFilters() {
-  //   setHidden(!hidden);
-  // }
   //keys used for socialmedia
   const [keys, setKeys] = useState([]);
 
