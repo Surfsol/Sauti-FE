@@ -86,7 +86,7 @@ const AddFilter = ({
   };
 
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
-  allSelectableOptions.unshift("KEY DEMOGRAPHICS");
+  allSelectableOptions.unshift("DEMOGRAPHICS");
 
   const allItems = [];
   for (let key in FilterBoxOptions.default) {
@@ -119,9 +119,9 @@ const AddFilter = ({
           >
             {ordered.map(e => {
               if (
-                e === "KEY DEMOGRAPHICS" ||
-                e === "INFORMATION DEMAND" ||
-                e === "BUSINESS BEHAVIOUR"
+                e === "DEMOGRAPHICS" ||
+                e === "INFORMATION INSIGHTS" ||
+                e === "BUSINESS INSIGHTS"
               ) {
                 return <p className={classes.super}>{e}</p>;
               } else {

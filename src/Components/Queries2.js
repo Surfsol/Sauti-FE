@@ -16,25 +16,21 @@ const GetData = (props, { makeValues }) => {
   const queriesFilters = useSelector(
     state => state.queriesReducer.queriesFilters
   );
-
+  console.log(queriesFilters.filters);
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
   let QUERY;
   let thisQuery;
   let filters;
-  let setFilters;
+  let setFilters = props.setFilters;
   let filterBoxStartDate;
   let filterBoxEndDate;
 
   if (queriesFilters.filters) {
     filters = queriesFilters.filters;
-    setFilters = queriesFilters.setFilters;
-    // filterBoxStartDate = queriesFilters.filterBoxStartDate;
-    // filterBoxEndDate = queriesFilters.filterBoxStartDate;
   } else if (filters === undefined) {
     filters = props.filters;
-    setFilters = props.setFilters;
     filterBoxStartDate = props.filterBoxStartDate;
     filterBoxEndDate = props.filterBoxStartDate;
     queriesFilters.filters = filters;
@@ -56,6 +52,7 @@ const GetData = (props, { makeValues }) => {
       );
     }
   };
+
   const firstThreeFilters = filterIds => {
     return (
       filterIds.length === 3 &&
@@ -141,8 +138,10 @@ const GetData = (props, { makeValues }) => {
   const [noDataModal, setNoDataModal] = useState(true);
 
   useEffect(() => {
+    console.log("run useEffect", filters);
     setNoDataModal(true);
   });
+
   function noData() {
     if (noDataModal) {
       return (

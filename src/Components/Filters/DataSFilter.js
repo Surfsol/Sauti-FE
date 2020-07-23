@@ -111,9 +111,9 @@ const DataSFilter = ({
           <Grid container xs={12} className={classes.optionsContainer}>
             {ordered.map(e => {
               if (
-                e === "KEY DEMOGRAPHICS" ||
-                e === "INFORMATION DEMAND" ||
-                e === "BUSINESS BEHAVIOUR"
+                e === "DEMOGRAPHICS" ||
+                e === "INFORMATION INSIGHTS" ||
+                e === "BUSINESS INSIGHTS"
               ) {
                 return <p className={classes.super}>{e}</p>;
               } else if (demographics.includes(e)) {
@@ -169,9 +169,9 @@ const DataSFilter = ({
           <Grid container xs={12} style={{ flexDirection: "column" }}>
             {ordered.map(e => {
               if (
-                e === "KEY DEMOGRAPHICS" ||
-                e === "INFORMATION DEMAND" ||
-                e === "BUSINESS BEHAVIOUR"
+                e === "DEMOGRAPHICS" ||
+                e === "INFORMATION INSIGHTS" ||
+                e === "BUSINESS INSIGHTS"
               ) {
                 return <p className={classes.super}>{e}</p>;
               } else {

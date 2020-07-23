@@ -51,7 +51,7 @@ export default function FilterBox(props) {
   const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
   const [displayDrop, setDisplayDrop] = useState([]);
 
-  //theSuperCategories (Key Demographic, Information Demand, Business Behavior)
+  //theSuperCategories (Demographic, Information Insights, Business Insights)
   //categoriesCollected (categories selected ex. 'gender')
   const xVar = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {

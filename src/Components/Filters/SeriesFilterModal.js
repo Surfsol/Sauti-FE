@@ -86,8 +86,8 @@ function SeriesFilterModal({ handleClose }) {
         <Div>
           <BigX onClick={() => handleClose(false)}>X</BigX>
           <FormTitle>
-            Would you like to filter by "Information Demand" or "Business
-            Behavior" categories?
+            Would you like to filter by "Information Insights" or "Business
+            Insights" categories?
           </FormTitle>
           <DownloadText>
             Click <BigContinue>Continue</BigContinue> if you'd like to upgrade

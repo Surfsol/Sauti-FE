@@ -11,7 +11,10 @@ const GraphParse = ({
   filterBoxEndDate,
   setChartDataSM
 }) => {
+  //needed for filterByDate, cannot filter tradersUsers by date
+  let typeOfQuery = Object.keys(data)[0];
   console.log(
+    typeOfQuery,
     "data",
     data,
     "end",
@@ -20,7 +23,12 @@ const GraphParse = ({
     filterBoxStartDate
   );
   //maybe will need something like this in else statement to prevent errors: data.sessionData != undefined &&
-  if (queryType === "sessionsData" && filterBoxStartDate && filterBoxEndDate) {
+  if (
+    queryType === "sessionsData" &&
+    typeOfQuery != "tradersUsers" &&
+    filterBoxStartDate &&
+    filterBoxEndDate
+  ) {
     data = filterByDate(data, filterBoxStartDate, filterBoxEndDate);
   }
 
