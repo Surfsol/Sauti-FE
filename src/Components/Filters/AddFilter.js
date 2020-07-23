@@ -33,6 +33,8 @@ const AddFilter = ({
   const [scrollTopVar, setScrollTopVar] = useState();
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
+  const adjustScroll = scrollY.position + 40;
+  console.log(adjustScroll);
 
   useEffect(() => {
     const div = innerRef.current;
@@ -52,7 +54,7 @@ const AddFilter = ({
   useEffect(() => {
     if (document.getElementById("scroll")) {
       let scrollBar = document.getElementById("scroll");
-      scrollBar.scrollTop = scrollY.position;
+      scrollBar.scrollTop = adjustScroll;
     }
   }, document);
 
