@@ -93,6 +93,14 @@ export default function FilterBox(props) {
       tier = decodeToken(token);
       tier = tier.tier;
     }
+    let access;
+    if (
+      tier !== undefined &&
+      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
+    ) {
+      access = true;
+    }
+
     dispatch(tierDefined({ tier: tier }));
 
     useEffect(() => {
@@ -122,6 +130,7 @@ export default function FilterBox(props) {
         <Grid container>
           <DataSFilter
             tier={tier}
+            access={access}
             newSub={newSub}
             filterSelectorName={filterSelectorName}
             filters={filters}
@@ -140,6 +149,7 @@ export default function FilterBox(props) {
           <AddFilter
             filterSelectorName={filterSelectorName}
             filters={filters}
+            access={access}
             setFilters={setFilters}
             index={index}
             setUpdateUrlFlag={setUpdateUrlFlag}
@@ -158,7 +168,7 @@ export default function FilterBox(props) {
   const [access, setAccess] = useState(false);
 
   const tier = useSelector(state => state.tierReducer.tier.tier);
-
+  console.log(tier);
   const newSub = getSubscription();
   let sub;
   if (newSub) {

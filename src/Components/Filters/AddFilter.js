@@ -13,6 +13,14 @@ import { Box } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { scrollPosition } from "../redux-actions/scrollAction";
 
+import { allowed } from "../orderedGraphLabels";
+import { separateOperations } from "graphql";
+
+import SeriesFilterModal from "./SeriesFilterModal";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+
 const AddFilter = ({
   filters,
   setFilters,
@@ -22,19 +30,21 @@ const AddFilter = ({
   setUpdateUrlFlag,
   updateUrlFlag,
   displayDrop,
-  setDisplayDrop
-  // scrollTopVar,
-  // setScrollTopVar
+  setDisplayDrop,
+  access
 }) => {
   const classes = useStyles();
-  //after click on scroll, should reload to scroll position
-  //const [scrollTop, setScrollTop] = useState(document.body.scrollTop);
   const innerRef = useRef(null);
   const [scrollTopVar, setScrollTopVar] = useState();
+  const [upgradeModal, setUpGradeModal] = useState(false);
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
   console.log(adjustScroll);
+
+  const handleClose = () => {
+    setUpGradeModal(false);
+  };
 
   useEffect(() => {
     const div = innerRef.current;
@@ -61,100 +71,131 @@ const AddFilter = ({
   const changeOption = e => {
     dispatch(scrollPosition({ position: scrollTopVar }));
     const selectedName = e.target.dataset.selectvalue;
-    setUpdateUrlFlag(!updateUrlFlag);
-    let optionFlags = {};
-    graphLabels[
-      `${FilterBoxOptions.default[selectedName].value.type}`
-    ].labels.forEach(option => {
-      optionFlags = {
-        ...optionFlags,
-        [option]: false
-      };
-    });
-    setFilters({
-      ...filters,
-      [index]: {
-        ...filters[index],
-        selectedCategory: selectedName, //option
-        selectedTableColumnName:
-          FilterBoxOptions.default[selectedName].value.type,
+    if (access || allowed.includes(selectedName)) {
+      setUpdateUrlFlag(!updateUrlFlag);
+      let optionFlags = {};
+      graphLabels[
+        `${FilterBoxOptions.default[selectedName].value.type}`
+      ].labels.forEach(option => {
+        optionFlags = {
+          ...optionFlags,
+          [option]: false
+        };
+      });
+      setFilters({
+        ...filters,
+        [index]: {
+          ...filters[index],
+          selectedCategory: selectedName, //option
+          selectedTableColumnName:
+            FilterBoxOptions.default[selectedName].value.type,
 
-        selectedTable: FilterBoxOptions.default[selectedName].value.query,
-        selectedOption: undefined,
-        selectableOptions: { ...optionFlags },
-        showOptions: true
-      }
-    });
+          selectedTable: FilterBoxOptions.default[selectedName].value.query,
+          selectedOption: undefined,
+          selectableOptions: { ...optionFlags },
+          showOptions: true
+        }
+      });
+    } else {
+      setUpGradeModal(true);
+    }
   };
 
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   allSelectableOptions.unshift("DEMOGRAPHICS");
 
-  const allItems = [];
-  for (let key in FilterBoxOptions.default) {
-    allItems.push([key, FilterBoxOptions.default[key].value.type]);
+  // const allItems = [];
+  // for (let key in FilterBoxOptions.default) {
+  //   allItems.push([key, FilterBoxOptions.default[key].value.type]);
+  // }
+
+  function inFilters() {
+    return (
+      <Grid container xs={12}>
+        <Grid
+          item
+          xs={12}
+          onClick={() => setDisplayDrop([])}
+          className={classes.filterButton}
+        >
+          <Box display="flex" height="100%" alignItems="center">
+            <div className={classes.filterText}>
+              <span className={classes.filterName}> Filter</span>
+            </div>
+            <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
+          </Box>
+        </Grid>
+
+        <Grid
+          container
+          xs={12}
+          className={classes.optionsContainer}
+          ref={innerRef}
+          id="scroll"
+        >
+          {ordered.map(e => {
+            if (
+              e === "DEMOGRAPHICS" ||
+              e === "INFORMATION INSIGHTS" ||
+              e === "BUSINESS INSIGHTS"
+            ) {
+              return <p className={classes.super}>{e}</p>;
+            } else if (allowed.includes(e)) {
+              return (
+                <>
+                  <span
+                    className="selectable"
+                    data-selectvalue={e}
+                    onClick={changeOption}
+                  >
+                    {e}
+                  </span>
+                  <RenderCheckContainer
+                    i={index}
+                    itemName={e}
+                    filters={filters}
+                    graphLabels={graphLabels}
+                    setFilters={setFilters}
+                    setUpdateUrlFlag={setUpdateUrlFlag}
+                    updateUrlFlag={updateUrlFlag}
+                    FilterBoxOptions={FilterBoxOptions}
+                    setDisplayDrop={setDisplayDrop}
+                  />
+                </>
+              );
+            } else {
+              return (
+                <>
+                  <span
+                    className={access ? "selectable" : "limited"}
+                    data-selectvalue={e}
+                    onClick={changeOption}
+                  >
+                    {e}
+                  </span>
+                  <RenderCheckContainer
+                    i={index}
+                    itemName={e}
+                    filters={filters}
+                    graphLabels={graphLabels}
+                    setFilters={setFilters}
+                    setUpdateUrlFlag={setUpdateUrlFlag}
+                    updateUrlFlag={updateUrlFlag}
+                    FilterBoxOptions={FilterBoxOptions}
+                    setDisplayDrop={setDisplayDrop}
+                  />
+                </>
+              );
+            }
+          })}
+        </Grid>
+      </Grid>
+    );
   }
   const displayDropOptions = () => {
-    if (displayDrop.includes(index)) {
-      return (
-        <Grid container xs={12}>
-          <Grid
-            item
-            xs={12}
-            onClick={() => setDisplayDrop([])}
-            className={classes.filterButton}
-          >
-            <Box display="flex" height="100%" alignItems="center">
-              <div className={classes.filterText}>
-                <span className={classes.filterName}> Filter</span>
-              </div>
-              <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
-            </Box>
-          </Grid>
-
-          <Grid
-            container
-            xs={12}
-            className={classes.optionsContainer}
-            ref={innerRef}
-            id="scroll"
-          >
-            {ordered.map(e => {
-              if (
-                e === "DEMOGRAPHICS" ||
-                e === "INFORMATION INSIGHTS" ||
-                e === "BUSINESS INSIGHTS"
-              ) {
-                return <p className={classes.super}>{e}</p>;
-              } else {
-                return (
-                  <>
-                    <span
-                      className="selectable"
-                      data-selectvalue={e}
-                      onClick={changeOption}
-                    >
-                      {e}
-                    </span>
-                    <RenderCheckContainer
-                      i={index}
-                      itemName={e}
-                      filters={filters}
-                      graphLabels={graphLabels}
-                      setFilters={setFilters}
-                      setUpdateUrlFlag={setUpdateUrlFlag}
-                      updateUrlFlag={updateUrlFlag}
-                      FilterBoxOptions={FilterBoxOptions}
-                      setDisplayDrop={setDisplayDrop}
-                    />
-                  </>
-                );
-              }
-            })}
-          </Grid>
-        </Grid>
-      );
-    } else {
+    if (displayDrop.includes(index) && upgradeModal === false) {
+      return <>{inFilters()}</>;
+    } else if (upgradeModal === false) {
       return (
         <>
           <Grid
@@ -183,6 +224,28 @@ const AddFilter = ({
               <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
             </Box>
           </Grid>
+        </>
+      );
+    } else {
+      return (
+        <>
+          {inFilters()}
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={upgradeModal}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500
+            }}
+          >
+            <Fade in={upgradeModal}>
+              <SeriesFilterModal handleClose={handleClose} />
+            </Fade>
+          </Modal>
         </>
       );
     }

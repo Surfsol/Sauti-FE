@@ -3,7 +3,7 @@ import graphLabels from "../graphLabels";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { ordered, demographics } from "../orderedGraphLabels";
+import { ordered, allowed } from "../orderedGraphLabels";
 import SeriesFilterModal from "./SeriesFilterModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -19,20 +19,21 @@ const DataSFilter = ({
   setUpdateUrlFlag,
   FilterBoxOptions,
   updateUrlFlag,
-  tier
+  tier,
+  access
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [open, setOpen] = useState(false);
-  const [access, setAccess] = useState(false);
+  //const [access, setAccess] = useState(false);
 
-  useEffect(() => {
-    if (
-      tier !== undefined &&
-      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
-    ) {
-      setAccess(true);
-    }
-  }, [tier]);
+  // useEffect(() => {
+  //   if (
+  //     tier !== undefined &&
+  //     (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
+  //   ) {
+  //     setAccess(true);
+  //   }
+  // }, [tier]);
 
   const handleClose = () => {
     setOpen(false);
@@ -67,7 +68,7 @@ const DataSFilter = ({
           selectableOptions: { ...optionFlags }
         }
       });
-    } else if (!access && demographics.includes(selectedName)) {
+    } else if (!access && allowed.includes(selectedName)) {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
@@ -116,7 +117,7 @@ const DataSFilter = ({
                 e === "BUSINESS INSIGHTS"
               ) {
                 return <p className={classes.super}>{e}</p>;
-              } else if (demographics.includes(e)) {
+              } else if (allowed.includes(e)) {
                 return (
                   <span
                     className={"selectable"}
@@ -166,7 +167,12 @@ const DataSFilter = ({
               <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
             </Box>
           </Grid>
-          <Grid container xs={12} style={{ flexDirection: "column" }}>
+          <Grid
+            container
+            xs={12}
+            style={{ flexDirection: "column" }}
+            className={classes.optionsContainer}
+          >
             {ordered.map(e => {
               if (
                 e === "DEMOGRAPHICS" ||

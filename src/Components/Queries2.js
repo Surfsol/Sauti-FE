@@ -16,7 +16,7 @@ const GetData = (props, { makeValues }) => {
   const queriesFilters = useSelector(
     state => state.queriesReducer.queriesFilters
   );
-  console.log(queriesFilters.filters);
+
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
@@ -138,12 +138,10 @@ const GetData = (props, { makeValues }) => {
   const [noDataModal, setNoDataModal] = useState(true);
 
   useEffect(() => {
-    console.log("run useEffect", filters);
     setNoDataModal(true);
   });
 
   function noData() {
-    console.log("run noData()");
     if (noDataModal) {
       return (
         <>
@@ -218,7 +216,7 @@ const GetData = (props, { makeValues }) => {
       </div>
     );
   }
-  console.log("data", data, "filters", filters, "queryType", queryType);
+
   return (
     <>
       <LineGraphButton

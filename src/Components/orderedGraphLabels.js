@@ -23,16 +23,13 @@ const ordered = [
   "Requested Procedures, by Commodity Category",
   "Requested Procedures, by Destination"
 ];
-const demographics = [
+const allowed = [
   "Age",
-  "Border Crossing Frequency",
-  "Crossing Location",
   "Country of Residence",
   "Education Level",
-  "Gender",
-  "Preferred Language",
-  "Cross Border Trade as Primary Income",
-  "Grow/Produce their Own Goods"
+  "Requested Agencies",
+  "Requsted Procedures, by Destination",
+  "Traded Commodity Categories"
 ];
 
-export { ordered, demographics };
+export { ordered, allowed };
