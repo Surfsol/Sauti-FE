@@ -143,6 +143,7 @@ const GetData = (props, { makeValues }) => {
   });
 
   function noData() {
+    console.log("run noData()");
     if (noDataModal) {
       return (
         <>
@@ -156,7 +157,7 @@ const GetData = (props, { makeValues }) => {
               timeout: 500
             }}
           >
-            <Fade in={noDataModal}>
+            <Fade>
               <NoDataModal
                 setNoDataModal={setNoDataModal}
                 filters={filters}
@@ -178,11 +179,13 @@ const GetData = (props, { makeValues }) => {
   ) {
     return noData();
   }
-
+  // quick fix, data.tradersUsers.length <= 5, could remove non-null first
+  // search - Border Crossing Freq, >60, kinyarwanda
+  // search returns 1 user, with 1 null value
   if (
     data &&
     data.tradersUsers !== undefined &&
-    data.tradersUsers.length === 0
+    data.tradersUsers.length <= 5
   ) {
     return noData();
   }

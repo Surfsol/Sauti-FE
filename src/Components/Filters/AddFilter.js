@@ -163,7 +163,17 @@ const AddFilter = ({
           >
             <Box display="flex" height="100%" alignItems="center">
               <div className={classes.filterText}>
-                <span className={classes.filterName}> Filter</span> -
+                <span className={classes.filterName}> Filter</span>
+                <span
+                  className={
+                    filters[index].selectedCategory
+                      ? classes.dash
+                      : classes.hideDash
+                  }
+                >
+                  {" "}
+                  -{" "}
+                </span>
                 <span className={classes.chosen}>
                   {filters[index].selectedCategory}
                 </span>
@@ -247,5 +257,9 @@ const useStyles = makeStyles(theme => ({
   },
   filterText: {
     width: "100%"
+  },
+  dash: {},
+  hideDash: {
+    visibility: "hidden"
   }
 }));

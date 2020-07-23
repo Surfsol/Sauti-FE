@@ -106,7 +106,17 @@ const CompareSubSamples = () => {
             <Grid item xs={12} className={classes.filterButton}>
               <Box display="flex" height="100%" alignItems="center">
                 <div className={classes.filterText}>
-                  <span className={classes.filterName}> Compare Data</span> -
+                  <span className={classes.filterName}> Compare Data</span>
+                  <span
+                    className={
+                      filters[index].selectedCategory
+                        ? classes.dash
+                        : classes.hideDash
+                    }
+                  >
+                    {" "}
+                    -{" "}
+                  </span>
                   <span className={classes.chosen}>
                     {" "}
                     {filters[1].selectedCategory}
@@ -187,5 +197,8 @@ const useStyles = makeStyles(theme => ({
     color: "#8c8c8c",
     fontSize: "1.4rem",
     padding: "1rem 0.5rem"
+  },
+  hideDash: {
+    visibility: "hidden"
   }
 }));
