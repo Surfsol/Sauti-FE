@@ -11,6 +11,7 @@ import Fade from "@material-ui/core/Fade";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
+import NoAccessModal from "./NoAccessModal";
 
 const DataSFilter = ({
   filters,
@@ -24,20 +25,6 @@ const DataSFilter = ({
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [open, setOpen] = useState(false);
-  //const [access, setAccess] = useState(false);
-
-  // useEffect(() => {
-  //   if (
-  //     tier !== undefined &&
-  //     (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
-  //   ) {
-  //     setAccess(true);
-  //   }
-  // }, [tier]);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
@@ -162,53 +149,15 @@ const DataSFilter = ({
           <Grid item xs={12} className={classes.filterButton}>
             <Box display="flex" height="100%" alignItems="center">
               <div className={classes.filterText}>
-                <span className={classes.filterName}> Data Series</span>
+                <span className={classes.filterName}> Data Series</span> -{" "}
+                <span className={classes.chosen}>
+                  {filters[0].selectedCategory}
+                </span>
               </div>
               <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
             </Box>
           </Grid>
-          <Grid
-            container
-            xs={12}
-            style={{ flexDirection: "column" }}
-            className={classes.optionsContainer}
-          >
-            {ordered.map(e => {
-              if (
-                e === "DEMOGRAPHICS" ||
-                e === "INFORMATION INSIGHTS" ||
-                e === "BUSINESS INSIGHTS"
-              ) {
-                return <p className={classes.super}>{e}</p>;
-              } else {
-                return (
-                  <span
-                    className={access ? "selectable" : "limited"}
-                    data-selectvalue={e}
-                    onClick={changeOption}
-                  >
-                    {e}
-                  </span>
-                );
-              }
-            })}
-          </Grid>
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500
-            }}
-          >
-            <Fade in={open}>
-              <SeriesFilterModal handleClose={handleClose} />
-            </Fade>
-          </Modal>
+          <NoAccessModal open={open} setOpen={setOpen} />
         </>
       );
     }

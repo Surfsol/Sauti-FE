@@ -9,6 +9,7 @@ import { ordered } from "../orderedGraphLabels";
 import { Box } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import NoAccessModal from "./NoAccessModal";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -60,77 +61,78 @@ const CompareSubSamples = () => {
 
   const [displayDrop, setDisplayDrop] = useState(false);
 
-  if (filterSelectorName === "Compare SubSamples" && open === "bar") {
-    let allSelectableOptions = Object.keys(FilterBoxOptions.default);
+  function compareOpen() {
+    return (
+      <>
+        <Grid item xs={12} className={classes.filterButton}>
+          <Box display="flex" height="100%" alignItems="center">
+            <div className={classes.filterText}>
+              <span className={classes.filterName}> Compare Data</span>
+            </div>
+            <ExpandLessIcon className={classes.filterArrow}></ExpandLessIcon>
+          </Box>
+        </Grid>
+        <Grid container xs={12} className={classes.optionsContainer}>
+          {ordered.map(e => {
+            if (
+              e === "DEMOGRAPHICS" ||
+              e === "INFORMATION INSIGHTS" ||
+              e === "BUSINESS INSIGHTS"
+            ) {
+              return <p className={classes.super}>{e}</p>;
+            } else {
+              return (
+                <span
+                  className="selectable"
+                  data-selectvalue={e}
+                  onClick={changeOption}
+                >
+                  {e}
+                </span>
+              );
+            }
+          })}
+        </Grid>
+      </>
+    );
+  }
 
-    const displayDropOptions = () => {
-      if (displayDrop === true) {
-        return (
-          <>
-            <Grid item xs={12} className={classes.filterButton}>
-              <Box display="flex" height="100%" alignItems="center">
-                <div className={classes.filterText}>
-                  <span className={classes.filterName}> Compare Data</span>
-                </div>
-                <ExpandLessIcon
-                  className={classes.filterArrow}
-                ></ExpandLessIcon>
-              </Box>
-            </Grid>
-            <Grid container xs={12} className={classes.optionsContainer}>
-              {ordered.map(e => {
-                if (
-                  e === "DEMOGRAPHICS" ||
-                  e === "INFORMATION INSIGHTS" ||
-                  e === "BUSINESS INSIGHTS"
-                ) {
-                  return <p className={classes.super}>{e}</p>;
-                } else {
-                  return (
-                    <span
-                      className="selectable"
-                      data-selectvalue={e}
-                      onClick={changeOption}
-                    >
-                      {e}
-                    </span>
-                  );
-                }
-              })}
-            </Grid>
-          </>
-        );
-      } else {
-        return (
-          <>
-            <Grid item xs={12} className={classes.filterButton}>
-              <Box display="flex" height="100%" alignItems="center">
-                <div className={classes.filterText}>
-                  <span className={classes.filterName}> Compare Data</span>
-                  <span
-                    className={
-                      filters[index].selectedCategory
-                        ? classes.dash
-                        : classes.hideDash
-                    }
-                  >
-                    {" "}
-                    -{" "}
-                  </span>
-                  <span className={classes.chosen}>
-                    {" "}
-                    {filters[1].selectedCategory}
-                  </span>
-                </div>
-                <ExpandMoreIcon
-                  className={classes.filterArrow}
-                ></ExpandMoreIcon>
-              </Box>
-            </Grid>
-          </>
-        );
-      }
-    };
+  const displayDropOptions = () => {
+    if (displayDrop === true) {
+      return <>{compareOpen()}</>;
+    } else {
+      return (
+        <>
+          <Grid item xs={12} className={classes.filterButton}>
+            <Box display="flex" height="100%" alignItems="center">
+              <div className={classes.filterText}>
+                <span className={classes.filterName}> Compare Data</span>
+                <span
+                  className={
+                    filters[index].selectedCategory
+                      ? classes.dash
+                      : classes.hideDash
+                  }
+                >
+                  {" "}
+                  -{" "}
+                </span>
+                <span className={classes.chosen}>
+                  {" "}
+                  {filters[1].selectedCategory}
+                </span>
+              </div>
+              <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+            </Box>
+          </Grid>
+        </>
+      );
+    }
+  };
+
+  if (filterSelectorName === "Compare SubSamples" && open === "bar") {
+    //let allSelectableOptions = Object.keys(FilterBoxOptions.default);
+
     return (
       <Grid container onClick={() => setDisplayDrop(!displayDrop)}>
         {displayDropOptions()}

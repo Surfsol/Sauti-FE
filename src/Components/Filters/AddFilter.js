@@ -16,10 +16,7 @@ import { scrollPosition } from "../redux-actions/scrollAction";
 import { allowed } from "../orderedGraphLabels";
 import { separateOperations } from "graphql";
 
-import SeriesFilterModal from "./SeriesFilterModal";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import NoAccessModal from "./NoAccessModal";
 
 const AddFilter = ({
   filters,
@@ -37,10 +34,11 @@ const AddFilter = ({
   const innerRef = useRef(null);
   const [scrollTopVar, setScrollTopVar] = useState();
   const [upgradeModal, setUpGradeModal] = useState(false);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
-  console.log(adjustScroll);
+  //console.log(adjustScroll);
 
   const handleClose = () => {
     setUpGradeModal(false);
@@ -97,17 +95,12 @@ const AddFilter = ({
         }
       });
     } else {
-      setUpGradeModal(true);
+      setOpen(true);
     }
   };
 
   let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   allSelectableOptions.unshift("DEMOGRAPHICS");
-
-  // const allItems = [];
-  // for (let key in FilterBoxOptions.default) {
-  //   allItems.push([key, FilterBoxOptions.default[key].value.type]);
-  // }
 
   function inFilters() {
     return (
@@ -193,9 +186,9 @@ const AddFilter = ({
     );
   }
   const displayDropOptions = () => {
-    if (displayDrop.includes(index) && upgradeModal === false) {
+    if (displayDrop.includes(index) && open === false) {
       return <>{inFilters()}</>;
-    } else if (upgradeModal === false) {
+    } else if (open === false) {
       return (
         <>
           <Grid
@@ -230,22 +223,7 @@ const AddFilter = ({
       return (
         <>
           {inFilters()}
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={upgradeModal}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500
-            }}
-          >
-            <Fade in={upgradeModal}>
-              <SeriesFilterModal handleClose={handleClose} />
-            </Fade>
-          </Modal>
+          <NoAccessModal open={open} setOpen={setOpen} />
         </>
       );
     }
