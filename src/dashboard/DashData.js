@@ -41,14 +41,6 @@ const filterTemplate = {
 };
 
 function DashHome() {
-  // const signedIn = getToken();
-  //const token = getToken();
-  // let userEmail;
-  // if (token) {
-  //   userEmail = decodeToken(token);
-  //   userEmail = userEmail.email;
-  // }
-
   const access = useSelector(state => state.tierReducer.access);
 
   const dispatch = useDispatch();
