@@ -1,15 +1,17 @@
 import { TIER_DEFINED } from "../redux-actions/tierAction";
 
 const initalState = {
-  tier: {}
+  tier: {},
+  access: {}
 };
-
+console.log("tier", initalState.tier, "access", initalState.access);
 const tierReducer = (state = initalState, action) => {
   switch (action.type) {
     case TIER_DEFINED:
       return {
         ...state,
-        tier: action.payload
+        tier: action.payload.tier,
+        access: action.payload.access
       };
     default:
       return state;

@@ -6,24 +6,21 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-const NoAccessModal = ({ open, setOpen }) => {
-  console.log("open NO Acc");
+const NoAccessModal = ({ noAccess, setNoAccess }) => {
+  console.log("open NO Acc", noAccess);
   //const [open, setOpen] = useState(true);
   const classes = useStyles();
   const handleClose = () => {
-    setOpen(false);
+    setNoAccess(false);
   };
-  console.log("open", open);
-  //  useEffect(() => {
-  //      setOpen(true)
-  //  })
+
   return (
     <>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open}
+        open={noAccess}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -31,7 +28,7 @@ const NoAccessModal = ({ open, setOpen }) => {
           timeout: 500
         }}
       >
-        <Fade in={open}>
+        <Fade in={noAccess}>
           <SeriesFilterModal handleClose={handleClose} />
         </Fade>
       </Modal>

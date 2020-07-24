@@ -23,7 +23,7 @@ import swal from "sweetalert";
 
 //need to bring in data, for 109
 const SocialMedia = () => {
-  const tier = useSelector(state => state.tierReducer.tier.tier);
+  const access = useSelector(state => state.tierReducer.access);
 
   const newSub = getSubscription();
   let sub;
@@ -71,10 +71,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {tier === "ADMIN" ||
-        tier === "PAID" ||
-        tier === "GOV_ROLE" ||
-        newSub ? (
+        {access || newSub ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader

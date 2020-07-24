@@ -24,14 +24,14 @@ const DataSFilter = ({
   access
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [noAccess, setNoAccess] = useState(false);
 
   // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
 
   function changeOption(e) {
     const selectedName = e.target.dataset.selectvalue;
-    if (access) {
+    if (access === "paid") {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
@@ -55,7 +55,7 @@ const DataSFilter = ({
           selectableOptions: { ...optionFlags }
         }
       });
-    } else if (!access && allowed.includes(selectedName)) {
+    } else if (access === "free" && allowed.includes(selectedName)) {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
@@ -80,12 +80,12 @@ const DataSFilter = ({
         }
       });
     } else {
-      setOpen(true);
+      setNoAccess(true);
     }
   }
 
   const displayDropOptions = () => {
-    if (displayDrop === true && open === false) {
+    if (displayDrop === true && noAccess === false) {
       return (
         <>
           <Grid item xs={12} className={classes.filterButton}>
@@ -117,7 +117,7 @@ const DataSFilter = ({
               } else {
                 return (
                   <span
-                    className={access ? "selectable" : "limited"}
+                    className={access === "paid" ? "selectable" : "limited"}
                     data-selectvalue={e}
                     onClick={changeOption}
                   >
@@ -129,7 +129,7 @@ const DataSFilter = ({
           </Grid>
         </>
       );
-    } else if (displayDrop === false && open === false) {
+    } else if (displayDrop === false && noAccess === false) {
       return (
         <Grid item xs={12} className={classes.filterButton}>
           <Box display="flex" height="100%" alignItems="center">
@@ -157,7 +157,7 @@ const DataSFilter = ({
               <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
             </Box>
           </Grid>
-          <NoAccessModal open={open} setOpen={setOpen} />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }

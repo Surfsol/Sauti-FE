@@ -19,15 +19,12 @@ const CalendarParent = ({
   open
 }) => {
   const classes = useStyles();
-  const tier = useSelector(state => state.tierReducer.tier.tier);
+  const access = useSelector(state => state.tierReducer.access);
 
   if (open === "bar") {
     return (
       <>
-        {tier === "ADMIN" ||
-        tier === "PAID" ||
-        tier === "GOV_ROLE" ||
-        newSub ? (
+        {access || newSub ? (
           <Grid container>
             <Grid container>
               <Grid item xs={6} style={{ fontSize: "12px" }}>

@@ -98,10 +98,12 @@ export default function FilterBox(props) {
       tier !== undefined &&
       (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
     ) {
-      access = true;
+      access = "paid";
+    } else if (tier !== undefined && tier === "FREE") {
+      access = "free";
     }
-
-    dispatch(tierDefined({ tier: tier }));
+    console.log("tier", tier, "access", access);
+    dispatch(tierDefined({ tier: tier, access: access }));
 
     useEffect(() => {
       if (filterSelectorName === "Compare SubSamples") {
@@ -165,10 +167,9 @@ export default function FilterBox(props) {
       return <></>;
     }
   };
-  const [access, setAccess] = useState(false);
 
-  const tier = useSelector(state => state.tierReducer.tier.tier);
-  console.log(tier);
+  const access = useSelector(state => state.tierReducer.access);
+  console.log(access);
   const newSub = getSubscription();
   let sub;
   if (newSub) {
@@ -214,29 +215,10 @@ export default function FilterBox(props) {
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
 
-  // const handleSubmit = useCallback(
-  //   e => {
-  //     if (e.target.textContent === "Submit") {
-  //       e.preventDefault();
-  //     }
-
-  //     setFilterBoxStartDate(filterBoxStartDate);
-  //     setFilterBoxEndDate(filterBoxEndDate);
-  //   },
-  //   [
-  //     filterBoxEndDate,
-
-  //     filterBoxStartDate,
-  //     setFilterBoxStartDate,
-  //     setFilterBoxEndDate
-  //   ]
-  // );
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       calendarAction({
-        access,
         filterBoxStartDate: filterBoxStartDate,
         setFilterBoxStartDate: setFilterBoxStartDate,
         filterBoxEndDate: filterBoxEndDate,
@@ -273,10 +255,7 @@ export default function FilterBox(props) {
 
   function filterAdd() {
     const currentDataFilter = Object.keys(filters).length - 1;
-    if (
-      tier !== undefined &&
-      (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
-    ) {
+    if (access === "paid") {
       setFilters({
         ...filters,
         // make a flag that is only true when this button is clicked on

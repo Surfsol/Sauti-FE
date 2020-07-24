@@ -10,6 +10,8 @@ import { Box } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import NoAccessModal from "./NoAccessModal";
+import { separateOperations } from "graphql";
+import { allowed } from "../orderedGraphLabels";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -32,31 +34,41 @@ const CompareSubSamples = () => {
   } = reducerSub;
   const classes = useStyles();
 
+  const access = useSelector(state => state.tierReducer.access);
+  const [noAccess, setNoAccess] = useState(false);
+
   function changeOption(e) {
     const selectedName = e.target.dataset.selectvalue;
-    setUpdateUrlFlag(!updateUrlFlag);
-    let optionFlags = {};
-    graphLabels[
-      `${FilterBoxOptions.default[selectedName].value.type}`
-    ].labels.forEach(option => {
-      optionFlags = {
-        ...optionFlags,
-        [option]: false
-      };
-    });
-    setFilters({
-      ...filters,
-      [index]: {
-        ...filters[index],
-        selectedCategory: selectedName, //option
-        selectedTableColumnName:
-          FilterBoxOptions.default[selectedName].value.type,
+    if (
+      access === "paid" ||
+      (access === "free" && allowed.includes(selectedName))
+    ) {
+      setUpdateUrlFlag(!updateUrlFlag);
+      let optionFlags = {};
+      graphLabels[
+        `${FilterBoxOptions.default[selectedName].value.type}`
+      ].labels.forEach(option => {
+        optionFlags = {
+          ...optionFlags,
+          [option]: false
+        };
+      });
+      setFilters({
+        ...filters,
+        [index]: {
+          ...filters[index],
+          selectedCategory: selectedName, //option
+          selectedTableColumnName:
+            FilterBoxOptions.default[selectedName].value.type,
 
-        selectedTable: FilterBoxOptions.default[selectedName].value.query,
-        selectedOption: undefined,
-        selectableOptions: { ...optionFlags }
-      }
-    });
+          selectedTable: FilterBoxOptions.default[selectedName].value.query,
+          selectedOption: undefined,
+          selectableOptions: { ...optionFlags }
+        }
+      });
+    } else {
+      setNoAccess(true);
+    }
   }
 
   const [displayDrop, setDisplayDrop] = useState(false);
@@ -80,13 +92,24 @@ const CompareSubSamples = () => {
               e === "BUSINESS INSIGHTS"
             ) {
               return <p className={classes.super}>{e}</p>;
-            } else {
+            } else if (allowed.includes(e)) {
               return (
                 <span
                   className="selectable"
                   data-selectvalue={e}
                   onClick={changeOption}
                 >
+                  {e}
+                </span>
+              );
+            } else {
+              return (
+                <span
+                  className={access === "paid" ? "selectable" : "limited"}
+                  data-selectvalue={e}
+                  onClick={changeOption}
+                >
+                  {" "}
                   {e}
                 </span>
               );
@@ -98,9 +121,9 @@ const CompareSubSamples = () => {
   }
 
   const displayDropOptions = () => {
-    if (displayDrop === true) {
+    if (displayDrop === true && noAccess === false) {
       return <>{compareOpen()}</>;
-    } else {
+    } else if (noAccess === false) {
       return (
         <>
           <Grid item xs={12} className={classes.filterButton}>
@@ -127,12 +150,18 @@ const CompareSubSamples = () => {
           </Grid>
         </>
       );
+    } else {
+      return (
+        <>
+          {compareOpen()}
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
+        </>
+      );
     }
   };
 
   if (filterSelectorName === "Compare SubSamples" && open === "bar") {
     //let allSelectableOptions = Object.keys(FilterBoxOptions.default);
-
     return (
       <Grid container onClick={() => setDisplayDrop(!displayDrop)}>
         {displayDropOptions()}
@@ -142,6 +171,7 @@ const CompareSubSamples = () => {
     return <></>;
   }
 };
+
 export default CompareSubSamples;
 
 const useStyles = makeStyles(theme => ({

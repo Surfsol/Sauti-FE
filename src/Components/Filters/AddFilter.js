@@ -34,15 +34,10 @@ const AddFilter = ({
   const innerRef = useRef(null);
   const [scrollTopVar, setScrollTopVar] = useState();
   const [upgradeModal, setUpGradeModal] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [noAccess, setNoAccess] = useState(false);
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
-  //console.log(adjustScroll);
-
-  const handleClose = () => {
-    setUpGradeModal(false);
-  };
 
   useEffect(() => {
     const div = innerRef.current;
@@ -69,7 +64,10 @@ const AddFilter = ({
   const changeOption = e => {
     dispatch(scrollPosition({ position: scrollTopVar }));
     const selectedName = e.target.dataset.selectvalue;
-    if (access || allowed.includes(selectedName)) {
+    if (
+      access === "paid" ||
+      (access === "free" && allowed.includes(selectedName))
+    ) {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
       graphLabels[
@@ -95,7 +93,7 @@ const AddFilter = ({
         }
       });
     } else {
-      setOpen(true);
+      setNoAccess(true);
     }
   };
 
@@ -160,7 +158,7 @@ const AddFilter = ({
               return (
                 <>
                   <span
-                    className={access ? "selectable" : "limited"}
+                    className={access === "paid" ? "selectable" : "limited"}
                     data-selectvalue={e}
                     onClick={changeOption}
                   >
@@ -186,9 +184,9 @@ const AddFilter = ({
     );
   }
   const displayDropOptions = () => {
-    if (displayDrop.includes(index) && open === false) {
+    if (displayDrop.includes(index) && noAccess === false) {
       return <>{inFilters()}</>;
-    } else if (open === false) {
+    } else if (noAccess === false) {
       return (
         <>
           <Grid
@@ -223,7 +221,7 @@ const AddFilter = ({
       return (
         <>
           {inFilters()}
-          <NoAccessModal open={open} setOpen={setOpen} />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }
