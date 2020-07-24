@@ -59,8 +59,8 @@ const AddFilter = ({
       let scrollBar = document.getElementById("scroll");
       scrollBar.scrollTop = adjustScroll;
     }
-  }, document);
-
+  }, []);
+  //removed document from useEffect, because not an array
   const changeOption = e => {
     dispatch(scrollPosition({ position: scrollTopVar }));
     const selectedName = e.target.dataset.selectvalue;

@@ -11,7 +11,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
   const classes = useStyles();
 
   const lineButton = () => {
-    if (open !== "line" && queryType === "sessionsData") {
+    if (open !== "line" && filters[0].selectedTable === "Sessions") {
       return (
         <div className="all-btn" onClick={() => setOpen("line")}>
           <Tooltip
@@ -93,7 +93,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
       );
     } else if (
       open !== "choropleth" &&
-      filters[0]["selectedCategory"] === "Final Destination Country"
+      filters[0]["selectedCategory"] === "Traders' Destination Country"
     ) {
       return (
         <div className="all-btn" onClick={() => setOpen("choropleth")}>
@@ -115,8 +115,7 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
       );
     } else if (
       open !== "choropleth" &&
-      filters[0]["selectedCategory"] ===
-        "Requested Procedures for Destination (Imports to:)"
+      filters[0]["selectedCategory"] === "Requsted Procedures, by Destination"
     ) {
       return (
         <div className="all-btn" onClick={() => setOpen("choropleth")}>

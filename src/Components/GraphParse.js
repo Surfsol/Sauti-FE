@@ -13,15 +13,7 @@ const GraphParse = ({
 }) => {
   //needed for filterByDate, cannot filter tradersUsers by date
   let typeOfQuery = Object.keys(data)[0];
-  console.log(
-    typeOfQuery,
-    "data",
-    data,
-    "end",
-    filterBoxEndDate,
-    "start",
-    filterBoxStartDate
-  );
+
   //maybe will need something like this in else statement to prevent errors: data.sessionData != undefined &&
   if (
     queryType === "sessionsData" &&
@@ -33,7 +25,6 @@ const GraphParse = ({
   }
 
   //used on SocialMedia.js
-  console.log("data", data);
   let chartData = dataParse(
     filters[0].selectedTableColumnName,
     data[`${queryType}`] || data.tradersUsers,
@@ -47,7 +38,6 @@ const GraphParse = ({
     filters[0].selectedTable,
     filters[1].selectedTable
   );
-  console.log("chartData", chartData);
   const graphItems = filters[1].selectedTableColumnName !== "";
   if (graphItems === true) {
     return (

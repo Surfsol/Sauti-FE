@@ -102,7 +102,7 @@ export default function FilterBox(props) {
     } else if (tier !== undefined && tier === "FREE") {
       access = "free";
     }
-    console.log("tier", tier, "access", access);
+    //console.log("tier", tier, "access", access);
     dispatch(tierDefined({ tier: tier, access: access }));
 
     useEffect(() => {
@@ -169,7 +169,6 @@ export default function FilterBox(props) {
   };
 
   const access = useSelector(state => state.tierReducer.access);
-  console.log(access);
   const newSub = getSubscription();
   let sub;
   if (newSub) {

@@ -4,7 +4,7 @@ const initalState = {
   tier: {},
   access: {}
 };
-console.log("tier", initalState.tier, "access", initalState.access);
+
 const tierReducer = (state = initalState, action) => {
   switch (action.type) {
     case TIER_DEFINED:
