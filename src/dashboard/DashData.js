@@ -8,6 +8,8 @@ import GraphContainer from "../GraphContainer";
 import { FilterBoxOptions } from "../Components/FilterBoxOptions";
 //import { flavourOptions } from "../Components/docs/data";
 import graphLabels from "../Components/graphLabels";
+import { useSelector, useDispatch } from "react-redux";
+import { queriesFilters } from "../Components/redux-actions/queriesAction";
 
 //set inital filters
 const filterTemplate = {
@@ -46,6 +48,10 @@ function DashHome() {
   //   userEmail = decodeToken(token);
   //   userEmail = userEmail.email;
   // }
+
+  const access = useSelector(state => state.tierReducer.access);
+
+  const dispatch = useDispatch();
 
   const history = useHistory();
 
@@ -157,11 +163,43 @@ function DashHome() {
       return newFilterObject;
     }
   };
+  if (access === undefined) {
+    const filters = {
+      0: {
+        nameOfFilter: "Data Series",
+        selectedCategory: "Gender",
+        selectableOptions: {},
+        selectedTable: "Users",
+        selectedTableColumnName: "gender"
+      },
+      1: {
+        nameOfFilter: "Compare SubSamples",
+        selectedCategory: "",
+        selectableOptions: {},
+        selectedTable: "Users",
+        selectedTableColumnName: "",
+        showOptions: false,
+        optionHasBeenSelected: false
+      },
+      2: {
+        nameOfFilter: "Data Filter",
+        selectedCategory: "",
+        selectableOptions: {},
+        selectedTable: "",
+        selectedTableColumnName: "",
+        showOptions: true,
+        optionHasBeenSelected: false
+      }
+    };
+
+    dispatch(
+      queriesFilters({
+        filters: filters
+      })
+    );
+  }
   return (
     <>
-      {/* <SignedInDiv>
-        <UserHeader></UserHeader>
-      </SignedInDiv> */}
       <GraphContainer filters={setupFilter(history)} />
     </>
   );

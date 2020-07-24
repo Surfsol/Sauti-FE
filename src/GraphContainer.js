@@ -99,6 +99,8 @@ const GraphContainer = props => {
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
   const chartData = {};
+
+  //copy url
   const clipboard = new ClipboardJS(".btn", {
     text: function() {
       return document.location.href;

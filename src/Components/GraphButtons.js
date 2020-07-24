@@ -1,8 +1,5 @@
 import React from "react";
 import "./scss/graphButtons.scss";
-import graphImage from "../assets/images/linegraph.png";
-import mapImage from "../assets/images/map.png";
-import barImage from "../assets/images/barchart.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";

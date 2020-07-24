@@ -113,6 +113,7 @@ const LineGraphButton = props => {
       </>
     );
   } else if (
+    data &&
     data.tradersUsers &&
     filters[0]["selectedCategory"] === "Country of Residence"
   ) {
