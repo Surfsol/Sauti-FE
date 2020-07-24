@@ -24,7 +24,7 @@ const CalendarParent = ({
   if (open === "bar") {
     return (
       <>
-        {access || newSub ? (
+        {access === "paid" || newSub ? (
           <Grid container>
             <Grid container>
               <Grid item xs={6} style={{ fontSize: "12px" }}>
