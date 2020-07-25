@@ -18,10 +18,10 @@ import { tierDefined } from "../Components/redux-actions/tierAction";
 const filterTemplate = {
   0: {
     nameOfFilter: "Data Series",
-    selectedCategory: "Country of Residence",
+    selectedCategory: "",
     selectableOptions: {},
-    selectedTable: "Users",
-    selectedTableColumnName: "country_of_residence",
+    selectedTable: "",
+    selectedTableColumnName: "",
     showOptions: false
   },
 
@@ -79,7 +79,7 @@ function DashHome() {
 
   //if nothing in history, set inital filters to Gender
   const setupFilter = history => {
-    //console.log('run setupFilter')
+    console.log("run setupFilter history", history);
     if (history.location.search.length === 0) {
       let defaultFilter = {};
       Object.keys(filterTemplate).forEach(filterId => {
@@ -175,8 +175,35 @@ function DashHome() {
     }
   };
 
-  let showenFilters = filterTemplate;
+  let defaultFilters = {
+    0: {
+      nameOfFilter: "Data Series",
+      selectedCategory: "Country of Residence",
+      selectableOptions: {},
+      selectedTable: "Users",
+      selectedTableColumnName: "country_of_residence",
+      showOptions: false
+    },
 
+    1: {
+      nameOfFilter: "Compare SubSamples",
+      selectedCategory: "",
+      selectableOptions: {},
+      selectedTable: "",
+      selectedTableColumnName: "",
+      showOptions: false
+    },
+    2: {
+      nameOfFilter: "Data Filter",
+      selectedCategory: "",
+      selectableOptions: {},
+      selectedTable: "",
+      selectedTableColumnName: "",
+      showOptions: true
+    }
+  };
+
+  console.log("tier", tier, "setup his", setupFilter(history));
   if (
     tier != "ADMIN" &&
     tier != "PAID" &&
@@ -185,24 +212,25 @@ function DashHome() {
   ) {
     dispatch(
       queriesFilters({
-        filters: showenFilters
+        filters: defaultFilters
       })
     );
-    return <GraphContainer filters={showenFilters} />;
+    return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
     for (let j in setupFilter(history)) {
-      //console.log(Object.values(setupFilter(history)[j]));
+      console.log(Object.values(setupFilter(history)[j]));
       let cat = Object.values(setupFilter(history)[j])[1];
-      //console.log(cat);
+      console.log(cat);
       if (!allowed.includes(cat)) {
+        console.log("not allowed");
         dispatch(
           queriesFilters({
-            filters: showenFilters
+            filters: defaultFilters
           })
         );
         return (
           <>
-            <GraphContainer filters={showenFilters} />
+            <GraphContainer filters={defaultFilters} />
           </>
         );
       } else {
