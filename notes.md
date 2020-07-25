@@ -18,7 +18,10 @@ SocialMedia.js
 new Subscription - should need to relogin.
 
 tier levels
-Free - Paid (Admin, Gov, Paid)
+Free - Paid (Admin, Gov, Paid), expired
 
-If tier undefined -
-Login / Register
+make user expired - need to change token
+
+run kron job to update tiers in database, based off registration date
+
+js write to file, to update dictonary

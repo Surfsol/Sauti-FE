@@ -6,6 +6,7 @@ const initalState = {
 };
 
 const tierReducer = (state = initalState, action) => {
+  console.log("tierReducer fired");
   switch (action.type) {
     case TIER_DEFINED:
       return {
