@@ -1,6 +1,6 @@
 const dynamicText = {
   Age:
-    "<p><strong>Data Series: Age</strong></p><p><strong>Description</strong>: Age is based on the self-reported answer of Sauti platform users to the question, &ldquo;Your Age:&rdquo;. Users have 6 options: 10-20; 20-30; 30-40; 40-50; 50-60; 60-70</p><p><strong>Aggregation Method</strong>: One-time self-reported user data</p><p><strong>Topic</strong>: Demographic</p>",
+    "<p><strong>Data Series: Age</strong></p><p><strong>Description</strong>: Age is based on the self-reported answer of Sauti platform users to the question, &ldquo;Your Age:&rdquo;. Users have 6 options: <20; 20-30; 30-40; 40-50; 50-60; >60</p><p><strong>Aggregation Method</strong>: One-time self-reported user data</p><p><strong>Topic</strong>: Demographic</p>",
   "Border Crossing Frequency":
     "<p><strong>Data Series: Border Crossing Frequency</strong></p><p><strong>Description</strong>: Border Crossing Frequency is based on the self-reported answer of Sauti platform users to the question, &ldquo;How often do you cross the border each month?&rdquo;. Users have 4 options: Monthly; Weekly; Daily; Never</p><p><strong>Aggregation Method</strong>: One-time self-reported user data</p><p><strong>Topic</strong>: Demographic</p>",
   "Crossing Location":

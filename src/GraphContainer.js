@@ -26,7 +26,7 @@ import LineFilter from "./Components/LineGraph/LineFilter";
 import { Box } from "@material-ui/core";
 import splashImage from "./assets/images/sautilogo-xhires.png";
 
-import { dispatch, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { queriesFilters } from "./Components/redux-actions/queriesAction";
 
 const useStyles = makeStyles(theme => ({
@@ -99,6 +99,8 @@ const GraphContainer = props => {
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
   const chartData = {};
+
+  //copy url
   const clipboard = new ClipboardJS(".btn", {
     text: function() {
       return document.location.href;
@@ -112,16 +114,7 @@ const GraphContainer = props => {
   function handleApply() {
     dispatch(
       queriesFilters({
-        filters: filters,
-        setFilters: setFilters,
-        filterBoxStartDate: filterBoxStartDate,
-        setFilterBoxStartDate: setFilterBoxStartDate,
-        filterBoxEndDate: filterBoxEndDate,
-        setFilterBoxEndDate: setFilterBoxEndDate,
-        changeYear: changeYear,
-        changeQuarter: changeQuarter,
-        getCurrentYear: getCurrentYear,
-        open: open
+        filters: filters
       })
     );
   }
