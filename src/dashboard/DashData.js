@@ -13,6 +13,7 @@ import { queriesFilters } from "../Components/redux-actions/queriesAction";
 import { allowed } from "../Components/orderedGraphLabels";
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
+import { showNoAccessAction } from "../Components/redux-actions/showNoAccessAction";
 
 //set inital filters
 const filterTemplate = {
@@ -44,6 +45,7 @@ const filterTemplate = {
 };
 
 function DashHome() {
+  const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
   let tier;
   if (token) {
@@ -79,7 +81,6 @@ function DashHome() {
 
   //if nothing in history, set inital filters to Gender
   const setupFilter = history => {
-    console.log("run setupFilter history", history);
     if (history.location.search.length === 0) {
       let defaultFilter = {};
       Object.keys(filterTemplate).forEach(filterId => {
@@ -203,7 +204,7 @@ function DashHome() {
     }
   };
 
-  //console.log("tier", tier, "setup his", setupFilter(history));
+  console.log("tier", tier, "setup his", setupFilter(history));
 
   if (
     tier != "ADMIN" &&
@@ -224,9 +225,17 @@ function DashHome() {
       // console.log(cat);
       if (!allowed.includes(cat)) {
         console.log("not allowed");
+        console.log("props.No", noAccess);
+        //setNoAccess(true)
         dispatch(
           queriesFilters({
             filters: defaultFilters
+          })
+        );
+        dispatch(
+          showNoAccessAction({
+            noAccess: noAccess,
+            setNoAccess: setNoAccess
           })
         );
         return (

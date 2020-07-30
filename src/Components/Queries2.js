@@ -7,6 +7,7 @@ import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 import NoDataModal from "./NoDataModal";
 import NotLoggedInModal from "./NotLoggedInModal";
+import NoAccessModal from "./Filters/NoAccessModal";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -19,6 +20,14 @@ const GetData = (props, { makeValues }) => {
   );
 
   const userTier = useSelector(state => state.tierReducer.tier);
+  const noAccess = useSelector(
+    state => state.showNoAccessReducer.show.noAccess
+  );
+  const setNoAccess = useSelector(
+    state => state.showNoAccessReducer.show.setNoAccess
+  );
+
+  console.log("noAccess", noAccess);
 
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
@@ -185,6 +194,21 @@ const GetData = (props, { makeValues }) => {
     } else {
       return <></>;
     }
+  }
+
+  function NotAccessible() {
+    console.log("notLogged IN", notLogged);
+    if (noAccess) {
+      console.log("return Not accessible");
+      return <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />;
+    } else {
+      return <></>;
+    }
+  }
+  console.log("noAccess", noAccess);
+
+  if (noAccess === true) {
+    return NotAccessible();
   }
 
   if (userTier === undefined) {
