@@ -8,7 +8,6 @@ import Fade from "@material-ui/core/Fade";
 
 const NoAccessModal = ({ noAccess, setNoAccess }) => {
   console.log("open NO Acc", noAccess);
-  //const [open, setOpen] = useState(true);
   const classes = useStyles();
   const handleClose = () => {
     setNoAccess(false);

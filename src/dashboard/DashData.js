@@ -203,7 +203,8 @@ function DashHome() {
     }
   };
 
-  console.log("tier", tier, "setup his", setupFilter(history));
+  //console.log("tier", tier, "setup his", setupFilter(history));
+
   if (
     tier != "ADMIN" &&
     tier != "PAID" &&
@@ -218,9 +219,9 @@ function DashHome() {
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
     for (let j in setupFilter(history)) {
-      console.log(Object.values(setupFilter(history)[j]));
+      // console.log(Object.values(setupFilter(history)[j]));
       let cat = Object.values(setupFilter(history)[j])[1];
-      console.log(cat);
+      // console.log(cat);
       if (!allowed.includes(cat)) {
         console.log("not allowed");
         dispatch(

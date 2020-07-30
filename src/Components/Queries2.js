@@ -191,13 +191,13 @@ const GetData = (props, { makeValues }) => {
     return notLoggedIn();
   }
 
-  // if (
-  //   data &&
-  //   data.sessionsData !== undefined &&
-  //   data.sessionsData.length === 0
-  // ) {
-  //   return noData();
-  // }
+  if (
+    data &&
+    data.sessionsData !== undefined &&
+    data.sessionsData.length === 0
+  ) {
+    return noData();
+  }
   // quick fix, data.tradersUsers.length <= 5, could remove non-null first
   // search - Border Crossing Freq, >60, kinyarwanda
   // search returns 1 user, with 1 null value

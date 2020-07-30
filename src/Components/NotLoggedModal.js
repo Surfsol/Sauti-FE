@@ -85,7 +85,6 @@ function SeriesFilterModal({ handleClose }) {
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={() => handleClose(false)}>X</BigX>
           <FormTitle>
             Would you like to filter by "Information Insights" or "Business
             Insights" categories?
