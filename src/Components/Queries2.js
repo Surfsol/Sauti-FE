@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
 import NoDataModal from "./NoDataModal";
+import NotLoggedInModal from "./NotLoggedInModal";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -16,6 +17,8 @@ const GetData = (props, { makeValues }) => {
   const queriesFilters = useSelector(
     state => state.queriesReducer.queriesFilters
   );
+
+  const userTier = useSelector(state => state.tierReducer.tier);
 
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
@@ -170,13 +173,31 @@ const GetData = (props, { makeValues }) => {
     }
   }
 
-  if (
-    data &&
-    data.sessionsData !== undefined &&
-    data.sessionsData.length === 0
-  ) {
-    return noData();
+  const [notLogged, setNotLogged] = useState(true);
+
+  function notLoggedIn() {
+    console.log("notLogged IN", notLogged);
+    if (notLogged) {
+      console.log("return Not LoggedIN");
+      return (
+        <NotLoggedInModal notLogged={notLogged} setNotLogged={setNotLogged} />
+      );
+    } else {
+      return <></>;
+    }
   }
+
+  if (userTier === undefined) {
+    return notLoggedIn();
+  }
+
+  // if (
+  //   data &&
+  //   data.sessionsData !== undefined &&
+  //   data.sessionsData.length === 0
+  // ) {
+  //   return noData();
+  // }
   // quick fix, data.tradersUsers.length <= 5, could remove non-null first
   // search - Border Crossing Freq, >60, kinyarwanda
   // search returns 1 user, with 1 null value
