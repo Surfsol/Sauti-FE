@@ -208,7 +208,7 @@ const GetData = (props, { makeValues }) => {
     return NotAccessible();
   }
 
-  if (userTier === undefined) {
+  if (userTier === undefined || userTier === "EXPIRED") {
     return notLoggedIn();
   }
 

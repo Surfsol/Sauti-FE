@@ -24,4 +24,7 @@ make user expired - need to change token
 
 run kron job to update tiers in database, based off registration date
 
-js write to file, to update dictonary
+To do:
+Expired should be same as Free
+
+Admin not showing expired
