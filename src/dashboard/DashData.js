@@ -79,6 +79,7 @@ function DashHome() {
     }
   };
 
+  let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
   const setupFilter = history => {
     if (history.location.search.length === 0) {
@@ -126,6 +127,9 @@ function DashHome() {
         let split2 = split1[i].split("equals");
         let split3 = split2[1].split("comma");
         if (split3[0] !== "undefined") {
+          allSelectedCategories.push(
+            FilterBoxOptions.tableNamesToCategoryName[split3[0]]
+          );
           let optionFlags = {};
 
           graphLabels[`${split3[0]}`].labels.forEach(option => {
@@ -217,36 +221,36 @@ function DashHome() {
     );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
-    for (let j in setupFilter(history)) {
-      // console.log(Object.values(setupFilter(history)[j]));
-      let cat = Object.values(setupFilter(history)[j])[1];
-      console.log(cat);
-      if (!allowed.includes(cat)) {
-        console.log("not allowed");
-        console.log("props.No", noAccess);
-        //setNoAccess(true)
-        dispatch(
-          queriesFilters({
-            filters: defaultFilters
-          })
-        );
-        dispatch(
-          showNoAccessAction({
-            noAccess: noAccess
-          })
-        );
-        return (
-          <>
-            <GraphContainer filters={defaultFilters} />
-          </>
-        );
-      } else {
-        return (
-          <>
-            <GraphContainer filters={setupFilter(history)} />
-          </>
-        );
+    let cat = "";
+    for (let i = 0; i < allSelectedCategories.length; i++) {
+      if (!allowed.includes(allSelectedCategories[i])) {
+        cat = allSelectedCategories[i];
       }
+    }
+    if (cat != "") {
+      //setNoAccess(true)
+      dispatch(
+        queriesFilters({
+          filters: defaultFilters
+        })
+      );
+      dispatch(
+        showNoAccessAction({
+          noAccess: noAccess,
+          cat: cat
+        })
+      );
+      return (
+        <>
+          <GraphContainer filters={defaultFilters} />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <GraphContainer filters={setupFilter(history)} />
+        </>
+      );
     }
   } else {
     return (

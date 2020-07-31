@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { ContentContainer } from "../../dashboard/styledComponents/Index";
 import styled from "styled-components";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showNoAccessAction } from "../redux-actions/showNoAccessAction";
 
 const LoginButton = styled.button`
@@ -76,7 +76,7 @@ function NoAccessModalDisplay({ noAccess }) {
       history.push("/myaccount");
     }
   };
-
+  const catValue = useSelector(state => state.showNoAccessReducer.show.cat);
   function Xout() {
     dispatch(showNoAccessAction({ noAccess: false }));
   }
@@ -87,7 +87,8 @@ function NoAccessModalDisplay({ noAccess }) {
         <Div>
           <BigX onClick={Xout}>X</BigX>
           <FormTitle>
-            This data cannot be accessed with a 'Free' account.
+            Filter Selected <strong>{catValue}</strong> cannot be accessed with
+            a 'Free' account.
           </FormTitle>
           <DownloadText>
             Click <BigContinue>Continue</BigContinue> if you'd like to upgrade
