@@ -10,11 +10,11 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const CalendarFilter = () => {
   const reducerCal = useSelector(state => state.calendarReducer.calendar);
+  const tier = useSelector(state => state.tierReducer.tier);
 
   const [openCal, setOpenCal] = useState(false);
   const classes = useStyles();
   const {
-    tier,
     newSub,
     filterBoxStartDate,
     setFilterBoxStartDate,
@@ -26,13 +26,29 @@ const CalendarFilter = () => {
     loading,
     open
   } = reducerCal;
-  if (open === "bar" && openCal === false) {
+
+  if (
+    (tier === "FREE" || tier === "EXPIRED") &&
+    open === "bar" &&
+    openCal === false
+  ) {
     return (
       <Grid
         item
         className={classes.doNotRender}
         onClick={() => setOpenCal(true)}
       >
+        <Box display="flex" height="100%" alignItems="center">
+          <div className={classes.filterText}>
+            <span className={classes.filterName}>Date Range</span>
+            <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+          </div>
+        </Box>
+      </Grid>
+    );
+  } else if (open === "bar" && openCal === false) {
+    return (
+      <Grid item className={classes.calendar} onClick={() => setOpenCal(true)}>
         <Box display="flex" height="100%" alignItems="center">
           <div className={classes.filterText}>
             <span className={classes.filterName}>Date Range</span>

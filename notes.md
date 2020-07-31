@@ -25,6 +25,7 @@ make user expired - need to change token
 run kron job to update tiers in database, based off registration date
 
 To do:
-Expired should be same as Free
 
 Admin not showing expired
+
+calendar grey
