@@ -88,14 +88,12 @@ function DashHome() {
           ...defaultFilter,
           [filterId]: {
             ...filterTemplate[filterId],
-            selectedCategory: filterId === "0" ? "Gender" : "",
-
-            selectableOptions:
-              filterId === "0" ? { Female: false, Male: false } : {},
+            selectedCategory: filterId === "0" ? "Country of Residence" : "",
 
             selectedTable: filterId === "0" || filterId === "1" ? "Users" : "",
 
-            selectedTableColumnName: filterId === "0" ? "gender" : ""
+            selectedTableColumnName:
+              filterId === "0" ? "country_of_residence" : ""
           }
         };
       });
@@ -222,7 +220,7 @@ function DashHome() {
     for (let j in setupFilter(history)) {
       // console.log(Object.values(setupFilter(history)[j]));
       let cat = Object.values(setupFilter(history)[j])[1];
-      // console.log(cat);
+      console.log(cat);
       if (!allowed.includes(cat)) {
         console.log("not allowed");
         console.log("props.No", noAccess);
@@ -234,8 +232,7 @@ function DashHome() {
         );
         dispatch(
           showNoAccessAction({
-            noAccess: noAccess,
-            setNoAccess: setNoAccess
+            noAccess: noAccess
           })
         );
         return (

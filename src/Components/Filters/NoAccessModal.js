@@ -6,15 +6,9 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 //import { useDispatch } from "react-redux";
-const NoAccessModal = ({ noAccess, setNoAccess }) => {
+const NoAccessModal = ({ noAccess }) => {
   console.log("open NO Acc", noAccess);
   const classes = useStyles();
-  const handleClose = () => {
-    setNoAccess(false);
-  };
-
-  // const dispatch = useDispatch();
-  // dispatch(setShowNoAccess(false));
 
   return (
     <>
@@ -23,7 +17,6 @@ const NoAccessModal = ({ noAccess, setNoAccess }) => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={noAccess}
-        onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -31,7 +24,7 @@ const NoAccessModal = ({ noAccess, setNoAccess }) => {
         }}
       >
         <Fade in={noAccess}>
-          <NoAccessModalDisplay handleClose={handleClose} />
+          <NoAccessModalDisplay noAccess={noAccess} />
         </Fade>
       </Modal>
     </>

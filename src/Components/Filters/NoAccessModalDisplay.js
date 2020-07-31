@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import { ContentContainer } from "../../dashboard/styledComponents/Index";
 import styled from "styled-components";
 
+import { useDispatch } from "react-redux";
+import { showNoAccessAction } from "../redux-actions/showNoAccessAction";
+
 const LoginButton = styled.button`
   background-color: transparent;
   font-size: 1.6rem;
@@ -59,12 +62,14 @@ const BigContinue = styled.big`
   color: black;
 `;
 
-function NoAccessModalDisplay({ handleClose }) {
+function NoAccessModalDisplay({ noAccess }) {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
-    handleClose(false);
+    console.log(noAccess);
+    dispatch(showNoAccessAction({ noAccess: false }));
     //if logged in push to account page
     //if not logged in push you to signup
     if (localStorage.getItem("token")) {
@@ -72,17 +77,15 @@ function NoAccessModalDisplay({ handleClose }) {
     }
   };
 
-  const handleSignIn = async (e, input) => {
-    e.preventDefault();
-    handleClose(false);
-    history.push("/login");
-  };
+  function Xout() {
+    dispatch(showNoAccessAction({ noAccess: false }));
+  }
 
   return (
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={() => handleClose(false)}>X</BigX>
+          <BigX onClick={Xout}>X</BigX>
           <FormTitle>
             This data cannot be accessed with a 'Free' account.
           </FormTitle>

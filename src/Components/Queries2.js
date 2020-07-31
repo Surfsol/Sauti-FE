@@ -23,9 +23,6 @@ const GetData = (props, { makeValues }) => {
   const noAccess = useSelector(
     state => state.showNoAccessReducer.show.noAccess
   );
-  const setNoAccess = useSelector(
-    state => state.showNoAccessReducer.show.setNoAccess
-  );
 
   console.log("noAccess", noAccess);
 
@@ -200,7 +197,7 @@ const GetData = (props, { makeValues }) => {
     console.log("notLogged IN", notLogged);
     if (noAccess) {
       console.log("return Not accessible");
-      return <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />;
+      return <NoAccessModal noAccess={noAccess} />;
     } else {
       return <></>;
     }
