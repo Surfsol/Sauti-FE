@@ -58,7 +58,7 @@ function DashHome() {
     (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
   ) {
     access = "paid";
-  } else if (tier !== undefined && tier === "FREE") {
+  } else if (tier === "FREE") {
     access = "free";
   }
 

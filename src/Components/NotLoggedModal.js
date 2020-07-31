@@ -12,7 +12,6 @@ const LoginButton = styled.button`
   transition: 0.5s ease;
   width: 45%;
   margin: 0 auto;
-  margin-top: 5%;
   margin-bottom: 5%;
   border: 2px solid #eb5e52;
   font-weight: bold;
@@ -40,7 +39,7 @@ export const FormTitle = styled.h1`
 export const DownloadText = styled.p`
   border: 0;
   display: block;
-  margin: 20px auto;
+  margin: 1.5rem auto;
   width: 65%;
   font-size: 1.6rem;
   color: grey;
@@ -81,24 +80,31 @@ function SeriesFilterModal({ handleClose }) {
     history.push("/login");
   };
 
+  function handleHome() {
+    history.push("/");
+  }
+
   return (
     <ContentContainer>
       <div>
         <Div>
           <FormTitle>
-            Would you like to filter by "Information Insights" or "Business
-            Insights" categories?
+            Welcome to Sauti DataBank, seems you are not logged in.
           </FormTitle>
           <DownloadText>
-            Click <BigContinue>Continue</BigContinue> if you'd like to upgrade
-            your account to premium.
+            Click <BigContinue>Continue</BigContinue> to learn more or create a
+            Free account.
           </DownloadText>
           <LoginButton type="submit" onClick={handleSubmit}>
             Continue
           </LoginButton>
-          <h1>Already have an account.</h1>
+          <DownloadText>Already have an account.</DownloadText>
           <LoginButton type="submit" onClick={handleSignIn}>
             Sign in
+          </LoginButton>
+          <DownloadText>Take me back to the Home page.</DownloadText>
+          <LoginButton type="submit" onClick={handleHome}>
+            Home
           </LoginButton>
         </Div>
       </div>
