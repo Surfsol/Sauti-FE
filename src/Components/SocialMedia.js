@@ -205,7 +205,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: "20px"
   },
   customWidth: {
-    fontSize: "12px"
+    fontSize: "16px"
   },
   socialMediaLink: {
     fontSize: "2.5rem",

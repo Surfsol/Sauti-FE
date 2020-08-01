@@ -147,6 +147,6 @@ const useStyles = makeStyles(theme => ({
     background: "#CCCCCC"
   },
   tooltip: {
-    fontSize: "12px"
+    fontSize: "18px"
   }
 }));
