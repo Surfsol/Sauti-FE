@@ -21,7 +21,8 @@ const CalendarParent = ({
   getCurrentYear,
   loading,
   open,
-  tier
+  tier,
+  setOpenCal
 }) => {
   const classes = useStyles();
   const access = useSelector(state => state.tierReducer.access);
@@ -41,7 +42,7 @@ const CalendarParent = ({
   };
 
   if (tier === "FREE" || tier === "EXPIRED") {
-    return <CalendarModal />;
+    return <CalendarModal setOpenCal={setOpenCal} />;
   } else if (open === "bar" && filters[0].selectedTable != "Users") {
     return (
       <>

@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CalendarModal() {
+export default function CalendarModal({ setOpenCal }) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
 
@@ -38,6 +38,7 @@ export default function CalendarModal() {
 
   const handleClose = () => {
     setOpen(false);
+    setOpenCal(false);
   };
 
   const {
@@ -62,7 +63,7 @@ export default function CalendarModal() {
         }}
       >
         <Fade in={open}>
-          <Download handleClose={handleClose} />
+          <Download setOpenCal={setOpenCal} handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>
