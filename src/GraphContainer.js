@@ -156,7 +156,7 @@ const GraphContainer = props => {
               >
                 <ClearFilters />
 
-                <Apply handleApply={handleApply} />
+                <Apply handleApply={handleApply} filters={filters} />
               </Grid>
             </Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
