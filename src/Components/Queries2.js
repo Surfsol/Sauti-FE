@@ -169,6 +169,7 @@ const GetData = (props, { makeValues }) => {
                 setNoDataModal={setNoDataModal}
                 filters={filters}
                 setFilters={setFilters}
+                setSelectedFilters={props.setSelectedFilters}
               />
             </Fade>
           </Modal>

@@ -30,8 +30,14 @@ const BigX = styled.big`
   }
 `;
 
-function NoDataModal({ setNoDataModal, setFilters, filters }) {
+function NoDataModal({
+  setNoDataModal,
+  setFilters,
+  filters,
+  setSelectedFilters
+}) {
   const dispatch = useDispatch();
+
   function handleClose() {
     //console.log('filters NoDataModal',filters)
     dispatch(
@@ -89,6 +95,8 @@ function NoDataModal({ setNoDataModal, setFilters, filters }) {
       })
     );
     setNoDataModal(false);
+    console.log("filters", filters);
+    setTimeout(setSelectedFilters(true), [2000]);
   }
 
   return (

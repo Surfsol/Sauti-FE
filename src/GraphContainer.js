@@ -111,7 +111,14 @@ const GraphContainer = props => {
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
 
+  //Display selected Filters
+  const [selectedFilters, setSelectedFilters] = useState(false);
+  useEffect(() => {
+    setSelectedFilters(false);
+  }, [filters]);
+  console.log("selectedFilters", selectedFilters);
   function handleApply() {
+    setSelectedFilters(true);
     dispatch(
       queriesFilters({
         filters: filters
@@ -138,7 +145,11 @@ const GraphContainer = props => {
               }}
               className={classes.whitebg}
             >
-              <SelectedFilterDisplay filters={filters} />
+              <SelectedFilterDisplay
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+                filters={filters}
+              />
             </Grid>
           </Grid>
           <Grid xs={3}></Grid>
@@ -228,6 +239,7 @@ const GraphContainer = props => {
                 queryType={queryType}
                 setQueryType={setQueryType}
                 setChartDataSM={setChartDataSM}
+                setSelectedFilters={setSelectedFilters}
               />
             </Grid>
           </Grid>

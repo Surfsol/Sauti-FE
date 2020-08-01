@@ -21,7 +21,7 @@ const Apply = ({ handleApply, filters }) => {
       <>
         <Grid item xs={6}>
           <Tooltip
-            title="Press Apply for results"
+            title="Press Apply"
             open
             arrow
             classes={{ tooltip: classes.customWidth }}
