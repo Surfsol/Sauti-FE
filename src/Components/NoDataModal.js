@@ -34,11 +34,12 @@ function NoDataModal({
   setNoDataModal,
   setFilters,
   filters,
-  setSelectedFilters
+  handleApply
+  // setSelectedFilters
 }) {
   const dispatch = useDispatch();
 
-  function handleClose() {
+  function noDataModalClose() {
     //console.log('filters NoDataModal',filters)
     dispatch(
       queriesFilters({
@@ -96,14 +97,15 @@ function NoDataModal({
     );
     setNoDataModal(false);
     console.log("filters", filters);
-    setTimeout(setSelectedFilters(true), [2000]);
+    handleApply();
+    //setTimeout(setSelectedFilters(true), [2000]);
   }
 
   return (
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={() => handleClose()}>X</BigX>
+          <BigX onClick={() => noDataModalClose()}>X</BigX>
           <FormTitle>
             Sorry no data is found for this search. Please try again.
           </FormTitle>

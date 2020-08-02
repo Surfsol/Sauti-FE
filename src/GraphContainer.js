@@ -93,12 +93,12 @@ const GraphContainer = props => {
   } = useCalendar();
 
   //keys used for socialmedia
-  const [keys, setKeys] = useState([]);
+  //const [keys, setKeys] = useState([]);
 
   //displays graph selected
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
-  const chartData = {};
+  //const chartData = {};
 
   //copy url
   const clipboard = new ClipboardJS(".btn", {
@@ -116,6 +116,7 @@ const GraphContainer = props => {
   useEffect(() => {
     setSelectedFilters(false);
   }, [filters]);
+
   console.log("selectedFilters", selectedFilters);
   function handleApply() {
     setSelectedFilters(true);
@@ -239,7 +240,7 @@ const GraphContainer = props => {
                 queryType={queryType}
                 setQueryType={setQueryType}
                 setChartDataSM={setChartDataSM}
-                setSelectedFilters={setSelectedFilters}
+                handleApply={handleApply}
               />
             </Grid>
           </Grid>

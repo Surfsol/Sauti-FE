@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const showNoAccessReducer = (state = initialState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case SHOWNOACCESS_SUCCESS:
       return {

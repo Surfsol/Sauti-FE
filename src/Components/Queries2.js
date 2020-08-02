@@ -169,7 +169,7 @@ const GetData = (props, { makeValues }) => {
                 setNoDataModal={setNoDataModal}
                 filters={filters}
                 setFilters={setFilters}
-                setSelectedFilters={props.setSelectedFilters}
+                handleApply={props.handleApply}
               />
             </Fade>
           </Modal>
@@ -212,7 +212,7 @@ const GetData = (props, { makeValues }) => {
   if (userTier === undefined || userTier === "EXPIRED") {
     return notLoggedIn();
   }
-
+  console.log("data", data);
   if (
     data &&
     data.sessionsData !== undefined &&
