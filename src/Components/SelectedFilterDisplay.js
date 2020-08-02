@@ -6,15 +6,6 @@ import { Box } from "@material-ui/core";
 
 const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   //noDatafound modal should selectedFilters true
-  console.log(
-    "filters",
-    filters,
-    "selectedFilters",
-    selectedFilters,
-    "resetFilters",
-    resetFilters
-  );
-  console.log("render selectedFilterDispaly");
 
   const [dataSeries, setDataSeries] = useState("");
   const [filtersVar, setAddFiltersVar] = useState({});
@@ -22,7 +13,6 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   useEffect(() => {
     if (resetFilters[0]) {
       filters = resetFilters;
-      console.log("in useEffect", filters);
       setDataSeries(filters[0].selectedCategory);
       setCompare(filters[1].selectedCategory);
       setAddFiltersVar(filters);

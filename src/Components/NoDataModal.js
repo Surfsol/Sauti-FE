@@ -39,64 +39,43 @@ function NoDataModal({
 }) {
   const dispatch = useDispatch();
 
+  let reset = {
+    0: {
+      ...filters[0],
+      nameOfFilter: "Data Series",
+      selectableOptions: {}
+    },
+    1: {
+      nameOfFilter: "Compare SubSamples",
+      selectedCategory: "",
+      selectableOptions: {},
+      selectedTable: "Users",
+      selectedTableColumnName: "",
+      showOptions: false,
+      optionHasBeenSelected: false
+    },
+    2: {
+      nameOfFilter: "Data Filter",
+      selectedCategory: "",
+      selectableOptions: {},
+      selectedTable: "",
+      selectedTableColumnName: "",
+      showOptions: true,
+      optionHasBeenSelected: false
+    }
+  };
+
   function noDataModalClose() {
     dispatch(
       queriesFilters({
-        filters: {
-          0: {
-            ...filters[0],
-            nameOfFilter: "Data Series",
-            selectableOptions: {}
-          },
-          1: {
-            nameOfFilter: "Compare SubSamples",
-            selectedCategory: "",
-            selectableOptions: {},
-            selectedTable: "Users",
-            selectedTableColumnName: "",
-            showOptions: false,
-            optionHasBeenSelected: false
-          },
-          2: {
-            nameOfFilter: "Data Filter",
-            selectedCategory: "",
-            selectableOptions: {},
-            selectedTable: "",
-            selectedTableColumnName: "",
-            showOptions: true,
-            optionHasBeenSelected: false
-          }
-        }
-      }),
-      setFilters({
-        0: {
-          ...filters[0],
-          nameOfFilter: "Data Series",
-          selectableOptions: {}
-        },
-        1: {
-          nameOfFilter: "Compare SubSamples",
-          selectedCategory: "",
-          selectableOptions: {},
-          selectedTable: "Users",
-          selectedTableColumnName: "",
-          showOptions: false,
-          optionHasBeenSelected: false
-        },
-        2: {
-          nameOfFilter: "Data Filter",
-          selectedCategory: "",
-          selectableOptions: {},
-          selectedTable: "",
-          selectedTableColumnName: "",
-          showOptions: true,
-          optionHasBeenSelected: false
-        }
+        filters: reset
       })
     );
+    setFilters(reset);
+
     setNoDataModal(false);
     console.log("filters", filters);
-    handleApply();
+    handleApply(reset);
     //setTimeout(setSelectedFilters(true), [2000]);
   }
 
