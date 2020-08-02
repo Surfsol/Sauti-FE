@@ -206,8 +206,6 @@ function DashHome() {
     }
   };
 
-  console.log("tier", tier, "setup his", setupFilter(history));
-
   if (
     tier != "ADMIN" &&
     tier != "PAID" &&

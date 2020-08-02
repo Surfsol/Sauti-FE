@@ -26,7 +26,7 @@ import LineFilter from "./Components/LineGraph/LineFilter";
 import { Box } from "@material-ui/core";
 import splashImage from "./assets/images/sautilogo-xhires.png";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { queriesFilters } from "./Components/redux-actions/queriesAction";
 
 const useStyles = makeStyles(theme => ({
@@ -80,6 +80,15 @@ const GraphContainer = props => {
 
   const dispatch = useDispatch();
 
+  const filtersReducer = useSelector(
+    state => state.queriesReducer.queriesFilters.filters
+  );
+  useEffect(() => {
+    if (filtersReducer) {
+      setFilters(filtersReducer);
+    }
+  }, [filtersReducer]);
+  console.log("filters", filters);
   const classes = useStyles();
 
   const {
@@ -117,14 +126,25 @@ const GraphContainer = props => {
     setSelectedFilters(false);
   }, [filters]);
 
-  console.log("selectedFilters", selectedFilters);
-  function handleApply() {
+  let resetFilters = {};
+
+  function handleApply(reset) {
+    console.log("handle Apply fired", filters);
     setSelectedFilters(true);
-    dispatch(
-      queriesFilters({
-        filters: filters
-      })
-    );
+    if (reset) {
+      resetFilters = reset;
+      dispatch(
+        queriesFilters({
+          filters: reset
+        })
+      );
+    } else {
+      dispatch(
+        queriesFilters({
+          filters: filters
+        })
+      );
+    }
   }
 
   return (
@@ -150,6 +170,7 @@ const GraphContainer = props => {
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
                 filters={filters}
+                resetFilters={resetFilters}
               />
             </Grid>
           </Grid>
@@ -166,7 +187,7 @@ const GraphContainer = props => {
                 spacing={2}
                 style={{ height: "30px", padding: "2%" }}
               >
-                <ClearFilters />
+                <ClearFilters handleApply={handleApply} />
 
                 <Apply handleApply={handleApply} filters={filters} />
               </Grid>

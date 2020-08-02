@@ -24,8 +24,6 @@ const GetData = (props, { makeValues }) => {
     state => state.showNoAccessReducer.show.noAccess
   );
 
-  console.log("noAccess", noAccess);
-
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
@@ -183,9 +181,7 @@ const GetData = (props, { makeValues }) => {
   const [notLogged, setNotLogged] = useState(true);
 
   function notLoggedIn() {
-    console.log("notLogged IN", notLogged);
     if (notLogged) {
-      console.log("return Not LoggedIN");
       return (
         <NotLoggedInModal notLogged={notLogged} setNotLogged={setNotLogged} />
       );
@@ -195,15 +191,12 @@ const GetData = (props, { makeValues }) => {
   }
 
   function NotAccessible() {
-    console.log("notLogged IN", notLogged);
     if (noAccess) {
-      console.log("return Not accessible");
       return <NoAccessModal noAccess={noAccess} />;
     } else {
       return <></>;
     }
   }
-  console.log("noAccess", noAccess);
 
   if (noAccess === true) {
     return NotAccessible();

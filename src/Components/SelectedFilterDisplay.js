@@ -4,21 +4,34 @@ import "./scss/SelectedFilterDisplay.scss";
 import Grid from "@material-ui/core/Grid";
 import { Box } from "@material-ui/core";
 
-const SelectedFilterDisplay = ({ filters, selectedFilters }) => {
+const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   //noDatafound modal should selectedFilters true
-
+  console.log(
+    "filters",
+    filters,
+    "selectedFilters",
+    selectedFilters,
+    "resetFilters",
+    resetFilters
+  );
   console.log("render selectedFilterDispaly");
-  console.log("selectedFilters", selectedFilters);
+
   const [dataSeries, setDataSeries] = useState("");
   const [filtersVar, setAddFiltersVar] = useState({});
   const [compare, setCompare] = useState("");
   useEffect(() => {
-    if (selectedFilters) {
+    if (resetFilters[0]) {
+      filters = resetFilters;
+      console.log("in useEffect", filters);
+      setDataSeries(filters[0].selectedCategory);
+      setCompare(filters[1].selectedCategory);
+      setAddFiltersVar(filters);
+    } else if (selectedFilters) {
       setDataSeries(filters[0].selectedCategory);
       setCompare(filters[1].selectedCategory);
       setAddFiltersVar(filters);
     }
-  }, [selectedFilters]);
+  }, [selectedFilters, resetFilters]);
 
   const makeFilterList = () => {
     return Object.keys(filtersVar)

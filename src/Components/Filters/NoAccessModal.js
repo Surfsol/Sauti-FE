@@ -7,7 +7,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 //import { useDispatch } from "react-redux";
 const NoAccessModal = ({ noAccess }) => {
-  console.log("open NO Acc", noAccess);
   const classes = useStyles();
 
   return (

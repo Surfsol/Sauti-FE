@@ -7,9 +7,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 const NotLoggedInModal = ({ notLogged, setNotLogged }) => {
-  console.log("vvvvvvvvNotLoggedInModal");
-  console.log(notLogged);
-
   const classes = useStyles();
   const handleClose = () => {
     setNotLogged(false);

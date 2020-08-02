@@ -40,7 +40,6 @@ function NoDataModal({
   const dispatch = useDispatch();
 
   function noDataModalClose() {
-    //console.log('filters NoDataModal',filters)
     dispatch(
       queriesFilters({
         filters: {
