@@ -57,6 +57,17 @@ const SelectedFilterDisplay = ({ filters, selectedFilters }) => {
     }
   }
 
+  function showDataSeries() {
+    if (dataSeries) {
+      return (
+        <>
+          <span className="filterTitle"> Data Series -</span>
+          <span style={{ marginLeft: ".4%" }}>{dataSeries}</span>
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <Box
@@ -67,8 +78,7 @@ const SelectedFilterDisplay = ({ filters, selectedFilters }) => {
         flexWrap="nowrap"
         style={{ fontSize: "1.5rem", padding: "0% 1%" }}
       >
-        <span className="filterTitle">Data Series -</span>
-        <span style={{ marginLeft: ".4%" }}>{dataSeries}</span>
+        {showDataSeries()}
         {makeFilterList()}
         {showCompare()}
       </Box>
