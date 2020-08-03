@@ -244,9 +244,10 @@ const GetData = (props, { makeValues }) => {
     return noData();
   }
 
-  if (filters[0].selectedCategory && data === undefined) {
-    return noData();
-  }
+  //removed because was causing NoDataModal to popup when initially going to Data
+  // if (filters[0].selectedCategory && data === undefined) {
+  //   return noData();
+  // }
 
   if (
     data &&
