@@ -205,23 +205,20 @@ const GetData = (props, { makeValues }) => {
   if (userTier === undefined || userTier === "EXPIRED") {
     return notLoggedIn();
   }
-  console.log("data", data);
-  if (
-    data &&
-    data.sessionsData !== undefined &&
-    data.sessionsData.length === 0
-  ) {
-    return noData();
-  }
-  // quick fix, data.tradersUsers.length <= 5, could remove non-null first
-  // search - Border Crossing Freq, >60, kinyarwanda
-  // search returns 1 user, with 1 null value
-  if (
-    data &&
-    data.tradersUsers !== undefined &&
-    data.tradersUsers.length <= 5
-  ) {
-    return noData();
+
+  if (filters[1].selectedCategory === "" && data && data.tradersUsers) {
+    const notNull = [];
+    let values = data.tradersUsers;
+    const selectedTableColumnName = filters[0].selectedTableColumnName;
+    for (let i = 0; i < values.length; i++) {
+      if (
+        values[i][selectedTableColumnName] !== null &&
+        values[i][selectedTableColumnName] !== ""
+      ) {
+        notNull.push(values[i]);
+      }
+    }
+    data = { tradersUsers: notNull };
   }
 
   if (filters[1].selectedCategory === "" && data && data.sessionsData) {
@@ -237,6 +234,26 @@ const GetData = (props, { makeValues }) => {
       }
     }
     data = { sessionsData: notNull };
+  }
+  console.log("data", data);
+  if (
+    data &&
+    data.sessionsData !== undefined &&
+    data.sessionsData.length === 0
+  ) {
+    return noData();
+  }
+
+  if (filters[0].selectedCategory && data === undefined) {
+    return noData();
+  }
+
+  if (
+    data &&
+    data.tradersUsers !== undefined &&
+    data.tradersUsers.length <= 5
+  ) {
+    return noData();
   }
 
   if (loading) {
