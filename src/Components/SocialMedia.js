@@ -71,7 +71,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {access || newSub ? (
+        {access || sub === newSub ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader
