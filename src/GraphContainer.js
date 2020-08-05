@@ -146,6 +146,15 @@ const GraphContainer = props => {
       );
     }
   }
+  //from linegraph
+  //const [lineApply, setLineApply] = useState(false)
+  //const lineApplyReducer = useSelector(state => state.lineApplyReducer.lineApply)
+  // if(lineApplyReducer){
+  //   setLineApply(lineApplyReducer)
+  // }
+  // if (lineApply){
+  //   handleApply()
+  // }
 
   return (
     <>
