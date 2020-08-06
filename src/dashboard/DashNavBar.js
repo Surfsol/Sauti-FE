@@ -18,6 +18,7 @@ import UserSVG from "./Images/UserSVG";
 import ForgotPassword from "./DashboardAccount/PasswordReset/ForgotPassword";
 import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswordContainer";
 import LandingParent from "../Components/themeLanding/LandingParent";
+import Pricing from "../Components/themePricing/Pricing";
 import {
   TopBar,
   SautiLogo,
@@ -74,6 +75,7 @@ function DashNav() {
             <Links to="/data">DATA</Links>
             <Links to="/about">ABOUT</Links>
             <Links to="/contact">CONTACT</Links>
+            <Links to="/pricing">PRICING</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
             {tier === "ADMIN" && <Links to="/tools">ADMIN</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
@@ -87,6 +89,7 @@ function DashNav() {
         </TopBar>
       </Container>
       <Route exact path="/" component={LandingParent} />
+      <Route exact path="/pricing" component={Pricing} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />

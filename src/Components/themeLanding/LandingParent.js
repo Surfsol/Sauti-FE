@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { colors, Divider } from "@material-ui/core";
-import Section from "./landingComponents/organisms/Section";
+import Section from "../themeStyledComponents/organisms/Section";
 import Download from "./landingComponents/LandingDownload";
 import Hero from "./landingComponents/Hero";
 import Hub from "./landingComponents/Hub";

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, colors } from "@material-ui/core";
-import Image from "./atoms/Image";
-import SectionHeader from "./molecules/SectionHeader";
-import IconAlternate from "./molecules/SectionHeader";
-import DescriptionListIcon from "./organisms/DescriptionListIcon";
+import Image from "../../themeStyledComponents/atoms/Image";
+import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
+import IconAlternate from "../../themeStyledComponents/molecules/SectionHeader";
+import DescriptionListIcon from "../../themeStyledComponents/organisms/DescriptionListIcon";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%"

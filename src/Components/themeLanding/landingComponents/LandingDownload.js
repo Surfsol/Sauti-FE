@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Button, colors } from "@material-ui/core";
-import SectionHeader from "./molecules/SectionHeader";
-import CardBase from "./organisms/CardBase";
+import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
+import CardBase from "../../themeStyledComponents/organisms/CardBase";
 
 const useStyles = makeStyles(theme => ({
   root: {},

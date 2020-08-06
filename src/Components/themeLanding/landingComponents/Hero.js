@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery, Grid, Button } from "@material-ui/core";
-import Image from "./atoms/Image";
-import SectionHeader from "./molecules/SectionHeader";
+import Image from "../../themeStyledComponents/atoms/Image";
+import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 
 const useStyles = makeStyles(theme => ({
   root: {},
