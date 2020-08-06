@@ -8,6 +8,7 @@ import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import NoAccount from "../dashboard/DashboardAccount/NoAccount";
 import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
+
 import DashLogout from "./DashLogout";
 import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -16,7 +17,7 @@ import { getToken, decodeToken } from "./auth/Auth";
 import UserSVG from "./Images/UserSVG";
 import ForgotPassword from "./DashboardAccount/PasswordReset/ForgotPassword";
 import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswordContainer";
-
+import LandingParent from "../Components/themeLanding/LandingParent";
 import {
   TopBar,
   SautiLogo,
@@ -47,7 +48,7 @@ function DashNav() {
     tier = tokenDecoded.tier;
   }
 
-  const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
+  // const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
 
   return (
     <>
@@ -85,7 +86,7 @@ function DashNav() {
           </Navigation>
         </TopBar>
       </Container>
-      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/" component={LandingParent} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
