@@ -29,7 +29,7 @@ const AccountHandler = () => {
   let adminUser = decoded.tier === "ADMIN";
 
   let newPaypalSubscriber = useNewSubName(newSub);
-
+  //console.log(newPaypalSubscriber)
   if (newSub && newPaypalSubscriber) {
     return <NewSubscriberHandler newPaypalSubscriber={newPaypalSubscriber} />;
   }
