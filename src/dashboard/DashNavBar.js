@@ -20,6 +20,7 @@ import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswo
 import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
+import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
 
 import {
   TopBar,
@@ -78,6 +79,7 @@ function DashNav() {
             <Links to="/about">ABOUT</Links>
             <Links to="/contact">CONTACT</Links>
             <Links to="/pricing">PRICING</Links>
+            <Links to="/companyterms">COMPANY TERMS</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
             {tier === "ADMIN" && <Links to="/tools">ADMIN</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
@@ -93,6 +95,7 @@ function DashNav() {
       <Route exact path="/" component={LandingParent} />
       <Route exact path="/pricing" component={Pricing} />
       <Route exact path="/contact" component={Contact} />
+      <Route exact path="/companyterms" component={CompanyTerms} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
