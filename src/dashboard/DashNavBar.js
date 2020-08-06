@@ -19,6 +19,8 @@ import ForgotPassword from "./DashboardAccount/PasswordReset/ForgotPassword";
 import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswordContainer";
 import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
+import Contact from "../Components/themeContact/Contact";
+
 import {
   TopBar,
   SautiLogo,
@@ -90,6 +92,7 @@ function DashNav() {
       </Container>
       <Route exact path="/" component={LandingParent} />
       <Route exact path="/pricing" component={Pricing} />
+      <Route exact path="/contact" component={Contact} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
