@@ -6,7 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 //import { useDispatch } from "react-redux";
-const NoAccessModal = ({ noAccess }) => {
+const NoAccessModal = ({ noAccess, setNoAccess, catValue }) => {
   const classes = useStyles();
 
   return (
@@ -23,7 +23,11 @@ const NoAccessModal = ({ noAccess }) => {
         }}
       >
         <Fade in={noAccess}>
-          <NoAccessModalDisplay noAccess={noAccess} />
+          <NoAccessModalDisplay
+            noAccess={noAccess}
+            setNoAccess={setNoAccess}
+            catValue={catValue}
+          />
         </Fade>
       </Modal>
     </>

@@ -20,10 +20,10 @@ const GetData = (props, { makeValues }) => {
   );
 
   const userTier = useSelector(state => state.tierReducer.tier);
-  const noAccess = useSelector(
-    state => state.showNoAccessReducer.show.noAccess
-  );
-
+  const noAccessReducer = useSelector(state => state.showNoAccessReducer.show);
+  let noAccess = noAccessReducer.noAccess;
+  const setNoAccess = noAccessReducer.setNoAccess;
+  console.log(noAccess, setNoAccess);
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
@@ -192,7 +192,7 @@ const GetData = (props, { makeValues }) => {
 
   function NotAccessible() {
     if (noAccess) {
-      return <NoAccessModal noAccess={noAccess} />;
+      return <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />;
     } else {
       return <></>;
     }

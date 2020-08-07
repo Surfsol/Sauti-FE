@@ -62,7 +62,7 @@ const BigContinue = styled.big`
   color: black;
 `;
 
-function NoAccessModalDisplay({ noAccess }) {
+function NoAccessModalDisplay({ noAccess, setNoAccess, catValue }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -76,8 +76,17 @@ function NoAccessModalDisplay({ noAccess }) {
       history.push("/myaccount");
     }
   };
-  const catValue = useSelector(state => state.showNoAccessReducer.show.cat);
+
+  const reducerCatValue = useSelector(
+    state => state.showNoAccessReducer.show.cat
+  );
+
+  if (reducerCatValue) {
+    catValue = reducerCatValue;
+  }
+
   function Xout() {
+    setNoAccess(false);
     dispatch(showNoAccessAction({ noAccess: false }));
   }
 

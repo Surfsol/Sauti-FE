@@ -78,6 +78,7 @@ function DashHome() {
       return option;
     }
   };
+  console.log("History", History);
 
   let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
@@ -219,12 +220,17 @@ function DashHome() {
     );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
+    console.log("tier", tier);
     let cat = "";
+    setupFilter(history);
+    console.log(allSelectedCategories);
     for (let i = 0; i < allSelectedCategories.length; i++) {
+      console.log(allSelectedCategories[i]);
       if (!allowed.includes(allSelectedCategories[i])) {
         cat = allSelectedCategories[i];
       }
     }
+    console.log("cat", cat);
     if (cat != "") {
       //setNoAccess(true)
       dispatch(
@@ -235,6 +241,7 @@ function DashHome() {
       dispatch(
         showNoAccessAction({
           noAccess: noAccess,
+          setNoAccess: setNoAccess,
           cat: cat
         })
       );
