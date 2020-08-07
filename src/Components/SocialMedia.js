@@ -71,7 +71,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {access || newSub ? (
+        {access || sub === newSub ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader
@@ -205,7 +205,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: "20px"
   },
   customWidth: {
-    fontSize: "12px"
+    fontSize: "16px"
   },
   socialMediaLink: {
     fontSize: "2.5rem",

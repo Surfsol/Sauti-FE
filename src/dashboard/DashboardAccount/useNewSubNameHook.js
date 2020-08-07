@@ -43,6 +43,7 @@ export function useNewSubName(newSub) {
         };
 
         let planIDName;
+        console.log("Access Token", access_token);
         if (access_token) {
           const config = {
             headers: { Authorization: `Bearer ${access_token}` }
@@ -58,6 +59,7 @@ export function useNewSubName(newSub) {
           );
           planIDName = users_planIdInformation.data.name;
         }
+        console.log("planIDName", planIDName);
         setResponse(planIDName);
       } catch (error) {
         setError(error);

@@ -34,18 +34,6 @@ const Graph = props => {
     }
   }
 
-  const token = getToken();
-  let tier;
-  if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
-  }
-  const newSub = getSubscription();
-  let sub;
-  if (newSub) {
-    sub = newSub;
-  }
-
   useEffect(() => {
     setChartDataSM(chartData);
   }, []);

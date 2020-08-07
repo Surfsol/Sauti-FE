@@ -26,7 +26,7 @@ import LineFilter from "./Components/LineGraph/LineFilter";
 import { Box } from "@material-ui/core";
 import splashImage from "./assets/images/sautilogo-xhires.png";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { queriesFilters } from "./Components/redux-actions/queriesAction";
 
 const useStyles = makeStyles(theme => ({
@@ -80,6 +80,15 @@ const GraphContainer = props => {
 
   const dispatch = useDispatch();
 
+  const filtersReducer = useSelector(
+    state => state.queriesReducer.queriesFilters.filters
+  );
+  useEffect(() => {
+    if (filtersReducer) {
+      setFilters(filtersReducer);
+    }
+  }, [filtersReducer]);
+  console.log("filters", filters);
   const classes = useStyles();
 
   const {
@@ -93,12 +102,12 @@ const GraphContainer = props => {
   } = useCalendar();
 
   //keys used for socialmedia
-  const [keys, setKeys] = useState([]);
+  //const [keys, setKeys] = useState([]);
 
   //displays graph selected
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
-  const chartData = {};
+  //const chartData = {};
 
   //copy url
   const clipboard = new ClipboardJS(".btn", {
@@ -111,13 +120,41 @@ const GraphContainer = props => {
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
 
-  function handleApply() {
-    dispatch(
-      queriesFilters({
-        filters: filters
-      })
-    );
+  //Display selected Filters
+  const [selectedFilters, setSelectedFilters] = useState(false);
+  useEffect(() => {
+    setSelectedFilters(false);
+  }, [filters]);
+
+  let resetFilters = {};
+
+  function handleApply(reset) {
+    console.log("handle Apply fired", filters);
+    setSelectedFilters(true);
+    if (reset) {
+      resetFilters = reset;
+      dispatch(
+        queriesFilters({
+          filters: reset
+        })
+      );
+    } else {
+      dispatch(
+        queriesFilters({
+          filters: filters
+        })
+      );
+    }
   }
+  //from linegraph
+  //const [lineApply, setLineApply] = useState(false)
+  //const lineApplyReducer = useSelector(state => state.lineApplyReducer.lineApply)
+  // if(lineApplyReducer){
+  //   setLineApply(lineApplyReducer)
+  // }
+  // if (lineApply){
+  //   handleApply()
+  // }
 
   return (
     <>
@@ -138,7 +175,12 @@ const GraphContainer = props => {
               }}
               className={classes.whitebg}
             >
-              <SelectedFilterDisplay filters={filters} />
+              <SelectedFilterDisplay
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+                filters={filters}
+                resetFilters={resetFilters}
+              />
             </Grid>
           </Grid>
           <Grid xs={3}></Grid>
@@ -154,9 +196,9 @@ const GraphContainer = props => {
                 spacing={2}
                 style={{ height: "30px", padding: "2%" }}
               >
-                <ClearFilters />
+                <ClearFilters handleApply={handleApply} />
 
-                <Apply handleApply={handleApply} />
+                <Apply handleApply={handleApply} filters={filters} />
               </Grid>
             </Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
@@ -228,6 +270,7 @@ const GraphContainer = props => {
                 queryType={queryType}
                 setQueryType={setQueryType}
                 setChartDataSM={setChartDataSM}
+                handleApply={handleApply}
               />
             </Grid>
           </Grid>

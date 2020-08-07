@@ -24,4 +24,14 @@ make user expired - need to change token
 
 run kron job to update tiers in database, based off registration date
 
-js write to file, to update dictonary
+To do:
+
+Admin not showing expired
+
+calendar grey
+
+paypal user story - http://framebox.org/ALTqd
+
+src / views / DesktopApp / components / Hero / Hero.js
+
+src / views / DesktopApp / components / Usecases

@@ -36,6 +36,7 @@ const CompareSubSamples = () => {
 
   const access = useSelector(state => state.tierReducer.access);
   const [noAccess, setNoAccess] = useState(false);
+  const [catValue, setCatValue] = useState("");
 
   function changeOption(e) {
     const selectedName = e.target.dataset.selectvalue;
@@ -68,6 +69,7 @@ const CompareSubSamples = () => {
       });
     } else {
       setNoAccess(true);
+      setCatValue(selectedName);
     }
   }
 
@@ -154,7 +156,11 @@ const CompareSubSamples = () => {
       return (
         <>
           {compareOpen()}
-          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
+          <NoAccessModal
+            noAccess={noAccess}
+            setNoAccess={setNoAccess}
+            catValue={catValue}
+          />
         </>
       );
     }

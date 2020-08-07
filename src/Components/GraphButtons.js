@@ -148,6 +148,6 @@ const GraphButtons = ({ open, setOpen, filters, queryType }) => {
 export default GraphButtons;
 const useStyles = makeStyles(theme => ({
   customWidth: {
-    fontSize: "12px"
+    fontSize: "16px"
   }
 }));

@@ -7,14 +7,15 @@ import "../scss/dataSeries.scss";
 import { Box } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const CalendarFilter = () => {
   const reducerCal = useSelector(state => state.calendarReducer.calendar);
+  const tier = useSelector(state => state.tierReducer.tier);
 
   const [openCal, setOpenCal] = useState(false);
   const classes = useStyles();
   const {
-    tier,
     newSub,
     filterBoxStartDate,
     setFilterBoxStartDate,
@@ -26,13 +27,35 @@ const CalendarFilter = () => {
     loading,
     open
   } = reducerCal;
-  if (open === "bar" && openCal === false) {
+
+  if (
+    (tier === "FREE" || tier === "EXPIRED") &&
+    open === "bar" &&
+    openCal === false
+  ) {
     return (
       <Grid
         item
         className={classes.doNotRender}
         onClick={() => setOpenCal(true)}
       >
+        <Box display="flex" height="100%" alignItems="center">
+          <Tooltip
+            arrow
+            classes={{ tooltip: classes.tooltip }}
+            title="Can only be accessed with a paid account"
+          >
+            <div className={classes.filterText}>
+              <span className={classes.filterName}>Date Range</span>
+              <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+            </div>
+          </Tooltip>
+        </Box>
+      </Grid>
+    );
+  } else if (open === "bar" && openCal === false) {
+    return (
+      <Grid item className={classes.calendar} onClick={() => setOpenCal(true)}>
         <Box display="flex" height="100%" alignItems="center">
           <div className={classes.filterText}>
             <span className={classes.filterName}>Date Range</span>
@@ -71,6 +94,7 @@ const CalendarFilter = () => {
           getCurrentYear={getCurrentYear}
           loading={loading}
           open={open}
+          setOpenCal={setOpenCal}
         />
       </>
     );
@@ -121,5 +145,8 @@ const useStyles = makeStyles(theme => ({
     fontSize: "1.5rem",
     cursor: "pointer",
     background: "#CCCCCC"
+  },
+  tooltip: {
+    fontSize: "18px"
   }
 }));

@@ -93,6 +93,12 @@ export default function FilterBox(props) {
       tier = decodeToken(token);
       tier = tier.tier;
     }
+    const newSub = getSubscription();
+
+    if (newSub) {
+      tier = "PAID";
+    }
+
     let access;
     if (
       tier !== undefined &&
