@@ -12,9 +12,6 @@ import { useHistory } from "react-router-dom";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 import EditAccount from "./EditAccount";
 
-import { useDispatch } from "react-redux";
-import { showNoAccessAction } from "../../Components/redux-actions/showNoAccessAction";
-
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -55,7 +52,6 @@ const DashAccountFree = props => {
   const classes = useStyles();
   const token = getToken();
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const tokenId = decodeToken(token);
 
@@ -76,9 +72,6 @@ const DashAccountFree = props => {
   }
 
   const handleSubmit = async (e, input) => {
-    console.log("handles submit");
-    dispatch(showNoAccessAction({ noAccess: false }));
-
     e.preventDefault();
     history.push("/data");
   };

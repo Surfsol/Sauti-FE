@@ -1,41 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
 
-const Apply = ({ handleApply, filters }) => {
+// import {useDispatch} from 'react-redux'
+// import {applyAction} from '../redux-actions/applyAction'
+
+const Apply = ({ handleApply }) => {
   const classes = useStyles();
-  const [show, setShow] = useState(false);
+  //const dispatch = useDispatch()
 
-  useEffect(() => {
-    setShow(true);
-  }, [filters]);
-
-  function handleClick() {
-    handleApply();
-    setShow(false);
-  }
-
-  if (show) {
-    return (
-      <>
-        <Grid item xs={6}>
-          <Tooltip
-            title="Press Apply"
-            open
-            arrow
-            classes={{ tooltip: classes.customWidth }}
-          >
-            <button className={classes.applyButton} onClick={handleClick}>
-              Apply
-            </button>
-          </Tooltip>
-        </Grid>
-      </>
-    );
-  } else {
-    return <></>;
-  }
+  // function handleApply(e){
+  // e.preventDefault()
+  // dispatch(applyAction())
+  // }
+  return (
+    <>
+      <Grid item xs={6}>
+        <button className={classes.applyButton} onClick={handleApply}>
+          Apply
+        </button>
+      </Grid>
+    </>
+  );
 };
 export default Apply;
 
@@ -51,8 +37,5 @@ const useStyles = makeStyles(theme => ({
     borderRadius: ".5rem",
     cursor: "pointer",
     float: "right"
-  },
-  customWidth: {
-    fontSize: "16px"
   }
 }));

@@ -13,7 +13,6 @@ import { queriesFilters } from "../Components/redux-actions/queriesAction";
 import { allowed } from "../Components/orderedGraphLabels";
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
-import { showNoAccessAction } from "../Components/redux-actions/showNoAccessAction";
 
 //set inital filters
 const filterTemplate = {
@@ -45,7 +44,6 @@ const filterTemplate = {
 };
 
 function DashHome() {
-  const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
   let tier;
   if (token) {
@@ -58,7 +56,7 @@ function DashHome() {
     (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
   ) {
     access = "paid";
-  } else if (tier === "FREE") {
+  } else if (tier !== undefined && tier === "FREE") {
     access = "free";
   }
 
@@ -78,11 +76,10 @@ function DashHome() {
       return option;
     }
   };
-  console.log("History", History);
 
-  let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
   const setupFilter = history => {
+    console.log("run setupFilter history", history);
     if (history.location.search.length === 0) {
       let defaultFilter = {};
       Object.keys(filterTemplate).forEach(filterId => {
@@ -90,12 +87,14 @@ function DashHome() {
           ...defaultFilter,
           [filterId]: {
             ...filterTemplate[filterId],
-            selectedCategory: filterId === "0" ? "Country of Residence" : "",
+            selectedCategory: filterId === "0" ? "Gender" : "",
+
+            selectableOptions:
+              filterId === "0" ? { Female: false, Male: false } : {},
 
             selectedTable: filterId === "0" || filterId === "1" ? "Users" : "",
 
-            selectedTableColumnName:
-              filterId === "0" ? "country_of_residence" : ""
+            selectedTableColumnName: filterId === "0" ? "gender" : ""
           }
         };
       });
@@ -128,9 +127,6 @@ function DashHome() {
         let split2 = split1[i].split("equals");
         let split3 = split2[1].split("comma");
         if (split3[0] !== "undefined") {
-          allSelectedCategories.push(
-            FilterBoxOptions.tableNamesToCategoryName[split3[0]]
-          );
           let optionFlags = {};
 
           graphLabels[`${split3[0]}`].labels.forEach(option => {
@@ -207,6 +203,7 @@ function DashHome() {
     }
   };
 
+  console.log("tier", tier, "setup his", setupFilter(history));
   if (
     tier != "ADMIN" &&
     tier != "PAID" &&
@@ -220,42 +217,29 @@ function DashHome() {
     );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
-    console.log("tier", tier);
-    let cat = "";
-    setupFilter(history);
-    console.log(allSelectedCategories);
-    for (let i = 0; i < allSelectedCategories.length; i++) {
-      console.log(allSelectedCategories[i]);
-      if (!allowed.includes(allSelectedCategories[i])) {
-        cat = allSelectedCategories[i];
+    for (let j in setupFilter(history)) {
+      console.log(Object.values(setupFilter(history)[j]));
+      let cat = Object.values(setupFilter(history)[j])[1];
+      console.log(cat);
+      if (!allowed.includes(cat)) {
+        console.log("not allowed");
+        dispatch(
+          queriesFilters({
+            filters: defaultFilters
+          })
+        );
+        return (
+          <>
+            <GraphContainer filters={defaultFilters} />
+          </>
+        );
+      } else {
+        return (
+          <>
+            <GraphContainer filters={setupFilter(history)} />
+          </>
+        );
       }
-    }
-    console.log("cat", cat);
-    if (cat != "") {
-      //setNoAccess(true)
-      dispatch(
-        queriesFilters({
-          filters: defaultFilters
-        })
-      );
-      dispatch(
-        showNoAccessAction({
-          noAccess: noAccess,
-          setNoAccess: setNoAccess,
-          cat: cat
-        })
-      );
-      return (
-        <>
-          <GraphContainer filters={defaultFilters} />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <GraphContainer filters={setupFilter(history)} />
-        </>
-      );
     }
   } else {
     return (
