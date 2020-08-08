@@ -10,6 +10,8 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   const [dataSeries, setDataSeries] = useState("");
   const [filtersVar, setAddFiltersVar] = useState({});
   const [compare, setCompare] = useState("");
+
+  //console.log(dataSeries, 'filtersVar', filters[1].selectedCategory, 'compare', compare)
   useEffect(() => {
     if (resetFilters[0]) {
       filters = resetFilters;
@@ -24,10 +26,11 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   }, [selectedFilters, resetFilters]);
 
   const makeFilterList = () => {
+    console.log("filtersVar", filtersVar);
     return Object.keys(filtersVar)
       .filter(filterId => filterId >= 2)
       .map(filterId => {
-        if (filtersVar[filterId].selectedCategory) {
+        if (getSelectedOption(filtersVar, filterId)) {
           return (
             <>
               <span className="filterTitle"> Additional Filter -</span>
@@ -48,6 +51,7 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   };
 
   function showCompare() {
+    console.log("compare", compare);
     if (compare) {
       return (
         <>
@@ -61,6 +65,7 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   }
 
   function showDataSeries() {
+    console.log("dataSeries", dataSeries);
     if (dataSeries) {
       return (
         <>
