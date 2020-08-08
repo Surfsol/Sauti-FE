@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { barDownload } from "../Components/redux-actions/barDownloadAction";
 import Grid from "@material-ui/core/Grid";
 import dynamicText from "./dynamicText";
+import { applyAction } from "../Components/redux-actions/applyAction";
 
 const Graph = props => {
   let {
@@ -22,7 +23,9 @@ const Graph = props => {
     sampleSize,
     tableName,
     setChartDataSM,
-    chartData
+    chartData,
+    applyNow,
+    setApplyNow
   } = props;
 
   const dispatch = useDispatch();
@@ -182,6 +185,15 @@ const Graph = props => {
       })
     );
   }, [makeValues, makeHeaders]);
+
+  if (applyNow) {
+    dispatch(
+      applyAction({
+        apply: true
+      })
+    );
+    setApplyNow(false);
+  }
 
   return (
     <>

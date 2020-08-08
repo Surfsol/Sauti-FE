@@ -10,6 +10,7 @@ import { FilterBoxOptions } from "../Components/FilterBoxOptions";
 import graphLabels from "../Components/graphLabels";
 import { useSelector, useDispatch } from "react-redux";
 import { queriesFilters } from "../Components/redux-actions/queriesAction";
+import { applyAction } from "../Components/redux-actions/applyAction";
 import { allowed } from "../Components/orderedGraphLabels";
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
@@ -47,6 +48,7 @@ const filterTemplate = {
 function DashHome() {
   const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
+
   let tier;
   if (token) {
     tier = decodeToken(token);
@@ -230,9 +232,8 @@ function DashHome() {
         cat = allSelectedCategories[i];
       }
     }
-    console.log("cat", cat);
+
     if (cat != "") {
-      //setNoAccess(true)
       dispatch(
         queriesFilters({
           filters: defaultFilters
@@ -251,6 +252,11 @@ function DashHome() {
         </>
       );
     } else {
+      dispatch(
+        applyAction({
+          apply: false
+        })
+      );
       return (
         <>
           <GraphContainer filters={setupFilter(history)} />
@@ -258,6 +264,12 @@ function DashHome() {
       );
     }
   } else {
+    console.log("last else");
+    dispatch(
+      applyAction({
+        apply: false
+      })
+    );
     return (
       <>
         <GraphContainer filters={setupFilter(history)} />

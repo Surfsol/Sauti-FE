@@ -2,21 +2,25 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useSelector } from "react-redux";
 
 const Apply = ({ handleApply, filters }) => {
   const classes = useStyles();
   const [show, setShow] = useState(false);
+  let applyFromDash = false;
+  applyFromDash = useSelector(state => state.applyActionReducer.apply.apply);
+  console.log("applyFromDash", applyFromDash);
 
   useEffect(() => {
     setShow(true);
-  }, [filters]);
+  }, [filters, applyFromDash]);
 
   function handleClick() {
     handleApply();
     setShow(false);
   }
 
-  if (show) {
+  if (show && applyFromDash !== true) {
     return (
       <>
         <Grid item xs={6}>

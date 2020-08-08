@@ -19,11 +19,13 @@ const GetData = (props, { makeValues }) => {
     state => state.queriesReducer.queriesFilters
   );
 
+  const [applyNow, setApplyNow] = useState(false);
+
   const userTier = useSelector(state => state.tierReducer.tier);
   const noAccessReducer = useSelector(state => state.showNoAccessReducer.show);
   let noAccess = noAccessReducer.noAccess;
   const setNoAccess = noAccessReducer.setNoAccess;
-  console.log(noAccess, setNoAccess);
+
   let queryType = props.queryType;
   let setQueryType = props.setQueryType;
   setQueryType("tradersUsers");
@@ -37,6 +39,8 @@ const GetData = (props, { makeValues }) => {
   if (queriesFilters.filters) {
     filters = queriesFilters.filters;
   } else if (filters === undefined) {
+    console.log("through filters Quereies");
+    setApplyNow(true);
     filters = props.filters;
     filterBoxStartDate = props.filterBoxStartDate;
     filterBoxEndDate = props.filterBoxStartDate;
@@ -235,7 +239,7 @@ const GetData = (props, { makeValues }) => {
     }
     data = { sessionsData: notNull };
   }
-  console.log("data", data);
+  // console.log("data", data);
   if (
     data &&
     data.sessionsData !== undefined &&
@@ -284,6 +288,8 @@ const GetData = (props, { makeValues }) => {
         setDisplayButton={props.setDisplayButton}
         displayButton={props.displayButton}
         setChartDataSM={props.setChartDataSM}
+        applyNow={applyNow}
+        setApplyNow={setApplyNow}
       />
     </>
   );
