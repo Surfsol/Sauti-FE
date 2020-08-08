@@ -23,8 +23,6 @@ import Grid from "@material-ui/core/Grid";
 import { barDownload } from "../redux-actions/barDownloadAction";
 import { downloadLine } from "./downloadLine";
 
-import NoDataParent from "./NoDataParent";
-
 const GraphTime = ({
   month100,
   quarter100,
@@ -36,11 +34,6 @@ const GraphTime = ({
   const [time, setTime] = useState([]);
   const [timeInUse, setTimeInUse] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
-  const [noDataModal, setNoDataModal] = useState(true);
-
-  useEffect(() => {
-    setNoDataModal(true);
-  });
 
   console.log("time", time);
 
@@ -50,22 +43,6 @@ const GraphTime = ({
     setTimeInUse(month100);
   }, [month100, top7]);
 
-  function noData() {
-    console.log("no data modal Line Graph", noDataModal);
-    if (noDataModal) {
-      console.log("show noData Parent");
-      return (
-        <NoDataParent
-          setNoDataModal={setNoDataModal}
-          noDataModal={noDataModal}
-        />
-      );
-    } else {
-      console.log("nooo show noData Parent");
-      return <></>;
-    }
-  }
-
   let display = [];
   if (checkedItems && Object.entries(checkedItems).length > 0) {
     for (let i = 0; i < Object.entries(checkedItems).length; i++) {
@@ -73,10 +50,6 @@ const GraphTime = ({
       if (bbb.includes(true)) {
         display.push(bbb[0]);
       }
-    }
-  } else {
-    {
-      noData();
     }
   }
   //dynamic Methodology Text

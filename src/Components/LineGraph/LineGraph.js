@@ -11,7 +11,7 @@ import LineTime from "./LineTime";
 
 const LineGraph = ({ filter0, buttonBar, data }) => {
   const lineArray = [...data.sessionsData];
-  console.log(lineArray);
+
   //Make an array of options that can be selected.
   // const keysArray = Object.keys(filter0.selectableOptions);
 
@@ -31,7 +31,7 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
     item["created_mo"] = item.created_date.substring(0, 7);
     item["created_year"] = item.created_date.substring(0, 4);
   });
-
+  console.log("filter0", filter0);
   //FOR MONTHLY DISPLAY
   //3. Group categories together with date
   const reduceBy1 = (objectArray, property, property1) => {

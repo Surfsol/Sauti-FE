@@ -1,43 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { getSelectedOption } from "../OptionFunctions";
 import "./scss/SelectedFilterDisplay.scss";
 import Grid from "@material-ui/core/Grid";
 import { Box } from "@material-ui/core";
 
-const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
-  //noDatafound modal should selectedFilters true
-
-  const [dataSeries, setDataSeries] = useState("");
-  const [filtersVar, setAddFiltersVar] = useState({});
-  const [compare, setCompare] = useState("");
-  useEffect(() => {
-    if (resetFilters[0]) {
-      filters = resetFilters;
-      setDataSeries(filters[0].selectedCategory);
-      setCompare(filters[1].selectedCategory);
-      setAddFiltersVar(filters);
-    } else if (selectedFilters) {
-      setDataSeries(filters[0].selectedCategory);
-      setCompare(filters[1].selectedCategory);
-      setAddFiltersVar(filters);
-    }
-  }, [selectedFilters, resetFilters]);
-
+const SelectedFilterDisplay = ({ filters }) => {
   const makeFilterList = () => {
-    return Object.keys(filtersVar)
+    return Object.keys(filters)
       .filter(filterId => filterId >= 2)
       .map(filterId => {
-        if (filtersVar[filterId].selectedCategory) {
+        if (filters[filterId].selectedCategory) {
           return (
             <>
               <span className="filterTitle"> Additional Filter -</span>
               <span style={{ marginLeft: ".4%" }}>
                 {" "}
-                {filtersVar[filterId].selectedCategory} :
+                {filters[filterId].selectedCategory} :
               </span>
               <span className="italic">
                 {" "}
-                {getSelectedOption(filtersVar, filterId)};
+                {getSelectedOption(filters, filterId)};
               </span>
             </>
           );
@@ -48,26 +30,17 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
   };
 
   function showCompare() {
-    if (compare) {
+    if (filters[1].selectedCategory) {
       return (
         <>
           <span className="filterTitle"> Compare By -</span>
-          <span style={{ marginLeft: ".4%" }}>{compare}</span>
+          <span style={{ marginLeft: ".4%" }}>
+            {filters[1].selectedCategory}
+          </span>
         </>
       );
     } else {
       return <></>;
-    }
-  }
-
-  function showDataSeries() {
-    if (dataSeries) {
-      return (
-        <>
-          <span className="filterTitle"> Data Series -</span>
-          <span style={{ marginLeft: ".4%" }}>{dataSeries}</span>
-        </>
-      );
     }
   }
 
@@ -81,7 +54,8 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
         flexWrap="nowrap"
         style={{ fontSize: "1.5rem", padding: "0% 1%" }}
       >
-        {showDataSeries()}
+        <span className="filterTitle">Data Series -</span>
+        <span style={{ marginLeft: ".4%" }}>{filters[0].selectedCategory}</span>
         {makeFilterList()}
         {showCompare()}
       </Box>

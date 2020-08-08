@@ -30,60 +30,72 @@ const BigX = styled.big`
   }
 `;
 
-function NoDataModal({
-  setNoDataModal,
-  setFilters,
-  filters,
-  handleApply
-  // setSelectedFilters
-}) {
+function NoDataModal({ setNoDataModal, setFilters, filters }) {
   const dispatch = useDispatch();
-
-  let reset = {
-    0: {
-      ...filters[0],
-      nameOfFilter: "Data Series",
-      selectableOptions: {}
-    },
-    1: {
-      nameOfFilter: "Compare SubSamples",
-      selectedCategory: "",
-      selectableOptions: {},
-      selectedTable: "Users",
-      selectedTableColumnName: "",
-      showOptions: false,
-      optionHasBeenSelected: false
-    },
-    2: {
-      nameOfFilter: "Data Filter",
-      selectedCategory: "",
-      selectableOptions: {},
-      selectedTable: "",
-      selectedTableColumnName: "",
-      showOptions: true,
-      optionHasBeenSelected: false
-    }
-  };
-
-  function noDataModalClose() {
+  function handleClose() {
+    //console.log('filters NoDataModal',filters)
     dispatch(
       queriesFilters({
-        filters: reset
+        filters: {
+          0: {
+            ...filters[0],
+            nameOfFilter: "Data Series",
+            selectableOptions: {}
+          },
+          1: {
+            nameOfFilter: "Compare SubSamples",
+            selectedCategory: "",
+            selectableOptions: {},
+            selectedTable: "Users",
+            selectedTableColumnName: "",
+            showOptions: false,
+            optionHasBeenSelected: false
+          },
+          2: {
+            nameOfFilter: "Data Filter",
+            selectedCategory: "",
+            selectableOptions: {},
+            selectedTable: "",
+            selectedTableColumnName: "",
+            showOptions: true,
+            optionHasBeenSelected: false
+          }
+        }
+      }),
+      setFilters({
+        0: {
+          ...filters[0],
+          nameOfFilter: "Data Series",
+          selectableOptions: {}
+        },
+        1: {
+          nameOfFilter: "Compare SubSamples",
+          selectedCategory: "",
+          selectableOptions: {},
+          selectedTable: "Users",
+          selectedTableColumnName: "",
+          showOptions: false,
+          optionHasBeenSelected: false
+        },
+        2: {
+          nameOfFilter: "Data Filter",
+          selectedCategory: "",
+          selectableOptions: {},
+          selectedTable: "",
+          selectedTableColumnName: "",
+          showOptions: true,
+          optionHasBeenSelected: false
+        }
       })
     );
-    setFilters(reset);
-
     setNoDataModal(false);
-    console.log("filters", filters);
-    handleApply(reset);
-    //setTimeout(setSelectedFilters(true), [2000]);
   }
 
   return (
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={() => noDataModalClose()}>X</BigX>
+          <BigX onClick={() => handleClose()}>X</BigX>
           <FormTitle>
             Sorry no data is found for this search. Please try again.
           </FormTitle>

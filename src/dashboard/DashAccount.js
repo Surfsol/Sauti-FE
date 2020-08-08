@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { urlPageView } from "./GoogleAnalytics/index";
 import { useHistory } from "react-router-dom";
-
+import { getToken, decodeToken, getSubscription } from "./auth/Auth";
+//import PaypalButton from "../Components/PaypalButton";
 import PaypalButton from "../Components/paypalButton";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-import { useSelector } from "react-redux";
 
 import swal from "sweetalert";
 
@@ -39,7 +39,22 @@ function DashAccount(props) {
 
   const history = useHistory();
 
-  const tier = useSelector(state => state.tierReducer.tier);
+  const token = getToken();
+  let tier;
+  if (token) {
+    tier = decodeToken(token);
+    tier = tier.tier;
+  }
+  let userEmail;
+  if (token) {
+    userEmail = decodeToken(token);
+    userEmail = userEmail.email;
+  }
+  const newSub = getSubscription();
+  let sub;
+  if (newSub) {
+    sub = newSub;
+  }
 
   const GET_SUBSCRIPTION_ID = gql`
     query($userEmail: String!) {
