@@ -220,6 +220,13 @@ function DashHome() {
         filters: defaultFilters
       })
     );
+
+    dispatch(
+      applyAction({
+        apply: true
+      })
+    );
+
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
     console.log("tier", tier);
