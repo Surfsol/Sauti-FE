@@ -11,6 +11,7 @@ import queriesReducer from "./queriesReducer";
 import showNoAccessReducer from "./showNoAccessReducer";
 import lineApplyReducer from "./lineApplyReducer";
 import applyActionReducer from "./applyActionReducer";
+import selectedReducer from "./selectedFiltersReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   queriesReducer,
   showNoAccessReducer,
   lineApplyReducer,
-  applyActionReducer
+  applyActionReducer,
+  selectedReducer
 });
 export default rootReducer;

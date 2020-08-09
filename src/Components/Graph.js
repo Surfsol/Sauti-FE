@@ -12,6 +12,7 @@ import { barDownload } from "../Components/redux-actions/barDownloadAction";
 import Grid from "@material-ui/core/Grid";
 import dynamicText from "./dynamicText";
 import { applyAction } from "../Components/redux-actions/applyAction";
+import { selectedFiltersAction } from "./redux-actions/selectedFiltersAction";
 
 const Graph = props => {
   let {
@@ -190,6 +191,11 @@ const Graph = props => {
     dispatch(
       applyAction({
         apply: true
+      })
+    );
+    dispatch(
+      selectedFiltersAction({
+        selected: true
       })
     );
     setApplyNow(false);

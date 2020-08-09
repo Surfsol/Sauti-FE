@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { getSelectedOption } from "../OptionFunctions";
 import "./scss/SelectedFilterDisplay.scss";
-import Grid from "@material-ui/core/Grid";
+import { useSelector } from "react-redux";
 import { Box } from "@material-ui/core";
 
-const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
+const SelectedFilterDisplay = ({
+  filters,
+  selectedFilters,
+  setSelectedFilters,
+  resetFilters
+}) => {
   //noDatafound modal should selectedFilters true
 
   const [dataSeries, setDataSeries] = useState("");
   const [filtersVar, setAddFiltersVar] = useState({});
   const [compare, setCompare] = useState("");
+
+  const selectedReducer = useSelector(
+    state => state.selectedReducer.selected.selected
+  );
+
+  if (selectedReducer) {
+    setSelectedFilters(selectedReducer);
+  }
 
   useEffect(() => {
     if (resetFilters[0]) {

@@ -220,13 +220,12 @@ function DashHome() {
         filters: defaultFilters
       })
     );
-
+    //if not logged in, will not see Apply Button
     dispatch(
       applyAction({
         apply: true
       })
     );
-
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
     console.log("tier", tier);
