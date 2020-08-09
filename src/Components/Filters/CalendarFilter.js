@@ -28,6 +28,11 @@ const CalendarFilter = () => {
     open
   } = reducerCal;
 
+  const filters = useSelector(
+    state => state.queriesReducer.queriesFilters.filters
+  );
+  console.log("filters", filters, "openCal", openCal);
+
   if (
     (tier === "FREE" || tier === "EXPIRED") &&
     open === "bar" &&
@@ -53,9 +58,29 @@ const CalendarFilter = () => {
         </Box>
       </Grid>
     );
-  } else if (open === "bar" && openCal === false) {
+  } else if (
+    open === "bar" &&
+    openCal === false &&
+    filters[0].selectedTable === "Sessions"
+  ) {
     return (
-      <Grid item className={classes.calendar} onClick={() => setOpenCal(true)}>
+      <Grid className={classes.calendar} onClick={() => setOpenCal(true)}>
+        <Box display="flex" height="100%" alignItems="center">
+          <div className={classes.filterText}>
+            <span className={classes.filterName}>Date Range</span>
+            <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
+          </div>
+        </Box>
+      </Grid>
+    );
+  } else if (open === "bar" && openCal === false) {
+    console.log("donotRender grey");
+    return (
+      <Grid
+        item
+        className={classes.doNotRender}
+        onClick={() => setOpenCal(true)}
+      >
         <Box display="flex" height="100%" alignItems="center">
           <div className={classes.filterText}>
             <span className={classes.filterName}>Date Range</span>
@@ -95,6 +120,7 @@ const CalendarFilter = () => {
           loading={loading}
           open={open}
           setOpenCal={setOpenCal}
+          filters={filters}
         />
       </>
     );

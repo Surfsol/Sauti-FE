@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const applyActionReducer = (state = initialState, action) => {
-  console.log("reducer applyAction", action.payload);
   switch (action.type) {
     case types.APPLY_SUCCESS:
       return {

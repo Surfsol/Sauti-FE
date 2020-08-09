@@ -9,7 +9,6 @@ const Apply = ({ handleApply, filters }) => {
   const [show, setShow] = useState(false);
   let applyFromDash = false;
   applyFromDash = useSelector(state => state.applyActionReducer.apply.apply);
-  console.log("applyFromDash", applyFromDash);
 
   useEffect(() => {
     setShow(true);

@@ -19,23 +19,14 @@ const CalendarParent = ({
   changeYear,
   changeQuarter,
   getCurrentYear,
-  loading,
   open,
   tier,
-  setOpenCal
+  setOpenCal,
+  filters
 }) => {
   const classes = useStyles();
-  const access = useSelector(state => state.tierReducer.access);
-  const filters = useSelector(
-    state => state.queriesReducer.queriesFilters.filters
-  );
-  console.log(filters[0].selectedTable);
 
   const [openDemo, setOpenDemo] = React.useState(true);
-
-  // const handleOpen = () => {
-  //   setOpenDemo(true);
-  // };
 
   const handleClose = () => {
     setOpenDemo(false);
@@ -129,7 +120,10 @@ const CalendarParent = ({
         }}
       >
         <Fade in={openDemo}>
-          <CalendarDemographics handleClose={handleClose} />
+          <CalendarDemographics
+            setOpenCal={setOpenCal}
+            handleClose={handleClose}
+          />
         </Fade>
       </Modal>
     );
@@ -159,39 +153,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DateContainer = styled.div`
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  input {
-    font-family: "Helvetica", sans-serif;
-    font-size: 14px;
-    margin: 0;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    padding: 10px 8px;
-    ::-webkit-inner-spin-button {
-      display: none;
-    }
-    ::-webkit-clear-button {
-      display: none;
-    }
-    ::-webkit-calendar-picker-indicator {
-      opacity: 0.8;
-      cursor: pointer;
-      color: #999;
-    }
-  }
-`;
-const StartEndContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const YearPicker = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 5px;
-`;
 const YearButtons = styled.button`
   padding: 5px;
   width: 25%;

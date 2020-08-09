@@ -88,7 +88,6 @@ const GraphContainer = props => {
       setFilters(filtersReducer);
     }
   }, [filtersReducer]);
-  console.log("filters", filters);
   const classes = useStyles();
 
   const {

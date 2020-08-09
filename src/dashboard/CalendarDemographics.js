@@ -59,19 +59,20 @@ const BigContinue = styled.big`
   color: black;
 `;
 
-function CalendarDemographics(props) {
+function CalendarDemographics({ handleClose, setOpenCal }) {
   const history = useHistory();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    props.handleClose();
+    handleClose();
+    setOpenCal(false);
   };
 
   return (
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={props.handleClose}>X</BigX>
+          <BigX onClick={handleSubmit}>X</BigX>
           <FormTitle>
             Calendar can only be used with "Data Series" category selections of
             "Business Insights" or "Information Insights"{" "}
