@@ -24,6 +24,19 @@ import swal from "sweetalert";
 //need to bring in data, for 109
 const SocialMedia = () => {
   const access = useSelector(state => state.tierReducer.access);
+  const chartDataReducer = useSelector(
+    state => state.chartDataReducer.chart.chart
+  );
+  let csvData;
+  let keys;
+  let sampleSize;
+  if (chartDataReducer) {
+    csvData = chartDataReducer.dataStructure;
+    keys = chartDataReducer.keys;
+    sampleSize = chartDataReducer.sampleSize;
+  }
+
+  console.log(chartDataReducer);
 
   const newSub = getSubscription();
   let sub;

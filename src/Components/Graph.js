@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import dynamicText from "./dynamicText";
 import { applyAction } from "../Components/redux-actions/applyAction";
 import { selectedFiltersAction } from "./redux-actions/selectedFiltersAction";
+import { chartDataAction } from "./redux-actions/chartDataAction";
 
 const Graph = props => {
   let {
@@ -23,24 +24,20 @@ const Graph = props => {
     groupMode,
     sampleSize,
     tableName,
-    setChartDataSM,
+    //setChartDataSM,
     chartData,
     applyNow,
     setApplyNow
   } = props;
 
   const dispatch = useDispatch();
-
+  const [chartDataSM, setChartDataSM] = useState([]);
   let dyText = "";
   for (let key in dynamicText) {
     if (filters[0]["selectedCategory"] === key) {
       dyText = dynamicText[key];
     }
   }
-
-  useEffect(() => {
-    setChartDataSM(chartData);
-  }, []);
 
   const [csvDownload, setCsvDownload] = useState([]);
 
@@ -186,6 +183,15 @@ const Graph = props => {
       })
     );
   }, [makeValues, makeHeaders]);
+
+  useEffect(() => {
+    setChartDataSM(chartData);
+    dispatch(
+      chartDataAction({
+        chart: chartData
+      })
+    );
+  }, []);
 
   if (applyNow) {
     dispatch(

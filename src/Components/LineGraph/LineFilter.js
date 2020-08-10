@@ -23,7 +23,6 @@ const LineFilter = () => {
   );
 
   function handleChange(event) {
-    let selected = event.target.name;
     setCheckedItems({
       ...checkedItems,
       [event.target.name]: event.target.checked
@@ -32,6 +31,8 @@ const LineFilter = () => {
   }
 
   const [state, setState] = useState(checkedItems);
+
+  console.log(state);
 
   useEffect(() => {
     setState(checkedItems);

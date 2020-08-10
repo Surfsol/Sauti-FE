@@ -33,7 +33,6 @@ const AddFilter = ({
   const classes = useStyles();
   const innerRef = useRef(null);
   const [scrollTopVar, setScrollTopVar] = useState();
-  const [upgradeModal, setUpGradeModal] = useState(false);
   const [noAccess, setNoAccess] = useState(false);
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);

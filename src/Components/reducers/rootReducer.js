@@ -12,6 +12,7 @@ import showNoAccessReducer from "./showNoAccessReducer";
 import lineApplyReducer from "./lineApplyReducer";
 import applyActionReducer from "./applyActionReducer";
 import selectedReducer from "./selectedFiltersReducer";
+import chartDataReducer from "./chartDataReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   showNoAccessReducer,
   lineApplyReducer,
   applyActionReducer,
-  selectedReducer
+  selectedReducer,
+  chartDataReducer
 });
 export default rootReducer;

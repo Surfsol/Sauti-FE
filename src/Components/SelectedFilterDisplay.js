@@ -45,7 +45,7 @@ const SelectedFilterDisplay = ({
           return (
             <>
               <span className="filterTitle"> Additional Filter -</span>
-              <span style={{ marginLeft: ".4%" }}>
+              <span style={{ marginLeft: ".4%" }} key={filterId}>
                 {" "}
                 {filtersVar[filterId].selectedCategory} :
               </span>
