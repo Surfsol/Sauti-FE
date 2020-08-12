@@ -9,9 +9,7 @@ const GraphParse = ({
   queryType,
   filterBoxStartDate,
   filterBoxEndDate,
-  setChartDataSM,
-  applyNow,
-  setApplyNow
+  setChartDataSM
 }) => {
   //needed for filterByDate, cannot filter tradersUsers by date
   let typeOfQuery = Object.keys(data)[0];
@@ -54,7 +52,6 @@ const GraphParse = ({
           tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
           setChartDataSM={setChartDataSM}
           chartData={chartData}
-          applyNow={applyNow}
         />
       </>
     );
@@ -71,8 +68,6 @@ const GraphParse = ({
           tableName={queryType === "sessionsData" ? "Sessions" : "Users"}
           setChartDataSM={setChartDataSM}
           chartData={chartData}
-          applyNow={applyNow}
-          setApplyNow={setApplyNow}
         />
       </>
     );

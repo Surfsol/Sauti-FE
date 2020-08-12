@@ -44,24 +44,26 @@ const setCrossedItems = (
   // ex: if indexBy = "gender" and crossFilter = "age"
   // {"gender": "Male", "10-20": 167, "20-30": 237, "30-40": 642, "40-50": 210, "50-60": 123, "60-70": 1}
   // There will be an object like this for each value of the indexByValues ex: ["Male", "Female"]
-
-  indexByValues.forEach((key, index) => {
-    const crossFilteredData = [];
-    const filtered = data.filter(trader => trader[`${indexBy}`] === key);
-    crossFilterValues.forEach((key, index) => {
-      const crossFiltered = filtered.filter(
-        trader => trader[`${crossFilter}`] === key
-      );
-      crossFilteredData.push({ [`${key}`]: crossFiltered.length });
-    });
-    crossFilteredData.forEach(obj => {
-      return (dataStructure[index] = {
-        ...dataStructure[index],
-        [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
+  if (data) {
+    indexByValues.forEach((key, index) => {
+      console.log("key", key);
+      console.log("index", index, "data", data);
+      const crossFilteredData = [];
+      const filtered = data.filter(trader => trader[`${indexBy}`] === key);
+      crossFilterValues.forEach((key, index) => {
+        const crossFiltered = filtered.filter(
+          trader => trader[`${crossFilter}`] === key
+        );
+        crossFilteredData.push({ [`${key}`]: crossFiltered.length });
+      });
+      crossFilteredData.forEach(obj => {
+        return (dataStructure[index] = {
+          ...dataStructure[index],
+          [`${Object.keys(obj)[0]}`]: [`${Object.values(obj)[0]}`][0]
+        });
       });
     });
-  });
-
+  }
   //If graph is "Most Requested" sort from Most to Least requested and provide top 7 objects
   let keyValueArrIndex = [];
   let keyValueArrCross = [];
@@ -408,11 +410,12 @@ const setCrossedItems = (
   abbreviateLabels(percentageData, indexBy);
 
   //GET ADDITIONAL FILTER OPTIONS TO DISPLAY ON SCREEN IF ADDITIONAL FILTER IS SELECTED
-  const additionalFilterOptions = getIndex(data, additionalFilter)
-    .map(obj => Object.values(obj)[0])
-    .filter(str => str !== null);
-
-  // console.log("TWOOOOOO - crossfiltervalues");
+  let additionalFilterOptions;
+  if (additionalFilter) {
+    additionalFilterOptions = getIndex(data, additionalFilter)
+      .map(obj => Object.values(obj)[0])
+      .filter(str => str !== null);
+  }
 
   return {
     dataStructure,

@@ -93,10 +93,6 @@ function AddFilterModal({ closeAddFilterModal }) {
           <LoginButton type="submit" onClick={handleSubmit}>
             Continue
           </LoginButton>
-          <h1>Already have an account.</h1>
-          <LoginButton type="submit" onClick={handleSignIn}>
-            Sign in
-          </LoginButton>
         </Div>
       </div>
     </ContentContainer>

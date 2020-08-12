@@ -7,7 +7,7 @@ import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 import { getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { barDownload } from "../Components/redux-actions/barDownloadAction";
 import Grid from "@material-ui/core/Grid";
 import dynamicText from "./dynamicText";
@@ -25,9 +25,7 @@ const Graph = props => {
     sampleSize,
     tableName,
     //setChartDataSM,
-    chartData,
-    applyNow,
-    setApplyNow
+    chartData
   } = props;
 
   const dispatch = useDispatch();
@@ -38,6 +36,10 @@ const Graph = props => {
       dyText = dynamicText[key];
     }
   }
+
+  const setApplyReducer = useSelector(state => state.setApplyReducer);
+  let applyNow = setApplyReducer.applyNow;
+  const setApplyNow = setApplyReducer.setApplyNow;
 
   const [csvDownload, setCsvDownload] = useState([]);
 
@@ -193,7 +195,9 @@ const Graph = props => {
     );
   }, []);
 
-  if (applyNow) {
+  //fire apply button
+  if (setApplyNow && applyNow) {
+    console.log("applyNow, setApplyNow", setApplyNow);
     dispatch(
       applyAction({
         apply: true

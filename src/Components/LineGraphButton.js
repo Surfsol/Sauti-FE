@@ -14,9 +14,7 @@ const LineGraphButton = props => {
     queryType,
     filterBoxStartDate,
     filterBoxEndDate,
-    setChartDataSM,
-    applyNow,
-    setApplyNow
+    setChartDataSM
   } = props;
 
   const renderLine = () => {
@@ -69,8 +67,6 @@ const LineGraphButton = props => {
             filterBoxStartDate={filterBoxStartDate}
             filterBoxEndDate={filterBoxEndDate}
             setChartDataSM={setChartDataSM}
-            applyNow={applyNow}
-            setApplyNow={setApplyNow}
           />
         </>
       );

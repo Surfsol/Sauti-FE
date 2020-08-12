@@ -12,7 +12,8 @@ import NoAccessModal from "./Filters/NoAccessModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setApplyAction } from "../Components/redux-actions/setApplyAction";
 
 const GetData = (props, { makeValues }) => {
   const queriesFilters = useSelector(
@@ -46,6 +47,11 @@ const GetData = (props, { makeValues }) => {
     filterBoxEndDate = props.filterBoxStartDate;
     queriesFilters.filters = filters;
   }
+
+  //dispatch ApplyNow
+  const dispatch = useDispatch();
+
+  dispatch(setApplyAction({ applyNow: applyNow, setApplyNow: setApplyNow }));
 
   const filterIsSelected = (filter, i) => {
     // if the filter is the subsample or the data series
@@ -288,8 +294,6 @@ const GetData = (props, { makeValues }) => {
         setDisplayButton={props.setDisplayButton}
         displayButton={props.displayButton}
         setChartDataSM={props.setChartDataSM}
-        applyNow={applyNow}
-        setApplyNow={setApplyNow}
       />
     </>
   );

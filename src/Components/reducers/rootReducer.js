@@ -13,6 +13,7 @@ import lineApplyReducer from "./lineApplyReducer";
 import applyActionReducer from "./applyActionReducer";
 import selectedReducer from "./selectedFiltersReducer";
 import chartDataReducer from "./chartDataReducer";
+import setApplyReducer from "./setApplyReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   lineApplyReducer,
   applyActionReducer,
   selectedReducer,
-  chartDataReducer
+  chartDataReducer,
+  setApplyReducer
 });
 export default rootReducer;
