@@ -72,14 +72,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const reducer = (state, action) => {
-  return state;
-};
-
 const GraphContainer = props => {
   const [filters, setFilters] = useState(props.filters);
   const [queryType, setQueryType] = useState("");
-  // const [chartDataSM, setChartDataSM] = useState([]);
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -207,9 +202,6 @@ const GraphContainer = props => {
                 filters={filters}
                 filterBoxStartDate={filterBoxStartDate}
                 filterBoxEndDate={filterBoxEndDate}
-                //csvData={chartDataSM.dataStructure}
-                // keys={chartDataSM.crossFilterValues}
-                // sampleSize={chartDataSM.totalSampleSize}
               />
             </Grid>
           </Grid>
@@ -258,7 +250,6 @@ const GraphContainer = props => {
                 displayButton={displayButton}
                 queryType={queryType}
                 setQueryType={setQueryType}
-                // setChartDataSM={setChartDataSM}
                 handleApply={handleApply}
               />
             </Grid>

@@ -45,11 +45,11 @@ const SelectedFilterDisplay = ({
           return (
             <>
               <span className="filterTitle"> Additional Filter -</span>
-              <span style={{ marginLeft: ".4%" }} key={filterId}>
+              <span style={{ marginLeft: ".4%" }} key={"id" + filterId}>
                 {" "}
                 {filtersVar[filterId].selectedCategory} :
               </span>
-              <span className="italic">
+              <span className="italic" key={"id2" + filterId}>
                 {" "}
                 {getSelectedOption(filtersVar, filterId)};
               </span>

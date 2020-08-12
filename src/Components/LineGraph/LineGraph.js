@@ -62,9 +62,10 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
 
   const checkboxes = [];
   for (let i = 0; i < allBoxes.length; i++) {
+    let id = "id" + i;
     checkboxes.push({
       name: allBoxes[i],
-      key: `checkbox[i]`,
+      key: id,
       label: allBoxes[i]
     });
   }
