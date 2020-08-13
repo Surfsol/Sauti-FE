@@ -9,7 +9,8 @@ const Apply = ({ handleApply, filters }) => {
   const [show, setShow] = useState(false);
   let applyFromDash = false;
   applyFromDash = useSelector(state => state.applyActionReducer.apply.apply);
-
+  const clearApply = useSelector(state => state.clearApplyReducer.clear.clear);
+  console.log(clearApply, "clearApply");
   useEffect(() => {
     setShow(true);
   }, [filters, applyFromDash]);
@@ -19,7 +20,7 @@ const Apply = ({ handleApply, filters }) => {
     setShow(false);
   }
 
-  if (show && applyFromDash !== true) {
+  if (show && applyFromDash !== true && clearApply !== true) {
     return (
       <>
         <Grid item xs={6}>

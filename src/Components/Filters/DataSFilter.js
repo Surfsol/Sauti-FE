@@ -8,6 +8,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
 import NoAccessModal from "./NoAccessModal";
+import { useDispatch } from "react-redux";
+import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
 const DataSFilter = ({
   filters,
@@ -25,8 +27,14 @@ const DataSFilter = ({
 
   // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   function changeOption(e) {
+    dispatch(
+      clearApplyAction({
+        clear: false
+      })
+    );
     const selectedName = e.target.dataset.selectvalue;
     console.log(selectedName);
     if (access === "paid") {

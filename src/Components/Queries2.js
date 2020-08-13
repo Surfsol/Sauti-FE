@@ -14,6 +14,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { useSelector, useDispatch } from "react-redux";
 import { setApplyAction } from "../Components/redux-actions/setApplyAction";
+import { clearApplyAction } from "../Components/redux-actions/clearApplyAction";
 
 const GetData = (props, { makeValues }) => {
   const queriesFilters = useSelector(
@@ -40,7 +41,6 @@ const GetData = (props, { makeValues }) => {
   if (queriesFilters.filters) {
     filters = queriesFilters.filters;
   } else if (filters === undefined) {
-    console.log("through filters Quereies");
     setApplyNow(true);
     filters = props.filters;
     filterBoxStartDate = props.filterBoxStartDate;
@@ -160,6 +160,7 @@ const GetData = (props, { makeValues }) => {
 
   useEffect(() => {
     setNoDataModal(true);
+
     //so selected filters 'text' will not display until Apply pressed
     //selectedReducer is true if url is manually altered
     if (props.setSelectedFilters && selectedReducer != true) {

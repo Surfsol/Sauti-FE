@@ -29,6 +29,7 @@ import splashImage from "./assets/images/sautilogo-xhires.png";
 import { useDispatch, useSelector } from "react-redux";
 import { queriesFilters } from "./Components/redux-actions/queriesAction";
 import { selectedFiltersAction } from "./Components/redux-actions/selectedFiltersAction";
+import { clearApplyAction } from "./Components/redux-actions/clearApplyAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,9 +57,6 @@ const useStyles = makeStyles(theme => ({
     //padding: "2rem"
     paddingLeft: "1%",
     flexDirection: "column"
-  },
-  clearApply: {
-    // alignItems: "space-between"
   },
   watermark: {
     backgroundImage: `url(${splashImage})`,
@@ -128,13 +126,10 @@ const GraphContainer = props => {
     );
   }, [filters]);
 
-  let resetFilters = {};
-
   function handleApply(reset) {
     console.log("handle Apply fired", filters);
     setSelectedFilters(true);
     if (reset) {
-      resetFilters = reset;
       dispatch(
         queriesFilters({
           filters: reset
@@ -172,7 +167,6 @@ const GraphContainer = props => {
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
                 filters={filters}
-                resetFilters={resetFilters}
               />
             </Grid>
           </Grid>

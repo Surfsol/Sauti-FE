@@ -7,8 +7,7 @@ import { Box } from "@material-ui/core";
 const SelectedFilterDisplay = ({
   filters,
   selectedFilters,
-  setSelectedFilters,
-  resetFilters
+  setSelectedFilters
 }) => {
   //noDatafound modal should selectedFilters true
 
@@ -25,17 +24,12 @@ const SelectedFilterDisplay = ({
   }
 
   useEffect(() => {
-    if (resetFilters[0]) {
-      filters = resetFilters;
-      setDataSeries(filters[0].selectedCategory);
-      setCompare(filters[1].selectedCategory);
-      setAddFiltersVar(filters);
-    } else if (selectedFilters) {
+    if (selectedFilters) {
       setDataSeries(filters[0].selectedCategory);
       setCompare(filters[1].selectedCategory);
       setAddFiltersVar(filters);
     }
-  }, [selectedFilters, resetFilters]);
+  }, [selectedFilters]);
 
   const makeFilterList = () => {
     return Object.keys(filtersVar)

@@ -11,6 +11,8 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
+import { clearApplyAction } from "../redux-actions/clearApplyAction";
+
 import { scrollPosition } from "../redux-actions/scrollAction";
 
 import { allowed } from "../orderedGraphLabels";
@@ -62,6 +64,11 @@ const AddFilter = ({
   }, []);
   //removed document from useEffect, because not an array
   const changeOption = e => {
+    dispatch(
+      clearApplyAction({
+        clear: false
+      })
+    );
     dispatch(scrollPosition({ position: scrollTopVar }));
     const selectedName = e.target.dataset.selectvalue;
     if (

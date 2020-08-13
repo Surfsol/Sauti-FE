@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { queriesFilters } from "../redux-actions/queriesAction";
+import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
-const ClearFilters = ({ handleApply }) => {
+const ClearFilters = ({ handleApply, applyClear, setApplyClear }) => {
   const clearReducer = useSelector(state => state.clearReducer.clear);
   const classes = useStyles();
   const {
@@ -58,6 +59,12 @@ const ClearFilters = ({ handleApply }) => {
     setFilterBoxEndDate(getTodaysDate());
     setUpdateUrlFlag(!updateUrlFlag);
     handleApply(reset);
+    dispatch(
+      clearApplyAction({
+        clear: true
+      })
+    );
+    // setApplyClear(true)
   }
 
   return (
