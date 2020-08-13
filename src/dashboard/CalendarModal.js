@@ -28,9 +28,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CalendarModal({ setOpenCal }) {
+export default function CalendarModal() {
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -38,7 +38,6 @@ export default function CalendarModal({ setOpenCal }) {
 
   const handleClose = () => {
     setOpen(false);
-    setOpenCal(false);
   };
 
   const {
@@ -48,8 +47,50 @@ export default function CalendarModal({ setOpenCal }) {
     setFilterBoxEndDate
   } = useCalendar();
 
+  const [loading, setLoading] = useState(false);
   return (
     <div>
+      <Grid container onClick={handleOpen}>
+        <Grid item xs={6} style={{ fontSize: "12px" }}>
+          {/* <form className={classes.container} noValidate> */}
+          <TextField
+            id="date"
+            label="Start"
+            type="date"
+            defaultValue={filterBoxStartDate}
+            value={filterBoxStartDate}
+            className={classes.textField}
+            onChange={e => setFilterBoxStartDate(e.target.value)}
+            InputLabelProps={{
+              // shrink: true
+
+              classes: {
+                root: classes.labelRoot,
+                focused: classes.labelFocused
+              }
+            }}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="End"
+            type="date"
+            name="endData"
+            value={filterBoxEndDate}
+            id="today"
+            defaultValue={filterBoxEndDate}
+            className={classes.textField}
+            onChange={e => setFilterBoxEndDate(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+              classes: {
+                root: classes.labelRoot,
+                focused: classes.labelFocused
+              }
+            }}
+          />
+        </Grid>
+      </Grid>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -63,7 +104,7 @@ export default function CalendarModal({ setOpenCal }) {
         }}
       >
         <Fade in={open}>
-          <Download setOpenCal={setOpenCal} handleClose={handleClose} />
+          <Download handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>

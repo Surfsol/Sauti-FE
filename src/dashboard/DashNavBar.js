@@ -8,7 +8,6 @@ import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import NoAccount from "../dashboard/DashboardAccount/NoAccount";
 import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
-
 import DashLogout from "./DashLogout";
 import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -17,10 +16,6 @@ import { getToken, decodeToken } from "./auth/Auth";
 import UserSVG from "./Images/UserSVG";
 import ForgotPassword from "./DashboardAccount/PasswordReset/ForgotPassword";
 import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswordContainer";
-import LandingParent from "../Components/themeLanding/LandingParent";
-import Pricing from "../Components/themePricing/Pricing";
-import Contact from "../Components/themeContact/Contact";
-import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
 
 import {
   TopBar,
@@ -52,7 +47,7 @@ function DashNav() {
     tier = tokenDecoded.tier;
   }
 
-  // const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
+  const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
 
   return (
     <>
@@ -78,8 +73,6 @@ function DashNav() {
             <Links to="/data">DATA</Links>
             <Links to="/about">ABOUT</Links>
             <Links to="/contact">CONTACT</Links>
-            <Links to="/pricing">PRICING</Links>
-            <Links to="/companyterms">COMPANY TERMS</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
             {tier === "ADMIN" && <Links to="/tools">ADMIN</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
@@ -92,10 +85,7 @@ function DashNav() {
           </Navigation>
         </TopBar>
       </Container>
-      <Route exact path="/" component={LandingParent} />
-      <Route exact path="/pricing" component={Pricing} />
-      <Route exact path="/contact" component={Contact} />
-      <Route exact path="/companyterms" component={CompanyTerms} />
+      <Route exact path="/" component={LandingPage} />
       <Route exact path="/data" component={DashData} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />

@@ -38,7 +38,6 @@ const AddFilter = ({
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
-  const [catValue, setCatValue] = useState("");
 
   useEffect(() => {
     const div = innerRef.current;
@@ -95,7 +94,6 @@ const AddFilter = ({
       });
     } else {
       setNoAccess(true);
-      setCatValue(selectedName);
     }
   };
 
@@ -223,11 +221,7 @@ const AddFilter = ({
       return (
         <>
           {inFilters()}
-          <NoAccessModal
-            noAccess={noAccess}
-            setNoAccess={setNoAccess}
-            catValue={catValue}
-          />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }

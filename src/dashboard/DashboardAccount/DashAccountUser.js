@@ -71,7 +71,7 @@ const DashAccountUser = props => {
       variables: { userEmail: userEmail }
     }
   );
-  console.log("data", data);
+
   const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
 
   if (fetching) {

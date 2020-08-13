@@ -382,11 +382,8 @@ const setCrossedItems = (
   });
 
   //This is the sampleSize of all responses {"Male": 153, "Female": 124 => totalSampleSize: 277}
-  console.log("sampleArr", sampleArr);
-  let totalSampleSize = [];
-  if (Object.values(sampleArr).length > 0) {
-    totalSampleSize = Object.values(sampleArr).reduce((a, b) => a + b);
-  }
+  let totalSampleSize = Object.values(sampleArr).reduce((a, b) => a + b);
+
   //CHANGE VALUES TO PERCENTAGE OF SAMPLE SIZE
   //[{gender: "Male", "10-20": 200, "20-30": 150},{gender: "Female", "10-20": 140, "20-30": 100}]
 

@@ -25,14 +25,12 @@ const DataSFilter = ({
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [noAccess, setNoAccess] = useState(false);
-  const [catValue, setCatValue] = useState("");
 
   // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
 
   function changeOption(e) {
     const selectedName = e.target.dataset.selectvalue;
-    console.log(selectedName);
     if (access === "paid") {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
@@ -83,7 +81,6 @@ const DataSFilter = ({
       });
     } else {
       setNoAccess(true);
-      setCatValue(selectedName);
     }
   }
 
@@ -160,11 +157,7 @@ const DataSFilter = ({
               <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
             </Box>
           </Grid>
-          <NoAccessModal
-            noAccess={noAccess}
-            setNoAccess={setNoAccess}
-            catValue={catValue}
-          />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }

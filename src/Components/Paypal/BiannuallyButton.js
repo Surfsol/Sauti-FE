@@ -64,10 +64,9 @@ export default function BiAnnuallyButton() {
             text: "Your account has been upgraded to premium!",
             icon: "success"
           });
-          console.log("data", data);
+
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);
-          //puts subscription id on token
           decoded.subscription_id = data.subscriptionID;
           localStorage.setItem("xyz", decoded.subscription_id);
           decoded.tier = "PAID";
@@ -78,7 +77,7 @@ export default function BiAnnuallyButton() {
           });
 
           const { id, tier, subscription_id, ...rest } = decoded;
-          console.log("decoded", decoded);
+
           await addPlan({
             variables: { newUserPlan: rest }
           });

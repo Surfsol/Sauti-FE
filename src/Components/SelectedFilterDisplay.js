@@ -13,12 +13,7 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
 
   //console.log(dataSeries, 'filtersVar', filters[1].selectedCategory, 'compare', compare)
   useEffect(() => {
-    if (resetFilters[0]) {
-      filters = resetFilters;
-      setDataSeries(filters[0].selectedCategory);
-      setCompare(filters[1].selectedCategory);
-      setAddFiltersVar(filters);
-    } else if (selectedFilters) {
+    if (selectedFilters) {
       setDataSeries(filters[0].selectedCategory);
       setCompare(filters[1].selectedCategory);
       setAddFiltersVar(filters);
@@ -36,11 +31,11 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
               <span className="filterTitle"> Additional Filter -</span>
               <span style={{ marginLeft: ".4%" }}>
                 {" "}
-                {filtersVar[filterId].selectedCategory} :
+                {filters[filterId].selectedCategory} :
               </span>
               <span className="italic">
                 {" "}
-                {getSelectedOption(filtersVar, filterId)};
+                {getSelectedOption(filters, filterId)};
               </span>
             </>
           );
@@ -56,7 +51,9 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
       return (
         <>
           <span className="filterTitle"> Compare By -</span>
-          <span style={{ marginLeft: ".4%" }}>{compare}</span>
+          <span style={{ marginLeft: ".4%" }}>
+            {filters[1].selectedCategory}
+          </span>
         </>
       );
     } else {
@@ -86,7 +83,8 @@ const SelectedFilterDisplay = ({ filters, selectedFilters, resetFilters }) => {
         flexWrap="nowrap"
         style={{ fontSize: "1.5rem", padding: "0% 1%" }}
       >
-        {showDataSeries()}
+        <span className="filterTitle">Data Series -</span>
+        <span style={{ marginLeft: ".4%" }}>{filters[0].selectedCategory}</span>
         {makeFilterList()}
         {showCompare()}
       </Box>

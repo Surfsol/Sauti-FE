@@ -59,13 +59,12 @@ const BigContinue = styled.big`
   color: black;
 `;
 
-function Download({ handleClose, setOpenCal }) {
+function Download(props) {
   const history = useHistory();
 
   const handleSubmit = async (e, input) => {
     e.preventDefault();
-    handleClose();
-    setOpenCal(false);
+    props.handleClose();
     //if logged in push to account page
     //if not logged in push you to signup
     if (localStorage.getItem("token")) {
@@ -77,16 +76,15 @@ function Download({ handleClose, setOpenCal }) {
 
   const handleSignIn = async (e, input) => {
     e.preventDefault();
-    handleClose();
+    props.handleClose();
     history.push("/login");
-    setOpenCal(false);
   };
 
   return (
     <ContentContainer>
       <div>
         <Div>
-          <BigX onClick={handleClose}>X</BigX>
+          <BigX onClick={props.handleClose}>X</BigX>
           <FormTitle>Want to see this feature?</FormTitle>
           <DownloadText>
             Click <BigContinue>Continue</BigContinue> if you'd like to upgrade
