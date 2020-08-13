@@ -36,8 +36,6 @@ const SocialMedia = () => {
     sampleSize = chartDataReducer.sampleSize;
   }
 
-  console.log(chartDataReducer);
-
   const newSub = getSubscription();
   let sub;
   if (newSub) {

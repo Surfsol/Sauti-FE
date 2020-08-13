@@ -46,8 +46,6 @@ const setCrossedItems = (
   // There will be an object like this for each value of the indexByValues ex: ["Male", "Female"]
   if (data) {
     indexByValues.forEach((key, index) => {
-      console.log("key", key);
-      console.log("index", index, "data", data);
       const crossFilteredData = [];
       const filtered = data.filter(trader => trader[`${indexBy}`] === key);
       crossFilterValues.forEach((key, index) => {
@@ -384,7 +382,7 @@ const setCrossedItems = (
   });
 
   //This is the sampleSize of all responses {"Male": 153, "Female": 124 => totalSampleSize: 277}
-  console.log("sampleArr", sampleArr);
+
   let totalSampleSize = [];
   if (Object.values(sampleArr).length > 0) {
     totalSampleSize = Object.values(sampleArr).reduce((a, b) => a + b);

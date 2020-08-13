@@ -31,7 +31,6 @@ const CalendarFilter = () => {
   const filters = useSelector(
     state => state.queriesReducer.queriesFilters.filters
   );
-  console.log("filters", filters, "openCal", openCal);
 
   if (
     (tier === "FREE" || tier === "EXPIRED") &&
@@ -74,7 +73,6 @@ const CalendarFilter = () => {
       </Grid>
     );
   } else if (open === "bar" && openCal === false) {
-    console.log("donotRender grey");
     return (
       <Grid
         item

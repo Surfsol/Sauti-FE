@@ -28,6 +28,7 @@ import splashImage from "./assets/images/sautilogo-xhires.png";
 
 import { useDispatch, useSelector } from "react-redux";
 import { queriesFilters } from "./Components/redux-actions/queriesAction";
+import { selectedFiltersAction } from "./Components/redux-actions/selectedFiltersAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -119,6 +120,12 @@ const GraphContainer = props => {
 
   useEffect(() => {
     setSelectedFilters(false);
+    //only used when url is manually changed
+    dispatch(
+      selectedFiltersAction({
+        selected: false
+      })
+    );
   }, [filters]);
 
   let resetFilters = {};
@@ -251,6 +258,7 @@ const GraphContainer = props => {
                 queryType={queryType}
                 setQueryType={setQueryType}
                 handleApply={handleApply}
+                setSelectedFilters={setSelectedFilters}
               />
             </Grid>
           </Grid>

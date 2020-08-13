@@ -153,9 +153,14 @@ const GetData = (props, { makeValues }) => {
   });
 
   const [noDataModal, setNoDataModal] = useState(true);
-
+  console.log(props, "rops");
   useEffect(() => {
     setNoDataModal(true);
+    //so selected filters 'text' will not display until Apply pressed
+    if (props.setSelectedFilters) {
+      console.log("fire Queries setSelected");
+      props.setSelectedFilters(false);
+    }
   });
 
   function noData() {
