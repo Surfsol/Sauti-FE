@@ -19,7 +19,7 @@ const SelectedFilterDisplay = ({
   const selectedReducer = useSelector(
     state => state.selectedReducer.selected.selected
   );
-
+  console.log("selectedReducer", selectedReducer);
   if (selectedReducer) {
     setSelectedFilters(selectedReducer);
   }
