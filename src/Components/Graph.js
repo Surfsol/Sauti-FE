@@ -7,10 +7,13 @@ import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 import { getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { barDownload } from "../Components/redux-actions/barDownloadAction";
 import Grid from "@material-ui/core/Grid";
 import dynamicText from "./dynamicText";
+import { applyAction } from "../Components/redux-actions/applyAction";
+import { selectedFiltersAction } from "./redux-actions/selectedFiltersAction";
+import { chartDataAction } from "./redux-actions/chartDataAction";
 
 const Graph = props => {
   let {
@@ -21,12 +24,12 @@ const Graph = props => {
     groupMode,
     sampleSize,
     tableName,
-    setChartDataSM,
+    //setChartDataSM,
     chartData
   } = props;
 
   const dispatch = useDispatch();
-
+  const [chartDataSM, setChartDataSM] = useState([]);
   let dyText = "";
   for (let key in dynamicText) {
     if (filters[0]["selectedCategory"] === key) {
@@ -34,21 +37,9 @@ const Graph = props => {
     }
   }
 
-  const token = getToken();
-  let tier;
-  if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
-  }
-  const newSub = getSubscription();
-  let sub;
-  if (newSub) {
-    sub = newSub;
-  }
-
-  useEffect(() => {
-    setChartDataSM(chartData);
-  }, []);
+  const setApplyReducer = useSelector(state => state.setApplyReducer);
+  let applyNow = setApplyReducer.applyNow;
+  const setApplyNow = setApplyReducer.setApplyNow;
 
   const [csvDownload, setCsvDownload] = useState([]);
 
@@ -194,6 +185,31 @@ const Graph = props => {
       })
     );
   }, [makeValues, makeHeaders]);
+
+  useEffect(() => {
+    setChartDataSM(chartData);
+    dispatch(
+      chartDataAction({
+        chart: chartData
+      })
+    );
+  }, []);
+
+  //fire apply button
+  if (setApplyNow && applyNow) {
+    console.log("applyNow, setApplyNow", setApplyNow);
+    dispatch(
+      applyAction({
+        apply: true
+      })
+    );
+    dispatch(
+      selectedFiltersAction({
+        selected: true
+      })
+    );
+    setApplyNow(false);
+  }
 
   return (
     <>

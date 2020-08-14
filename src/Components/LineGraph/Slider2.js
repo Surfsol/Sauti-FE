@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 //Data loads value is 0 - totalRangePeriods, makes length of slider
 //value should always be based on total length of time period being used.
-export default function RangeSlider({
+export default memo(function RangeSlider({
   totalRangePeriods,
   range,
   setRange,
@@ -67,4 +67,4 @@ export default function RangeSlider({
       >{` Date Range: ${range[0]} ... ${range[1]}`}</div>
     </div>
   );
-}
+});

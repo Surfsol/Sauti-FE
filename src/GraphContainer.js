@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import "./App.scss";
 import "./index.css";
 import FilterBox from "./Components/Filters/FilterBox";
@@ -26,8 +26,10 @@ import LineFilter from "./Components/LineGraph/LineFilter";
 import { Box } from "@material-ui/core";
 import splashImage from "./assets/images/sautilogo-xhires.png";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { queriesFilters } from "./Components/redux-actions/queriesAction";
+import { selectedFiltersAction } from "./Components/redux-actions/selectedFiltersAction";
+import { clearApplyAction } from "./Components/redux-actions/clearApplyAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,9 +58,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: "1%",
     flexDirection: "column"
   },
-  clearApply: {
-    // alignItems: "space-between"
-  },
   watermark: {
     backgroundImage: `url(${splashImage})`,
     backgroundSize: "40%",
@@ -73,14 +72,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GraphContainer = props => {
-  const [url, setUrl] = useState("");
   const [filters, setFilters] = useState(props.filters);
   const [queryType, setQueryType] = useState("");
-  const [chartDataSM, setChartDataSM] = useState([]);
-
-  const dispatch = useDispatch();
 
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const filtersReducer = useSelector(
+    state => state.queriesReducer.queriesFilters.filters
+  );
+
+  useEffect(() => {
+    if (filtersReducer) {
+      setFilters(filtersReducer);
+    }
+  }, [filtersReducer]);
 
   const {
     filterBoxStartDate,
@@ -92,13 +98,9 @@ const GraphContainer = props => {
     getCurrentYear
   } = useCalendar();
 
-  //keys used for socialmedia
-  const [keys, setKeys] = useState([]);
-
   //displays graph selected
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
-  const chartData = {};
 
   //copy url
   const clipboard = new ClipboardJS(".btn", {
@@ -111,12 +113,35 @@ const GraphContainer = props => {
   });
   // ?filter0equalscommoditycatcommaundefinedzazfilter1equalsundefinedcommaundefinedzazfilter2equalscrossing_freqcommaWeeklyzazfilter3equalscountry_of_residencecommaKENzazfilter4equalsundefinedcommaundefined
 
-  function handleApply() {
+  //Display selected Filters
+  const [selectedFilters, setSelectedFilters] = useState(false);
+
+  useEffect(() => {
+    setSelectedFilters(false);
+    //only used when url is manually changed
     dispatch(
-      queriesFilters({
-        filters: filters
+      selectedFiltersAction({
+        selected: false
       })
     );
+  }, [filters]);
+
+  function handleApply(reset) {
+    console.log("handle Apply fired", filters);
+    setSelectedFilters(true);
+    if (reset) {
+      dispatch(
+        queriesFilters({
+          filters: reset
+        })
+      );
+    } else {
+      dispatch(
+        queriesFilters({
+          filters: filters
+        })
+      );
+    }
   }
 
   return (
@@ -138,7 +163,11 @@ const GraphContainer = props => {
               }}
               className={classes.whitebg}
             >
-              <SelectedFilterDisplay filters={filters} />
+              <SelectedFilterDisplay
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+                filters={filters}
+              />
             </Grid>
           </Grid>
           <Grid xs={3}></Grid>
@@ -154,9 +183,9 @@ const GraphContainer = props => {
                 spacing={2}
                 style={{ height: "30px", padding: "2%" }}
               >
-                <ClearFilters />
+                <ClearFilters handleApply={handleApply} />
 
-                <Apply handleApply={handleApply} />
+                <Apply handleApply={handleApply} filters={filters} />
               </Grid>
             </Grid>
             <Grid container xs={3} spacing={1} style={{ height: "30px" }}>
@@ -166,19 +195,14 @@ const GraphContainer = props => {
                 filters={filters}
                 setDisplayButton={setDisplayButton}
                 displayButton={displayButton}
-                queryType={queryType}
               />
             </Grid>
             <Grid container xs={4}></Grid>
             <Grid container xs={2} spacing={1} style={{ height: "30px" }}>
               <SocialMedia
                 filters={filters}
-                queryType={queryType}
                 filterBoxStartDate={filterBoxStartDate}
                 filterBoxEndDate={filterBoxEndDate}
-                csvData={chartDataSM.dataStructure}
-                keys={chartDataSM.crossFilterValues}
-                sampleSize={chartDataSM.totalSampleSize}
               />
             </Grid>
           </Grid>
@@ -227,7 +251,8 @@ const GraphContainer = props => {
                 displayButton={displayButton}
                 queryType={queryType}
                 setQueryType={setQueryType}
-                setChartDataSM={setChartDataSM}
+                handleApply={handleApply}
+                setSelectedFilters={setSelectedFilters}
               />
             </Grid>
           </Grid>

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
+import { queriesFilters } from "../redux-actions/queriesAction";
+import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
-const ClearFilters = () => {
+const ClearFilters = ({ handleApply, applyClear, setApplyClear }) => {
   const clearReducer = useSelector(state => state.clearReducer.clear);
   const classes = useStyles();
   const {
@@ -16,42 +19,57 @@ const ClearFilters = () => {
     getTodaysDate,
     updateUrlFlag
   } = clearReducer;
+
+  const dispatch = useDispatch();
+
+  let reset = {};
+  if (filters) {
+    reset = {
+      0: {
+        ...filters[0],
+        nameOfFilter: "Data Series",
+        selectableOptions: {}
+      },
+      1: {
+        nameOfFilter: "Compare SubSamples",
+        selectedCategory: "",
+        selectableOptions: {},
+        selectedTable: "Users",
+        selectedTableColumnName: "",
+        showOptions: false,
+        optionHasBeenSelected: false
+      },
+      2: {
+        nameOfFilter: "Data Filter",
+        selectedCategory: "",
+        selectableOptions: {},
+        selectedTable: "",
+        selectedTableColumnName: "",
+        showOptions: true,
+        optionHasBeenSelected: false
+      }
+    };
+  }
+
+  function handleClear(e) {
+    e.preventDefault();
+    setFilters(reset);
+    dispatch(queriesFilters(reset));
+    setFilterBoxStartDate("2017-01-01");
+    setFilterBoxEndDate(getTodaysDate());
+    setUpdateUrlFlag(!updateUrlFlag);
+    handleApply(reset);
+    dispatch(
+      clearApplyAction({
+        clear: true
+      })
+    );
+    // setApplyClear(true)
+  }
+
   return (
     <>
-      <Grid
-        item
-        xs={6}
-        onClick={e => {
-          setFilters({
-            0: {
-              ...filters[0],
-              nameOfFilter: "Data Series",
-              selectableOptions: {}
-            },
-            1: {
-              nameOfFilter: "Compare SubSamples",
-              selectedCategory: "",
-              selectableOptions: {},
-              selectedTable: "Users",
-              selectedTableColumnName: "",
-              showOptions: false,
-              optionHasBeenSelected: false
-            },
-            2: {
-              nameOfFilter: "Data Filter",
-              selectedCategory: "",
-              selectableOptions: {},
-              selectedTable: "",
-              selectedTableColumnName: "",
-              showOptions: true,
-              optionHasBeenSelected: false
-            }
-          });
-          setFilterBoxStartDate("2017-01-01");
-          setFilterBoxEndDate(getTodaysDate());
-          setUpdateUrlFlag(!updateUrlFlag);
-        }}
-      >
+      <Grid item xs={6} onClick={handleClear}>
         <button className={classes.clearButton}>Clear All</button>
       </Grid>
     </>

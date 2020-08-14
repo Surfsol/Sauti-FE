@@ -10,9 +10,11 @@ import { FilterBoxOptions } from "../Components/FilterBoxOptions";
 import graphLabels from "../Components/graphLabels";
 import { useSelector, useDispatch } from "react-redux";
 import { queriesFilters } from "../Components/redux-actions/queriesAction";
+import { applyAction } from "../Components/redux-actions/applyAction";
 import { allowed } from "../Components/orderedGraphLabels";
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
+import { showNoAccessAction } from "../Components/redux-actions/showNoAccessAction";
 
 //set inital filters
 const filterTemplate = {
@@ -44,7 +46,9 @@ const filterTemplate = {
 };
 
 function DashHome() {
+  const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
+
   let tier;
   if (token) {
     tier = decodeToken(token);
@@ -56,7 +60,7 @@ function DashHome() {
     (tier === "ADMIN" || tier === "PAID" || tier === "GOV_ROLE")
   ) {
     access = "paid";
-  } else if (tier !== undefined && tier === "FREE") {
+  } else if (tier === "FREE") {
     access = "free";
   }
 
@@ -76,10 +80,11 @@ function DashHome() {
       return option;
     }
   };
+  console.log("History", History);
 
+  let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
   const setupFilter = history => {
-    console.log("run setupFilter history", history);
     if (history.location.search.length === 0) {
       let defaultFilter = {};
       Object.keys(filterTemplate).forEach(filterId => {
@@ -87,14 +92,12 @@ function DashHome() {
           ...defaultFilter,
           [filterId]: {
             ...filterTemplate[filterId],
-            selectedCategory: filterId === "0" ? "Gender" : "",
-
-            selectableOptions:
-              filterId === "0" ? { Female: false, Male: false } : {},
+            selectedCategory: filterId === "0" ? "Country of Residence" : "",
 
             selectedTable: filterId === "0" || filterId === "1" ? "Users" : "",
 
-            selectedTableColumnName: filterId === "0" ? "gender" : ""
+            selectedTableColumnName:
+              filterId === "0" ? "country_of_residence" : ""
           }
         };
       });
@@ -127,6 +130,9 @@ function DashHome() {
         let split2 = split1[i].split("equals");
         let split3 = split2[1].split("comma");
         if (split3[0] !== "undefined") {
+          allSelectedCategories.push(
+            FilterBoxOptions.tableNamesToCategoryName[split3[0]]
+          );
           let optionFlags = {};
 
           graphLabels[`${split3[0]}`].labels.forEach(option => {
@@ -203,7 +209,6 @@ function DashHome() {
     }
   };
 
-  console.log("tier", tier, "setup his", setupFilter(history));
   if (
     tier != "ADMIN" &&
     tier != "PAID" &&
@@ -215,33 +220,62 @@ function DashHome() {
         filters: defaultFilters
       })
     );
+    //if not logged in, will not see Apply Button
+    dispatch(
+      applyAction({
+        apply: true
+      })
+    );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
-    for (let j in setupFilter(history)) {
-      console.log(Object.values(setupFilter(history)[j]));
-      let cat = Object.values(setupFilter(history)[j])[1];
-      console.log(cat);
-      if (!allowed.includes(cat)) {
-        console.log("not allowed");
-        dispatch(
-          queriesFilters({
-            filters: defaultFilters
-          })
-        );
-        return (
-          <>
-            <GraphContainer filters={defaultFilters} />
-          </>
-        );
-      } else {
-        return (
-          <>
-            <GraphContainer filters={setupFilter(history)} />
-          </>
-        );
+    console.log("tier", tier);
+    let cat = "";
+    setupFilter(history);
+    console.log(allSelectedCategories);
+    for (let i = 0; i < allSelectedCategories.length; i++) {
+      console.log(allSelectedCategories[i]);
+      if (!allowed.includes(allSelectedCategories[i])) {
+        cat = allSelectedCategories[i];
       }
     }
+
+    if (cat != "") {
+      dispatch(
+        queriesFilters({
+          filters: defaultFilters
+        })
+      );
+      dispatch(
+        showNoAccessAction({
+          noAccess: noAccess,
+          setNoAccess: setNoAccess,
+          cat: cat
+        })
+      );
+      return (
+        <>
+          <GraphContainer filters={defaultFilters} />
+        </>
+      );
+    } else {
+      dispatch(
+        applyAction({
+          apply: false
+        })
+      );
+      return (
+        <>
+          <GraphContainer filters={setupFilter(history)} />
+        </>
+      );
+    }
   } else {
+    console.log("last else");
+    dispatch(
+      applyAction({
+        apply: false
+      })
+    );
     return (
       <>
         <GraphContainer filters={setupFilter(history)} />

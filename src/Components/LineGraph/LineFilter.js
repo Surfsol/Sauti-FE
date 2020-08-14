@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-const LineFilter = () => {
+const LineFilter = memo(() => {
   const classes = useStyles();
   const lineReducer = useSelector(state => state.lineReducer.lineBoxes);
 
@@ -23,7 +23,6 @@ const LineFilter = () => {
   );
 
   function handleChange(event) {
-    let selected = event.target.name;
     setCheckedItems({
       ...checkedItems,
       [event.target.name]: event.target.checked
@@ -33,10 +32,11 @@ const LineFilter = () => {
 
   const [state, setState] = useState(checkedItems);
 
+  console.log(state);
+
   useEffect(() => {
     setState(checkedItems);
   }, [checkedItems]);
-
   let boxes = [];
   if (checkboxes && state) {
     for (let i = 0; i < checkboxes.length; i++) {
@@ -68,7 +68,7 @@ const LineFilter = () => {
   } else {
     return <></>;
   }
-};
+});
 export default LineFilter;
 
 const useStyles = makeStyles(theme => ({

@@ -8,6 +8,13 @@ import lineReducer from "./lineReducer";
 import scrollReducer from "./scrollReducer";
 import tierReducer from "./tierReducer";
 import queriesReducer from "./queriesReducer";
+import showNoAccessReducer from "./showNoAccessReducer";
+import lineApplyReducer from "./lineApplyReducer";
+import applyActionReducer from "./applyActionReducer";
+import selectedReducer from "./selectedFiltersReducer";
+import chartDataReducer from "./chartDataReducer";
+import setApplyReducer from "./setApplyReducer";
+import clearApplyReducer from "./clearApplyReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -17,6 +24,13 @@ const rootReducer = combineReducers({
   lineReducer,
   scrollReducer,
   tierReducer,
-  queriesReducer
+  queriesReducer,
+  showNoAccessReducer,
+  lineApplyReducer,
+  applyActionReducer,
+  selectedReducer,
+  chartDataReducer,
+  setApplyReducer,
+  clearApplyReducer
 });
 export default rootReducer;

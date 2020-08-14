@@ -55,7 +55,7 @@ const GraphParse = ({
         />
       </>
     );
-  } else if (graphItems === false) {
+  } else if (chartData && graphItems === false) {
     return (
       <>
         <Graph
@@ -71,6 +71,11 @@ const GraphParse = ({
         />
       </>
     );
+    //switching from Account.js back to graph too fast was giving an error
+    // because chartData was not available.
+    // so added chartData on 58 and return
+  } else {
+    return <></>;
   }
 };
 export default GraphParse;
