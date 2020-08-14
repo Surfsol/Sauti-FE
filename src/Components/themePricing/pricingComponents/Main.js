@@ -9,9 +9,9 @@ import {
   Typography,
   Button
 } from "@material-ui/core";
-import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
+//import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 import Icon from "../../themeStyledComponents/atoms/Icon";
-import Image from "../../themeStyledComponents/atoms/Image";
+//import Image from "../../themeStyledComponents/atoms/Image";
 import CardPricingStandard from "../../themeStyledComponents/organisms/CardPricingStandard";
 import Section from "../../themeStyledComponents/organisms/Section";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
