@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/scss/dataSeries.scss";
 import { makeStyles } from "@material-ui/core/styles";
-import NoAccessModalDisplay from "./NoAccessModalDisplay";
+import SeriesFilterModal from "./SeriesFilterModal";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-//import { useDispatch } from "react-redux";
-const NoAccessModal = ({ noAccess, setNoAccess, catValue }) => {
+
+const NoAccessModal = ({ noAccess, setNoAccess }) => {
+  console.log("open NO Acc", noAccess);
+  //const [open, setOpen] = useState(true);
   const classes = useStyles();
+  const handleClose = () => {
+    setNoAccess(false);
+  };
 
   return (
     <>
@@ -16,6 +21,7 @@ const NoAccessModal = ({ noAccess, setNoAccess, catValue }) => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={noAccess}
+        onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -23,11 +29,7 @@ const NoAccessModal = ({ noAccess, setNoAccess, catValue }) => {
         }}
       >
         <Fade in={noAccess}>
-          <NoAccessModalDisplay
-            noAccess={noAccess}
-            setNoAccess={setNoAccess}
-            catValue={catValue}
-          />
+          <SeriesFilterModal handleClose={handleClose} />
         </Fade>
       </Modal>
     </>

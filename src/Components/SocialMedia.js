@@ -24,17 +24,6 @@ import swal from "sweetalert";
 //need to bring in data, for 109
 const SocialMedia = () => {
   const access = useSelector(state => state.tierReducer.access);
-  const chartDataReducer = useSelector(
-    state => state.chartDataReducer.chart.chart
-  );
-  let csvData;
-  let keys;
-  let sampleSize;
-  if (chartDataReducer) {
-    csvData = chartDataReducer.dataStructure;
-    keys = chartDataReducer.keys;
-    sampleSize = chartDataReducer.sampleSize;
-  }
 
   const newSub = getSubscription();
   let sub;
@@ -82,7 +71,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {access || sub === newSub ? (
+        {access || newSub ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader
@@ -216,7 +205,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: "20px"
   },
   customWidth: {
-    fontSize: "16px"
+    fontSize: "12px"
   },
   socialMediaLink: {
     fontSize: "2.5rem",

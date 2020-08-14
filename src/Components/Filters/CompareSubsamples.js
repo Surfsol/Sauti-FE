@@ -12,14 +12,12 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import NoAccessModal from "./NoAccessModal";
 import { separateOperations } from "graphql";
 import { allowed } from "../orderedGraphLabels";
-import { useDispatch } from "react-redux";
-import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
     state => state.compareSubSamplesReducer.compareSub
   );
-  const dispatch = useDispatch();
+
   const {
     filterSelectorName,
     filters,
@@ -38,14 +36,8 @@ const CompareSubSamples = () => {
 
   const access = useSelector(state => state.tierReducer.access);
   const [noAccess, setNoAccess] = useState(false);
-  const [catValue, setCatValue] = useState("");
 
   function changeOption(e) {
-    dispatch(
-      clearApplyAction({
-        clear: false
-      })
-    );
     const selectedName = e.target.dataset.selectvalue;
     if (
       access === "paid" ||
@@ -76,7 +68,6 @@ const CompareSubSamples = () => {
       });
     } else {
       setNoAccess(true);
-      setCatValue(selectedName);
     }
   }
 
@@ -163,11 +154,7 @@ const CompareSubSamples = () => {
       return (
         <>
           {compareOpen()}
-          <NoAccessModal
-            noAccess={noAccess}
-            setNoAccess={setNoAccess}
-            catValue={catValue}
-          />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }

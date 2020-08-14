@@ -41,11 +41,11 @@ const SelectedFilterDisplay = ({
               <span className="filterTitle"> Additional Filter -</span>
               <span style={{ marginLeft: ".4%" }} key={"id" + filterId}>
                 {" "}
-                {filtersVar[filterId].selectedCategory} :
+                {filters[filterId].selectedCategory} :
               </span>
               <span className="italic" key={"id2" + filterId}>
                 {" "}
-                {getSelectedOption(filtersVar, filterId)};
+                {getSelectedOption(filters, filterId)};
               </span>
             </>
           );
@@ -60,7 +60,9 @@ const SelectedFilterDisplay = ({
       return (
         <>
           <span className="filterTitle"> Compare By -</span>
-          <span style={{ marginLeft: ".4%" }}>{compare}</span>
+          <span style={{ marginLeft: ".4%" }}>
+            {filters[1].selectedCategory}
+          </span>
         </>
       );
     } else {
@@ -89,7 +91,8 @@ const SelectedFilterDisplay = ({
         flexWrap="nowrap"
         style={{ fontSize: "1.5rem", padding: "0% 1%" }}
       >
-        {showDataSeries()}
+        <span className="filterTitle">Data Series -</span>
+        <span style={{ marginLeft: ".4%" }}>{filters[0].selectedCategory}</span>
         {makeFilterList()}
         {showCompare()}
       </Box>

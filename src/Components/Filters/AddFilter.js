@@ -11,8 +11,6 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
-import { clearApplyAction } from "../redux-actions/clearApplyAction";
-
 import { scrollPosition } from "../redux-actions/scrollAction";
 
 import { allowed } from "../orderedGraphLabels";
@@ -35,11 +33,11 @@ const AddFilter = ({
   const classes = useStyles();
   const innerRef = useRef(null);
   const [scrollTopVar, setScrollTopVar] = useState();
+  const [upgradeModal, setUpGradeModal] = useState(false);
   const [noAccess, setNoAccess] = useState(false);
   const dispatch = useDispatch();
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
-  const [catValue, setCatValue] = useState("");
 
   useEffect(() => {
     const div = innerRef.current;
@@ -64,11 +62,6 @@ const AddFilter = ({
   }, []);
   //removed document from useEffect, because not an array
   const changeOption = e => {
-    dispatch(
-      clearApplyAction({
-        clear: false
-      })
-    );
     dispatch(scrollPosition({ position: scrollTopVar }));
     const selectedName = e.target.dataset.selectvalue;
     if (
@@ -101,7 +94,6 @@ const AddFilter = ({
       });
     } else {
       setNoAccess(true);
-      setCatValue(selectedName);
     }
   };
 
@@ -229,11 +221,7 @@ const AddFilter = ({
       return (
         <>
           {inFilters()}
-          <NoAccessModal
-            noAccess={noAccess}
-            setNoAccess={setNoAccess}
-            catValue={catValue}
-          />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }

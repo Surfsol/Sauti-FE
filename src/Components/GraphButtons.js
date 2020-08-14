@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const GraphButtons = ({ open, setOpen, filters }) => {
+const GraphButtons = ({ open, setOpen, filters, queryType }) => {
   const classes = useStyles();
 
   const lineButton = () => {
@@ -148,6 +148,6 @@ const GraphButtons = ({ open, setOpen, filters }) => {
 export default GraphButtons;
 const useStyles = makeStyles(theme => ({
   customWidth: {
-    fontSize: "16px"
+    fontSize: "12px"
   }
 }));

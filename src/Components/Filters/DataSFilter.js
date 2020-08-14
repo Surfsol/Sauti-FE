@@ -4,12 +4,14 @@ import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { ordered, allowed } from "../orderedGraphLabels";
+import SeriesFilterModal from "./SeriesFilterModal";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
 import NoAccessModal from "./NoAccessModal";
-import { useDispatch } from "react-redux";
-import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
 const DataSFilter = ({
   filters,
@@ -23,20 +25,12 @@ const DataSFilter = ({
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const [noAccess, setNoAccess] = useState(false);
-  const [catValue, setCatValue] = useState("");
 
   // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   function changeOption(e) {
-    dispatch(
-      clearApplyAction({
-        clear: false
-      })
-    );
     const selectedName = e.target.dataset.selectvalue;
-    console.log(selectedName);
     if (access === "paid") {
       setUpdateUrlFlag(!updateUrlFlag);
       let optionFlags = {};
@@ -87,7 +81,6 @@ const DataSFilter = ({
       });
     } else {
       setNoAccess(true);
-      setCatValue(selectedName);
     }
   }
 
@@ -164,11 +157,7 @@ const DataSFilter = ({
               <ExpandMoreIcon className={classes.filterArrow}></ExpandMoreIcon>
             </Box>
           </Grid>
-          <NoAccessModal
-            noAccess={noAccess}
-            setNoAccess={setNoAccess}
-            catValue={catValue}
-          />
+          <NoAccessModal noAccess={noAccess} setNoAccess={setNoAccess} />
         </>
       );
     }
