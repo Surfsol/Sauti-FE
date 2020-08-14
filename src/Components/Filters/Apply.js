@@ -1,27 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
+import { useSelector } from "react-redux";
 
-// import {useDispatch} from 'react-redux'
-// import {applyAction} from '../redux-actions/applyAction'
-
-const Apply = ({ handleApply }) => {
+const Apply = ({ handleApply, filters }) => {
   const classes = useStyles();
-  //const dispatch = useDispatch()
+  const [show, setShow] = useState(false);
+  let applyFromDash = false;
+  applyFromDash = useSelector(state => state.applyActionReducer.apply.apply);
+  const clearApply = useSelector(state => state.clearApplyReducer.clear.clear);
+  console.log(clearApply, "clearApply");
+  useEffect(() => {
+    setShow(true);
+  }, [filters, applyFromDash]);
 
-  // function handleApply(e){
-  // e.preventDefault()
-  // dispatch(applyAction())
-  // }
-  return (
-    <>
-      <Grid item xs={6}>
-        <button className={classes.applyButton} onClick={handleApply}>
-          Apply
-        </button>
-      </Grid>
-    </>
-  );
+  function handleClick() {
+    handleApply();
+    setShow(false);
+  }
+
+  if (show && applyFromDash !== true && clearApply !== true) {
+    return (
+      <>
+        <Grid item xs={6}>
+          <Tooltip
+            title="Press Apply"
+            open
+            arrow
+            classes={{ tooltip: classes.customWidth }}
+          >
+            <button className={classes.applyButton} onClick={handleClick}>
+              Apply
+            </button>
+          </Tooltip>
+        </Grid>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };
 export default Apply;
 
@@ -37,5 +55,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: ".5rem",
     cursor: "pointer",
     float: "right"
+  },
+  customWidth: {
+    fontSize: "16px"
   }
 }));

@@ -47,7 +47,7 @@ const CalendarFilter = () => {
           <Tooltip
             arrow
             classes={{ tooltip: classes.tooltip }}
-            title="Can only be accessed with a paid account"
+            title="For paid members only"
           >
             <div className={classes.filterText}>
               <span className={classes.filterName}>Date Range</span>
