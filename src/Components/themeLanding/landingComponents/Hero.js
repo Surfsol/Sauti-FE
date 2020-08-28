@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery, Grid, Button } from "@material-ui/core";
-import Image from "../../themeStyledComponents/atoms/Image";
+import Image from "../../themeStyledComponents/atoms/Image/";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
+import theme from "../../../theme/";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -76,7 +77,7 @@ const Hero = props => {
           data-aos={"fade-up"}
         >
           <Image
-            src="/images/illustrations/dashboard.png"
+            src="../../../assets/images/dashboard.png"
             alt="CBT Insights by Sauti East Africa"
             className={classes.image}
             data-aos="flip-left"

@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 
 import SectionHeader from "../themeStyledComponents/molecules/SectionHeader";
-import Image from "../themeStyledComponents/atoms/Image";
+import Image from "../themeStyledComponents/atoms/Image/";
 import Section from "../themeStyledComponents/organisms/Section";
 
 const useStyles = makeStyles(theme => ({

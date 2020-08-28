@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { useMediaQuery, Grid } from "@material-ui/core";
-import LearnMoreLink from "../../themeStyledComponents/atoms/LearnMoreLink";
+import LearnMoreLink from "../../themeStyledComponents/atoms/LearnMoreLink/";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import CardBase from "../../themeStyledComponents/organisms/CardBase";
 import Button from "@material-ui/core/Button";
