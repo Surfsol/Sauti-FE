@@ -14,6 +14,7 @@ import dynamicText from "./dynamicText";
 import { applyAction } from "../Components/redux-actions/applyAction";
 import { selectedFiltersAction } from "./redux-actions/selectedFiltersAction";
 import { chartDataAction } from "./redux-actions/chartDataAction";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Graph = props => {
   let {
@@ -27,7 +28,7 @@ const Graph = props => {
     //setChartDataSM,
     chartData
   } = props;
-
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [chartDataSM, setChartDataSM] = useState([]);
   let dyText = "";
@@ -292,11 +293,9 @@ const Graph = props => {
           motionStiffness={90}
           motionDamping={15}
         />
-        <Grid item style={{ margin: "auto" }}>
-          <div>
-            <h2>Method Notes</h2>
-            <div dangerouslySetInnerHTML={{ __html: dyText }}></div>
-          </div>
+        <Grid item style={{ margin: "auto" }} className={classes.dyContainer}>
+          <h2>Method Notes</h2>
+          <div dangerouslySetInnerHTML={{ __html: dyText }}></div>
         </Grid>
       </Grid>
     </>
@@ -395,3 +394,13 @@ const IconContainer = styled.span`
 const ShareDiv = styled.div`
   margin-right: 5px;
 `;
+const useStyles = makeStyles(theme => ({
+  dyContainer: {
+    width: "100%",
+    padding: "0em 2em",
+    fontSize: "1.5em",
+    "& h2": {
+      fontWeight: 600
+    }
+  }
+}));
