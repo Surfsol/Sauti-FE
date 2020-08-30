@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   useMediaQuery,
@@ -70,6 +70,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ContactPageCover = () => {
+  const [message, setMessage] = useState({});
+
+  function handleChange(e) {
+    setMessage({ ...message, [e.target.name]: e.target.value });
+  }
+  console.log(message);
+
   const classes = useStyles();
 
   const theme = useTheme();
@@ -112,6 +119,8 @@ const ContactPageCover = () => {
                     name="fullname"
                     fullWidth
                     type="text"
+                    onChange={handleChange}
+                    value={message.full_name}
                   />
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
@@ -129,6 +138,8 @@ const ContactPageCover = () => {
                     name="email"
                     fullWidth
                     type="email"
+                    onChange={handleChange}
+                    value={message.email}
                   />
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
@@ -146,6 +157,8 @@ const ContactPageCover = () => {
                     fullWidth
                     multiline
                     rows={4}
+                    onChange={handleChange}
+                    value={message.message}
                   />
                 </Grid>
                 <Grid item container justify="center" xs={12}>
