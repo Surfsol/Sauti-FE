@@ -10,11 +10,8 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import rootReducer from "./Components/reducers/rootReducer";
-
+import { ThemeProvider } from "@material-ui/core/styles";
 //Theme stuff
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
-import palette from "./theme";
-import typography from "./theme";
 import theme from "./theme";
 
 dotenv.config();
@@ -29,10 +26,12 @@ const client = new ApolloClient({
 });
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Provider store={store} theme={theme}>
-      <Router>
-        <App />
-      </Router>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <App />
+        </Router>
+      </ThemeProvider>
     </Provider>
   </ApolloProvider>,
   document.getElementById("root")
