@@ -182,22 +182,22 @@ export const AccountPage = styled.div`
                 height: 20%;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 
-                h2 {
-                  font-size: 1.2vw;
-                  font-weight: bold;
-                }
+                // h2 {
+                //   font-size: 1.2vw;
+                //   font-weight: bold;
+                // }
 
-                h1 {
-                  font-size: 2vw;
-                  line-height: 2.5vw;
-                  font-weight: normal;
+                // h1 {
+                //   font-size: 2vw;
+                //   line-height: 2.5vw;
+                //   font-weight: normal;
 
-                  @media ${device.laptop} {
-                    /* 1024px - 1600px */
-                    font-size: 1.9vw;
-                    -webkit-min-device-pixel-ratio: 1;
-                  }
-                }
+                //   @media ${device.laptop} {
+                //     /* 1024px - 1600px */
+                //     font-size: 1.9vw;
+                //     -webkit-min-device-pixel-ratio: 1;
+                //   }
+                // }
               }
 
               .account-features {
@@ -530,13 +530,13 @@ export const PasswordReset = styled.div`
       flex-direction: column;
       height: 20%;
 
-      h1 {
-        font-size: 3rem;
-      }
+      // h1 {
+      //   font-size: 3rem;
+      // }
 
-      h2 {
-        font-size: 2rem;
-      }
+      // h2 {
+      //   font-size: 2rem;
+      // }
     }
 
     .container-stepper {
