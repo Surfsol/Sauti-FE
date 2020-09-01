@@ -14,7 +14,7 @@ import {
   Avatar,
   People
 } from "@material-ui/core";
-import Image from "../../themeStyledComponents/atoms/Image";
+import Image from "../../themeStyledComponents/atoms/Image/";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 
 const useStyles = makeStyles(theme => ({

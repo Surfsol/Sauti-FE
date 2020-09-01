@@ -17,7 +17,9 @@ const useStyles = makeStyles(theme => ({
   title: {
     fontWeight: "bold"
   },
+  //buttons
   cta: {
+    //space between buttons
     marginLeft: theme.spacing(1),
     "&:first-child": {
       marginLeft: theme.spacing(0)
@@ -98,10 +100,12 @@ const SectionHeader = props => {
       )}
       <Grid item xs={12} className="section-header__title-wrapper">
         <Typography
-          variant={titleVariant}
+          //change size
+          variant={"h1"}
           align={align || "center"}
           className={clsx(
             "section-header__title",
+            //bold
             classes.title,
             titleClasses ? titleClasses : {}
           )}
@@ -114,7 +118,8 @@ const SectionHeader = props => {
       {subtitle && (
         <Grid item xs={12} className="section-header__subtitle-wrapper">
           <Typography
-            variant={subtitleVariant || "h6"}
+            //adjust font size
+            variant={"h4"}
             align={align || "center"}
             color={subtitleColor || "textSecondary"}
             className="section-header__subtitle"

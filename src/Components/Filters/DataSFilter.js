@@ -218,7 +218,10 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer"
   },
   filterText: {
-    width: "100%"
+    width: "100%",
+    "&:hover": {
+      color: "#9F1C0F"
+    }
   },
   filterName: {
     fontWeight: "500"

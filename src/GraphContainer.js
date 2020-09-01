@@ -54,15 +54,17 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   filters: {
-    //padding: "2rem"
     paddingLeft: "1%",
+    flexDirection: "column"
+  },
+  filterCalendar: {
+    paddingLeft: "0%",
     flexDirection: "column"
   },
   watermark: {
     backgroundImage: `url(${splashImage})`,
     backgroundSize: "40%",
     backgroundRepeat: "no-repeat",
-    // backgroundPosition: "center"
     backgroundPositionX: "47%",
     backgroundPositionY: "15%"
   },
@@ -230,7 +232,7 @@ const GraphContainer = props => {
                 <CompareSubSamples />
               </Grid>
 
-              <Grid item className={classes.filters}>
+              <Grid item className={classes.filterCalendar}>
                 <CalendarFilter />
               </Grid>
               <Grid item className={classes.filters}>

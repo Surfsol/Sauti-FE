@@ -107,13 +107,13 @@ $greyColor: #4d4f52;
         height: 50px;
         width: 25vw;
         background: #2c2e32;
-        h1 {
-          font-family: "Montserrat", sans-serif;
-          font-size: 18px;
-          font-weight: 600;
-          color: #ffffff;
-          margin-left: 20px;
-        }
+        // h1 {
+        //   font-family: "Montserrat", sans-serif;
+        //   font-size: 18px;
+        //   font-weight: 600;
+        //   color: #ffffff;
+        //   margin-left: 20px;
+        // }
       } //header
       .data-header {
         height: 50px;
@@ -212,11 +212,11 @@ $greyColor: #4d4f52;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  h1 {
-    text-align: left;
-    font-size: 4.5rem;
-    margin-bottom: 4%;
-  }
+  // h1 {
+  //   text-align: left;
+  //   font-size: 4.5rem;
+  //   margin-bottom: 4%;
+  // }
   p {
     font-size: 1.5rem;
     line-height: 1.5;
@@ -235,11 +235,11 @@ $greyColor: #4d4f52;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  h1 {
-    text-align: left;
-    font-size: 4.5rem;
-    margin-bottom: 4%;
-  }
+  // h1 {
+  //   text-align: left;
+  //   font-size: 4.5rem;
+  //   margin-bottom: 4%;
+  // }
   p {
     font-size: 1.7rem;
     line-height: 1.5;
@@ -303,9 +303,9 @@ $greyColor: #4d4f52;
 }
 
 .container-row-col-top-col {
-  h1 {
-    font-size: 5rem;
-  }
+  // h1 {
+  //   font-size: 5rem;
+  // }
   p {
     font-size: 2rem;
   }
@@ -313,4 +313,12 @@ $greyColor: #4d4f52;
 
 .account-type1 {
   margin-top: 8.7%;
+}
+
+.text-highlighted {
+  color: #f9b934;
+
+  &__primary {
+    color: #3f51b5;
+  }
 }
