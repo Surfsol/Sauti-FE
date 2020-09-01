@@ -12,6 +12,10 @@ import {
 import SectionHeader from "../themeStyledComponents/molecules/SectionHeader";
 import Image from "../themeStyledComponents/atoms/Image/";
 import Section from "../themeStyledComponents/organisms/Section";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
+import swal from "sweetalert";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,13 +73,43 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const NodeMail = gql`
+  mutation contactEmail($email: emailContactInput!) {
+    emailByContact(input: $email) {
+      email
+    }
+  }
+`;
+
 const ContactPageCover = () => {
-  const [message, setMessage] = useState({});
+  const [messageC, setMessage] = useState({});
+  const { name, email, message } = messageC;
+
+  const [createMail] = useMutation(NodeMail);
+
+  const handleSubmit = async (event, input) => {
+    console.log(input);
+    event.preventDefault();
+    if (email === "" || message === "") {
+      swal({
+        title: "Error",
+        text: "Please include your email and a message.",
+        icon: "warning",
+        dangerMode: true
+      });
+    } else {
+      const sentEmail = await createMail({
+        variables: { email: input }
+      });
+
+      setMessage({});
+      swal({ title: "", text: "Message Sent!", icon: "success" });
+    }
+  };
 
   function handleChange(e) {
-    setMessage({ ...message, [e.target.name]: e.target.value });
+    setMessage({ ...messageC, [e.target.name]: e.target.value });
   }
-  console.log(message);
 
   const classes = useStyles();
 
@@ -116,11 +150,11 @@ const ContactPageCover = () => {
                     placeholder="Your full name"
                     variant="outlined"
                     size="medium"
-                    name="fullname"
+                    name="name"
                     fullWidth
                     type="text"
                     onChange={handleChange}
-                    value={message.full_name}
+                    value={name}
                   />
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
@@ -139,7 +173,7 @@ const ContactPageCover = () => {
                     fullWidth
                     type="email"
                     onChange={handleChange}
-                    value={message.email}
+                    value={email}
                   />
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
@@ -158,7 +192,7 @@ const ContactPageCover = () => {
                     multiline
                     rows={4}
                     onChange={handleChange}
-                    value={message.message}
+                    value={message}
                   />
                 </Grid>
                 <Grid item container justify="center" xs={12}>
@@ -168,6 +202,7 @@ const ContactPageCover = () => {
                     color="primary"
                     size="large"
                     fullWidth
+                    onClick={event => handleSubmit(event, messageC)}
                   >
                     submit
                   </Button>

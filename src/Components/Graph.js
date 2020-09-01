@@ -43,17 +43,36 @@ const Graph = props => {
   const setApplyNow = setApplyReducer.setApplyNow;
 
   const [csvDownload, setCsvDownload] = useState([]);
-
+  console.log("data", data);
   let makeValues = data => {
     return data.map(obj => {
       return Object.values(obj);
     });
   };
+  const AddFilters = () => {
+    // let filterNums = Object.keys(filters)
+    let arr = [];
+    for (let key in filters) {
+      if (key > 1) {
+        let choices = filters[key]["selectableOptions"];
+        let cat = filters[key]["selectedCategory"];
+        let sel;
+        for (let item in filters[key]["selectableOptions"]) {
+          if (choices[item] === true) {
+            sel = item;
+          }
+        }
+        arr.push(`${cat}:${sel}`);
+      }
+    }
+    return arr;
+  };
+
   let makeHeaders = data => {
     if (!filters[1].selectedCategory) {
       return [
         {
-          id: `${filters[0].selectedTableColumnName}`,
+          id: `${65}`,
           displayName: `${filters[0].selectedTableColumnName}`
         },
         // instead of the subsample keys we put in the total count
@@ -65,28 +84,24 @@ const Graph = props => {
           id: `${67}`, // random value
           displayName: `% of Sample Size`
         },
-
-        ...Object.keys(filters)
-          .filter(filterId => filterId >= 2)
-          .map(filterId => ({ id: `${filters[filterId].selectedCategory}` })),
         {
-          id: `${sampleSize}`,
+          id: `${68}`,
           displayName: `Sample Size: ${sampleSize}`
+        },
+        {
+          id: `${69}`,
+          displayName: AddFilters()
         }
       ];
     } else {
       return [
         {
-          id: `${filters[0].selectedTableColumnName}`,
+          id: `${65}`,
           displayName: `${filters[0].selectedTableColumnName}`
         },
         ...keys,
-        ...Object.keys(filters)
-          .filter(filterId => filterId >= 2)
-          .map(filterId => ({ id: `${filters[filterId].selectedCategory}` })),
         {
-          id: `${sampleSize}`,
-          displayName: `Sample Size: ${sampleSize}`
+          displayName: AddFilters()
         }
       ];
     }
@@ -105,6 +120,7 @@ const Graph = props => {
         // assume dataItem[filters[0].selectedTableColumnName] exists
         if (!newDataCache[dataItem[filters[0].selectedTableColumnName]]) {
           newData = [...newData, dataItem];
+
           newDataCache = {
             ...newDataCache,
             [dataItem[filters[0].selectedTableColumnName]]: 1
@@ -114,7 +130,6 @@ const Graph = props => {
       data = newData;
     }
 
-    // works fine for both cases
     if (Object.keys(filters).length >= 2) {
       data = data.map(obj => {
         // calculate the additional filters
@@ -130,7 +145,6 @@ const Graph = props => {
               )
             };
           });
-
         // case for the non subsamples
         if (filters[1].selectedCategory.length === 0) {
           return {
@@ -138,15 +152,15 @@ const Graph = props => {
             percentage: (
               (obj[obj[filters[0].selectedTableColumnName]] / sampleSize) *
               100
-            ).toFixed(2),
-            ...additionalCategories // additional filters
+            ).toFixed(2)
+            // ...additionalCategories // additional filters
           };
         } else {
           // the subsamples(filters[1]) don't have an item count for calculating percentages
 
           return {
-            ...obj, // all minus additional filters
-            ...additionalCategories // additional filters
+            ...obj // all minus additional filters
+            //...additionalCategories // additional filters
           };
         }
       });
@@ -174,7 +188,6 @@ const Graph = props => {
     setCsvDownload(csvFormater(csvData));
   }, [csvData]);
   const socialMediaLink = useHistory().location.search;
-
   useEffect(() => {
     dispatch(
       barDownload({
