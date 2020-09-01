@@ -417,7 +417,18 @@ const dataOrder = {
     ]
   },
   commoditycountry: {
-    labels: ["BDI", "DRC", "KEN", "MWI", "RWA", "SSD", "TZA", "UGA"],
+    labels: [
+      "BDI",
+      "DRC",
+      "KEN",
+      "MWI",
+      "RWA",
+      "SSD",
+      "TZA",
+      "UGA",
+      "SOM",
+      "ETH"
+    ],
     structure: [
       { commoditycountry: "BDI" },
       { commoditycountry: "DRC" },
@@ -426,7 +437,9 @@ const dataOrder = {
       { commoditycountry: "RWA" },
       { commoditycountry: "SSD" },
       { commoditycountry: "TZA" },
-      { commoditycountry: "UGA" }
+      { commoditycountry: "UGA" },
+      { commoditycountry: "SOM" },
+      { commoditycountry: "ETH" }
     ]
   },
 
