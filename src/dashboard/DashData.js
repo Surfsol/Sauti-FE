@@ -127,8 +127,8 @@ function DashHome() {
       let newFilterObject = {};
 
       for (var i in split1) {
-        let split2 = split1[i].split("equals");
-        let split3 = split2[1].split("comma");
+        let split2 = split1[i].split("=");
+        let split3 = split2[1].split(",");
         if (split3[0] !== "undefined") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]

@@ -42,8 +42,6 @@ const GraphTime = ({
     setNoDataModal(true);
   });
 
-  console.log("time", time);
-
   useEffect(() => {
     setTime(month100);
     setCheckedItems(top7);
@@ -51,9 +49,7 @@ const GraphTime = ({
   }, [month100, top7]);
 
   function noData() {
-    console.log("no data modal Line Graph", noDataModal);
     if (noDataModal) {
-      console.log("show noData Parent");
       return (
         <NoDataParent
           setNoDataModal={setNoDataModal}
@@ -61,7 +57,6 @@ const GraphTime = ({
         />
       );
     } else {
-      console.log("nooo show noData Parent");
       return <></>;
     }
   }
