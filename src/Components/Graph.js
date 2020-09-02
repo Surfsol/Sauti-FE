@@ -43,7 +43,6 @@ const Graph = props => {
   const setApplyNow = setApplyReducer.setApplyNow;
 
   const [csvDownload, setCsvDownload] = useState([]);
-  console.log("data", data);
   let makeValues = data => {
     return data.map(obj => {
       return Object.values(obj);
@@ -211,7 +210,6 @@ const Graph = props => {
 
   //fire apply button
   if (setApplyNow && applyNow) {
-    console.log("applyNow, setApplyNow", setApplyNow);
     dispatch(
       applyAction({
         apply: true
