@@ -1,11 +1,11 @@
 function addArray(item) {
   let numArray = [];
-  //let period;
+
   for (let key in item) {
     if (key !== "date") {
       numArray.push(item[key]);
     } else {
-      item["period"] = 0;
+      item["count"] = 0;
     }
   }
 
@@ -21,19 +21,17 @@ function addArray(item) {
       // item[key] = (item[key] / total) * 100;
     }
   }
-  item["period"] = total;
+  item["count"] = total;
 }
 
 function hundredScale(array) {
-  let highNumerical = [];
-
   for (let i = 0; i < array.length; i++) {
     let item = array[i];
 
     addArray(item);
   }
 
-  return { array, highNumerical };
+  return { array };
 }
 
 export { hundredScale };

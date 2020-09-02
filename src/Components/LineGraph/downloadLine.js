@@ -1,11 +1,14 @@
 function downloadLine(time, filter0) {
+  //makes rows based off selectableOptions
+
   const rows = Object.keys(filter0.selectableOptions);
+  rows.push("count");
   rows.unshift("date");
   let completeObj = { date: [] };
   for (let i = 0; i < rows.length; i++) {
     completeObj[rows[i]] = [rows[i]];
   }
-
+  console.log(completeObj);
   for (let i = 0; i < time.length; i++) {
     let obj = time[i];
     let objKeys = Object.keys(obj);
@@ -29,6 +32,7 @@ function downloadLine(time, filter0) {
   for (let item in completeObj) {
     completeArray.push(completeObj[item]);
   }
+
   return completeArray;
 }
 export { downloadLine };

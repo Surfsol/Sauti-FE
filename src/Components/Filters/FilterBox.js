@@ -185,10 +185,9 @@ export default function FilterBox(props) {
         filters[filterId].selectedTableColumnName
           ? filters[filterId].selectedTableColumnName
           : "undefined"
-      }comma${getSelectedOption(filters, filterId)}`
+      },${getSelectedOption(filters, filterId)}`
     };
   });
-
   //let ourSearch = useHistory().location.search;
   const inverseConvertOptionUrl = option => {
     // these come from the selection options the user will see
@@ -208,7 +207,7 @@ export default function FilterBox(props) {
     );
 
     const filterStrings = keys
-      .map((key, i) => key + "equals" + values[i])
+      .map((key, i) => key + "=" + values[i])
       .join("zaz");
 
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
