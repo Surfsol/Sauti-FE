@@ -71,6 +71,13 @@ function DashHome() {
 
   // convert the english word url to option labels the user will see
   const convertOptionUrl = option => {
+    // replace %3C = <, and %3E = >
+    if (option === "%3E60") {
+      option = ">60";
+    }
+    if (option === "%3C20") {
+      option = "<20";
+    }
     // -1 means the search failed
     if (option.search(/forwardslash/) > -1) {
       return option.replace(/forwardslash/g, "/");
@@ -121,21 +128,15 @@ function DashHome() {
       // z is in maize
 
       //split on &
-      let split1 = searchString.split("&");
+      let split1 = searchString.split("&&");
 
       // making a new set of filters from the url
       let newFilterObject = {};
-
+      console.log("split1", split1);
       for (var i in split1) {
         let split2 = split1[i].split("=");
+        console.log("2 spl", split2);
         let split3 = split2[1].split(",");
-        // replace %3C = <, and %3E = >
-        if (split3[1] === "%3E60") {
-          split3[1] = ">60";
-        }
-        if (split3[1] === "%3C20") {
-          split3[1] = "<20";
-        }
 
         if (split3[0] !== "null") {
           allSelectedCategories.push(

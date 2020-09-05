@@ -210,8 +210,9 @@ export default function FilterBox(props) {
     let values = Object.values(urlSearchParams).map(value =>
       inverseConvertOptionUrl(value)
     );
-
-    const filterStrings = keys.map((key, i) => key + "=" + values[i]).join("&");
+    const filterStrings = keys
+      .map((key, i) => key + "=" + values[i])
+      .join("&&");
     //console.log(filterStrings)
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
