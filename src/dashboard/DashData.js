@@ -129,6 +129,14 @@ function DashHome() {
       for (var i in split1) {
         let split2 = split1[i].split("=");
         let split3 = split2[1].split(",");
+        // replace %3C = <, and %3E = >
+        if (split3[1] === "%3E60") {
+          split3[1] = ">60";
+        }
+        if (split3[1] === "%3C20") {
+          split3[1] = "<20";
+        }
+
         if (split3[0] !== "null") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
