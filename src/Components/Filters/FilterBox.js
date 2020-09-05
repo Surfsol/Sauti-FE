@@ -53,23 +53,25 @@ export default function FilterBox(props) {
 
   //theSuperCategories (Demographic, Information Insights, Business Insights)
   //categoriesCollected (categories selected ex. 'gender')
-  const xVar = (theSuperCategories, categoriesCollected) => {
-    return theSuperCategories.map(superCategory => {
-      return {
-        label: superCategory.label,
-        options: superCategory.options
-          //  filters out the already selected option
-          .map(category => {
-            return {
-              label: !categoriesCollected.includes(category.label)
-                ? category.label
-                : undefined
-            };
-          })
-          .filter(category => category.label !== undefined)
-      };
-    });
-  };
+  // const xVar = (theSuperCategories, categoriesCollected) => {
+  //   console.log('in xVar')
+  //   return theSuperCategories.map(superCategory => {
+  //     return {
+  //       label: superCategory.label,
+  //       options: superCategory.options
+  //         //  filters out the already selected option
+  //         .map(category => {
+  //           console.log('category   mmm', category)
+  //           return {
+  //             label: !categoriesCollected.includes(category.label)
+  //               ? category.label
+  //               : undefined
+  //           };
+  //         })
+  //         .filter(category => category.label !== undefined)
+  //     };
+  //   });
+  // };
 
   const dataFilterVar = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {
@@ -117,7 +119,7 @@ export default function FilterBox(props) {
             setUpdateUrlFlag: setUpdateUrlFlag,
             FilterBoxOptions: FilterBoxOptions,
             updateUrlFlag: updateUrlFlag,
-            xVar: xVar,
+            // xVar: xVar,
 
             open: open,
             filterSelectorName: filterSelectorName
@@ -141,7 +143,7 @@ export default function FilterBox(props) {
             setUpdateUrlFlag={setUpdateUrlFlag}
             FilterBoxOptions={FilterBoxOptions}
             updateUrlFlag={updateUrlFlag}
-            xVar={xVar}
+            // xVar={xVar}
           />
         </Grid>
       );
@@ -177,6 +179,7 @@ export default function FilterBox(props) {
 
   const [loading, setLoading] = useState(false);
 
+  //make the url based off filters
   let urlSearchParams = {};
   Object.keys(filters).forEach(filterId => {
     urlSearchParams = {
@@ -184,7 +187,8 @@ export default function FilterBox(props) {
       ["filter" + String(filterId)]: `${
         filters[filterId].selectedTableColumnName
           ? filters[filterId].selectedTableColumnName
-          : "undefined"
+          : // change undefined to null
+            "null"
       },${getSelectedOption(filters, filterId)}`
     };
   });
@@ -201,15 +205,14 @@ export default function FilterBox(props) {
     }
   };
   useEffect(() => {
+    // console.log('url Search params',urlSearchParams)
     let keys = Object.keys(urlSearchParams);
     let values = Object.values(urlSearchParams).map(value =>
       inverseConvertOptionUrl(value)
     );
 
-    const filterStrings = keys
-      .map((key, i) => key + "=" + values[i])
-      .join("zaz");
-
+    const filterStrings = keys.map((key, i) => key + "=" + values[i]).join("&");
+    //console.log(filterStrings)
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
 

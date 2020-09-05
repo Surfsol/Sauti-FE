@@ -80,7 +80,7 @@ function DashHome() {
       return option;
     }
   };
-  console.log("History", History);
+  console.log("History", history);
 
   let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
@@ -119,9 +119,9 @@ function DashHome() {
       // - is in 10-20
       // &, ^ aren't accepted by twitter
       // z is in maize
-      // zaz works
 
-      let split1 = searchString.split("zaz");
+      //split on &
+      let split1 = searchString.split("&");
 
       // making a new set of filters from the url
       let newFilterObject = {};
@@ -129,7 +129,7 @@ function DashHome() {
       for (var i in split1) {
         let split2 = split1[i].split("=");
         let split3 = split2[1].split(",");
-        if (split3[0] !== "undefined") {
+        if (split3[0] !== "null") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
           );
@@ -228,12 +228,9 @@ function DashHome() {
     );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
-    console.log("tier", tier);
     let cat = "";
     setupFilter(history);
-    console.log(allSelectedCategories);
     for (let i = 0; i < allSelectedCategories.length; i++) {
-      console.log(allSelectedCategories[i]);
       if (!allowed.includes(allSelectedCategories[i])) {
         cat = allSelectedCategories[i];
       }

@@ -49,14 +49,14 @@ const DataSeriesFilter = ({
         }}
         name="color"
         styles={colourStyles}
-        options={xVar(
-          FilterBoxOptions.superCategories,
-          Object.keys(filters)
-            .map(filterId => {
-              return filters[filterId].selectedCategory;
-            })
-            .filter(selectedCategory => selectedCategory.length > 0)
-        )}
+        // options={xVar(
+        //   FilterBoxOptions.superCategories,
+        //   Object.keys(filters)
+        //     .map(filterId => {
+        //       return filters[filterId].selectedCategory;
+        //     })
+        //     .filter(selectedCategory => selectedCategory.length > 0)
+        // )}
       />
     </>
   );
