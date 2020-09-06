@@ -71,6 +71,13 @@ function DashHome() {
 
   // convert the english word url to option labels the user will see
   const convertOptionUrl = option => {
+    // replace %3C = <, and %3E = >
+    if (option === "%3E60") {
+      option = ">60";
+    }
+    if (option === "%3C20") {
+      option = "<20";
+    }
     // -1 means the search failed
     if (option.search(/forwardslash/) > -1) {
       return option.replace(/forwardslash/g, "/");
@@ -80,7 +87,7 @@ function DashHome() {
       return option;
     }
   };
-  console.log("History", History);
+  console.log("History", history);
 
   let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
@@ -119,17 +126,19 @@ function DashHome() {
       // - is in 10-20
       // &, ^ aren't accepted by twitter
       // z is in maize
-      // zaz works
 
-      let split1 = searchString.split("zaz");
+      //split on &
+      let split1 = searchString.split("&&");
 
       // making a new set of filters from the url
       let newFilterObject = {};
-
+      console.log("split1", split1);
       for (var i in split1) {
         let split2 = split1[i].split("=");
+        console.log("2 spl", split2);
         let split3 = split2[1].split(",");
-        if (split3[0] !== "undefined") {
+
+        if (split3[0] !== "null") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
           );
@@ -228,12 +237,9 @@ function DashHome() {
     );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
-    console.log("tier", tier);
     let cat = "";
     setupFilter(history);
-    console.log(allSelectedCategories);
     for (let i = 0; i < allSelectedCategories.length; i++) {
-      console.log(allSelectedCategories[i]);
       if (!allowed.includes(allSelectedCategories[i])) {
         cat = allSelectedCategories[i];
       }

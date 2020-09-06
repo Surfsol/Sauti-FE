@@ -83,12 +83,11 @@ const NodeMail = gql`
 
 const ContactPageCover = () => {
   const [messageC, setMessage] = useState({});
-  const { name, email, message } = messageC;
 
   const [createMail] = useMutation(NodeMail);
 
   const handleSubmit = async (event, input) => {
-    console.log(input);
+    const { email, message } = messageC;
     event.preventDefault();
     if (email === "" || message === "") {
       swal({
@@ -101,9 +100,9 @@ const ContactPageCover = () => {
       const sentEmail = await createMail({
         variables: { email: input }
       });
-
-      setMessage({});
-      swal({ title: "", text: "Message Sent!", icon: "success" });
+      console.log("sentMail", sentEmail);
+      setMessage({ name: "", email: "", message: "" });
+      swal({ title: "Success", text: "Message Sent!", icon: "success" });
     }
   };
 
@@ -154,7 +153,7 @@ const ContactPageCover = () => {
                     fullWidth
                     type="text"
                     onChange={handleChange}
-                    value={name}
+                    value={messageC.name}
                   />
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
@@ -173,7 +172,7 @@ const ContactPageCover = () => {
                     fullWidth
                     type="email"
                     onChange={handleChange}
-                    value={email}
+                    value={messageC.email}
                   />
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
@@ -192,7 +191,7 @@ const ContactPageCover = () => {
                     multiline
                     rows={4}
                     onChange={handleChange}
-                    value={message}
+                    value={messageC.message}
                   />
                 </Grid>
                 <Grid item container justify="center" xs={12}>

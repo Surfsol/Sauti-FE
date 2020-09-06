@@ -30,7 +30,6 @@ const CompareSubSamples = () => {
     setUpdateUrlFlag,
     FilterBoxOptions,
     updateUrlFlag,
-    xVar,
     colourStyles,
     open
   } = reducerSub;
