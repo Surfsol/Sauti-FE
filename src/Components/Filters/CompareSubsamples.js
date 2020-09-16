@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import graphLabels from "../graphLabels";
-import { useSelector } from "react-redux";
+//import graphLabels from "../graphLabels";
+import { useSelector, useDispatch } from "react-redux";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import { ordered } from "../orderedGraphLabels";
 import { Box } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import NoAccessModal from "./NoAccessModal";
-import { separateOperations } from "graphql";
 import { allowed } from "../orderedGraphLabels";
-import { useDispatch } from "react-redux";
 import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
 const CompareSubSamples = () => {
@@ -34,6 +31,10 @@ const CompareSubSamples = () => {
     open
   } = reducerSub;
   const classes = useStyles();
+
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
 
   const access = useSelector(state => state.tierReducer.access);
   const [noAccess, setNoAccess] = useState(false);

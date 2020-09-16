@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CsvDownloader from "react-csv-downloader";
-import { Event } from "../dashboard/GoogleAnalytics/index";
-import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
+
+import { getSubscription } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
-import styled from "styled-components";
-import { getSelectedOption } from "../OptionFunctions";
+
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useSelector } from "react-redux";
-import dataParse from "./dataParse";
-import csv from "react-csv-downloader/dist/lib/csv";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -19,7 +16,6 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 
 import ClipboardJS from "clipboard";
 import swal from "sweetalert";
-//import downloadBtn  from '../assets/images/downloadBtn'
 
 //need to bring in data, for 109
 const SocialMedia = () => {

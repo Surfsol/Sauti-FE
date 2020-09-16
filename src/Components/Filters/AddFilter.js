@@ -1,23 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import graphLabels from "../graphLabels";
-
 import RenderCheckContainer from "./RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { ordered } from "../orderedGraphLabels";
-
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
-
 import { useDispatch, useSelector } from "react-redux";
 import { clearApplyAction } from "../redux-actions/clearApplyAction";
-
 import { scrollPosition } from "../redux-actions/scrollAction";
-
 import { allowed } from "../orderedGraphLabels";
-import { separateOperations } from "graphql";
-
 import NoAccessModal from "./NoAccessModal";
 
 const AddFilter = ({
@@ -40,6 +32,10 @@ const AddFilter = ({
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
   const [catValue, setCatValue] = useState("");
+
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
 
   useEffect(() => {
     const div = innerRef.current;

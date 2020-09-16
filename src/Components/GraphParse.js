@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import dataParse from "./dataParse";
 import Graph from "./Graph";
 import { filterByDate } from "../DataParseHelpers/filterByDate";
+import { useSelector } from "react-redux";
 
 const GraphParse = ({
   data,
@@ -14,6 +15,10 @@ const GraphParse = ({
   //needed for filterByDate, cannot filter tradersUsers by date
   let typeOfQuery = Object.keys(data)[0];
 
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
+  console.log("graphLabels", graphLabels);
   //maybe will need something like this in else statement to prevent errors: data.sessionData != undefined &&
   if (
     queryType === "sessionsData" &&
@@ -29,15 +34,12 @@ const GraphParse = ({
     filters[0].selectedTableColumnName,
     data[`${queryType}`] || data.tradersUsers,
     filters[1].selectedTableColumnName,
-
-    filterBoxStartDate,
-
-    filterBoxEndDate,
     filters[2].selectedTableColumnName,
-
     filters[0].selectedTable,
-    filters[1].selectedTable
+    filters[1].selectedTable,
+    graphLabels
   );
+
   const graphItems = filters[1].selectedTableColumnName !== "";
   if (graphItems === true) {
     return (
@@ -71,9 +73,6 @@ const GraphParse = ({
         />
       </>
     );
-    //switching from Account.js back to graph too fast was giving an error
-    // because chartData was not available.
-    // so added chartData on 58 and return
   } else {
     return <></>;
   }

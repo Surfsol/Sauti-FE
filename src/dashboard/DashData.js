@@ -7,7 +7,6 @@ import GraphContainer from "../GraphContainer";
 //import { SignedInDiv, UserHeader } from "./styledComponents/Index";
 import { FilterBoxOptions } from "../Components/FilterBoxOptions";
 //import { flavourOptions } from "../Components/docs/data";
-import graphLabels from "../Components/graphLabels";
 import { useSelector, useDispatch } from "react-redux";
 import { queriesFilters } from "../Components/redux-actions/queriesAction";
 import { applyAction } from "../Components/redux-actions/applyAction";
@@ -45,9 +44,11 @@ const filterTemplate = {
   }
 };
 
-function DashHome() {
+function DashHome({ graphLabels }) {
   const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   let tier;
   if (token) {
@@ -64,10 +65,7 @@ function DashHome() {
     access = "free";
   }
 
-  const dispatch = useDispatch();
   dispatch(tierDefined({ tier: tier, access: access }));
-
-  const history = useHistory();
 
   // convert the english word url to option labels the user will see
   const convertOptionUrl = option => {
@@ -87,7 +85,6 @@ function DashHome() {
       return option;
     }
   };
-  console.log("History", history);
 
   let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
@@ -132,10 +129,8 @@ function DashHome() {
 
       // making a new set of filters from the url
       let newFilterObject = {};
-      console.log("split1", split1);
       for (var i in split1) {
         let split2 = split1[i].split("=");
-        console.log("2 spl", split2);
         let split3 = split2[1].split(",");
 
         if (split3[0] !== "null") {
@@ -276,7 +271,6 @@ function DashHome() {
       );
     }
   } else {
-    console.log("last else");
     dispatch(
       applyAction({
         apply: false

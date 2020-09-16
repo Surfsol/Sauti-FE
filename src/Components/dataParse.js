@@ -1,4 +1,5 @@
-import graphLabels from "./graphLabels";
+//import graphLabels from "./graphLabels";
+
 import getIndex from "../DataParseHelpers/getIndex";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
@@ -8,11 +9,10 @@ const dataParse = (
   indexBy,
   data,
   crossFilter,
-  startDate,
-  endDate,
   additionalFilter,
   queryType,
-  crossFilterQuery
+  crossFilterQuery,
+  graphLabels
 ) => {
   let dataStructure = [];
   //when single filtering "Most Requested" graph

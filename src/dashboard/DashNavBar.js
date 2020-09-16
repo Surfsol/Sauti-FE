@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import { NavLink, Route, withRouter } from "react-router-dom";
 import { HistoryListen, PageView } from "./GoogleAnalytics/index";
-import DashData from "./DashData";
 import UsersQuery from "./Tools/UsersQuery";
 import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import NoAccount from "../dashboard/DashboardAccount/NoAccount";
 import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
+import QueryGraphLabels from "./QueryGraphLabels";
 
 import DashLogout from "./DashLogout";
 import Login from "./Login";
@@ -21,6 +21,10 @@ import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
 import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { catLabelsAction } from "../Components/redux-actions/catLabels";
+import { useDispatch } from "react-redux";
 
 import {
   TopBar,
@@ -29,13 +33,10 @@ import {
   SautiDot,
   Navigation,
   Links,
-  LinksLast,
-  SautiLink,
   Container
 } from "./styledComponents/Index";
 
 function DashNav() {
-  // History Listner
   HistoryListen();
 
   useEffect(() => {
@@ -96,7 +97,7 @@ function DashNav() {
       <Route exact path="/pricing" component={Pricing} />
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/companyterms" component={CompanyTerms} />
-      <Route exact path="/data" component={DashData} />
+      <Route exact path="/data" component={QueryGraphLabels} />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={CreateAccount} />
