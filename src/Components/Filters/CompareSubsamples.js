@@ -36,8 +36,6 @@ const CompareSubSamples = () => {
     state => state.catLabelReducer.labels.getGraphLabels
   );
 
-  console.log("comprar graphlae", graphLabels);
-
   const access = useSelector(state => state.tierReducer.access);
   const [noAccess, setNoAccess] = useState(false);
   const [catValue, setCatValue] = useState("");

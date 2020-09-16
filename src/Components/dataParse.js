@@ -19,7 +19,6 @@ const dataParse = (
   //remove multiples should happen prior to filterByDate
   //multiples should also be given a date
 
-  console.log("graphLabels", graphLabels);
   let newArray = [];
   if (data && queryType === "Sessions" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
