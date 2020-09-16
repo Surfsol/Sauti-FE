@@ -49,6 +49,11 @@ function DashHome() {
   const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
 
+  const dispatch = useDispatch();
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
+
   let tier;
   if (token) {
     tier = decodeToken(token);
@@ -64,7 +69,6 @@ function DashHome() {
     access = "free";
   }
 
-  const dispatch = useDispatch();
   dispatch(tierDefined({ tier: tier, access: access }));
 
   const history = useHistory();
@@ -87,7 +91,6 @@ function DashHome() {
       return option;
     }
   };
-  console.log("History", history);
 
   let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
@@ -132,10 +135,8 @@ function DashHome() {
 
       // making a new set of filters from the url
       let newFilterObject = {};
-      console.log("split1", split1);
       for (var i in split1) {
         let split2 = split1[i].split("=");
-        console.log("2 spl", split2);
         let split3 = split2[1].split(",");
 
         if (split3[0] !== "null") {
@@ -276,7 +277,6 @@ function DashHome() {
       );
     }
   } else {
-    console.log("last else");
     dispatch(
       applyAction({
         apply: false

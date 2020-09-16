@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import graphLabels from "../graphLabels";
+//import graphLabels from "../graphLabels";
 
 import RenderCheckContainer from "./RenderCheckContainer";
 import Grid from "@material-ui/core/Grid";
@@ -40,6 +40,11 @@ const AddFilter = ({
   const scrollY = useSelector(state => state.scrollReducer.scrollPos);
   const adjustScroll = scrollY.position + 40;
   const [catValue, setCatValue] = useState("");
+
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
+  console.log("labesls", graphLabels);
 
   useEffect(() => {
     const div = innerRef.current;

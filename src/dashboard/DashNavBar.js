@@ -21,6 +21,10 @@ import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
 import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { catLabelsAction } from "../Components/redux-actions/catLabels";
+import { useDispatch } from "react-redux";
 
 import {
   TopBar,
@@ -34,6 +38,12 @@ import {
   Container
 } from "./styledComponents/Index";
 
+const GET_GRAPHLABELS = gql`
+  query Labels {
+    getGraphLabels
+  }
+`;
+
 function DashNav() {
   // History Listner
   HistoryListen();
@@ -41,6 +51,11 @@ function DashNav() {
   useEffect(() => {
     PageView();
   });
+
+  const dispatch = useDispatch();
+  let { data } = useQuery(GET_GRAPHLABELS);
+
+  dispatch(catLabelsAction(data));
 
   const SignedIn = getToken();
   const token = getToken();
