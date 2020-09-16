@@ -33,8 +33,6 @@ import {
   SautiDot,
   Navigation,
   Links,
-  LinksLast,
-  SautiLink,
   Container
 } from "./styledComponents/Index";
 
@@ -54,7 +52,7 @@ function DashNav() {
 
   const dispatch = useDispatch();
   let { data } = useQuery(GET_GRAPHLABELS);
-
+  console.log(data);
   dispatch(catLabelsAction(data));
 
   const SignedIn = getToken();

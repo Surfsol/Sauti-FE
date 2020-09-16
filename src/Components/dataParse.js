@@ -1,4 +1,5 @@
-import graphLabels from "./graphLabels";
+//import graphLabels from "./graphLabels";
+
 import getIndex from "../DataParseHelpers/getIndex";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
@@ -8,17 +9,17 @@ const dataParse = (
   indexBy,
   data,
   crossFilter,
-  startDate,
-  endDate,
   additionalFilter,
   queryType,
-  crossFilterQuery
+  crossFilterQuery,
+  graphLabels
 ) => {
   let dataStructure = [];
   //when single filtering "Most Requested" graph
   //remove multiples should happen prior to filterByDate
   //multiples should also be given a date
 
+  console.log("graphLabels", graphLabels);
   let newArray = [];
   if (data && queryType === "Sessions" && crossFilter === "") {
     dataStructure = getIndex(data, indexBy);
