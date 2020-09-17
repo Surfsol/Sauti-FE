@@ -21,7 +21,7 @@ const QueryGraphLabels = () => {
     return <></>;
   }
   if (data) {
-    return <DashData graphLabels={data.getGraphLabels} />;
+    return <DashData />;
   }
   if (error) {
     console.log(error);

@@ -8,6 +8,7 @@ import NoAccount from "../dashboard/DashboardAccount/NoAccount";
 import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
 import QueryGraphLabels from "./QueryGraphLabels";
+import DashData from "./DashData";
 
 import DashLogout from "./DashLogout";
 import Login from "./Login";
@@ -21,10 +22,7 @@ import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
 import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
-import { catLabelsAction } from "../Components/redux-actions/catLabels";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   TopBar,
@@ -51,6 +49,12 @@ function DashNav() {
     let tokenDecoded = decodeToken(token);
     email = tokenDecoded.email;
     tier = tokenDecoded.tier;
+  }
+
+  const labels = useSelector(state => state.catLabelReducer.labels);
+  let labelsRedux = false;
+  if (labels) {
+    labelsRedux = labels.getGraphLabels;
   }
 
   // const isLandingPage = window.location.href ? "http://localhost:3000/" : null;
@@ -97,7 +101,11 @@ function DashNav() {
       <Route exact path="/pricing" component={Pricing} />
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/companyterms" component={CompanyTerms} />
-      <Route exact path="/data" component={QueryGraphLabels} />
+      <Route
+        exact
+        path="/data"
+        component={labelsRedux ? DashData : QueryGraphLabels}
+      />
       <Route exact path="/tools" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={CreateAccount} />

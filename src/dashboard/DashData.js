@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import GraphContainer from "../GraphContainer";
-//import { getToken, decodeToken } from "./auth/Auth";
-
-//import { SignedInDiv, UserHeader } from "./styledComponents/Index";
 import { FilterBoxOptions } from "../Components/FilterBoxOptions";
-//import { flavourOptions } from "../Components/docs/data";
 import { useSelector, useDispatch } from "react-redux";
 import { queriesFilters } from "../Components/redux-actions/queriesAction";
 import { applyAction } from "../Components/redux-actions/applyAction";
@@ -44,11 +39,15 @@ const filterTemplate = {
   }
 };
 
-function DashHome({ graphLabels }) {
+function DashHome() {
   const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
 
   let tier;
   if (token) {
