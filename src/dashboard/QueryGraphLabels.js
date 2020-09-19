@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { catLabelsAction } from "../Components/redux-actions/catLabels";
 import { useDispatch } from "react-redux";
 import DashData from "./DashData";
+import Loader from "react-loader-spinner";
 
 const GET_GRAPHLABELS = gql`
   query Labels {
@@ -16,15 +17,24 @@ const QueryGraphLabels = () => {
 
   const dispatch = useDispatch();
   dispatch(catLabelsAction(data));
-
+  console.log("loading", loading);
   if (loading) {
-    return <></>;
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={100000}
+        />
+      </div>
+    );
   }
   if (data) {
     return <DashData />;
   }
   if (error) {
-    console.log(error);
     return <div>error in fetching graph labels</div>;
   }
 };
