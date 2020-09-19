@@ -1,11 +1,6 @@
 import abbreviateLabels from "./abbreviateLabels";
-import graphLabels from "../Components/graphLabels";
 import getIndex from "./getIndex";
-/* 
 
-
-
-*/
 // tomorrow start looking in here
 const setCrossedItems = (
   data,
@@ -14,7 +9,8 @@ const setCrossedItems = (
   indexBy,
   additionalFilter,
   queryType,
-  crossFilterQuery
+  crossFilterQuery,
+  graphLabels
 ) => {
   //will be used to store all possible values for the index value, which is referring to a column in the database table
   let indexByValues = [];

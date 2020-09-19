@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import graphLabels from "../graphLabels";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";

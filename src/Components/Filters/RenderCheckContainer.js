@@ -1,8 +1,6 @@
 import React from "react";
 import CategoryOptions from "./CategoryOptions";
 import styled from "styled-components";
-import Grid from "@material-ui/core/Grid";
-import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 //component - diplays a button to see options when button is clicked
 const RenderCheckContainer = ({

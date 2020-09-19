@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-//only being used for AddFilter -> RenderCheckContainer
 const FilterCategoryOptions = props => {
   let {
     i,

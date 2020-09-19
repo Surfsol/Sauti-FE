@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import { FilterBoxOptions } from "../FilterBoxOptions";
-import graphLabels from "../graphLabels";
-import { colourOptions, groupedOptions } from "../docs/data";
-import useCalendar, { getTodaysDate } from "../../hooks/useCalendar";
+import { getTodaysDate } from "../../hooks/useCalendar";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-//import CalendarModal from "../dashboard/CalendarModal";
 import {
   decodeToken,
   getToken,
   getSubscription
 } from "../../dashboard/auth/Auth";
-import { getAvaliableOptions, getSelectedOption } from "../../OptionFunctions";
+import { getSelectedOption } from "../../OptionFunctions";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -51,27 +48,9 @@ export default function FilterBox(props) {
   const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
   const [displayDrop, setDisplayDrop] = useState([]);
 
-  //theSuperCategories (Demographic, Information Insights, Business Insights)
-  //categoriesCollected (categories selected ex. 'gender')
-  // const xVar = (theSuperCategories, categoriesCollected) => {
-  //   console.log('in xVar')
-  //   return theSuperCategories.map(superCategory => {
-  //     return {
-  //       label: superCategory.label,
-  //       options: superCategory.options
-  //         //  filters out the already selected option
-  //         .map(category => {
-  //           console.log('category   mmm', category)
-  //           return {
-  //             label: !categoriesCollected.includes(category.label)
-  //               ? category.label
-  //               : undefined
-  //           };
-  //         })
-  //         .filter(category => category.label !== undefined)
-  //     };
-  //   });
-  // };
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
 
   const dataFilterVar = (theSuperCategories, categoriesCollected) => {
     return theSuperCategories.map(superCategory => {
