@@ -164,7 +164,6 @@ const GetData = (props, { makeValues }) => {
     //so selected filters 'text' will not display until Apply pressed
     //selectedReducer is true if url is manually altered
     if (props.setSelectedFilters && selectedReducer != true) {
-      console.log("fire Queries setSelected");
       props.setSelectedFilters(false);
     }
   });
@@ -256,7 +255,7 @@ const GetData = (props, { makeValues }) => {
     }
     data = { sessionsData: notNull };
   }
-  // console.log("data", data);
+
   if (
     data &&
     data.sessionsData !== undefined &&
@@ -264,11 +263,6 @@ const GetData = (props, { makeValues }) => {
   ) {
     return noData();
   }
-
-  //removed because was causing NoDataModal to popup when initially going to Data
-  // if (filters[0].selectedCategory && data === undefined) {
-  //   return noData();
-  // }
 
   if (
     data &&

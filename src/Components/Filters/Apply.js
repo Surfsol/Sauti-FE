@@ -10,7 +10,7 @@ const Apply = ({ handleApply, filters }) => {
   let applyFromDash = false;
   applyFromDash = useSelector(state => state.applyActionReducer.apply.apply);
   const clearApply = useSelector(state => state.clearApplyReducer.clear.clear);
-  console.log(clearApply, "clearApply");
+
   useEffect(() => {
     setShow(true);
   }, [filters, applyFromDash]);

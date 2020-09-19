@@ -21,7 +21,6 @@ const CompareSubSamples = () => {
     filterSelectorName,
     filters,
     setFilters,
-    ControlComponent,
     index,
     formatGroupLabel,
     setUpdateUrlFlag,
