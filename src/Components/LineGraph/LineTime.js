@@ -116,6 +116,8 @@ const GraphTime = ({
   const five = display[5];
   const six = display[6];
   const seven = display[7];
+  const eight = display[8];
+  const nine = display[9];
 
   let highest = getHighestSelected(time, display);
 
@@ -215,11 +217,23 @@ const GraphTime = ({
               />
               <Line type="monotone" dataKey={four} stroke="red" dot={false} />
               <Line type="monotone" dataKey={five} stroke="tan" dot={false} />
-              <Line type="monotone" dataKey={six} stroke="yellow" dot={false} />
+              <Line type="monotone" dataKey={six} stroke="black" dot={false} />
               <Line
                 type="monotone"
                 dataKey={seven}
                 stroke="brown"
+                dot={false}
+              />
+              <Line
+                type="monotone"
+                dataKey={eight}
+                stroke="chartreuse"
+                dot={false}
+              />
+              <Line
+                type="monotone"
+                dataKey={nine}
+                stroke="darkslategrey"
                 dot={false}
               />
             </LineChart>

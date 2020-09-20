@@ -62,7 +62,7 @@ function topChecked(lineNonNull, selectedTableColumnName, keysInOrder) {
   //const keysInOrder = [];
 
   for (let i = 0; i < ordered.length; i++) {
-    if (i < 7) {
+    if (i < 9) {
       let cat = Object.values(ordered[i]);
       keysInOrder.push(cat[0]);
     }
