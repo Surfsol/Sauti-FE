@@ -129,7 +129,6 @@ const GraphContainer = props => {
   }, [filters]);
 
   function handleApply(reset) {
-    console.log("handle Apply fired", filters);
     setSelectedFilters(true);
     if (reset) {
       dispatch(

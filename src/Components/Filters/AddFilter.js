@@ -17,7 +17,6 @@ const AddFilter = ({
   setFilters,
   index,
   FilterBoxOptions,
-  CategoryOptions,
   setUpdateUrlFlag,
   updateUrlFlag,
   displayDrop,

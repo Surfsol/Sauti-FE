@@ -18,7 +18,6 @@ const DataSFilter = ({
   setUpdateUrlFlag,
   FilterBoxOptions,
   updateUrlFlag,
-  tier,
   access
 }) => {
   const [displayDrop, setDisplayDrop] = useState(false);

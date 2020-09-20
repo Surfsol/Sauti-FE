@@ -36,7 +36,8 @@ const dataParse = (
       indexBy,
       additionalFilter,
       queryType,
-      crossFilterQuery
+      crossFilterQuery,
+      graphLabels
     );
   } else {
     if (queryType === "Users") {
