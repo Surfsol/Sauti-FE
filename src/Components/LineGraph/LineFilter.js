@@ -46,6 +46,7 @@ const LineFilter = memo(() => {
             />
           }
           label={checkboxes[i].name}
+          key={"key" + i}
         />
       );
     }
