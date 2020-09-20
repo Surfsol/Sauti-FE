@@ -41,7 +41,6 @@ const GraphParse = ({
   );
 
   const graphItems = filters[1].selectedTableColumnName !== "";
-  console.log("graphItems", chartData);
   if (graphItems === true) {
     return (
       <>

@@ -9,15 +9,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 const LineFilter = memo(() => {
-  const classes = useStyles();
   const lineReducer = useSelector(state => state.lineReducer.lineBoxes);
 
-  const {
-    checkboxes,
-    handleReset,
-    checkedItems,
-    setCheckedItems
-  } = lineReducer;
+  const { checkboxes, checkedItems, setCheckedItems } = lineReducer;
   const open = useSelector(
     state => state.compareSubSamplesReducer.compareSub.open
   );
@@ -32,7 +26,7 @@ const LineFilter = memo(() => {
 
   const [state, setState] = useState(checkedItems);
 
-  console.log(state);
+  //console.log(state);
 
   useEffect(() => {
     setState(checkedItems);
