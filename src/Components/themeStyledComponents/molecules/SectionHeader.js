@@ -100,8 +100,7 @@ const SectionHeader = props => {
       )}
       <Grid item xs={12} className="section-header__title-wrapper">
         <Typography
-          //change size
-          variant={"h1"}
+          variant={titleVariant}
           align={align || "center"}
           className={clsx(
             "section-header__title",
@@ -119,7 +118,7 @@ const SectionHeader = props => {
         <Grid item xs={12} className="section-header__subtitle-wrapper">
           <Typography
             //adjust font size
-            variant={"h4"}
+            variant={subtitleVariant || "h6"}
             align={align || "center"}
             color={subtitleColor || "textSecondary"}
             className="section-header__subtitle"

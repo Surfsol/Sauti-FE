@@ -109,7 +109,7 @@ const Main = props => {
         <Section className={classes.pagePaddingTop}>
           <SectionHeader
             title="Pricing"
-            subtitle="We are founded by a leading researchers in East Africa's cross-border trade field. "
+            subtitle="We are founded by leading researchers in East Africa's cross-border trade field. "
             titleProps={{
               className: clsx(classes.textWhite, classes.fontWeightBold),
               variant: "h2"

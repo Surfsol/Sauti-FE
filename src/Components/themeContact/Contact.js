@@ -16,6 +16,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
+import imgContact from "../../assets/images/SautiBusia_62_2.jpg";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -122,11 +123,7 @@ const ContactPageCover = () => {
       <Section className={classes.section}>
         <div className={classes.wrapper}>
           <div className={classes.cover}>
-            <Image
-              src="/images/photos/SautiBusia_62_2.jpg"
-              alt="Contact"
-              className={classes.image}
-            />
+            <Image src={imgContact} alt="Contact" className={classes.image} />
           </div>
           <div className={classes.content}>
             <SectionHeader

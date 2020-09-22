@@ -34,7 +34,7 @@ const Support = props => {
             subtitle="Are you part of a research institution. Request a consultation to customize a plan."
             subtitleVariant="body1"
             subtitleColor="textPrimary"
-            ctaGroup={[<LearnMoreLink title="Contact us" />]}
+            ctaGroup={[<LearnMoreLink title="Contact us" href="contact" />]}
             disableGutter
           />
         </Grid>

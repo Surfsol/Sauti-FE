@@ -3,7 +3,6 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, colors } from "@material-ui/core";
-
 /**
  * Component to display the icon
  *
@@ -29,10 +28,6 @@ const Icon = props => {
   );
 };
 
-Icon.defaultProps = {
-  size: "small"
-};
-
 Icon.propTypes = {
   /**
    * External classes
@@ -53,7 +48,9 @@ Icon.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    display: "flex !important"
+  },
   extraSmall: {
     width: 20,
     height: 20
@@ -63,8 +60,9 @@ const useStyles = makeStyles(theme => ({
     height: 50
   },
   medium: {
-    width: 70,
-    height: 70
+    width: "70px !important",
+    height: "70px !important",
+    fontSize: "25px"
   },
   large: {
     width: 90,
@@ -115,7 +113,6 @@ const IconAlternate = props => {
       {...rest}
     >
       <Icon
-        size={size}
         fontIconClass={fontIconClass}
         fontIconColor={color[500]}
         className="icon-alternate__icon"

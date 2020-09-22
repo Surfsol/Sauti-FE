@@ -14,7 +14,9 @@ const useStyles = makeStyles(theme => ({
     }
   },
   fullWidth: {
-    maxWidth: "100%"
+    maxWidth: "100%",
+    padding: theme.spacing(12, 1),
+    marginLeft: theme.spacing(-2)
   },
   disablePadding: {
     padding: 0
