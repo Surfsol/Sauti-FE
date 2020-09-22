@@ -15,10 +15,10 @@ import {
   People
 } from "@material-ui/core";
 import Image from "../../themeStyledComponents/atoms/Image/";
+import ImgMarket from "../../../assets/images/market.jpg";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 
 const useStyles = makeStyles(theme => ({
-  root: {},
   image: {
     boxShadow:
       "25px 60px 125px -25px rgba(80,102,144,.1), 16px 40px 75px -40px rgba(0,0,0,.2)",
@@ -55,7 +55,7 @@ const Usecases = props => {
           data-aos="fade-up"
         >
           <Image
-            src="/images/illustrations/market.jpg"
+            src={ImgMarket}
             alt="..."
             className={classes.coverImage}
             lazy={false}

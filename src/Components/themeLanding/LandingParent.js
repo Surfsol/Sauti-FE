@@ -7,7 +7,6 @@ import Hero from "./landingComponents/Hero";
 import Hub from "./landingComponents/Hub";
 import Partners from "./landingComponents/Partners";
 import Usecases from "./landingComponents/Usecases";
-
 import { reviews, support, integrations } from "./data";
 
 const useStyles = makeStyles(theme => ({
