@@ -151,7 +151,12 @@ const Features = props => {
           />
         </Grid>
         <Grid item container xs={12} justify="center">
-          <Button variant="contained" size="large" color="primary">
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            href="pricing"
+          >
             get started
           </Button>
         </Grid>

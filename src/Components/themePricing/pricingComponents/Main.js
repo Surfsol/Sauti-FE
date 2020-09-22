@@ -176,8 +176,9 @@ const Main = props => {
                       variant="outlined"
                       fullWidth
                       size="large"
+                      href="signup"
                     >
-                      Subscribe now
+                      Join now
                     </Button>
                   }
                 />
@@ -251,8 +252,9 @@ const Main = props => {
                       variant="contained"
                       fullWidth
                       size="large"
+                      href="signup"
                     >
-                      Subscribe now
+                      Join now
                     </Button>
                   }
                 />
