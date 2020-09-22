@@ -58,7 +58,7 @@ const Subscription = props => {
             <Button variant="contained" size="large" href="contact">
               Contact Us
             </Button>,
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" href="faq">
               FAQ
             </Button>
           ]}
