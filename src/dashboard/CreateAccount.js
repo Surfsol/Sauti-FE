@@ -81,6 +81,7 @@ export default function SignInSide(props) {
           dangerMode: true
         });
       } else {
+        localStorage.removeItem("token");
         localStorage.setItem("token", createdUser.data.register.token);
         history.push("/myaccount");
         swal({ title: "", text: "Success!", icon: "success" });
