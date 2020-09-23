@@ -8,6 +8,8 @@ import GovAccount from "./GovAccount";
 import NewSubscriberHandler from "./NewSubscriberHandler";
 import NoAccount from "./NoAccount";
 
+import AccountPage from "../../Components/themePricing/AccountPage";
+
 // This component handles the conditionals for the users
 // We can include an else statement if all else fails to throw some error or push them back to login page
 
@@ -35,7 +37,7 @@ const AccountHandler = () => {
   }
 
   if (freeUser) {
-    return <DashAccountFree />;
+    return <AccountPage />;
   } else if (paidUser) {
     return <DashAccountUser />;
   } else if (adminUser) {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import graphLabels from "../graphLabels";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +7,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Box } from "@material-ui/core";
 import NoAccessModal from "./NoAccessModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearApplyAction } from "../redux-actions/clearApplyAction";
 
 const DataSFilter = ({
@@ -27,6 +26,10 @@ const DataSFilter = ({
   // let allSelectableOptions = Object.keys(FilterBoxOptions.default);
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const graphLabels = useSelector(
+    state => state.catLabelReducer.labels.getGraphLabels
+  );
 
   function changeOption(e) {
     dispatch(
