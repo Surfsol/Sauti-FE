@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import CsvDownloader from "react-csv-downloader";
 import { Event } from "../dashboard/GoogleAnalytics/index";
-import { getSubscription, getToken, decodeToken } from "../dashboard/auth/Auth";
-import DownloadModal from "../dashboard/DownloadModal";
 import styled from "styled-components";
 import { getSelectedOption } from "../OptionFunctions";
 import { useHistory } from "react-router-dom";
