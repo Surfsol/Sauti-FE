@@ -4,6 +4,8 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, colors } from "@material-ui/core";
 import Image from "../../themeStyledComponents/atoms/Image/";
+import ImgDashboard2 from "../../../assets/images/dashboard2.png";
+
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import IconAlternate from "../../themeStyledComponents/molecules/IconAlternate/";
 import DescriptionListIcon from "../../themeStyledComponents/organisms/DescriptionListIcon";
@@ -47,7 +49,7 @@ const Features = props => {
           data-aos="fade-up"
         >
           <Image
-            src="/images/illustrations/dashboard2.png"
+            src={ImgDashboard2}
             alt="..."
             className={classes.coverImage}
             data-aos="flip-left"
@@ -69,8 +71,7 @@ const Features = props => {
               <SectionHeader
                 title={
                   <span>
-                    Answer your data-driven questions
-                    <br />
+                    Evidence-based insights{" "}
                     <span className="text-highlighted__primary">
                       with unprecedented granular data.
                     </span>
@@ -79,7 +80,7 @@ const Features = props => {
                 align="left"
                 fadeUp
                 disableGutter
-                titleVariant="h3"
+                titleVariant="h1"
               />
             </Grid>
           </Grid>
@@ -150,7 +151,12 @@ const Features = props => {
           />
         </Grid>
         <Grid item container xs={12} justify="center">
-          <Button variant="contained" size="large" color="primary">
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            href="pricing"
+          >
             get started
           </Button>
         </Grid>

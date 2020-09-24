@@ -5,6 +5,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery, Grid, Button } from "@material-ui/core";
 
 import Image from "../../themeStyledComponents/atoms/Image/";
+import ImgDashboard from "../../../assets/images/dashboard.png";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 
 const useStyles = makeStyles(theme => ({
@@ -48,7 +49,7 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Support East Africa's traders
+                Support East Africa's traders{" "}
                 <span className="text-highlighted__primary">
                   with data-driven insights.
                 </span>
@@ -56,7 +57,12 @@ const Hero = props => {
             }
             subtitle="Data from Kenyan, Ugandan, Rwandan, and Tanzanian cross-border traders to support your research, policy work, solution designs and more."
             ctaGroup={[
-              <Button variant="contained" color="primary" size="large">
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                href="pricing"
+              >
                 Get Started
               </Button>,
               <Button variant="outlined" color="primary" size="large">
@@ -65,7 +71,7 @@ const Hero = props => {
             ]}
             align="left"
             disableGutter
-            titleVariant="h3"
+            titleVariant="h1"
           />
         </Grid>
         <Grid
@@ -78,7 +84,7 @@ const Hero = props => {
           data-aos={"fade-up"}
         >
           <Image
-            src="../../../assets/images/dashboard.png"
+            src={ImgDashboard}
             alt="CBT Insights by Sauti East Africa"
             className={classes.image}
             data-aos="flip-left"

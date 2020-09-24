@@ -6,13 +6,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, colors } from "@material-ui/core";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import CardBase from "../../themeStyledComponents/organisms/CardBase";
+import imgNewsletterBG from "../../../assets/images/newsletter-bg.svg";
 
 const useStyles = makeStyles(theme => ({
   root: {},
   cardBase: {
     background: colors.indigo[500],
     [theme.breakpoints.up("md")]: {
-      background: `url(/images/illustrations/newsletter-bg.svg) no-repeat 150% 50% ${colors.indigo[500]}`
+      background: `url(${imgNewsletterBG}) no-repeat 150% 50% ${colors.indigo[500]}`
     }
   },
   textWhite: {
@@ -54,10 +55,10 @@ const Subscription = props => {
           fadeUp
           align="left"
           ctaGroup={[
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" href="contact">
               Contact Us
             </Button>,
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" href="faq">
               FAQ
             </Button>
           ]}
