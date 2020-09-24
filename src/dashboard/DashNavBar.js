@@ -77,14 +77,13 @@ function DashNav() {
             </ReactGA.OutboundLink>
           </SautiLogo>
           <Navigation>
-            {(!SignedIn || SignedIn) && <Links to="/">HOME</Links>}
-            {!SignedIn && <Links to="/noaccount">ACCOUNT</Links>}
-            {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
+            <Links to="/">HOME</Links>
             <Links to="/data">DATA</Links>
             <Links to="/about">ABOUT</Links>
+            <Links to="/companyterms">FAQs</Links>
+            {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
+            {!SignedIn && <Links to="/pricing">PRICING</Links>}
             <Links to="/contact">CONTACT</Links>
-            <Links to="/pricing">PRICING</Links>
-            <Links to="/companyterms">COMPANY TERMS</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
             {tier === "ADMIN" && <Links to="/tools">ADMIN</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
