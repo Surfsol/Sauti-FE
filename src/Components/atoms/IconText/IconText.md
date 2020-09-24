@@ -3,10 +3,9 @@ import React from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { colors } from "@material-ui/core";
 
-//import theme from "../../../theme";
+import theme from "../../../theme";
 
-//<ThemeProvider theme={theme}>
-<ThemeProvider>
+<ThemeProvider theme={theme}>
   <div style={{ display: "flex", justifyContent: "space-evenly" }}>
     <IconText
       fontIconClass="fas fa-users"
