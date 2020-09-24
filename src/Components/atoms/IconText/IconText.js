@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 
-import { Icon } from "themeStyledComponents/atoms/Icon";
-//import theme from "theme";
+import { Icon } from "../../../Components/atoms";
+//import theme from 'theme';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     width: "100%"
   },
   title: {
-    //marginLeft: theme.spacing(1)
+    // marginLeft: theme.spacing(1),
   }
 }));
 
