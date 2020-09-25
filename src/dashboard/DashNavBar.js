@@ -23,7 +23,6 @@ import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
 import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
 import { useSelector } from "react-redux";
-import Accounts from "../Components/Account/index";
 
 import {
   TopBar,
@@ -111,7 +110,7 @@ function DashNav() {
       <Route exact path="/signup" component={CreateAccount} />
       <Route exact path="/passwordreset" component={ForgotPassword} />
       <Route exact path="/noaccount" component={NoAccount} />
-      <ProtectedRoute exact path="/myaccount" component={Accounts} />
+      <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
       <ProtectedRoute exact path="/logout" component={DashLogout} />
       <CodeRoute
         exact
