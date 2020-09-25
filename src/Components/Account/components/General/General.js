@@ -10,6 +10,7 @@ import {
   Button,
   Divider
 } from "@material-ui/core";
+import EditAccount from "../../../../dashboard/DashboardAccount/EditAccount";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -126,26 +127,6 @@ const General = props => {
             type="text"
           />
         </Grid>
-        {/* <Grid item xs={12}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            className={classes.inputTitle}
-          >
-            Bio
-          </Typography>
-          <TextField
-            placeholder="Your bio"
-            variant="outlined"
-            name="bio"
-            fullWidth
-            multiline
-            rows={4}
-          />
-        </Grid> */}
-        {/* <Grid item xs={12}>
-          <Divider />
-        </Grid> */}
         <Grid item xs={12} sm={6}>
           <Typography
             variant="subtitle1"
@@ -163,50 +144,17 @@ const General = props => {
             type="text"
           />
         </Grid>
-        {/* <Grid item xs={12} sm={6}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            className={classes.inputTitle}
-          >
-            City
-          </Typography>
-          <TextField
-            placeholder="City"
-            variant="outlined"
-            size="medium"
-            name="city"
-            fullWidth
-            type="text"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            className={classes.inputTitle}
-          >
-            Full Address
-          </Typography>
-          <TextField
-            placeholder="Your address"
-            variant="outlined"
-            size="medium"
-            name="address"
-            fullWidth
-            type="text"
-          />
-        </Grid> */}
-        <Grid item container justify="flex-start" xs={12}>
+        <EditAccount data={data} />
+        {/* <Grid item container justify="flex-start" xs={12}>
           <Button
             variant="contained"
             type="submit"
             color="primary"
             size="large"
           >
-            save
+            <EditAccount data={data}/>
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

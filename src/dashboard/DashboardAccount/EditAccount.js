@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import { Grid } from "@material-ui/core";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -107,24 +108,26 @@ const EDIT = gql`
 `;
 
 //button on AccountGrid
-const EditModal = props => {
+const EditModal = ({ data }) => {
   const [account, setAccount] = useState({});
   //account id added automatically, needed to .put
-  account.id = props.data.id;
-  console.log(props);
-  console.log("props.data.email", props.data.email);
+  account.id = data.id;
+  console.log(data);
+  console.log("data.email", data.email);
 
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
 
-  const [createUser, editUser] = useMutation(EDIT);
+  const [createUser, editUser, refetch] = useMutation(EDIT);
+  //should trigger a refetch
 
   const handleChange = event => {
     setAccount({ ...account, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (event, input) => {
+    console.log("input", input);
     event.preventDefault();
     createUser({
       variables: { editUser: input }
@@ -160,16 +163,17 @@ const EditModal = props => {
 
   return (
     <>
-      <span className="btnCon">
-        <IconButtons
-          style={{ height: 20, lineHeight: 0.5 }}
-          onClick={e => handleOpen(e, props.data)}
+      <Grid item container justify="flex-start" xs={12}>
+        <Button
+          onClick={e => handleOpen(e, data)}
+          variant="contained"
+          type="submit"
+          color="primary"
+          size="large"
         >
-          <Button variant="contained">
-            <Typography variant="h6">Edit Account</Typography>
-          </Button>
-        </IconButtons>
-      </span>
+          Edit Account
+        </Button>
+      </Grid>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -192,7 +196,7 @@ const EditModal = props => {
                     type="email"
                     name="email"
                     //  id="email"
-                    placeholder={props.data.email}
+                    placeholder={data.email}
                     value={account.email}
                     //  onChange={handleChange}
                   />
@@ -200,7 +204,7 @@ const EditModal = props => {
                   <Inputs
                     type="text"
                     id="organization"
-                    placeholder={props.data.organization}
+                    placeholder={data.organization}
                     name="organization"
                     value={account.organization}
                     onChange={handleChange}
@@ -219,7 +223,7 @@ const EditModal = props => {
                   <Inputs
                     type="text"
                     id="country"
-                    placeholder={props.data.country}
+                    placeholder={data.country}
                     name="country"
                     value={account.country}
                     onChange={handleChange}
@@ -229,7 +233,7 @@ const EditModal = props => {
                     type="text"
                     name="interest"
                     id="interest"
-                    placeholder={props.data.interest}
+                    placeholder={data.interest}
                     value={account.interest}
                     onChange={handleChange}
                   />
@@ -240,7 +244,7 @@ const EditModal = props => {
                       name="organization_type"
                       value={account.organization_type}
                       onChange={handleChange}
-                      placeholder={props.data.organization_type}
+                      placeholder={data.organization_type}
                       input={<Styles />}
                     >
                       <MenuItem value="">
