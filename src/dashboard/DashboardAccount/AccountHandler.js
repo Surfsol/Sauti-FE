@@ -10,13 +10,13 @@ import NoAccount from "./NoAccount";
 
 import AccountPage from "../../Components/themePricing/AccountPage";
 
+import Accounts from "../../Components/Account/index";
 // This component handles the conditionals for the users
 // We can include an else statement if all else fails to throw some error or push them back to login page
 
 const AccountHandler = () => {
   const token = getToken();
   const decoded = decodeToken(token);
-
   const newSub = getSubscription();
 
   let sub;
@@ -36,10 +36,14 @@ const AccountHandler = () => {
     return <NewSubscriberHandler newPaypalSubscriber={newPaypalSubscriber} />;
   }
 
+  // if (freeUser) {
+  //   return <AccountPage />;
+  // } else if (paidUser) {
+  //   return <DashAccountUser />;
   if (freeUser) {
-    return <AccountPage />;
+    return <Accounts decoded={decoded} />;
   } else if (paidUser) {
-    return <DashAccountUser />;
+    return <Accounts tier={paidUser} decoded={decoded} />;
   } else if (adminUser) {
     return <DashAccountAdmin />;
   } else if (govUser) {

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const General = props => {
-  const { className, ...rest } = props;
+  const { data, decoded, className, ...rest } = props;
   const classes = useStyles();
 
   const theme = useTheme();
@@ -43,12 +43,29 @@ const General = props => {
           <Typography
             variant="subtitle1"
             color="textPrimary"
-            className={classes.inputTitle}
+            // className={classes.inputTitle}
           >
-            Full name
+            E-mail
           </Typography>
           <TextField
-            placeholder="Your full name"
+            placeholder={decoded.email}
+            variant="outlined"
+            size="medium"
+            name="email"
+            fullWidth
+            type="email"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            // className={classes.inputTitle}
+          >
+            Subscription Level
+          </Typography>
+          <TextField
+            placeholder={decoded.tier}
             variant="outlined"
             size="medium"
             name="fullname"
@@ -62,18 +79,54 @@ const General = props => {
             color="textPrimary"
             className={classes.inputTitle}
           >
-            E-mail
+            Organization
           </Typography>
           <TextField
-            placeholder="Your e-mail address"
+            placeholder={data.organization}
             variant="outlined"
             size="medium"
-            name="email"
+            name="fullname"
             fullWidth
-            type="email"
+            type="text"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            className={classes.inputTitle}
+            default={decoded.email}
+          >
+            Job Position
+          </Typography>
+          <TextField
+            placeholder={data.job_position}
+            variant="outlined"
+            size="medium"
+            name="fullname"
+            fullWidth
+            type="text"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            className={classes.inputTitle}
+            default={decoded.email}
+          >
+            Interest
+          </Typography>
+          <TextField
+            placeholder={data.interest}
+            variant="outlined"
+            size="medium"
+            name="fullname"
+            fullWidth
+            type="text"
+          />
+        </Grid>
+        {/* <Grid item xs={12}>
           <Typography
             variant="subtitle1"
             color="textPrimary"
@@ -89,10 +142,10 @@ const General = props => {
             multiline
             rows={4}
           />
-        </Grid>
-        <Grid item xs={12}>
+        </Grid> */}
+        {/* <Grid item xs={12}>
           <Divider />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={6}>
           <Typography
             variant="subtitle1"
@@ -102,7 +155,7 @@ const General = props => {
             Country
           </Typography>
           <TextField
-            placeholder="Country"
+            placeholder={data.country}
             variant="outlined"
             size="medium"
             name="country"
@@ -110,7 +163,7 @@ const General = props => {
             type="text"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <Typography
             variant="subtitle1"
             color="textPrimary"
@@ -143,7 +196,7 @@ const General = props => {
             fullWidth
             type="text"
           />
-        </Grid>
+        </Grid> */}
         <Grid item container justify="flex-start" xs={12}>
           <Button
             variant="contained"
