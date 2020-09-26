@@ -99,7 +99,6 @@ const GraphContainer = props => {
     changeQuarter,
     getCurrentYear
   } = useCalendar();
-
   //displays graph selected
   const [open, setOpen] = useState("bar");
   const [displayButton, setDisplayButton] = useState([]);
@@ -232,7 +231,12 @@ const GraphContainer = props => {
               </Grid>
 
               <Grid item className={classes.filterCalendar}>
-                <CalendarFilter />
+                <CalendarFilter
+                  filterBoxStartDate={filterBoxStartDate}
+                  setFilterBoxStartDate={setFilterBoxStartDate}
+                  filterBoxEndDate={filterBoxEndDate}
+                  setFilterBoxEndDate={setFilterBoxEndDate}
+                />
               </Grid>
               <Grid item className={classes.filters}>
                 <LineFilter />

@@ -9,7 +9,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const CalendarFilter = () => {
+const CalendarFilter = ({
+  filterBoxStartDate,
+  setFilterBoxStartDate,
+  filterBoxEndDate,
+  setFilterBoxEndDate
+}) => {
   const reducerCal = useSelector(state => state.calendarReducer.calendar);
   const tier = useSelector(state => state.tierReducer.tier);
 
@@ -17,17 +22,12 @@ const CalendarFilter = () => {
   const classes = useStyles();
   const {
     newSub,
-    filterBoxStartDate,
-    setFilterBoxStartDate,
-    filterBoxEndDate,
-    setFilterBoxEndDate,
     changeQuarter,
     getCurrentYear,
     changeYear,
     loading,
     open
   } = reducerCal;
-
   const filters = useSelector(
     state => state.queriesReducer.queriesFilters.filters
   );
