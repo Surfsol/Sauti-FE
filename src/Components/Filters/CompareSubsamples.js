@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Components/scss/dataSeries.scss";
 import Grid from "@material-ui/core/Grid";
@@ -21,11 +21,9 @@ const CompareSubSamples = () => {
     filters,
     setFilters,
     index,
-    formatGroupLabel,
     setUpdateUrlFlag,
     FilterBoxOptions,
     updateUrlFlag,
-    colourStyles,
     open
   } = reducerSub;
   const classes = useStyles();

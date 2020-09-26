@@ -18,7 +18,7 @@ const GraphParse = ({
   const graphLabels = useSelector(
     state => state.catLabelReducer.labels.getGraphLabels
   );
-  console.log("graphLabels", graphLabels);
+
   //maybe will need something like this in else statement to prevent errors: data.sessionData != undefined &&
   if (
     queryType === "sessionsData" &&
