@@ -1,34 +1,30 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  useParams,
+  Link,
+  Route,
+  Switch,
+  useRouteMatch
+} from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
 import { SectionAlternate, CardBase } from "../../Components/organisms";
 import { Hero, General, Security, Notifications, Billing } from "./components";
 import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 
 const subPages = [
   {
     id: "general",
-    href: "/account/general",
-    title: "General"
+    href: "/myaccount/general",
+    title: "My Account"
   },
   {
-    id: "security",
-    href: "/account/security",
-    title: "Security"
-  },
-  {
-    id: "notifications",
-    href: "/account/notifications",
-    title: "Notifications"
-  },
-  {
-    id: "billing",
-    href: "/account/billing",
-    title: "Billing Information"
+    id: "subscriptions",
+    href: "/myaccount/subscriptions",
+    title: "Subscriptions"
   }
 ];
 
@@ -43,11 +39,11 @@ const TabPanel = props => {
 };
 
 const Account = ({ decoded, tier }) => {
+  const [pageId, setPageId] = useState("subscriptions");
   const classes = useStyles();
 
-  let { pageId } = useParams();
   if (!pageId) {
-    pageId = "general";
+    setPageId("security");
   }
 
   const GET_SUBSCRIPTION_ID = gql`
@@ -74,7 +70,6 @@ const Account = ({ decoded, tier }) => {
   );
 
   if (fetching) {
-    console.log("fetching", fetching);
     return (
       <div className="loader-container">
         <Loader
@@ -92,8 +87,6 @@ const Account = ({ decoded, tier }) => {
     return <h1>ERROR!</h1>;
   }
 
-  console.log("data", data);
-
   return (
     <div className={classes.root}>
       <Hero />
@@ -102,27 +95,47 @@ const Account = ({ decoded, tier }) => {
           <Grid item xs={12} md={3}>
             <CardBase withShadow align="left" className={classes.menu}>
               <List disablePadding className={classes.list}>
-                {subPages.map((item, index) => (
-                  <ListItem
-                    key={index}
-                    component={Link}
-                    to={item.href}
-                    className={clsx(
-                      classes.listItem,
-                      pageId === item.id ? classes.listItemActive : {}
-                    )}
-                    disableGutters
+                <ListItem
+                  key="general"
+                  // component={Link}
+                  //to= "/myaccount/general"
+                  onClick={() => setPageId("general")}
+                  className={clsx(
+                    classes.listItem,
+                    pageId === "general" ? classes.listItemActive : {}
+                  )}
+                  disableGutters
+                >
+                  <Typography
+                    variant="subtitle1"
+                    noWrap
+                    color="textSecondary"
+                    className="menu__item"
                   >
-                    <Typography
-                      variant="subtitle1"
-                      noWrap
-                      color="textSecondary"
-                      className="menu__item"
-                    >
-                      {item.title}
-                    </Typography>
-                  </ListItem>
-                ))}
+                    My Account
+                  </Typography>
+                </ListItem>
+
+                <ListItem
+                  key="subscriptions"
+                  // component={Link}
+                  // to="/myaccount/subscriptions"
+                  onClick={() => setPageId("subscriptions")}
+                  className={clsx(
+                    classes.listItem,
+                    pageId === "subscriptions" ? classes.listItemActive : {}
+                  )}
+                  disableGutters
+                >
+                  <Typography
+                    variant="subtitle1"
+                    noWrap
+                    color="textSecondary"
+                    className="menu__item"
+                  >
+                    Subscriptions
+                  </Typography>
+                </ListItem>
               </List>
             </CardBase>
           </Grid>
@@ -131,14 +144,8 @@ const Account = ({ decoded, tier }) => {
               <TabPanel value={pageId} index={"general"}>
                 <General decoded={decoded} data={data.databankUser} />
               </TabPanel>
-              <TabPanel value={pageId} index={"security"}>
+              <TabPanel value={pageId} index={"subscriptions"}>
                 <Security />
-              </TabPanel>
-              <TabPanel value={pageId} index={"notifications"}>
-                <Notifications />
-              </TabPanel>
-              <TabPanel value={pageId} index={"billing"}>
-                <Billing />
               </TabPanel>
             </CardBase>
           </Grid>
