@@ -61,7 +61,7 @@ const dataParse = (
       //when single filtering with index that is not "Most Requested"
       // data = removeMultiple(data);
 
-      return setItem(data, dataStructure, indexBy);
+      return setItem(data, dataStructure, indexBy, graphLabels);
     }
   }
 };
