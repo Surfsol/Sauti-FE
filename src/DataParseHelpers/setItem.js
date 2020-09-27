@@ -1,8 +1,7 @@
-import graphLabels from "../Components/graphLabels";
 // Sets single filter index
 // Puts each value from key:value pair into an array
 // ['Female', 'Male', null]
-const setItem = (data, dataStructure, indexBy) => {
+const setItem = (data, dataStructure, indexBy, graphLabels) => {
   let arr = [];
   dataStructure.forEach(obj => arr.push(Object.values(obj)[0]));
   //error when hit back button from login
