@@ -31,7 +31,8 @@ const GraphTime = ({
   year100,
   top7,
   checkboxes,
-  filter0
+  filter0,
+  additionalFiltersArray
 }) => {
   const [time, setTime] = useState([]);
   const [timeInUse, setTimeInUse] = useState([]);
@@ -144,11 +145,21 @@ const GraphTime = ({
     ? (arrayDownload = downloadLine(time, filter0))
     : console.log("");
 
+  let filtersIncluded = "";
+  if (additionalFiltersArray.length > 0) {
+    filtersIncluded = `Filters:  ${additionalFiltersArray}`;
+  }
+
   useEffect(() => {
     if (arrayDownload.length > 1) {
       dispatch(
         barDownload({
-          columns: [{ id: "165", displayName: filter0.selectedCategory }],
+          columns: [
+            {
+              id: "165",
+              displayName: `Data Series: ${filter0.selectedCategory}, ${filtersIncluded}`
+            }
+          ],
           makeValues: arrayDownload,
           fileName: "Line Graph",
           suffix: `${new Date().toISOString()}`,
