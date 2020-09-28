@@ -4,6 +4,9 @@ function downloadLine(time, filter0) {
   const rows = Object.keys(filter0.selectableOptions);
   rows.push("count");
   rows.unshift("date");
+  rows.push(
+    "This table contains all available categories.  Categories that lack sufficient data are not visible on the line graph."
+  );
   let completeObj = { date: [] };
   for (let i = 0; i < rows.length; i++) {
     completeObj[rows[i]] = [rows[i]];
@@ -15,7 +18,8 @@ function downloadLine(time, filter0) {
 
     //check to see if there is a value for each row
     // if not assign it zero
-    for (let i = 0; i < rows.length; i++) {
+    // not to include last row
+    for (let i = 0; i < rows.length - 1; i++) {
       if (!objKeys.includes(rows[i])) {
         obj[rows[i]] = "0";
       }

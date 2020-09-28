@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
 import { SectionAlternate, CardBase } from "../../Components/organisms";
-import { Hero, General, Security, Notifications, Billing } from "./components";
+import { Hero, General, Security } from "./components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
