@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  useParams,
-  Link,
-  Route,
-  Switch,
-  useRouteMatch
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
@@ -14,19 +8,7 @@ import { Hero, General, Security, Notifications, Billing } from "./components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-
-const subPages = [
-  {
-    id: "general",
-    href: "/myaccount/general",
-    title: "My Account"
-  },
-  {
-    id: "subscriptions",
-    href: "/myaccount/subscriptions",
-    title: "Subscriptions"
-  }
-];
+import swal from "sweetalert";
 
 const TabPanel = props => {
   const { tier, children, value, index, ...other } = props;
@@ -45,7 +27,7 @@ const Account = ({ decoded, tier }) => {
   if (!pageId) {
     setPageId("security");
   }
-
+  const history = useHistory();
   const GET_SUBSCRIPTION_ID = gql`
     query($userEmail: String!) {
       databankUser(input: { email: $userEmail }) {
@@ -84,6 +66,13 @@ const Account = ({ decoded, tier }) => {
   }
 
   if (err) {
+    history.push("/");
+    swal({
+      title: "Error",
+      text: "Network Error, unable to load.",
+      icon: "warning",
+      dangerMode: true
+    });
     return <h1>ERROR!</h1>;
   }
 
