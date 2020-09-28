@@ -9,7 +9,7 @@ import LineTime from "./LineTime";
 //top 7 should be checked
 //y-axis recalculate 100 based upon what is checked
 
-const LineGraph = ({ filter0, buttonBar, data }) => {
+const LineGraph = ({ filter0, data, additionalFiltersArray }) => {
   const lineArray = [...data.sessionsData];
 
   //Make an array of options that can be selected.
@@ -362,6 +362,7 @@ const LineGraph = ({ filter0, buttonBar, data }) => {
         top7={top7}
         checkboxes={checkboxes}
         filter0={filter0}
+        additionalFiltersArray={additionalFiltersArray}
       />
     </>
   );

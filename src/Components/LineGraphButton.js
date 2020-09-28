@@ -18,10 +18,29 @@ const LineGraphButton = props => {
   } = props;
 
   const renderLine = () => {
+    //list additional filters
+    let additionalFiltersArray = [];
+    for (let key in filters) {
+      if (key > 1) {
+        let cat = filters[key].selectedCategory;
+        let selected = "";
+        let obj = filters[key].selectableOptions;
+        for (let item in obj) {
+          if (obj[item] === true) {
+            selected = item;
+            additionalFiltersArray.push(`${cat}: ${selected}`);
+          }
+        }
+      }
+    }
     if (open === "line") {
       return (
         <>
-          <LineGraph filter0={filters[0]} data={data} />
+          <LineGraph
+            filter0={filters[0]}
+            data={data}
+            additionalFiltersArray={additionalFiltersArray}
+          />
         </>
       );
     } else {

@@ -11,7 +11,7 @@ function downloadLine(time, filter0) {
   for (let i = 0; i < rows.length; i++) {
     completeObj[rows[i]] = [rows[i]];
   }
-  console.log(completeObj);
+
   for (let i = 0; i < time.length; i++) {
     let obj = time[i];
     let objKeys = Object.keys(obj);
