@@ -21,6 +21,7 @@ import ResetPasswordContainer from "./DashboardAccount/PasswordReset/ResetPasswo
 import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
+import About from "../Components/themeAbout/About";
 import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
 import { useSelector } from "react-redux";
 
@@ -98,6 +99,7 @@ function DashNav() {
       </Container>
       <Route exact path="/" component={LandingParent} />
       <Route exact path="/pricing" component={Pricing} />
+      <Route exact path="/about" component={About} />
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/companyterms" component={CompanyTerms} />
       <Route

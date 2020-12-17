@@ -67,7 +67,7 @@ const Usecases = props => {
             title={
               <span>
                 <span className="text-highlighted">Know</span> East Africa's
-                Cross-borders Traders
+                Cross-border Traders
               </span>
             }
             subtitle="Leverage behavioural data from multiple mobile-based trade and market information services on both sides of the borders between Kenya, Uganda, Rwanda, and Tanzania. Our networked data pool is a rich resource for understanding the cross-border trade environment:"
