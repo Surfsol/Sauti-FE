@@ -301,7 +301,7 @@ const Graph = props => {
           motionStiffness={90}
           motionDamping={15}
         />
-        <Grid item style={{ margin: "auto" }} className={classes.dyContainer}>
+        <Grid item className={classes.dyContainer}>
           <h2>Method Notes</h2>
           <div dangerouslySetInnerHTML={{ __html: dyText }}></div>
         </Grid>
@@ -406,9 +406,13 @@ const useStyles = makeStyles(theme => ({
   dyContainer: {
     width: "100%",
     padding: "0em 2em",
-    fontSize: "1.5em",
+    fontSize: "1.0em",
+    marginLeft: "-1px",
+    borderLeft: "1px solid #00000045",
     "& h2": {
-      fontWeight: 600
+      fontWeight: 600,
+      fontSize: "1.2em",
+      paddingBottom: "10px"
     }
   }
 }));

@@ -62,6 +62,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   },
   watermark: {
+    borderLeft: "1px solid #00000045",
     backgroundImage: `url(${splashImage})`,
     backgroundSize: "40%",
     backgroundRepeat: "no-repeat",
@@ -152,7 +153,7 @@ const GraphContainer = props => {
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid item xs={3} className={classes.titleContainer}>
               <Box display="flex" height="100%" alignItems="center">
-                <h1 className={classes.h1}>Cross-Border Trade DataBank</h1>
+                <h1 className={classes.h1}>Sauti Trade Insights</h1>
               </Box>
             </Grid>
             <Grid
@@ -177,7 +178,14 @@ const GraphContainer = props => {
             //style={{ height: "30px" }}
             className={classes.whitebg}
           >
-            <Grid xs={3} style={{ paddingBottom: "2%" }}>
+            <Grid
+              xs={3}
+              style={{
+                paddingBottom: "2%",
+                borderRight: "1px solid #00000045",
+                marginLeft: "1px"
+              }}
+            >
               <Grid
                 container
                 spacing={2}
