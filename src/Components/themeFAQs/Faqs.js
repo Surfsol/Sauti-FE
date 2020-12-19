@@ -131,7 +131,11 @@ const CompanyTerms = () => {
                     through the platform, Sauti is able to generate wide-scale
                     and reliably proximate insights related to cross-border
                     business activity in the region. Learn more about Sauti East
-                    Africa’s methodology here.
+                    Africa’s methodology{" "}
+                    <a href="https://www.researchgate.net/publication/347473284_Innovating_Past_Data_Collection_Obstacles_for_East_Africa's_Women_Cross-_Border_Traders_Evidence_from_Sauti_East_Africa">
+                      here
+                    </a>
+                    .
                   </p>
                 </Typography>
               </ListItem>
