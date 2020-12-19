@@ -22,7 +22,7 @@ import LandingParent from "../Components/themeLanding/LandingParent";
 import Pricing from "../Components/themePricing/Pricing";
 import Contact from "../Components/themeContact/Contact";
 import About from "../Components/themeAbout/About";
-import CompanyTerms from "../Components/themeCompanyTerms/CompanyTerms";
+import Faqs from "../Components/themeFAQs/Faqs";
 import { useSelector } from "react-redux";
 
 import {
@@ -81,7 +81,7 @@ function DashNav() {
             <Links to="/">HOME</Links>
             <Links to="/data">DATA</Links>
             <Links to="/about">ABOUT</Links>
-            <Links to="/companyterms">FAQs</Links>
+            <Links to="/faqs">FAQs</Links>
             {SignedIn && <Links to="/myaccount">ACCOUNT</Links>}
             {!SignedIn && <Links to="/pricing">PRICING</Links>}
             <Links to="/contact">CONTACT</Links>
@@ -101,7 +101,7 @@ function DashNav() {
       <Route exact path="/pricing" component={Pricing} />
       <Route exact path="/about" component={About} />
       <Route exact path="/contact" component={Contact} />
-      <Route exact path="/companyterms" component={CompanyTerms} />
+      <Route exact path="/faqs" component={Faqs} />
       <Route
         exact
         path="/data"
