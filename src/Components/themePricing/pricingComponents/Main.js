@@ -15,6 +15,8 @@ import Image from "../../themeStyledComponents/atoms/Image/";
 import CardPricingStandard from "../../themeStyledComponents/organisms/CardPricingStandard";
 import Section from "../../themeStyledComponents/organisms/Section";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
   root: {
     alignItems: "baseline"
@@ -103,6 +105,12 @@ const Main = props => {
     setPricingOption(newPricingOption);
   };
 
+  const history = useHistory();
+  const handleSignIn = async (e, input) => {
+    e.preventDefault();
+    history.push("/login");
+  };
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={classes.sectionContainer}>
@@ -172,6 +180,7 @@ const Main = props => {
                   }
                   cta={
                     <Button
+                      onClick={handleSignIn}
                       color="primary"
                       variant="outlined"
                       fullWidth
