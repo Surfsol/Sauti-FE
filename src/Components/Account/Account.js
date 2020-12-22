@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
 import { SectionAlternate, CardBase } from "../../Components/organisms";
-import { Hero, General, Security } from "./components";
+import { Hero, MyAccount, Security } from "./components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -85,13 +85,13 @@ const Account = ({ decoded, tier }) => {
             <CardBase withShadow align="left" className={classes.menu}>
               <List disablePadding className={classes.list}>
                 <ListItem
-                  key="general"
+                  key="myaccount"
                   // component={Link}
-                  //to= "/myaccount/general"
-                  onClick={() => setPageId("general")}
+                  //to= "/myaccount/myaccount"
+                  onClick={() => setPageId("myaccount")}
                   className={clsx(
                     classes.listItem,
-                    pageId === "general" ? classes.listItemActive : {}
+                    pageId === "myaccount" ? classes.listItemActive : {}
                   )}
                   disableGutters
                 >
@@ -130,8 +130,8 @@ const Account = ({ decoded, tier }) => {
           </Grid>
           <Grid item xs={12} md={9}>
             <CardBase withShadow align="left">
-              <TabPanel value={pageId} index={"general"}>
-                <General decoded={decoded} data={data.databankUser} />
+              <TabPanel value={pageId} index={"myaccount"}>
+                <MyAccount decoded={decoded} data={data.databankUser} />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
                 <Security />
