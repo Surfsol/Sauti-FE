@@ -70,7 +70,7 @@ function SeriesFilterModal({ handleClose }) {
     if (localStorage.getItem("token")) {
       history.push("/myaccount");
     } else {
-      history.push("/noaccount");
+      history.push("/pricing");
     }
   };
 
