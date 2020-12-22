@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,12 +21,15 @@ const TabPanel = props => {
 };
 
 const Account = ({ decoded, tier }) => {
-  const [pageId, setPageId] = useState("subscriptions");
+  const [pageId, setPageId] = useState("myaccount");
   const classes = useStyles();
 
-  if (!pageId) {
-    setPageId("security");
-  }
+  useEffect(() => {
+    if (decoded.tier === "FREE") {
+      setPageId("subscriptions");
+    }
+  }, []);
+
   const history = useHistory();
   const GET_SUBSCRIPTION_ID = gql`
     query($userEmail: String!) {
@@ -85,13 +88,13 @@ const Account = ({ decoded, tier }) => {
             <CardBase withShadow align="left" className={classes.menu}>
               <List disablePadding className={classes.list}>
                 <ListItem
-                  key="general"
+                  key="myaccount"
                   // component={Link}
-                  //to= "/myaccount/general"
-                  onClick={() => setPageId("general")}
+                  //to= "/myaccount/myaccount"
+                  onClick={() => setPageId("myaccount")}
                   className={clsx(
                     classes.listItem,
-                    pageId === "general" ? classes.listItemActive : {}
+                    pageId === "myaccount" ? classes.listItemActive : {}
                   )}
                   disableGutters
                 >
@@ -130,7 +133,7 @@ const Account = ({ decoded, tier }) => {
           </Grid>
           <Grid item xs={12} md={9}>
             <CardBase withShadow align="left">
-              <TabPanel value={pageId} index={"general"}>
+              <TabPanel value={pageId} index={"myaccount"}>
                 <General decoded={decoded} data={data.databankUser} />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
