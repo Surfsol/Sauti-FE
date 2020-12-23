@@ -154,7 +154,7 @@ const General = props => {
             placeholder={account.organization}
             variant="outlined"
             size="medium"
-            name="organization_type"
+            name="organization"
             fullWidth
             type="text"
             value={account.organization}
