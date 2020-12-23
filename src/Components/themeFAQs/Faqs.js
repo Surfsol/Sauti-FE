@@ -16,6 +16,7 @@ import {
 import CardBase from "../themeStyledComponents/organisms/CardBase";
 import SectionHeader from "../themeStyledComponents/molecules/SectionHeader";
 import Section from "../themeStyledComponents/organisms/Section";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,6 +78,22 @@ const CompanyTerms = () => {
     defaultMatches: true
   });
 
+  const history = useHistory();
+  const handleContact = async (e, input) => {
+    e.preventDefault();
+    history.push("/contact");
+  };
+
+  const handlePricing = async (e, input) => {
+    e.preventDefault();
+    history.push("/pricing");
+  };
+
+  const handleSignUp = async (e, input) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
+
   return (
     <div className={classes.root}>
       <Section className={classes.pagePaddingTop}>
@@ -132,7 +149,10 @@ const CompanyTerms = () => {
                     and reliably proximate insights related to cross-border
                     business activity in the region. Learn more about Sauti East
                     Africa’s methodology{" "}
-                    <a href="https://www.researchgate.net/publication/347473284_Innovating_Past_Data_Collection_Obstacles_for_East_Africa's_Women_Cross-_Border_Traders_Evidence_from_Sauti_East_Africa">
+                    <a
+                      href="https://www.researchgate.net/publication/347473284_Innovating_Past_Data_Collection_Obstacles_for_East_Africa's_Women_Cross-_Border_Traders_Evidence_from_Sauti_East_Africa"
+                      target="_blank"
+                    >
                       here
                     </a>
                     .
@@ -195,7 +215,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Contact us through our contact form{" "}
-                    <a href="contact">here</a>
+                    <a
+                      onClick={handleContact}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -296,7 +321,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Contact us through our contact form{" "}
-                    <a href="contact">here</a>
+                    <a
+                      onClick={handleContact}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -322,7 +352,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Sign up to access Sauti Trade Insights{" "}
-                    <a href="pricing">here</a>
+                    <a
+                      onClick={handleSignUp}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -336,7 +371,13 @@ const CompanyTerms = () => {
                     Free Trial with limited access to our data and interactive
                     features, and a Premium Account with full access for $60 USD
                     / month. Find out more about our plans{" "}
-                    <a href="pricing">here</a>.
+                    <a
+                      onClick={handlePricing}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
+                    .
                   </p>
                 </Typography>
               </ListItem>
@@ -348,7 +389,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Contact us through our contact form{" "}
-                    <a href="contact">here</a>
+                    <a
+                      onClick={handleContact}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -362,7 +408,7 @@ const CompanyTerms = () => {
                     title="Have a question?"
                     subtitle="Not sure exactly what we’re looking for or just want clarification? We’d be happy to chat with you and clear things up for you."
                     ctaGroup={[
-                      <Button variant="contained" href="contact">
+                      <Button onClick={handleContact} variant="contained">
                         Contact us
                       </Button>
                     ]}
