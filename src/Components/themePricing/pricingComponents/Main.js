@@ -106,9 +106,9 @@ const Main = props => {
   };
 
   const history = useHistory();
-  const handleSignIn = async (e, input) => {
+  const handleSignUp = async (e, input) => {
     e.preventDefault();
-    history.push("/login");
+    history.push("/signup");
   };
 
   return (
@@ -180,12 +180,11 @@ const Main = props => {
                   }
                   cta={
                     <Button
-                      onClick={handleSignIn}
+                      onClick={handleSignUp}
                       color="primary"
                       variant="outlined"
                       fullWidth
                       size="large"
-                      href="signup"
                     >
                       Join now
                     </Button>
@@ -257,11 +256,11 @@ const Main = props => {
                   }
                   cta={
                     <Button
+                      onClick={handleSignUp}
                       color="primary"
                       variant="contained"
                       fullWidth
                       size="large"
-                      href="signup"
                     >
                       Join now
                     </Button>
