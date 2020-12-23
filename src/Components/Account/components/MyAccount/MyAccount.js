@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -12,6 +12,11 @@ import {
 } from "@material-ui/core";
 import EditAccount from "../../../../dashboard/DashboardAccount/EditAccount";
 
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import Loader from "react-loader-spinner";
+import swal from "sweetalert";
+
 const useStyles = makeStyles(theme => ({
   root: {},
   inputTitle: {
@@ -19,6 +24,27 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1)
   }
 }));
+
+const EDIT = gql`
+  mutation editUserData($editUser: newEditUserInput!) {
+    editUser(input: $editUser) {
+      ... on DatabankUser {
+        id
+        email
+        interest
+        tier
+        organization
+        job_position
+        country
+        organization_type
+        password
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
 
 const General = props => {
   const { data, decoded, className, ...rest } = props;
@@ -28,6 +54,48 @@ const General = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
+
+  const [account, setAccount] = useState({
+    id: decoded.id,
+    email: decoded.email,
+    interest: data.interest,
+    organization: data.organization,
+    job_position: data.job_position,
+    country: data.country,
+    tier: decoded.tier
+  });
+
+  const [createUser, editUser, refetch] = useMutation(EDIT);
+
+  const handleChange = event => {
+    setAccount({ ...account, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = (event, input) => {
+    event.preventDefault();
+    createUser({
+      variables: { editUser: input }
+    });
+    swal({ title: "", text: "Success!", icon: "success" });
+  };
+
+  if (editUser.loading) {
+    return (
+      <div className="loader-container">
+        <Loader
+          className="loader"
+          type="Oval"
+          color="#708090"
+          width={100}
+          timeout={12000}
+        />
+      </div>
+    );
+  }
+
+  if (editUser.error) {
+    return <p>ERROR!</p>;
+  }
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -49,12 +117,13 @@ const General = props => {
             E-mail
           </Typography>
           <TextField
-            placeholder={decoded.email}
+            placeholder={account.email}
             variant="outlined"
             size="medium"
             name="email"
             fullWidth
             type="email"
+            value={account.email}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -66,10 +135,9 @@ const General = props => {
             Subscription Level
           </Typography>
           <TextField
-            placeholder={decoded.tier}
+            placeholder={account.tier}
             variant="outlined"
             size="medium"
-            name="fullname"
             fullWidth
             type="text"
           />
@@ -83,12 +151,14 @@ const General = props => {
             Organization
           </Typography>
           <TextField
-            placeholder={data.organization}
+            placeholder={account.organization}
             variant="outlined"
             size="medium"
-            name="fullname"
+            name="organization_type"
             fullWidth
             type="text"
+            value={account.organization}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -96,17 +166,19 @@ const General = props => {
             variant="subtitle1"
             color="textPrimary"
             className={classes.inputTitle}
-            default={decoded.email}
+            default={account.email}
           >
             Job Position
           </Typography>
           <TextField
-            placeholder={data.job_position}
+            placeholder={account.job_position}
             variant="outlined"
             size="medium"
-            name="fullname"
+            name="job_position"
             fullWidth
             type="text"
+            value={account.job_position}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -114,17 +186,19 @@ const General = props => {
             variant="subtitle1"
             color="textPrimary"
             className={classes.inputTitle}
-            default={decoded.email}
+            default={account.email}
           >
             Interest
           </Typography>
           <TextField
-            placeholder={data.interest}
+            placeholder={account.interest}
             variant="outlined"
             size="medium"
-            name="fullname"
+            name="interest"
             fullWidth
             type="text"
+            value={account.interest}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -136,25 +210,27 @@ const General = props => {
             Country
           </Typography>
           <TextField
-            placeholder={data.country}
+            placeholder={account.country}
             variant="outlined"
             size="medium"
             name="country"
             fullWidth
             type="text"
+            value={account.country}
+            onChange={handleChange}
           />
         </Grid>
-        <EditAccount data={data} />
-        {/* <Grid item container justify="flex-start" xs={12}>
+        <Grid item container justify="flex-start" xs={12}>
           <Button
+            onClick={e => handleSubmit(e, account)}
             variant="contained"
             type="submit"
             color="primary"
             size="large"
           >
-            <EditAccount data={data}/>
+            EDIT ACCOUNT
           </Button>
-        </Grid> */}
+        </Grid>
       </Grid>
     </div>
   );
