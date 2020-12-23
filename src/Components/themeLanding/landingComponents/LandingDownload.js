@@ -7,6 +7,7 @@ import { Button, colors } from "@material-ui/core";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import CardBase from "../../themeStyledComponents/organisms/CardBase";
 import imgNewsletterBG from "../../../assets/images/newsletter-bg.svg";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -29,6 +30,17 @@ const useStyles = makeStyles(theme => ({
 const Subscription = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
+
+  const history = useHistory();
+  const handlefaqs = async (e, input) => {
+    e.preventDefault();
+    history.push("/faqs");
+  };
+
+  const handleContact = async (e, input) => {
+    e.preventDefault();
+    history.push("/contact");
+  };
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -55,10 +67,10 @@ const Subscription = props => {
           fadeUp
           align="left"
           ctaGroup={[
-            <Button variant="contained" size="large" href="contact">
+            <Button onClick={handleContact} variant="contained" size="large">
               Contact Us
             </Button>,
-            <Button variant="contained" size="large" href="faq">
+            <Button onClick={handlefaqs} variant="contained" size="large">
               FAQ
             </Button>
           ]}
