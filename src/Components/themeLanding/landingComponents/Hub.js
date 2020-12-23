@@ -9,6 +9,8 @@ import ImgDashboard2 from "../../../assets/images/dashboard2.png";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import IconAlternate from "../../themeStyledComponents/molecules/IconAlternate/";
 import DescriptionListIcon from "../../themeStyledComponents/organisms/DescriptionListIcon";
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%"
@@ -35,6 +37,12 @@ const useStyles = makeStyles(theme => ({
 const Features = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
+
+  const history = useHistory();
+  const handleSignUp = async (e, input) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -152,6 +160,7 @@ const Features = props => {
         </Grid>
         <Grid item container xs={12} justify="center">
           <Button
+            onClick={handleSignUp}
             variant="contained"
             size="large"
             color="primary"
