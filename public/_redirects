@@ -1,3 +1,8 @@
-
-
-[{“source”: “</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>”, “status”: “200”, “target”: “index.html”, “condition”: null}]
+[
+   {
+      "source":"</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>",
+      "status":"200",
+      "target":"/",
+      "condition":null
+   }
+]
