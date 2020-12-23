@@ -13,6 +13,7 @@ import IconAlternate from "../themeStyledComponents/molecules/IconAlternate/";
 import DescriptionListIcon from "../themeStyledComponents/organisms/DescriptionListIcon";
 import Image from "../themeStyledComponents/atoms/Image/";
 import ImgDashboard from "../../assets/images/dashboard.png";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,6 +50,17 @@ const AboutPageCover = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
+
+  const history = useHistory();
+  const handleContactUs = async (e, input) => {
+    e.preventDefault();
+    history.push("/contact");
+  };
+
+  const handleFAQ = async (e, input) => {
+    e.preventDefault();
+    history.push("/faqs");
+  };
 
   return (
     <div className={classes.root}>
@@ -249,14 +261,19 @@ const AboutPageCover = props => {
                   </span>
                 }
                 ctaGroup={[
-                  <Button variant="contained" color="primary" href="contact">
+                  <Button
+                    onClick={handleContactUs}
+                    variant="contained"
+                    color="primary"
+                    href="contact"
+                  >
                     Contact Us
                   </Button>,
                   <Button
+                    onClick={handleFAQ}
                     variant="outlined"
                     color="primary"
                     size="large"
-                    href="faq"
                   >
                     FAQ
                   </Button>
