@@ -47,9 +47,9 @@ const Subscription = props => {
           }
           subtitle={
             <span className={classes.textWhite}>
-              Have a specific question about how our data applies to you? We're
-              always ready to discuss how you can embed our insights into your
-              programming!
+              Have a specific question about how our data applies to you? Would
+              you like to request a demo? We're always ready to discuss how you
+              can embed our insights into your programming or research!
             </span>
           }
           fadeUp

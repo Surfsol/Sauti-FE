@@ -104,7 +104,7 @@ const Features = props => {
               />
             }
             title="Multiple Filters"
-            subtitle="Drill-down the data for sub-set specific insights"
+            subtitle="Refine your analysis with sub-set filters"
             align="center"
           />
         </Grid>
@@ -146,7 +146,7 @@ const Features = props => {
               />
             }
             title="Download Data"
-            subtitle="Download the data for my in-depth statistical analyses"
+            subtitle="Download the data for more in-depth statistical analyses"
             align="center"
           />
         </Grid>
@@ -157,7 +157,7 @@ const Features = props => {
             color="primary"
             href="pricing"
           >
-            get started
+            Sign Up Now
           </Button>
         </Grid>
       </Grid>
