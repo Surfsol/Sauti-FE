@@ -113,7 +113,7 @@ const Security = props => {
                     size="large"
                     href="signup"
                   >
-                    Join now
+                    Change Account Plan to Free Plan
                   </Button>
                 }
               />
@@ -189,7 +189,7 @@ const Security = props => {
                     size="large"
                     href="signup"
                   >
-                    Join now
+                    Change Account Plan to Premium
                   </Button>
                 }
               />
