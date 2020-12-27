@@ -109,7 +109,7 @@ const Main = props => {
         <Section className={classes.pagePaddingTop}>
           <SectionHeader
             title="Pricing"
-            subtitle="We are founded by leading researchers and development practitioners in East Africa’s cross-border trade environment. Cross-borders are notoriously difficult space to map, but with Sauti Trade Insights you can easily explore this data through interactive charts, or download the data to conduct your own analysis with Premium Access."
+            subtitle="We are founded by leading researchers and development practitioners in East Africa’s cross-border trade environment. Cross-borders are notoriously difficult space to map, but with Sauti Trade Insights you can easily explore this data through interactive charts, or download the data to conduct your own analysis."
             titleProps={{
               className: clsx(classes.textWhite, classes.fontWeightBold),
               variant: "h2"
