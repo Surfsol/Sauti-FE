@@ -55,6 +55,15 @@ const useStyles = makeStyles(theme => ({
   listTitle: {
     fontWeight: 700
   },
+  listTitle2: {
+    textTransform: "uppercase"
+  },
+  listColumn: {
+    "& li": {
+      marginLeft: "15px",
+      listStyle: "disc"
+    }
+  },
   underlined: {
     textDecoration: "underline"
   },
@@ -140,15 +149,67 @@ const CompanyTerms = () => {
                 </Typography>
               </ListItem>
               <ListItem disableGutters>
-                <Typography variant="body1" color="textPrimary">
-                  <span className={classes.listTitle}>
-                    What data series are included in Sauti Trade Insights?
-                  </span>
-                  <p>
-                    Sauti Trade Insights consists of the following data
-                    collected from cross-border traders across East Africa:
-                  </p>
-                </Typography>
+                <Grid container spacing={isMd ? 4 : 2}>
+                  <Grid item xs={12} md={12} style={{ paddingBottom: "0px" }}>
+                    <Typography
+                      variant="body1"
+                      color="textPrimary"
+                      style={{ marginBottom: "0px" }}
+                    >
+                      <span className={classes.listTitle}>
+                        What data series are included in Sauti Trade Insights?
+                      </span>
+                      <p style={{ marginBottom: "0px" }}>
+                        Sauti Trade Insights consists of the following data
+                        collected from cross-border traders across East Africa:
+                      </p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={4} className={classes.listColumn}>
+                    <Typography>
+                      <p className={classes.listTitle2}>Demographic Insights</p>
+                      <li>Age*</li>
+                      <li>Border crossing frequency</li>
+                      <li>Border crossing location</li>
+                      <li>Country of residence*</li>
+                      <li>Education level*</li>
+                      <li>Gender</li>
+                      <li>Preferred language</li>
+                      <li>Cross border trade as primary income</li>
+                      <li>Grow / produce their own products</li>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={4} className={classes.listColumn}>
+                    <Typography>
+                      <p className={classes.listTitle2}>Business Insights</p>
+                      <li>Traded commodities</li>
+                      <li>Traded commodity categories*</li>
+                      <li>Traders' destination country</li>
+                      <li>Traders' destination market</li>
+                      <li>Currency exchanges</li>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={4} className={classes.listColumn}>
+                    <Typography>
+                      <p className={classes.listTitle2}>Trade Insights</p>
+                      <li>Requested information, by agency*</li>
+                      <li>Requested trade documents</li>
+                      <li>Requested trade procedures, by commodity</li>
+                      <li>Requested trade procedures, by commodity category</li>
+                      <li>
+                        Requested trade procedures, by destination country
+                      </li>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={12} style={{ paddingTop: "0px" }}>
+                    <Typography>
+                      <p>
+                        *Data series available in the two week Free Trial. Users
+                        with a Premium Account can access all data series.
+                      </p>
+                    </Typography>
+                  </Grid>
+                </Grid>
               </ListItem>
               <ListItem disableGutters>
                 <Typography variant="body1" color="textPrimary">
