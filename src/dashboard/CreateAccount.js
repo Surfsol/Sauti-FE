@@ -4,17 +4,17 @@ import { useHistory } from "react-router-dom";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
+
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import swal from "sweetalert";
+
+import { TextField } from "@material-ui/core";
 
 import styled from "styled-components";
 
@@ -44,9 +44,13 @@ export default function SignInSide(props) {
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
 
+  const [org_typeDropdown, setOrg_typeDropdown] = useState(false);
+  const [aboutUs, setAboutUs] = useState(false);
+
   const classes = useStyles();
 
   const handleChange = event => {
+    console.log("ran handleChange");
     event.preventDefault();
     setUser({
       ...user,
@@ -55,6 +59,7 @@ export default function SignInSide(props) {
   };
 
   const handleSubmit = async (e, input) => {
+    console.log("ran handleSubmit");
     e.preventDefault();
     if (
       user.email === "" ||
@@ -238,57 +243,76 @@ export default function SignInSide(props) {
             />
             <br />
             <br />
-            <br />
-            <FormControl className={classes.margin}>
-              <GreyLabelText>
-                <RequiredStar>*</RequiredStar> Organization Type
-              </GreyLabelText>
-              <Select
-                label="Organization Type"
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                name="organization_type"
-                placeholder="Organization Type"
+            <GreyLabelText>
+              <RequiredStar>*</RequiredStar> Organization Type
+            </GreyLabelText>
+            {org_typeDropdown ? (
+              <select
+                style={{
+                  width: "100%",
+                  height: "5%",
+                  marginTop: "5%",
+                  border: "none",
+                  fontSize: "1.6rem",
+                  borderBottom: "1px solid black",
+                  paddingBottom: "1.2%"
+                }}
                 value={user.organization_type}
                 onChange={handleChange}
-                input={<Styles />}
               >
-                <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
-                <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
-                <MenuItem value={"NGO"}>NGO</MenuItem>
-                <MenuItem value={"OTHER"}>OTHER</MenuItem>
-              </Select>
-            </FormControl>
+                <option value={"RESEARCH"}>RESEARCH</option>
+                <option value={"GOVERNMENT"}>GOVERNMENT</option>
+                <option value={"NGO"}>NGO</option>
+                <option value={"OTHER"}>OTHER</option>
+              </select>
+            ) : (
+              <TextField
+                fullWidth
+                margin="normal"
+                onClick={() => setOrg_typeDropdown(!org_typeDropdown)}
+                InputProps={{
+                  disableUnderline: true,
+                  className: classes.input
+                }}
+              />
+            )}
             <br />
             <br />
-            <br />
-            <FormControl className={classes.margin}>
-              <GreyLabelText>
-                <RequiredStar>*</RequiredStar> How did you hear about us?
-              </GreyLabelText>
-              <Select
-                label="Found By"
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                name="found_by"
-                placeholder=""
-                value={user.found_by}
+            <GreyLabelText>
+              <RequiredStar>*</RequiredStar> How did you hear about us?
+            </GreyLabelText>
+            {aboutUs ? (
+              <select
+                style={{
+                  width: "100%",
+                  height: "5%",
+                  marginTop: "5%",
+                  paddingBottom: "1.2%",
+                  border: "none",
+                  fontSize: "1.6rem",
+                  borderBottom: "1px solid black"
+                }}
+                value={user.organization_type}
                 onChange={handleChange}
-                input={<Styles />}
               >
-                <MenuItem value={"CROSS_BORDER_ASSOCIATION"}>
+                <option value={"CROSS_BORDER_ASSOCIATION"}>
                   Cross border Association
-                </MenuItem>
-                <MenuItem value={"UNIVERSITY"}>University</MenuItem>
-                <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
-                <MenuItem value={"OTHER"}>OTHER</MenuItem>
-              </Select>
-              <br />
-              <RequiredLabel>
-                <RequiredStar>*</RequiredStar> = required
-              </RequiredLabel>
-            </FormControl>
-            <br />
+                </option>
+                <option value={"UNIVERSITY"}>University</option>
+                <option value={"SAUTI_STAFF"}>Sauti Staff</option>
+                <option value={"OTHER"}>OTHER</option>
+              </select>
+            ) : (
+              <TextField
+                fullWidth
+                margin="normal"
+                onClick={() => setAboutUs(!aboutUs)}
+                InputProps={{
+                  disableUnderline: true,
+                  className: classes.input
+                }}
+              />
+            )}
             <Button
               type="submit"
               fullWidth
@@ -442,4 +466,18 @@ const RequiredStar = styled.big`
 const GreyLabelText = styled.p`
   // opacity: 0.8;
   font-size: 1.4rem;
+`;
+const Dropdown = styled.div`
+  // opacity: 0.8;
+  width: "100%",
+  height: "5%",
+  marginTop: "5%",
+  border: "none",
+  fontSize: "1.6rem",
+  borderBottom: "1px solid black",
+  "&:focus": {
+    borderRadius: 4,
+    borderColor: "white",
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+  }
 `;
