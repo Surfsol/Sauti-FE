@@ -83,8 +83,10 @@ const NodeMail = gql`
 `;
 
 const ContactPageCover = () => {
-  const [messageC, setMessage] = useState({});
-
+  const [messageC, setMessage] = useState({
+    nature: "Please Select an Option"
+  });
+  console.log("messageC.natuer", messageC.nature);
   const [createMail] = useMutation(NodeMail);
 
   const handleSubmit = async (event, input) => {
@@ -101,9 +103,9 @@ const ContactPageCover = () => {
       const sentEmail = await createMail({
         variables: { email: input }
       });
-      console.log("sentMail", sentEmail);
       setMessage({ name: "", email: "", message: "" });
       swal({ title: "Success", text: "Message Sent!", icon: "success" });
+      setMessage({ nature: "Please Select an Option" });
     }
   };
 
@@ -171,6 +173,38 @@ const ContactPageCover = () => {
                     onChange={handleChange}
                     value={messageC.email}
                   />
+                </Grid>
+                <Grid item xs={12} data-aos="fade-up">
+                  <Typography
+                    variant="subtitle1"
+                    color="textPrimary"
+                    className={classes.inputTitle}
+                  >
+                    Nature of Inquiry
+                  </Typography>
+
+                  <select
+                    style={{
+                      width: "100%",
+                      height: "40%",
+                      marginTop: "5%",
+                      paddingBottom: "1.2%",
+                      border: "none",
+                      fontSize: "1.6rem",
+                      borderBottom: "1px solid black"
+                    }}
+                    name="nature"
+                    value={messageC.nature}
+                    onChange={handleChange}
+                  >
+                    <option value={"PLEASE SELECT AN OPTION"}>
+                      PLEASE SELECT AN OPTION
+                    </option>
+                    <option value={"SALES"}>SALES</option>
+                    <option value={"DATA"}>DATA</option>
+                    <option value={"TECHNICAL"}>TECHNICAL</option>
+                    <option value={"OTHER"}>OTHER</option>
+                  </select>
                 </Grid>
                 <Grid item xs={12} data-aos="fade-up">
                   <Typography
