@@ -259,11 +259,13 @@ export default function SignInSide(props) {
                 }}
                 value={user.organization_type}
                 onChange={handleChange}
+                defaultValue="-1"
               >
-                <option value={"RESEARCH"}>RESEARCH</option>
-                <option value={"GOVERNMENT"}>GOVERNMENT</option>
+                <option hidden value="-1"></option>
+                <option value={"RESEARCH"}>Research</option>
+                <option value={"GOVERNMENT"}>Government</option>
                 <option value={"NGO"}>NGO</option>
-                <option value={"OTHER"}>OTHER</option>
+                <option value={"OTHER"}>Other</option>
               </select>
             ) : (
               <TextField
@@ -294,13 +296,15 @@ export default function SignInSide(props) {
                 }}
                 value={user.organization_type}
                 onChange={handleChange}
+                defaultValue="-1"
               >
+                <option hidden value="-1"></option>
                 <option value={"CROSS_BORDER_ASSOCIATION"}>
                   Cross border Association
                 </option>
                 <option value={"UNIVERSITY"}>University</option>
                 <option value={"SAUTI_STAFF"}>Sauti Staff</option>
-                <option value={"OTHER"}>OTHER</option>
+                <option value={"OTHER"}>Other</option>
               </select>
             ) : (
               <TextField
