@@ -16,6 +16,7 @@ import {
 import CardBase from "../themeStyledComponents/organisms/CardBase";
 import SectionHeader from "../themeStyledComponents/molecules/SectionHeader";
 import Section from "../themeStyledComponents/organisms/Section";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,6 +56,15 @@ const useStyles = makeStyles(theme => ({
   listTitle: {
     fontWeight: 700
   },
+  listTitle2: {
+    textTransform: "uppercase"
+  },
+  listColumn: {
+    "& li": {
+      marginLeft: "15px",
+      listStyle: "disc"
+    }
+  },
   underlined: {
     textDecoration: "underline"
   },
@@ -76,6 +86,22 @@ const CompanyTerms = () => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
+
+  const history = useHistory();
+  const handleContact = async (e, input) => {
+    e.preventDefault();
+    history.push("/contact");
+  };
+
+  const handlePricing = async (e, input) => {
+    e.preventDefault();
+    history.push("/pricing");
+  };
+
+  const handleSignUp = async (e, input) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
 
   return (
     <div className={classes.root}>
@@ -132,7 +158,10 @@ const CompanyTerms = () => {
                     and reliably proximate insights related to cross-border
                     business activity in the region. Learn more about Sauti East
                     Africa’s methodology{" "}
-                    <a href="https://www.researchgate.net/publication/347473284_Innovating_Past_Data_Collection_Obstacles_for_East_Africa's_Women_Cross-_Border_Traders_Evidence_from_Sauti_East_Africa">
+                    <a
+                      href="https://www.researchgate.net/publication/347473284_Innovating_Past_Data_Collection_Obstacles_for_East_Africa's_Women_Cross-_Border_Traders_Evidence_from_Sauti_East_Africa"
+                      target="_blank"
+                    >
                       here
                     </a>
                     .
@@ -140,15 +169,67 @@ const CompanyTerms = () => {
                 </Typography>
               </ListItem>
               <ListItem disableGutters>
-                <Typography variant="body1" color="textPrimary">
-                  <span className={classes.listTitle}>
-                    What data series are included in Sauti Trade Insights?
-                  </span>
-                  <p>
-                    Sauti Trade Insights consists of the following data
-                    collected from cross-border traders across East Africa:
-                  </p>
-                </Typography>
+                <Grid container spacing={isMd ? 4 : 2}>
+                  <Grid item xs={12} md={12} style={{ paddingBottom: "0px" }}>
+                    <Typography
+                      variant="body1"
+                      color="textPrimary"
+                      style={{ marginBottom: "0px" }}
+                    >
+                      <span className={classes.listTitle}>
+                        What data series are included in Sauti Trade Insights?
+                      </span>
+                      <p style={{ marginBottom: "0px" }}>
+                        Sauti Trade Insights consists of the following data
+                        collected from cross-border traders across East Africa:
+                      </p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={4} className={classes.listColumn}>
+                    <Typography>
+                      <p className={classes.listTitle2}>Demographic Insights</p>
+                      <li>Age*</li>
+                      <li>Border crossing frequency</li>
+                      <li>Border crossing location</li>
+                      <li>Country of residence*</li>
+                      <li>Education level*</li>
+                      <li>Gender</li>
+                      <li>Preferred language</li>
+                      <li>Cross border trade as primary income</li>
+                      <li>Grow / produce their own products</li>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={4} className={classes.listColumn}>
+                    <Typography>
+                      <p className={classes.listTitle2}>Business Insights</p>
+                      <li>Traded commodities</li>
+                      <li>Traded commodity categories*</li>
+                      <li>Traders' destination country</li>
+                      <li>Traders' destination market</li>
+                      <li>Currency exchanges</li>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={4} className={classes.listColumn}>
+                    <Typography>
+                      <p className={classes.listTitle2}>Trade Insights</p>
+                      <li>Requested information, by agency*</li>
+                      <li>Requested trade documents</li>
+                      <li>Requested trade procedures, by commodity</li>
+                      <li>Requested trade procedures, by commodity category</li>
+                      <li>
+                        Requested trade procedures, by destination country
+                      </li>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={12} style={{ paddingTop: "0px" }}>
+                    <Typography>
+                      <p>
+                        *Data series available in the two week Free Trial. Users
+                        with a Premium Account can access all data series.
+                      </p>
+                    </Typography>
+                  </Grid>
+                </Grid>
               </ListItem>
               <ListItem disableGutters>
                 <Typography variant="body1" color="textPrimary">
@@ -195,7 +276,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Contact us through our contact form{" "}
-                    <a href="contact">here</a>
+                    <a
+                      onClick={handleContact}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -296,7 +382,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Contact us through our contact form{" "}
-                    <a href="contact">here</a>
+                    <a
+                      onClick={handleContact}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -322,7 +413,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Sign up to access Sauti Trade Insights{" "}
-                    <a href="pricing">here</a>
+                    <a
+                      onClick={handleSignUp}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -336,7 +432,13 @@ const CompanyTerms = () => {
                     Free Trial with limited access to our data and interactive
                     features, and a Premium Account with full access for $60 USD
                     / month. Find out more about our plans{" "}
-                    <a href="pricing">here</a>.
+                    <a
+                      onClick={handlePricing}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
+                    .
                   </p>
                 </Typography>
               </ListItem>
@@ -348,7 +450,12 @@ const CompanyTerms = () => {
                   </span>
                   <p>
                     Contact us through our contact form{" "}
-                    <a href="contact">here</a>
+                    <a
+                      onClick={handleContact}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      here
+                    </a>
                   </p>
                 </Typography>
               </ListItem>
@@ -362,7 +469,7 @@ const CompanyTerms = () => {
                     title="Have a question?"
                     subtitle="Not sure exactly what we’re looking for or just want clarification? We’d be happy to chat with you and clear things up for you."
                     ctaGroup={[
-                      <Button variant="contained" href="contact">
+                      <Button onClick={handleContact} variant="contained">
                         Contact us
                       </Button>
                     ]}

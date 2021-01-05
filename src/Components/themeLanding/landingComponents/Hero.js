@@ -7,6 +7,7 @@ import { useMediaQuery, Grid, Button } from "@material-ui/core";
 import Image from "../../themeStyledComponents/atoms/Image/";
 import ImgDashboard from "../../../assets/images/dashboard.png";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -28,6 +29,17 @@ const Hero = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
+
+  const history = useHistory();
+  const handleSignUp = async (e, input) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
+
+  const handlePricing = async (e, input) => {
+    e.preventDefault();
+    history.push("/pricing");
+  };
 
   return (
     // class name and rest not doing anything
@@ -58,14 +70,19 @@ const Hero = props => {
             subtitle="Data from Kenyan, Ugandan, Rwandan, and Tanzanian cross-border traders to support your research, policy work, solution designs and more."
             ctaGroup={[
               <Button
+                onClick={handleSignUp}
                 variant="contained"
                 color="primary"
                 size="large"
-                href="pricing"
               >
                 Get Started
               </Button>,
-              <Button variant="outlined" color="primary" size="large">
+              <Button
+                onClick={handlePricing}
+                variant="outlined"
+                color="primary"
+                size="large"
+              >
                 Learn more
               </Button>
             ]}

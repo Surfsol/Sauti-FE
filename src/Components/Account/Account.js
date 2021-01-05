@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
 import { SectionAlternate, CardBase } from "../../Components/organisms";
-import { Hero, General, Security } from "./components";
+import { Hero, MyAccount, Security } from "./components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -89,8 +89,6 @@ const Account = ({ decoded, tier }) => {
               <List disablePadding className={classes.list}>
                 <ListItem
                   key="myaccount"
-                  // component={Link}
-                  //to= "/myaccount/myaccount"
                   onClick={() => setPageId("myaccount")}
                   className={clsx(
                     classes.listItem,
@@ -110,8 +108,6 @@ const Account = ({ decoded, tier }) => {
 
                 <ListItem
                   key="subscriptions"
-                  // component={Link}
-                  // to="/myaccount/subscriptions"
                   onClick={() => setPageId("subscriptions")}
                   className={clsx(
                     classes.listItem,
@@ -134,7 +130,7 @@ const Account = ({ decoded, tier }) => {
           <Grid item xs={12} md={9}>
             <CardBase withShadow align="left">
               <TabPanel value={pageId} index={"myaccount"}>
-                <General decoded={decoded} data={data.databankUser} />
+                <MyAccount decoded={decoded} data={data.databankUser} />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
                 <Security />

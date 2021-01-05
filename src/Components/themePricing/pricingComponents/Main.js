@@ -15,6 +15,8 @@ import Image from "../../themeStyledComponents/atoms/Image/";
 import CardPricingStandard from "../../themeStyledComponents/organisms/CardPricingStandard";
 import Section from "../../themeStyledComponents/organisms/Section";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
   root: {
     alignItems: "baseline"
@@ -103,13 +105,19 @@ const Main = props => {
     setPricingOption(newPricingOption);
   };
 
+  const history = useHistory();
+  const handleSignUp = async (e, input) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={classes.sectionContainer}>
         <Section className={classes.pagePaddingTop}>
           <SectionHeader
             title="Pricing"
-            subtitle="We are founded by leading researchers in East Africa's cross-border trade field. "
+            subtitle="We are founded by leading researchers and development practitioners in East Africa’s cross-border trade environment. Cross-borders are notoriously difficult space to map, but with Sauti Trade Insights you can easily explore this data through interactive charts, or download the data to conduct your own analysis."
             titleProps={{
               className: clsx(classes.textWhite, classes.fontWeightBold),
               variant: "h2"
@@ -127,7 +135,7 @@ const Main = props => {
                   liftUp
                   variant="outlined"
                   title="Free Trial"
-                  subtitle="Try out the databank"
+                  subtitle="Our two week free trial allows you to explore a basic selection of our Trade Insights Data and try out our interactive dashboard for free."
                   priceComponent={
                     <div>
                       <Typography
@@ -172,11 +180,11 @@ const Main = props => {
                   }
                   cta={
                     <Button
+                      onClick={handleSignUp}
                       color="primary"
                       variant="outlined"
                       fullWidth
                       size="large"
-                      href="signup"
                     >
                       Join now
                     </Button>
@@ -189,7 +197,7 @@ const Main = props => {
                   liftUp
                   variant="outlined"
                   title="Premium Access"
-                  subtitle="Access to all data and features"
+                  subtitle="With Premium Access you can explore and download all the Sauti Trade Insights data, with additional filtering and dashboard features to drill-down through the data."
                   priceComponent={
                     <div>
                       <Typography
@@ -248,11 +256,11 @@ const Main = props => {
                   }
                   cta={
                     <Button
+                      onClick={handleSignUp}
                       color="primary"
                       variant="contained"
                       fullWidth
                       size="large"
-                      href="signup"
                     >
                       Join now
                     </Button>

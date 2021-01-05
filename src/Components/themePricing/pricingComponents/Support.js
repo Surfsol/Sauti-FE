@@ -31,7 +31,7 @@ const Support = props => {
           <SectionHeader
             title="University and Customized Plans"
             titleVariant="h5"
-            subtitle="Are you part of a research institution. Request a consultation to customize a plan."
+            subtitle="Are you part of a research institution? Request a consultation to find out more about our customised plans."
             subtitleVariant="body1"
             subtitleColor="textPrimary"
             ctaGroup={[<LearnMoreLink title="Contact us" href="contact" />]}
