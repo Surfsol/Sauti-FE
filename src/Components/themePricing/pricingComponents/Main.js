@@ -117,7 +117,7 @@ const Main = props => {
         <Section className={classes.pagePaddingTop}>
           <SectionHeader
             title="Pricing"
-            subtitle="We are founded by leading researchers in East Africa's cross-border trade field. "
+            subtitle="We are founded by leading researchers and development practitioners in East Africa’s cross-border trade environment. Cross-borders are notoriously difficult space to map, but with Sauti Trade Insights you can easily explore this data through interactive charts, or download the data to conduct your own analysis."
             titleProps={{
               className: clsx(classes.textWhite, classes.fontWeightBold),
               variant: "h2"
@@ -135,7 +135,7 @@ const Main = props => {
                   liftUp
                   variant="outlined"
                   title="Free Trial"
-                  subtitle="Try out the databank"
+                  subtitle="Our two week free trial allows you to explore a basic selection of our Trade Insights Data and try out our interactive dashboard for free."
                   priceComponent={
                     <div>
                       <Typography
@@ -197,7 +197,7 @@ const Main = props => {
                   liftUp
                   variant="outlined"
                   title="Premium Access"
-                  subtitle="Access to all data and features"
+                  subtitle="With Premium Access you can explore and download all the Sauti Trade Insights data, with additional filtering and dashboard features to drill-down through the data."
                   priceComponent={
                     <div>
                       <Typography

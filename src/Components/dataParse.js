@@ -1,5 +1,3 @@
-//import graphLabels from "./graphLabels";
-
 import getIndex from "../DataParseHelpers/getIndex";
 import getMostRequested from "../DataParseHelpers/getMostRequested";
 import setCrossedItems from "../DataParseHelpers/setCrossedItems";
@@ -55,7 +53,8 @@ const dataParse = (
         indexBy,
         additionalFilter,
         queryType,
-        crossFilterQuery
+        crossFilterQuery,
+        graphLabels
       );
     } else if (data) {
       //when single filtering with index that is not "Most Requested"
