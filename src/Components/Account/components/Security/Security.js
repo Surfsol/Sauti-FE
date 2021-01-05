@@ -6,15 +6,13 @@ import {
   useMediaQuery,
   Grid,
   Typography,
-  TextField,
-  FormControlLabel,
-  Switch,
   Button,
   Divider,
   colors
 } from "@material-ui/core";
 import Icon from "../../../themeStyledComponents/atoms/Icon/";
 import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPricingStandard";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -40,6 +38,14 @@ const Security = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
+  const userTier = useSelector(state => state.tierReducer.tier);
+  const showPlan = () => {
+    let plan = userTier;
+    if (typeof plan !== "string") {
+      plan = "Please log out and login again to see your plan.";
+    }
+    return `Your Plan: ${plan}`;
+  };
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -47,7 +53,7 @@ const Security = props => {
         <Grid item xs={12}>
           <div className={classes.titleCta}>
             <Typography variant="h6" color="textPrimary">
-              Your Plan: [PLAN NAME HERE]
+              {showPlan()}
             </Typography>
           </div>
         </Grid>
