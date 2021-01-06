@@ -46,10 +46,9 @@ const Graph = props => {
     });
   };
   const AddFilters = () => {
-    // let filterNums = Object.keys(filters)
     let arr = [];
     for (let key in filters) {
-      if (key > 1) {
+      if (key > 1 && filters[key]["selectedCategory"] !== "") {
         let choices = filters[key]["selectableOptions"];
         let cat = filters[key]["selectedCategory"];
         let sel;
@@ -64,7 +63,29 @@ const Graph = props => {
     return arr;
   };
 
-  let makeHeaders = data => {
+  const compareBy = () => {
+    let arr = [];
+    for (let key in filters) {
+      if (key == 1) {
+        let choices = filters[key]["selectableOptions"];
+        let cat = filters[key]["selectedCategory"];
+        let sel;
+        for (let item in filters[key]["selectableOptions"]) {
+          if (choices[item] === true) {
+            sel = item;
+          }
+        }
+        arr.push(`${cat}`);
+      }
+    }
+    return arr;
+  };
+
+  const makeHeaders = data => {
+    let varAddFilters = AddFilters();
+    if (varAddFilters.length > 0) {
+      varAddFilters = `Filters: ${varAddFilters}`;
+    }
     if (!filters[1].selectedCategory) {
       return [
         {
@@ -86,10 +107,11 @@ const Graph = props => {
         },
         {
           id: `${69}`,
-          displayName: AddFilters()
+          displayName: varAddFilters
         }
       ];
     } else {
+      let varCompare = `Compare Data: ${compareBy()}  ${varAddFilters}`;
       return [
         {
           id: `${65}`,
@@ -97,7 +119,7 @@ const Graph = props => {
         },
         ...keys,
         {
-          displayName: AddFilters()
+          displayName: varCompare
         }
       ];
     }
