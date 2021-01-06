@@ -27,6 +27,13 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
+  },
+  planText: {
+    color: "#3f51b5",
+    border: "1px solid rgba(63, 81, 181, 0.5)",
+    padding: "0.25em",
+    borderRadius: "4px",
+    textTransform: "uppercase"
   }
 }));
 
@@ -39,12 +46,20 @@ const Security = props => {
     defaultMatches: true
   });
   const userTier = useSelector(state => state.tierReducer.tier);
-  const showPlan = () => {
+  const getPlan = () => {
     let plan = userTier;
+    switch (plan) {
+      case "FREE":
+        plan = "Free Trial";
+        break;
+      case "PAID":
+        plan = "Premium Access";
+        break;
+    }
     if (typeof plan !== "string") {
       plan = "Please log out and login again to see your plan.";
     }
-    return `Your Plan: ${plan}`;
+    return plan;
   };
 
   return (
@@ -53,7 +68,8 @@ const Security = props => {
         <Grid item xs={12}>
           <div className={classes.titleCta}>
             <Typography variant="h6" color="textPrimary">
-              {showPlan()}
+              <span>{"Your Plan: "}</span>
+              <span className={classes.planText}> {getPlan()} </span>
             </Typography>
           </div>
         </Grid>
