@@ -193,13 +193,12 @@ const ContactPageCover = () => {
                       fontSize: "1.6rem",
                       borderBottom: "1px solid black"
                     }}
+                    defaultValue="-1"
                     name="nature"
                     value={messageC.nature}
                     onChange={handleChange}
                   >
-                    <option value={"PLEASE SELECT AN OPTION"}>
-                      PLEASE SELECT AN OPTION
-                    </option>
+                    <option hidden value="-1"></option>
                     <option value={"SALES"}>SALES</option>
                     <option value={"DATA"}>DATA</option>
                     <option value={"TECHNICAL"}>TECHNICAL</option>
