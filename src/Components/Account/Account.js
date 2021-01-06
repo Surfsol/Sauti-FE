@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,12 +21,15 @@ const TabPanel = props => {
 };
 
 const Account = ({ decoded, tier }) => {
-  const [pageId, setPageId] = useState("subscriptions");
+  const [pageId, setPageId] = useState("myaccount");
   const classes = useStyles();
 
-  if (!pageId) {
-    setPageId("security");
-  }
+  useEffect(() => {
+    if (decoded.tier === "FREE") {
+      setPageId("subscriptions");
+    }
+  }, []);
+
   const history = useHistory();
   const GET_SUBSCRIPTION_ID = gql`
     query($userEmail: String!) {
@@ -86,8 +89,6 @@ const Account = ({ decoded, tier }) => {
               <List disablePadding className={classes.list}>
                 <ListItem
                   key="myaccount"
-                  // component={Link}
-                  //to= "/myaccount/myaccount"
                   onClick={() => setPageId("myaccount")}
                   className={clsx(
                     classes.listItem,
@@ -107,8 +108,6 @@ const Account = ({ decoded, tier }) => {
 
                 <ListItem
                   key="subscriptions"
-                  // component={Link}
-                  // to="/myaccount/subscriptions"
                   onClick={() => setPageId("subscriptions")}
                   className={clsx(
                     classes.listItem,
