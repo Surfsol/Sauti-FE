@@ -4,17 +4,17 @@ import { useHistory } from "react-router-dom";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
+
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import swal from "sweetalert";
+
+import { TextField } from "@material-ui/core";
 
 import styled from "styled-components";
 
@@ -238,57 +238,62 @@ export default function SignInSide(props) {
             />
             <br />
             <br />
+            <GreyLabelText>
+              <RequiredStar>*</RequiredStar> Organization Type
+            </GreyLabelText>
+
+            <select
+              style={{
+                width: "100%",
+                height: "5%",
+                marginTop: "5%",
+                border: "none",
+                fontSize: "1.6rem",
+                borderBottom: "1px solid black",
+                paddingBottom: "1.2%"
+              }}
+              defaultValue="-1"
+              name="organization_type"
+              value={user.organization_type}
+              onChange={handleChange}
+            >
+              <option hidden value="-1"></option>
+              <option value={"RESEARCH"}>RESEARCH</option>
+              <option value={"GOVERNMENT"}>GOVERNMENT</option>
+              <option value={"NGO"}>NGO</option>
+              <option value={"OTHER"}>OTHER</option>
+            </select>
+
             <br />
-            <FormControl className={classes.margin}>
-              <GreyLabelText>
-                <RequiredStar>*</RequiredStar> Organization Type
-              </GreyLabelText>
-              <Select
-                label="Organization Type"
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                name="organization_type"
-                placeholder="Organization Type"
-                value={user.organization_type}
-                onChange={handleChange}
-                input={<Styles />}
-              >
-                <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
-                <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
-                <MenuItem value={"NGO"}>NGO</MenuItem>
-                <MenuItem value={"OTHER"}>OTHER</MenuItem>
-              </Select>
-            </FormControl>
             <br />
-            <br />
-            <br />
-            <FormControl className={classes.margin}>
-              <GreyLabelText>
-                <RequiredStar>*</RequiredStar> How did you hear about us?
-              </GreyLabelText>
-              <Select
-                label="Found By"
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                name="found_by"
-                placeholder=""
-                value={user.found_by}
-                onChange={handleChange}
-                input={<Styles />}
-              >
-                <MenuItem value={"CROSS_BORDER_ASSOCIATION"}>
-                  Cross border Association
-                </MenuItem>
-                <MenuItem value={"UNIVERSITY"}>University</MenuItem>
-                <MenuItem value={"SAUTI_STAFF"}>Sauti Staff</MenuItem>
-                <MenuItem value={"OTHER"}>OTHER</MenuItem>
-              </Select>
-              <br />
-              <RequiredLabel>
-                <RequiredStar>*</RequiredStar> = required
-              </RequiredLabel>
-            </FormControl>
-            <br />
+            <GreyLabelText>
+              <RequiredStar>*</RequiredStar> How did you hear about us?
+            </GreyLabelText>
+
+            <select
+              style={{
+                width: "100%",
+                height: "5%",
+                marginTop: "5%",
+                paddingBottom: "1.2%",
+                border: "none",
+                fontSize: "1.6rem",
+                borderBottom: "1px solid black"
+              }}
+              defaultValue="-1"
+              name="found_by"
+              value={user.found_by}
+              onChange={handleChange}
+            >
+              <option hidden value="-1"></option>
+              <option value={"CROSS_BORDER_ASSOCIATION"}>
+                Cross border Association
+              </option>
+              <option value={"UNIVERSITY"}>University</option>
+              <option value={"SAUTI_STAFF"}>Sauti Staff</option>
+              <option value={"OTHER"}>OTHER</option>
+            </select>
+
             <Button
               type="submit"
               fullWidth
@@ -442,4 +447,18 @@ const RequiredStar = styled.big`
 const GreyLabelText = styled.p`
   // opacity: 0.8;
   font-size: 1.4rem;
+`;
+const Dropdown = styled.div`
+  // opacity: 0.8;
+  width: "100%",
+  height: "5%",
+  marginTop: "5%",
+  border: "none",
+  fontSize: "1.6rem",
+  borderBottom: "1px solid black",
+  "&:focus": {
+    borderRadius: 4,
+    borderColor: "white",
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+  }
 `;

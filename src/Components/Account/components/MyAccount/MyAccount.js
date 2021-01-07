@@ -10,7 +10,6 @@ import {
   Button,
   Divider
 } from "@material-ui/core";
-import EditAccount from "../../../../dashboard/DashboardAccount/EditAccount";
 
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
@@ -22,6 +21,10 @@ const useStyles = makeStyles(theme => ({
   inputTitle: {
     fontWeight: 700,
     marginBottom: theme.spacing(1)
+  },
+  changePlanButton: {
+    marginTop: "-0.5em",
+    float: "right"
   }
 }));
 
@@ -46,8 +49,8 @@ const EDIT = gql`
   }
 `;
 
-const General = props => {
-  const { data, decoded, className, ...rest } = props;
+const MyAccount = props => {
+  const { data, decoded, className, setPageId, ...rest } = props;
   const classes = useStyles();
 
   const theme = useTheme();
@@ -65,6 +68,15 @@ const General = props => {
     tier: decoded.tier
   });
 
+  let plan = account.tier;
+  switch (plan) {
+    case "FREE":
+      plan = "Free Trial";
+      break;
+    case "PAID":
+      plan = "Premium Access";
+      break;
+  }
   const [createUser, editUser, refetch] = useMutation(EDIT);
 
   const handleChange = event => {
@@ -105,43 +117,29 @@ const General = props => {
             Basic Information
           </Typography>
         </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="subtitle1" color="textPrimary">
+            {"E-mail: " + account.email}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="subtitle1" color="textPrimary">
+            {"Subscription: " + plan}
+            <Button
+              onClick={() => setPageId("subscriptions")}
+              variant="contained"
+              color="secondary"
+              size="medium"
+              className={clsx(classes.changePlanButton)}
+            >
+              Change Plan
+            </Button>
+          </Typography>
+        </Grid>
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            // className={classes.inputTitle}
-          >
-            E-mail
-          </Typography>
-          <TextField
-            placeholder={account.email}
-            variant="outlined"
-            size="medium"
-            name="email"
-            fullWidth
-            type="email"
-            value={account.email}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            // className={classes.inputTitle}
-          >
-            Subscription Level
-          </Typography>
-          <TextField
-            placeholder={account.tier}
-            variant="outlined"
-            size="medium"
-            fullWidth
-            type="text"
-          />
-        </Grid>
+
         <Grid item xs={12} sm={6}>
           <Typography
             variant="subtitle1"
@@ -228,7 +226,7 @@ const General = props => {
             color="primary"
             size="large"
           >
-            EDIT ACCOUNT
+            SAVE CHANGES
           </Button>
         </Grid>
       </Grid>
@@ -236,11 +234,11 @@ const General = props => {
   );
 };
 
-General.propTypes = {
+MyAccount.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string
 };
 
-export default General;
+export default MyAccount;
