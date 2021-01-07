@@ -49,17 +49,14 @@ const Subscription = props => {
   console.log("tier", props.tier);
 
   const monthlyPmt = () => {
-    if (props.tier === "FREE") {
+    if (props.tier !== "PAID") {
       return <MonthlyPayPal />;
     }
   };
 
   const cancelSub = () => {
-    if (props.tier !== "FREE") {
-      return (
-        <CancelSubscription />
-        // <p>Change Account Plan to Free Plan</p>
-      );
+    if (props.tier !== "PAID") {
+      return <CancelSubscription />;
     }
   };
 
