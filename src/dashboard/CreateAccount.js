@@ -44,13 +44,9 @@ export default function SignInSide(props) {
   const history = useHistory();
   const [createUser, newUser] = useMutation(REGISTER);
 
-  const [org_typeDropdown, setOrg_typeDropdown] = useState(false);
-  const [aboutUs, setAboutUs] = useState(false);
-
   const classes = useStyles();
 
   const handleChange = event => {
-    console.log("ran handleChange");
     event.preventDefault();
     setUser({
       ...user,
@@ -59,7 +55,6 @@ export default function SignInSide(props) {
   };
 
   const handleSubmit = async (e, input) => {
-    console.log("ran handleSubmit");
     e.preventDefault();
     if (
       user.email === "" ||
@@ -246,73 +241,59 @@ export default function SignInSide(props) {
             <GreyLabelText>
               <RequiredStar>*</RequiredStar> Organization Type
             </GreyLabelText>
-            {org_typeDropdown ? (
-              <select
-                style={{
-                  width: "100%",
-                  height: "5%",
-                  marginTop: "5%",
-                  border: "none",
-                  fontSize: "1.6rem",
-                  borderBottom: "1px solid black",
-                  paddingBottom: "1.2%"
-                }}
-                value={user.organization_type}
-                onChange={handleChange}
-              >
-                <option value={"RESEARCH"}>RESEARCH</option>
-                <option value={"GOVERNMENT"}>GOVERNMENT</option>
-                <option value={"NGO"}>NGO</option>
-                <option value={"OTHER"}>OTHER</option>
-              </select>
-            ) : (
-              <TextField
-                fullWidth
-                margin="normal"
-                onClick={() => setOrg_typeDropdown(!org_typeDropdown)}
-                InputProps={{
-                  disableUnderline: true,
-                  className: classes.input
-                }}
-              />
-            )}
+
+            <select
+              style={{
+                width: "100%",
+                height: "5%",
+                marginTop: "5%",
+                border: "none",
+                fontSize: "1.6rem",
+                borderBottom: "1px solid black",
+                paddingBottom: "1.2%"
+              }}
+              defaultValue="-1"
+              name="organization_type"
+              value={user.organization_type}
+              onChange={handleChange}
+            >
+              <option hidden value="-1"></option>
+              <option value={"RESEARCH"}>RESEARCH</option>
+              <option value={"GOVERNMENT"}>GOVERNMENT</option>
+              <option value={"NGO"}>NGO</option>
+              <option value={"OTHER"}>OTHER</option>
+            </select>
+
             <br />
             <br />
             <GreyLabelText>
               <RequiredStar>*</RequiredStar> How did you hear about us?
             </GreyLabelText>
-            {aboutUs ? (
-              <select
-                style={{
-                  width: "100%",
-                  height: "5%",
-                  marginTop: "5%",
-                  paddingBottom: "1.2%",
-                  border: "none",
-                  fontSize: "1.6rem",
-                  borderBottom: "1px solid black"
-                }}
-                value={user.organization_type}
-                onChange={handleChange}
-              >
-                <option value={"CROSS_BORDER_ASSOCIATION"}>
-                  Cross border Association
-                </option>
-                <option value={"UNIVERSITY"}>University</option>
-                <option value={"SAUTI_STAFF"}>Sauti Staff</option>
-                <option value={"OTHER"}>OTHER</option>
-              </select>
-            ) : (
-              <TextField
-                fullWidth
-                margin="normal"
-                onClick={() => setAboutUs(!aboutUs)}
-                InputProps={{
-                  disableUnderline: true,
-                  className: classes.input
-                }}
-              />
-            )}
+
+            <select
+              style={{
+                width: "100%",
+                height: "5%",
+                marginTop: "5%",
+                paddingBottom: "1.2%",
+                border: "none",
+                fontSize: "1.6rem",
+                borderBottom: "1px solid black"
+              }}
+              defaultValue="-1"
+              name="found_by"
+              value={user.found_by}
+              onChange={handleChange}
+            >
+              <option hidden value="-1"></option>
+              <option value={"CROSS_BORDER_ASSOCIATION"}>
+                Cross border Association
+              </option>
+              <option value={"UNIVERSITY"}>University</option>
+              <option value={"SAUTI_STAFF"}>Sauti Staff</option>
+              <option value={"OTHER"}>OTHER</option>
+            </select>
+
             <Button
               type="submit"
               fullWidth
