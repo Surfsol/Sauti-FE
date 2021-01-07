@@ -146,7 +146,11 @@ const Account = ({ decoded, tier }) => {
           <Grid item xs={12} md={9}>
             <CardBase withShadow align="left">
               <TabPanel value={pageId} index={"myaccount"}>
-                <MyAccount decoded={decoded} data={data.databankUser} />
+                <MyAccount
+                  decoded={decoded}
+                  data={data.databankUser}
+                  setPageId={setPageId}
+                />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
                 <Security />

@@ -10,7 +10,6 @@ import {
   Button,
   Divider
 } from "@material-ui/core";
-import EditAccount from "../../../../dashboard/DashboardAccount/EditAccount";
 
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
@@ -50,8 +49,8 @@ const EDIT = gql`
   }
 `;
 
-const General = props => {
-  const { data, decoded, className, ...rest } = props;
+const MyAccount = props => {
+  const { data, decoded, className, setPageId, ...rest } = props;
   const classes = useStyles();
 
   const theme = useTheme();
@@ -119,23 +118,15 @@ const General = props => {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            // className={classes.inputTitle}
-          >
+          <Typography variant="subtitle1" color="textPrimary">
             {"E-mail: " + account.email}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-            // className={classes.inputTitle}
-          >
+          <Typography variant="subtitle1" color="textPrimary">
             {"Subscription: " + plan}
             <Button
-              //onClick={() => setPageId("subscriptions")}   //RUSS CAN YOU MAKE THIS WORK?
+              onClick={() => setPageId("subscriptions")}
               variant="contained"
               color="secondary"
               size="medium"
@@ -243,11 +234,11 @@ const General = props => {
   );
 };
 
-General.propTypes = {
+MyAccount.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string
 };
 
-export default General;
+export default MyAccount;
