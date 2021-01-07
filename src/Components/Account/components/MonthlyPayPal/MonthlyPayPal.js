@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { decodeToken } from "../../../../dashboard/auth/Auth";
+import { decodeToken } from "../auth/authorization";
 import { useMutation } from "@apollo/react-hooks";
 import swal from "sweetalert";
 import gql from "graphql-tag";

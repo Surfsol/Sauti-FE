@@ -153,7 +153,7 @@ const Account = ({ decoded, tier }) => {
                 />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
-                <Subscription />
+                <Subscription tier={tier} />
               </TabPanel>
             </CardBase>
           </Grid>

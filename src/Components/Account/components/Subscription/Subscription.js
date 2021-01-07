@@ -6,14 +6,13 @@ import {
   useMediaQuery,
   Grid,
   Typography,
-  Button,
   Divider,
   colors
 } from "@material-ui/core";
 import Icon from "../../../themeStyledComponents/atoms/Icon";
 import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPricingStandard";
-import { useSelector } from "react-redux";
 import MonthlyPayPal from "../MonthlyPayPal/index";
+import CancelSubscription from "../CancelSub";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -46,21 +45,22 @@ const Subscription = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
-  const userTier = useSelector(state => state.tierReducer.tier);
-  const getPlan = () => {
-    let plan = userTier;
-    switch (plan) {
-      case "FREE":
-        plan = "Free Trial";
-        break;
-      case "PAID":
-        plan = "Premium Access";
-        break;
+
+  console.log("tier", props.tier);
+
+  const monthlyPmt = () => {
+    if (props.tier === "FREE") {
+      return <MonthlyPayPal />;
     }
-    if (typeof plan !== "string") {
-      plan = "Please log out and login again to see your plan.";
+  };
+
+  const cancelSub = () => {
+    if (props.tier !== "FREE") {
+      return (
+        <CancelSubscription />
+        // <p>Change Account Plan to Free Plan</p>
+      );
     }
-    return plan;
   };
 
   return (
@@ -70,7 +70,7 @@ const Subscription = props => {
           <div className={classes.titleCta}>
             <Typography variant="h6" color="textPrimary">
               <span>{"Your Plan: "}</span>
-              <span className={classes.planText}> {getPlan()} </span>
+              <span className={classes.planText}> {props.tier} </span>
             </Typography>
           </div>
         </Grid>
@@ -129,15 +129,15 @@ const Subscription = props => {
                   />
                 }
                 cta={
-                  <Button
+                  <div
                     color="primary"
                     variant="outlined"
                     fullWidth
                     size="large"
                     href="signup"
                   >
-                    Change Account Plan to Free Plan
-                  </Button>
+                    {cancelSub()}
+                  </div>
                 }
               />
             </Grid>
@@ -204,7 +204,17 @@ const Subscription = props => {
                     fontIconColor={colors.indigo[500]}
                   />
                 }
-                cta={<MonthlyPayPal />}
+                cta={
+                  <div
+                    color="primary"
+                    variant="outlined"
+                    fullWidth
+                    size="large"
+                    href="signup"
+                  >
+                    {monthlyPmt()}
+                  </div>
+                }
               />
             </Grid>
           </Grid>
