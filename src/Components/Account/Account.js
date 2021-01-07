@@ -124,13 +124,33 @@ const Account = ({ decoded, tier }) => {
                     Subscriptions
                   </Typography>
                 </ListItem>
+                <ListItem
+                  className={clsx(classes.listItem)}
+                  onClick={() => {
+                    window.location = "/contact";
+                  }}
+                  disableGutters
+                >
+                  <Typography
+                    variant="subtitle1"
+                    noWrap
+                    color="textSecondary"
+                    className="menu__item"
+                  >
+                    Contact Us
+                  </Typography>
+                </ListItem>
               </List>
             </CardBase>
           </Grid>
           <Grid item xs={12} md={9}>
             <CardBase withShadow align="left">
               <TabPanel value={pageId} index={"myaccount"}>
-                <MyAccount decoded={decoded} data={data.databankUser} />
+                <MyAccount
+                  decoded={decoded}
+                  data={data.databankUser}
+                  setPageId={setPageId}
+                />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
                 <Security />
@@ -182,6 +202,7 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     marginRight: theme.spacing(2),
     flex: 0,
+    cursor: "pointer",
     [theme.breakpoints.up("md")]: {
       paddingRight: theme.spacing(3),
       paddingLeft: theme.spacing(3),
