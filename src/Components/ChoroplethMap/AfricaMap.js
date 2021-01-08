@@ -11,11 +11,12 @@ import {
 } from "d3";
 import useResizeObserver from "./useResizeObserver";
 import "../scss/choropleth.scss";
-
+import { makeStyles } from "@material-ui/core/styles";
 import { countryRank } from "./mapParcer";
 import { useDispatch } from "react-redux";
 import { lineAction } from "../redux-actions/lineActions";
 import { barDownload } from "../redux-actions/barDownloadAction";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function AfricaMap({
   updatedData,
@@ -28,6 +29,7 @@ function AfricaMap({
 }) {
   //use select from d3
   //useRef to access DOM element and pass to D3
+  const classes = useStyles();
   const svgRef = useRef();
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
@@ -49,9 +51,8 @@ function AfricaMap({
   const [scalePercent, setScalePercent] = useState([1, 100]);
   //must start as empty array or will render text many times.
   const [allResults, setResults] = useState([]);
-  const [button, setButton] = useState();
+  const [button, setButton] = useState("Apply");
 
-  console.log(allResults);
   const dispatch = useDispatch();
   useEffect(() => {
     if (allResults.length > 1) {
@@ -71,11 +72,34 @@ function AfricaMap({
     setMaxColor("#A2181D");
     setProperty(category);
     setResults(countryRank(updatedData, category));
-    setTimeout(() => setButton(""), 300);
+    setButton("");
   }
 
+  const showButton = () => {
+    if (button === "Apply") {
+      return (
+        <>
+          <Tooltip
+            title="Press Apply"
+            open
+            arrow
+            classes={{ tooltip: classes.customWidth }}
+          >
+            <button
+              className={
+                button === "Apply" ? classes.applyButton : classes.none
+              }
+              onClick={changeProperty}
+            >
+              {button}
+            </button>
+          </Tooltip>
+        </>
+      );
+    }
+  };
+
   useEffect(() => {
-    setButton("Display Results");
     //need to work with D3
     const svg = select(svgRef.current);
     //find min and max of filter selected
@@ -207,7 +231,7 @@ function AfricaMap({
 
   return (
     <>
-      <button onClick={changeProperty}>{button}</button>
+      {showButton()}
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         {/* declare className, not to interfere with other svg styling */}
         <div onMouseEnter={handleChanges} className="d3">
@@ -220,3 +244,22 @@ function AfricaMap({
 }
 
 export default AfricaMap;
+
+const useStyles = makeStyles(theme => ({
+  applyButton: {
+    border: "2px solid #9F1C0F",
+    backgroundColor: "#9F1C0F",
+    color: "#FFF",
+    height: "3rem",
+    fontWeight: "500",
+    fontSize: "1.5rem",
+    width: "15rem",
+    borderRadius: ".5rem",
+    cursor: "pointer",
+    float: "left",
+    margin: "1%"
+  },
+  customWidth: {
+    fontSize: "16px"
+  }
+}));
