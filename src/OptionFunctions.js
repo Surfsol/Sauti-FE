@@ -10,6 +10,6 @@ export const getSelectedOption = (filters, filterId) => {
         : null;
     })
     .filter(selectableOption => selectableOption !== null);
-  //can change undefined, but is breaking
+
   return selectedOptions.length > 0 ? selectedOptions[0] : undefined;
 };

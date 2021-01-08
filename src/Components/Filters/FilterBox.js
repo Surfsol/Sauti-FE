@@ -161,6 +161,12 @@ export default function FilterBox(props) {
   //make the url based off filters
   let urlSearchParams = {};
   Object.keys(filters).forEach(filterId => {
+    let options = "";
+    if (getSelectedOption(filters, filterId) === undefined) {
+      options = ":";
+    } else {
+      options = `${getSelectedOption(filters, filterId)}`;
+    }
     urlSearchParams = {
       ...urlSearchParams,
       ["filter" + String(filterId)]: `${
@@ -168,9 +174,10 @@ export default function FilterBox(props) {
           ? filters[filterId].selectedTableColumnName
           : // change undefined to null
             "null"
-      },${getSelectedOption(filters, filterId)}`
+      },${options}`
     };
   });
+
   //let ourSearch = useHistory().location.search;
   const inverseConvertOptionUrl = option => {
     // these come from the selection options the user will see

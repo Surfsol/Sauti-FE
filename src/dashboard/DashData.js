@@ -137,7 +137,6 @@ function DashHome() {
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
           );
           let optionFlags = {};
-
           graphLabels[`${split3[0]}`].labels.forEach(option => {
             optionFlags = {
               ...optionFlags,
@@ -155,7 +154,7 @@ function DashHome() {
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                split3[1] === "undefined"
+                split3[1] === ":"
                   ? { ...optionFlags }
                   : // only need to alter split3[1] if we are using it
                     { ...optionFlags, [convertOptionUrl(split3[1])]: true },
