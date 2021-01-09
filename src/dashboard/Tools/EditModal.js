@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-
+import { Grid, Divider, Typography } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -181,29 +181,35 @@ const EditModal = props => {
             <FormDiv>
               <InputColumns>
                 <ColumnDiv>
-                  <Labels for="Id">Id</Labels>
-                  <Inputs
-                    type="text"
-                    id="id"
-                    placeholder={props.data.id}
-                    name={props.data.id}
-                    value={account.id}
-                    onChange={handleChange}
-                  />
-                  <Labels for="Email">Email</Labels>
-                  <Inputs
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder={props.data.email}
-                    value={account.email}
-                    onChange={handleChange}
-                  />
+                  <Typography variant="h5">
+                    {"ID: "}
+                    {account.id}
+                  </Typography>
+                  <Divider />
+                  <FormControl className={classes.margin}>
+                    <Labels2 for="Tier">User Type</Labels2>
+                    <Select
+                      id="tier"
+                      name="tier"
+                      value={account.tier}
+                      onChange={handleChange}
+                      defaultValue={props.data.tier}
+                      input={<Styles />}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={"FREE"}>FREE</MenuItem>
+                      <MenuItem value={"PAID"}>PAID</MenuItem>
+                      <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
+                      <MenuItem value={"GOV_ROLE"}>GOVERNMENT</MenuItem>
+                    </Select>
+                  </FormControl>
                   <Labels for="Organization">Organization</Labels>
                   <Inputs
                     type="text"
                     id="organization"
-                    placeholder={props.data.organization}
+                    defaultValue={props.data.organization}
                     name="organization"
                     value={account.organization}
                     onChange={handleChange}
@@ -218,11 +224,16 @@ const EditModal = props => {
                   />
                 </ColumnDiv>
                 <ColumnDiv>
+                  <Typography variant="h5">
+                    {"Email: "}
+                    {props.data.email}
+                  </Typography>
+                  <Divider />
                   <Labels for="Country">Country</Labels>
                   <Inputs
                     type="text"
                     id="country"
-                    placeholder={props.data.country}
+                    defaultValue={props.data.country}
                     name="country"
                     value={account.country}
                     onChange={handleChange}
@@ -232,29 +243,10 @@ const EditModal = props => {
                     type="text"
                     name="interest"
                     id="interest"
-                    placeholder={props.data.interest}
+                    defaultValue={props.data.interest}
                     value={account.interest}
                     onChange={handleChange}
                   />
-                  <FormControl className={classes.margin}>
-                    <Labels2 for="Tier">User Type</Labels2>
-                    <Select
-                      id="tier"
-                      name="tier"
-                      value={account.tier}
-                      onChange={handleChange}
-                      placeholder={props.data.tier}
-                      input={<Styles />}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={"FREE"}>FREE</MenuItem>
-                      <MenuItem value={"PAID"}>PAID</MenuItem>
-                      <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
-                      <MenuItem value={"GOV_ROLE"}>GOVERNMENT</MenuItem>
-                    </Select>
-                  </FormControl>
                   <FormControl className={classes.margin}>
                     <Labels2 for="Organization_type">Organization Type</Labels2>
                     <Select
@@ -262,7 +254,7 @@ const EditModal = props => {
                       name="organization_type"
                       value={account.organization_type}
                       onChange={handleChange}
-                      placeholder={props.data.organization_type}
+                      defaultValue={props.data.organization_type}
                       input={<Styles />}
                     >
                       <MenuItem value="">
