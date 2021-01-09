@@ -51,7 +51,7 @@ export default function MonthlyPayPal() {
         style: {
           shape: "rect",
           size: "responsive",
-          color: "white",
+          color: "blue",
           label: "paypal"
         },
 
@@ -103,5 +103,5 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 15vw;
+  width: 80%;
 `;
