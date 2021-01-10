@@ -9,7 +9,7 @@ function ChoroplethParent({ gqlData, queryType, filters }) {
   gqlData = gqlData[queryType];
 
   let category;
-  gqlData.length > 0
+  gqlData?.length > 0
     ? (category = Object.keys(gqlData[0])[0])
     : console.log("No Data");
 

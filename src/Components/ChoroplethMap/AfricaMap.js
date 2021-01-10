@@ -14,9 +14,7 @@ import "../scss/choropleth.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import { countryRank } from "./mapParcer";
 import { useDispatch } from "react-redux";
-import { lineAction } from "../redux-actions/lineActions";
 import { barDownload } from "../redux-actions/barDownloadAction";
-import Tooltip from "@material-ui/core/Tooltip";
 
 function AfricaMap({
   updatedData,
@@ -74,30 +72,11 @@ function AfricaMap({
     setResults(countryRank(updatedData, category));
     setButton("");
   }
-
-  const showButton = () => {
-    if (button === "Apply") {
-      return (
-        <>
-          <Tooltip
-            title="Press Apply"
-            open
-            arrow
-            classes={{ tooltip: classes.customWidth }}
-          >
-            <button
-              className={
-                button === "Apply" ? classes.applyButton : classes.none
-              }
-              onClick={changeProperty}
-            >
-              {button}
-            </button>
-          </Tooltip>
-        </>
-      );
-    }
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      changeProperty();
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     //need to work with D3
@@ -231,7 +210,6 @@ function AfricaMap({
 
   return (
     <>
-      {showButton()}
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         {/* declare className, not to interfere with other svg styling */}
         <div onMouseEnter={handleChanges} className="d3">
