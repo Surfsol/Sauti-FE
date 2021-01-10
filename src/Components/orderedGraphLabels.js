@@ -28,7 +28,7 @@ const allowed = [
   "Country of Residence",
   "Education Level",
   "Requested Agencies",
-  "Requsted Procedures, by Destination",
+  "Requested Procedures, by Destination",
   "Traded Commodity Categories"
 ];
 
