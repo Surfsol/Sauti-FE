@@ -60,7 +60,6 @@ function ChoroplethParent({ gqlData, queryType, filters }) {
     return (
       <>
         <React.Fragment>
-          <h2 className="choro-parent-h2">Sauti Map</h2>
           <AfricaMap
             handleChanges={handleChanges}
             dataView={map}

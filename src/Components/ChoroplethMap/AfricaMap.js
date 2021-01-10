@@ -216,7 +216,6 @@ function AfricaMap({
           <svg ref={svgRef}></svg>
         </div>
       </div>
-      <h2 className="choro-parent-h2">Select Country</h2>
     </>
   );
 }
