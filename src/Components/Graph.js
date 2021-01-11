@@ -192,11 +192,11 @@ const Graph = props => {
 
   let fileName = "";
   fileName = `${filters[0].selectedTableColumnName &&
-    filters[0].selectedTableColumnName}${filters[1].selectedCategory &&
-    "_by_" + filters[1].selectedCategory}${filters[2].selectedCategory &&
-    `_where_${filters[2].selectedCategory}:(${
+    filters[0].selectedTableColumnName}${filters[1]?.selectedCategory &&
+    "_by_" + filters[1]?.selectedCategory}${filters[2]?.selectedCategory &&
+    `_where_${filters[2]?.selectedCategory}:(${
       Object.values({
-        [filters[2].selectedCategory]: getSelectedOption(filters, 2)
+        [filters[2]?.selectedCategory]: getSelectedOption(filters, 2)
       })[0]
     })`}`;
 

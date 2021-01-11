@@ -33,10 +33,10 @@ const GraphParse = ({
   let chartData = dataParse(
     filters[0].selectedTableColumnName,
     data[`${queryType}`] || data.tradersUsers,
-    filters[1].selectedTableColumnName,
-    filters[2].selectedTableColumnName,
+    filters[1]?.selectedTableColumnName,
+    filters[2]?.selectedTableColumnName,
     filters[0].selectedTable,
-    filters[1].selectedTable,
+    filters[1]?.selectedTable,
     graphLabels
   );
 

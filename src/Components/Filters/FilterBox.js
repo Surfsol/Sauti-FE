@@ -83,7 +83,7 @@ export default function FilterBox(props) {
     } else if (tier !== undefined && tier === "FREE") {
       access = "free";
     }
-    //console.log("tier", tier, "access", access);
+
     dispatch(tierDefined({ tier: tier, access: access }));
 
     useEffect(() => {
@@ -122,7 +122,6 @@ export default function FilterBox(props) {
             setUpdateUrlFlag={setUpdateUrlFlag}
             FilterBoxOptions={FilterBoxOptions}
             updateUrlFlag={updateUrlFlag}
-            // xVar={xVar}
           />
         </Grid>
       );
@@ -162,20 +161,15 @@ export default function FilterBox(props) {
   let urlSearchParams = {};
   Object.keys(filters).forEach(filterId => {
     let options = "";
-    if (getSelectedOption(filters, filterId) === undefined) {
-      options = ":";
-    } else {
+    if (getSelectedOption(filters, filterId) !== undefined) {
       options = `${getSelectedOption(filters, filterId)}`;
     }
-    urlSearchParams = {
-      ...urlSearchParams,
-      ["filter" + String(filterId)]: `${
-        filters[filterId].selectedTableColumnName
-          ? filters[filterId].selectedTableColumnName
-          : // change undefined to null
-            "null"
-      },${options}`
-    };
+
+    if (filters[filterId].selectedTableColumnName) {
+      urlSearchParams[
+        "filter" + String(filterId)
+      ] = `${filters[filterId].selectedTableColumnName},${options}`;
+    }
   });
 
   //let ourSearch = useHistory().location.search;
@@ -191,7 +185,6 @@ export default function FilterBox(props) {
     }
   };
   useEffect(() => {
-    // console.log('url Search params',urlSearchParams)
     let keys = Object.keys(urlSearchParams);
     let values = Object.values(urlSearchParams).map(value =>
       inverseConvertOptionUrl(value)
@@ -199,7 +192,6 @@ export default function FilterBox(props) {
     const filterStrings = keys
       .map((key, i) => key + "=" + values[i])
       .join("&&");
-    //console.log(filterStrings)
     History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
   }, [updateUrlFlag]);
 

@@ -125,14 +125,16 @@ function DashHome() {
 
       //split on &
       let split1 = searchString.split("&&");
+      if (!split1[1]?.includes("filter1")) {
+        split1.splice(1, 0, `filter1=,`);
+      }
 
       // making a new set of filters from the url
       let newFilterObject = {};
       for (var i in split1) {
         let split2 = split1[i].split("=");
         let split3 = split2[1].split(",");
-
-        if (split3[0] !== "null") {
+        if (split3[0] !== "") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
           );
@@ -154,7 +156,7 @@ function DashHome() {
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                split3[1] === ":"
+                split3[1] === ""
                   ? { ...optionFlags }
                   : // only need to alter split3[1] if we are using it
                     { ...optionFlags, [convertOptionUrl(split3[1])]: true },
@@ -178,7 +180,9 @@ function DashHome() {
           };
         }
       }
-
+      if (!newFilterObject[1]) {
+        newFilterObject[1] = filterTemplate[1];
+      }
       return newFilterObject;
     }
   };
