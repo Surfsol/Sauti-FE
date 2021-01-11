@@ -102,7 +102,7 @@ const LineGraphButton = props => {
       </>
     );
   } else if (
-    filters[0]["selectedCategory"] === "Requsted Procedures, by Destination"
+    filters[0]["selectedCategory"] === "Requested Procedures, by Destination"
   ) {
     return (
       <>
@@ -115,7 +115,7 @@ const LineGraphButton = props => {
     open === "choropleth" &&
     filters[0]["selectedCategory"] !== "Country of Residence" &&
     filters[0]["selectedCategory"] !== "Traders' Destination Country" &&
-    filters[0]["selectedCategory"] !== "Requsted Procedures, by Destination"
+    filters[0]["selectedCategory"] !== "Requested Procedures, by Destination"
   ) {
     setOpen("bar");
     return <>{renderBar()}</>;
