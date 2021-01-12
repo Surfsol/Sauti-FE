@@ -7,6 +7,7 @@ import {
   Grid,
   Typography,
   Divider,
+  Button,
   colors
 } from "@material-ui/core";
 import Icon from "../../../themeStyledComponents/atoms/Icon";
@@ -34,6 +35,13 @@ const useStyles = makeStyles(theme => ({
     padding: "0.25em",
     borderRadius: "4px",
     textTransform: "uppercase"
+  },
+  premiumButton: {
+    marginTop: "1.9em"
+  },
+  cardSubTitle: {
+    minHeight: "6em",
+    display: "block"
   }
 }));
 
@@ -48,18 +56,80 @@ const Subscription = props => {
 
   console.log("tier", props.tier);
 
-  const monthlyPmt = () => {
-    if (props.tier !== "PAID") {
-      return <MonthlyPayPal />;
+  //Russ I've used this exact code twice on MyAccount and here. Perhaps this should be global somewhere?
+  let planName = props.tier;
+  switch (planName) {
+    case "FREE":
+      planName = "Free Trial";
+      break;
+    case "PAID":
+      planName = "Premium Access";
+      break;
+  }
+  //------------
+
+  const yourPlanFree = () => {
+    if (props.tier == "FREE") {
+      return (
+        <Button
+          color="primary"
+          variant="outlined"
+          disabled
+          fullWidth
+          size="large"
+          className={classes.premiumButton}
+        >
+          Your Plan
+        </Button>
+      );
+    } else if (props.tier == "PAID") {
+      return (
+        <Button
+          color="primary"
+          variant="outlined"
+          fullWidth
+          size="large"
+          className={classes.premiumButton}
+        >
+          Downgrade Your Plan
+        </Button>
+      );
+      //Pops up modal: "Are you sure you want to downgrade your plan?" <CancelSubscription />;
     }
   };
 
-  const cancelSub = () => {
-    if (props.tier === "PAID") {
-      return <CancelSubscription />;
+  // const cancelSub = () => {
+  //   if (props.tier === "PAID") {
+  //     return <CancelSubscription />;
+  const yourPlanPaid = () => {
+    if (props.tier == "PAID") {
+      return (
+        <Button
+          color="primary"
+          variant="outlined"
+          disabled
+          fullWidth
+          size="large"
+          className={classes.premiumButton}
+        >
+          Your Plan
+        </Button>
+      );
+    } else if (props.tier != "PAID") {
+      return (
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          size="large"
+          className={classes.premiumButton}
+        >
+          Upgrade Plan
+        </Button>
+      );
+      //Pops up modal with Select a Payment Method <MonthlyPayPal />
     }
   };
-
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Grid container spacing={isMd ? 4 : 2}>
@@ -67,7 +137,7 @@ const Subscription = props => {
           <div className={classes.titleCta}>
             <Typography variant="h6" color="textPrimary">
               <span>{"Your Plan: "}</span>
-              <span className={classes.planText}> {props.tier} </span>
+              <span className={classes.planText}> {planName} </span>
             </Typography>
           </div>
         </Grid>
@@ -82,16 +152,23 @@ const Subscription = props => {
                 liftUp
                 variant="outlined"
                 title="Free Trial"
-                subtitle="Our two week free trial allows you to explore a basic selection of our Trade Insights Data and try out our interactive dashboard for free."
+                subtitle={
+                  <span className={classes.cardSubTitle}>
+                    Our two week free trial allows you to explore a basic
+                    selection of our Trade Insights Data and try out our
+                    interactive dashboard for free.
+                  </span>
+                }
                 priceComponent={
                   <div>
                     <Typography
                       variant="h3"
                       component="span"
-                      style={{ fontWeight: 900 }}
+                      style={{ fontWeight: 900, minHeight: "6em" }}
                     >
                       2 weeks free
                     </Typography>
+                    {yourPlanFree()}
                   </div>
                 }
                 features={[
@@ -132,9 +209,7 @@ const Subscription = props => {
                     fullWidth
                     size="large"
                     href="signup"
-                  >
-                    {cancelSub()}
-                  </div>
+                  ></div>
                 }
               />
             </Grid>
@@ -144,7 +219,13 @@ const Subscription = props => {
                 liftUp
                 variant="outlined"
                 title="Premium Access"
-                subtitle="With Premium Access you can explore and download all the Sauti Trade Insights data, with additional filtering and dashboard features to drill-down through the data."
+                subtitle={
+                  <span className={classes.cardSubTitle}>
+                    With Premium Access you can explore and download all the
+                    Sauti Trade Insights data, with additional filtering and
+                    dashboard features to drill-down through the data.
+                  </span>
+                }
                 priceComponent={
                   <div>
                     <Typography
@@ -157,6 +238,8 @@ const Subscription = props => {
                     <Typography component="span" variant="subtitle1">
                       / mo
                     </Typography>
+                    <yourPlan plan="PAID" />
+                    {yourPlanPaid()}
                   </div>
                 }
                 features={[
@@ -209,7 +292,7 @@ const Subscription = props => {
                     size="large"
                     href="signup"
                   >
-                    {monthlyPmt()}
+                    {yourPlanPaid()}
                   </div>
                 }
               />
