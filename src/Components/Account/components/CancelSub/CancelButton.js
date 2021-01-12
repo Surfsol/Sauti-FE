@@ -17,6 +17,7 @@ const CancelButton = () => {
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={CancelSubModal}
+            onClose={() => setCancelSub(false)}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
