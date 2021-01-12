@@ -17,6 +17,7 @@ const PremiumButton = () => {
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={PayPalModal}
+            onClose={() => setGetSub(false)}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
