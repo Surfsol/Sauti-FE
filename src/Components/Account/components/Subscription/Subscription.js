@@ -55,7 +55,7 @@ const Subscription = props => {
   };
 
   const cancelSub = () => {
-    if (props.tier !== "PAID") {
+    if (props.tier === "PAID") {
       return <CancelSubscription />;
     }
   };
