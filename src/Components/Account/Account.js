@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
 import { SectionAlternate, CardBase } from "../../Components/organisms";
-import { Hero, MyAccount, Subscription } from "./components";
+import { Hero, MyAccount, SubscriptionOpt } from "./components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
@@ -153,7 +153,7 @@ const Account = ({ decoded, tier }) => {
                 />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
-                <Subscription tier={tier} />
+                <SubscriptionOpt tier={tier} />
               </TabPanel>
             </CardBase>
           </Grid>

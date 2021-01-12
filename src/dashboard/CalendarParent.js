@@ -37,7 +37,7 @@ const CalendarParent = ({
   } else if (open === "bar" && filters[0].selectedTable != "Users") {
     return (
       <>
-        <Grid container>
+        <Grid container style={{ paddingRight: "10px" }}>
           <Grid container>
             <Grid item xs={6} style={{ fontSize: "12px" }}>
               <TextField
@@ -47,6 +47,7 @@ const CalendarParent = ({
                 defaultValue={filterBoxStartDate}
                 value={filterBoxStartDate}
                 className={classes.textField}
+                style={{ margin: "2%", width: "95%" }}
                 onChange={e => setFilterBoxStartDate(e.target.value)}
                 InputLabelProps={{
                   // shrink: true
@@ -67,6 +68,7 @@ const CalendarParent = ({
                 id="today"
                 defaultValue={filterBoxEndDate}
                 className={classes.textField}
+                style={{ margin: "2%", width: "95%" }}
                 onChange={e => setFilterBoxEndDate(e.target.value)}
                 InputLabelProps={{
                   shrink: true,

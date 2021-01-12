@@ -12,10 +12,9 @@ import {
 } from "@material-ui/core";
 import Icon from "../../../themeStyledComponents/atoms/Icon";
 import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPricingStandard";
-import MonthlyPayPal from "../MonthlyPayPal/index";
-import CancelSubscription from "../CancelSub";
 import { useSelector } from "react-redux";
 import PremiumButton from "../PayPal/PremiumButton";
+import CancelButton from "../CancelSub/CancelButton";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -71,7 +70,7 @@ const Subscription = props => {
   //------------
 
   const yourPlanFree = () => {
-    if (props.tier == "FREE") {
+    if (props.tier === "FREE") {
       return (
         <Button
           color="primary"
@@ -85,17 +84,7 @@ const Subscription = props => {
         </Button>
       );
     } else if (props.tier == "PAID") {
-      return (
-        <Button
-          color="primary"
-          variant="outlined"
-          fullWidth
-          size="large"
-          className={classes.premiumButton}
-        >
-          Downgrade Your Plan
-        </Button>
-      );
+      return <CancelButton />;
       //Pops up modal: "Are you sure you want to downgrade your plan?" <CancelSubscription />;
     }
   };
@@ -104,30 +93,22 @@ const Subscription = props => {
   //   if (props.tier === "PAID") {
   //     return <CancelSubscription />;
   const yourPlanPaid = () => {
-    if (props.tier == "PAID") {
+    if (props.tier !== "PAID") {
+      return <PremiumButton />;
+    } else if (props.tier === "PAID") {
       return (
-        <Button
-          color="primary"
-          variant="outlined"
-          disabled
-          fullWidth
-          size="large"
-          className={classes.premiumButton}
-        >
-          Your Plan
-        </Button>
-      );
-    } else if (props.tier != "PAID") {
-      return (
-        <Button
-          color="primary"
-          variant="contained"
-          fullWidth
-          size="large"
-          className={classes.premiumButton}
-        >
-          Upgrade Plan
-        </Button>
+        <>
+          {/* <Button
+        color="primary"
+        variant="outlined"
+        disabled
+        fullWidth
+        size="large"
+        className={classes.premiumButton}
+      >
+        Your Plan
+      </Button> */}
+        </>
       );
       //Pops up modal with Select a Payment Method <MonthlyPayPal />
     }
@@ -286,18 +267,7 @@ const Subscription = props => {
                     fontIconColor={colors.indigo[500]}
                   />
                 }
-                // cta={
-                //   <div
-                //     color="primary"
-                //     variant="outlined"
-                //     fullWidth
-                //     size="large"
-                //     href="signup"
-                //   >
-                //     {yourPlanPaid()}
-                //   </div>
-                // }
-                cta={<PremiumButton />}
+                cta={yourPlanPaid()}
               />
             </Grid>
           </Grid>
