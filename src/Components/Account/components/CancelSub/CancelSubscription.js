@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
+import { Button } from "@material-ui/core";
 
 const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(
@@ -120,9 +121,16 @@ const NewSubscriberHandler = props => {
   };
 
   return (
-    <button className="cancel" onClick={handleSubscriptionCancellation}>
+    <Button
+      color="primary"
+      variant="contained"
+      fullWidth
+      size="large"
+      className="cancel"
+      onClick={handleSubscriptionCancellation}
+    >
       Cancel Subscription
-    </button>
+    </Button>
   );
 };
 

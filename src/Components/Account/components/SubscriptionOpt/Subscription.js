@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "4px",
     textTransform: "uppercase"
   },
-  premiumButton: {
+  buttonPadding: {
     marginTop: "1.9em"
   },
   cardSubTitle: {
@@ -78,7 +78,7 @@ const Subscription = props => {
           disabled
           fullWidth
           size="large"
-          className={classes.premiumButton}
+          className={classes.buttonPadding}
         >
           Your Plan
         </Button>
@@ -98,16 +98,18 @@ const Subscription = props => {
     } else if (props.tier === "PAID") {
       return (
         <>
-          {/* <Button
-        color="primary"
-        variant="outlined"
-        disabled
-        fullWidth
-        size="large"
-        className={classes.premiumButton}
-      >
-        Your Plan
-      </Button> */}
+          {
+            <Button
+              color="primary"
+              variant="outlined"
+              disabled
+              fullWidth
+              size="large"
+              className={classes.buttonPadding}
+            >
+              Your Plan
+            </Button>
+          }
         </>
       );
       //Pops up modal with Select a Payment Method <MonthlyPayPal />

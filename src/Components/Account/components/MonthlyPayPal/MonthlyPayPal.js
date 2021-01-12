@@ -103,5 +103,5 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 80%;
+  width: 100%;
 `;
