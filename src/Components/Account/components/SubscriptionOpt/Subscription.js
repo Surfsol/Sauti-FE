@@ -89,12 +89,10 @@ const Subscription = props => {
     }
   };
 
-  // const cancelSub = () => {
-  //   if (props.tier === "PAID") {
-  //     return <CancelSubscription />;
   const yourPlanPaid = () => {
     if (props.tier !== "PAID") {
       return <PremiumButton />;
+      //Pops up modal with Select a Payment Method <MonthlyPayPal />
     } else if (props.tier === "PAID") {
       return (
         <>
@@ -112,7 +110,6 @@ const Subscription = props => {
           }
         </>
       );
-      //Pops up modal with Select a Payment Method <MonthlyPayPal />
     }
   };
   return (
