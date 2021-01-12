@@ -6,13 +6,15 @@ import {
   useMediaQuery,
   Grid,
   Typography,
-  Button,
   Divider,
+  Button,
   colors
 } from "@material-ui/core";
-import Icon from "../../../themeStyledComponents/atoms/Icon/";
+import Icon from "../../../themeStyledComponents/atoms/Icon";
 import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPricingStandard";
 import { useSelector } from "react-redux";
+import PremiumButton from "../PayPal/PremiumButton";
+import CancelButton from "../CancelSub/CancelButton";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -34,10 +36,17 @@ const useStyles = makeStyles(theme => ({
     padding: "0.25em",
     borderRadius: "4px",
     textTransform: "uppercase"
+  },
+  buttonPadding: {
+    marginTop: "1.9em"
+  },
+  cardSubTitle: {
+    minHeight: "6em",
+    display: "block"
   }
 }));
 
-const Security = props => {
+const Subscription = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
@@ -45,23 +54,64 @@ const Security = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
-  const userTier = useSelector(state => state.tierReducer.tier);
-  const getPlan = () => {
-    let plan = userTier;
-    switch (plan) {
-      case "FREE":
-        plan = "Free Trial";
-        break;
-      case "PAID":
-        plan = "Premium Access";
-        break;
+
+  console.log("tier", props.tier);
+
+  //Russ I've used this exact code twice on MyAccount and here. Perhaps this should be global somewhere?
+  let planName = props.tier;
+  switch (planName) {
+    case "FREE":
+      planName = "Free Trial";
+      break;
+    case "PAID":
+      planName = "Premium Access";
+      break;
+  }
+  //------------
+
+  const yourPlanFree = () => {
+    if (props.tier === "FREE") {
+      return (
+        <Button
+          color="primary"
+          variant="outlined"
+          disabled
+          fullWidth
+          size="large"
+          className={classes.buttonPadding}
+        >
+          Your Plan
+        </Button>
+      );
+    } else if (props.tier == "PAID") {
+      return <CancelButton />;
+      //Pops up modal: "Are you sure you want to downgrade your plan?" <CancelSubscription />;
     }
-    if (typeof plan !== "string") {
-      plan = "Please log out and login again to see your plan.";
-    }
-    return plan;
   };
 
+  const yourPlanPaid = () => {
+    if (props.tier !== "PAID") {
+      return <PremiumButton />;
+      //Pops up modal with Select a Payment Method <MonthlyPayPal />
+    } else if (props.tier === "PAID") {
+      return (
+        <>
+          {
+            <Button
+              color="primary"
+              variant="outlined"
+              disabled
+              fullWidth
+              size="large"
+              className={classes.buttonPadding}
+            >
+              Your Plan
+            </Button>
+          }
+        </>
+      );
+    }
+  };
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Grid container spacing={isMd ? 4 : 2}>
@@ -69,7 +119,7 @@ const Security = props => {
           <div className={classes.titleCta}>
             <Typography variant="h6" color="textPrimary">
               <span>{"Your Plan: "}</span>
-              <span className={classes.planText}> {getPlan()} </span>
+              <span className={classes.planText}> {planName} </span>
             </Typography>
           </div>
         </Grid>
@@ -84,16 +134,23 @@ const Security = props => {
                 liftUp
                 variant="outlined"
                 title="Free Trial"
-                subtitle="Our two week free trial allows you to explore a basic selection of our Trade Insights Data and try out our interactive dashboard for free."
+                subtitle={
+                  <span className={classes.cardSubTitle}>
+                    Our two week free trial allows you to explore a basic
+                    selection of our Trade Insights Data and try out our
+                    interactive dashboard for free.
+                  </span>
+                }
                 priceComponent={
                   <div>
                     <Typography
                       variant="h3"
                       component="span"
-                      style={{ fontWeight: 900 }}
+                      style={{ fontWeight: 900, minHeight: "6em" }}
                     >
                       2 weeks free
                     </Typography>
+                    {yourPlanFree()}
                   </div>
                 }
                 features={[
@@ -128,15 +185,13 @@ const Security = props => {
                   />
                 }
                 cta={
-                  <Button
+                  <div
                     color="primary"
                     variant="outlined"
                     fullWidth
                     size="large"
                     href="signup"
-                  >
-                    Change Account Plan to Free Plan
-                  </Button>
+                  ></div>
                 }
               />
             </Grid>
@@ -146,7 +201,13 @@ const Security = props => {
                 liftUp
                 variant="outlined"
                 title="Premium Access"
-                subtitle="With Premium Access you can explore and download all the Sauti Trade Insights data, with additional filtering and dashboard features to drill-down through the data."
+                subtitle={
+                  <span className={classes.cardSubTitle}>
+                    With Premium Access you can explore and download all the
+                    Sauti Trade Insights data, with additional filtering and
+                    dashboard features to drill-down through the data.
+                  </span>
+                }
                 priceComponent={
                   <div>
                     <Typography
@@ -159,6 +220,8 @@ const Security = props => {
                     <Typography component="span" variant="subtitle1">
                       / mo
                     </Typography>
+                    <yourPlan plan="PAID" />
+                    {yourPlanPaid()}
                   </div>
                 }
                 features={[
@@ -203,17 +266,7 @@ const Security = props => {
                     fontIconColor={colors.indigo[500]}
                   />
                 }
-                cta={
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                    size="large"
-                    href="signup"
-                  >
-                    Change Account Plan to Premium
-                  </Button>
-                }
+                cta={yourPlanPaid()}
               />
             </Grid>
           </Grid>
@@ -223,11 +276,11 @@ const Security = props => {
   );
 };
 
-Security.propTypes = {
+Subscription.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string
 };
 
-export default Security;
+export default Subscription;

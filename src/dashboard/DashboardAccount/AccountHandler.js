@@ -1,14 +1,10 @@
 import React from "react";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 import { useNewSubName } from "./useNewSubNameHook";
-import DashAccountFree from "./DashAccountFree";
-import DashAccountUser from "./DashAccountUser";
 import DashAccountAdmin from "./DashAccountAdmin";
 import GovAccount from "./GovAccount";
 import NewSubscriberHandler from "./NewSubscriberHandler";
 import NoAccount from "./NoAccount";
-
-import AccountPage from "../../Components/themePricing/AccountPage";
 
 import Accounts from "../../Components/Account/index";
 // This component handles the conditionals for the users
@@ -36,14 +32,10 @@ const AccountHandler = () => {
     return <NewSubscriberHandler newPaypalSubscriber={newPaypalSubscriber} />;
   }
 
-  // if (freeUser) {
-  //   return <AccountPage />;
-  // } else if (paidUser) {
-  //   return <DashAccountUser />;
   if (freeUser) {
-    return <Accounts decoded={decoded} />;
+    return <Accounts tier={"FREE"} decoded={decoded} />;
   } else if (paidUser) {
-    return <Accounts tier={paidUser} decoded={decoded} />;
+    return <Accounts tier={"PAID"} decoded={decoded} />;
   } else if (adminUser) {
     return <DashAccountAdmin />;
   } else if (govUser) {
