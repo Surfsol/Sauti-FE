@@ -10,9 +10,10 @@ import {
   Divider,
   colors
 } from "@material-ui/core";
-import Icon from "../../../themeStyledComponents/atoms/Icon/";
+import Icon from "../../../themeStyledComponents/atoms/Icon";
 import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPricingStandard";
 import { useSelector } from "react-redux";
+import PremiumButton from "./PremiumButton";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Security = props => {
+const Subscription = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
@@ -203,17 +204,7 @@ const Security = props => {
                     fontIconColor={colors.indigo[500]}
                   />
                 }
-                cta={
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                    size="large"
-                    href="signup"
-                  >
-                    Change Account Plan to Premium
-                  </Button>
-                }
+                cta={<PremiumButton />}
               />
             </Grid>
           </Grid>
@@ -223,11 +214,11 @@ const Security = props => {
   );
 };
 
-Security.propTypes = {
+Subscription.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string
 };
 
-export default Security;
+export default Subscription;

@@ -4,11 +4,12 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, List, ListItem, Grid, Typography } from "@material-ui/core";
 import { SectionAlternate, CardBase } from "../../Components/organisms";
-import { Hero, MyAccount, Security } from "./components";
+import { Hero, MyAccount, SubscriptionOpt } from "./components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
+import { Subscription } from "react-apollo";
 
 const TabPanel = props => {
   const { tier, children, value, index, ...other } = props;
@@ -153,7 +154,7 @@ const Account = ({ decoded, tier }) => {
                 />
               </TabPanel>
               <TabPanel value={pageId} index={"subscriptions"}>
-                <Security />
+                <SubscriptionOpt />
               </TabPanel>
             </CardBase>
           </Grid>
