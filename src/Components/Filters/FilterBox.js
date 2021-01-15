@@ -164,8 +164,12 @@ export default function FilterBox(props) {
     if (getSelectedOption(filters, filterId) !== undefined) {
       options = `${getSelectedOption(filters, filterId)}`;
     }
-
-    if (filters[filterId].selectedTableColumnName) {
+    if (Number(filterId) <= 1 && filters[filterId].selectedTableColumnName) {
+      urlSearchParams[
+        "filter" + String(filterId)
+      ] = `${filters[filterId].selectedTableColumnName}`;
+    }
+    if (Number(filterId) > 1 && filters[filterId].selectedTableColumnName) {
       urlSearchParams[
         "filter" + String(filterId)
       ] = `${filters[filterId].selectedTableColumnName},${options}`;

@@ -76,6 +76,7 @@ function DashHome() {
       option = "<20";
     }
     // -1 means the search failed
+
     if (option.search(/forwardslash/) > -1) {
       return option.replace(/forwardslash/g, "/");
     } else if (option.search(/whitespace/) > -1) {
@@ -106,6 +107,7 @@ function DashHome() {
       });
       return defaultFilter;
     } else {
+      console.log("url", history.location.search);
       let searchString = history.location.search.slice(
         1,
         history.location.search.length
@@ -128,12 +130,14 @@ function DashHome() {
       if (!split1[1]?.includes("filter1")) {
         split1.splice(1, 0, `filter1=,`);
       }
-
+      console.log("split1", split1);
       // making a new set of filters from the url
       let newFilterObject = {};
       for (var i in split1) {
         let split2 = split1[i].split("=");
+        console.log("split1", split1, "split2", split2);
         let split3 = split2[1].split(",");
+        console.log("split3", split3);
         if (split3[0] !== "") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
@@ -156,7 +160,7 @@ function DashHome() {
                 FilterBoxOptions.tableNamesToCategoryName[split3[0]],
               selectedTableColumnName: split3[0],
               selectableOptions:
-                split3[1] === ""
+                split3[1] === "" || split3[1] === undefined
                   ? { ...optionFlags }
                   : // only need to alter split3[1] if we are using it
                     { ...optionFlags, [convertOptionUrl(split3[1])]: true },
