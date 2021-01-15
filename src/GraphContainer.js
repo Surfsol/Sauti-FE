@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: "40%",
     backgroundRepeat: "no-repeat",
     backgroundPositionX: "47%",
-    backgroundPositionY: "15%"
+    backgroundPositionY: "30px"
   },
   whitebg: {
     backgroundColor: "white"
