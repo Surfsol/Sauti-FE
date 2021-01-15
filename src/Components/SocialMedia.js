@@ -31,7 +31,7 @@ const SocialMedia = () => {
     keys = chartDataReducer.keys;
     sampleSize = chartDataReducer.sampleSize;
   }
-
+  console.log("access", access);
   const newSub = getSubscription();
   let sub;
   if (newSub) {
@@ -78,7 +78,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {access || sub === newSub ? (
+        {access !== "free" || sub === newSub ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader
