@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   pagePaddingTop: {
     paddingTop: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
-      paddingTop: theme.spacing(5)
+      paddingTop: theme.spacing(12)
     }
   },
   sectionNoPaddingTop: {

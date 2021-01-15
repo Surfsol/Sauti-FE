@@ -6,6 +6,7 @@ import { useMediaQuery, Grid, Button } from "@material-ui/core";
 
 import Image from "../../themeStyledComponents/atoms/Image/";
 import ImgDashboard from "../../../assets/images/dashboard.png";
+import ImgDashboardGif from "../../../assets/images/tradeinsights.gif";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import { useHistory } from "react-router-dom";
 
@@ -42,7 +43,6 @@ const Hero = props => {
   };
 
   return (
-    // class name and rest not doing anything
     <div className={clsx(classes.root, className)} {...rest}>
       <Grid
         container
@@ -61,13 +61,13 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Support East Africa's traders{" "}
+                Data-driven insights{" "}
                 <span className="text-highlighted__primary">
-                  with data-driven insights.
+                  for East African trade.
                 </span>
               </span>
             }
-            subtitle="Data from Kenyan, Ugandan, Rwandan, and Tanzanian cross-border traders to support your research, policy work, solution designs and more."
+            subtitle="Crowdsourced data from Kenyan, Ugandan, Rwandan, and Tanzanian cross-border traders to support your research, solution designs, and more."
             ctaGroup={[
               <Button
                 onClick={handleSignUp}
@@ -76,14 +76,6 @@ const Hero = props => {
                 size="large"
               >
                 Get Started
-              </Button>,
-              <Button
-                onClick={handlePricing}
-                variant="outlined"
-                color="primary"
-                size="large"
-              >
-                Learn more
               </Button>
             ]}
             align="left"
@@ -101,7 +93,7 @@ const Hero = props => {
           data-aos={"fade-up"}
         >
           <Image
-            src={ImgDashboard}
+            src={ImgDashboardGif}
             alt="CBT Insights by Sauti East Africa"
             className={classes.image}
             data-aos="flip-left"

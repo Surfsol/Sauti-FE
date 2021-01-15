@@ -29,39 +29,46 @@ const Partners = props => {
     <div className={clsx(classes.root, className)} {...rest}>
       <Grid container spacing={isMd ? 4 : 2}>
         <Grid item xs={6} data-aos="fade-up">
+          <CardBase variant="outlined" align="left">
+            <Typography variant="h4" style={{ paddingBottom: "8px" }}>
+              Demographic, Market, and Trade insights for East Africa's
+              cross-border traders
+            </Typography>
+            <Typography
+              variant="h6"
+              style={{ paddingTop: "8px", paddingBottom: "8px" }}
+            >
+              Cross-border trade is notoriously difficult to sample by
+              traditional methods. We provide near-realtime crowdsourced data to
+              enrich analyst's understanding of East Africa's cross-border trade
+              environment.
+            </Typography>
+            <LearnMoreLink
+              title="More about our data"
+              href="faqs"
+              variant="h6"
+              style={{ marginTop: "8px" }}
+            />
+          </CardBase>
+        </Grid>
+        <Grid item xs={6} data-aos="fade-up">
           <SectionHeader
-            title="Demographic, Market, and Trade insights for East Africa's cross-border traders"
-            subtitle="Our mission is to enrich the understanding of East Africa's cross-border trade environment with data up-to-date data and and analyses"
+            title="How has cross-border trade behaviour changed during the COVID-19 pandemic?"
+            subtitle="This report presents key findings on the economic impacts of COVID-19 on East Africa's traders. We identify a regional shift of market sourcing from cross-border destinations to local destinations, likely a reflection of national restrictions on cross-border movements."
             align="left"
-            label="95000+ data points"
+            label="Latest Analysis"
             ctaGroup={[
-              <LearnMoreLink
-                title="See all data series"
-                href="#"
-                variant="h6"
-              />
+              <Button
+                href="https://sautiafrica.org/sauti-trade-insights-covid-19-bulletin/"
+                target="_blank"
+                variant="contained"
+                color="primary"
+              >
+                Read More
+              </Button>
             ]}
             disableGutter
           />
-        </Grid>
-        <Grid item xs={6} data-aos="fade-up">
-          <CardBase variant="outlined" align="left">
-            <Typography variant="h4">Latest Analysis</Typography>
-            <Typography variant="h6">
-              COVID-19's Impact on Goods Traded in East Africa
-            </Typography>
-
-            <Typography gutterBottom="True">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              gravida mauris a volutpat suscipit. Nulla sagittis pulvinar lorem
-              sit amet dictum. Nunc dapibus dolor quis turpis rhoncus tempor.
-              Sed nec nibh aliquam, posuere ante vel, accumsan nunc. Sed non
-              rutrum mauris. Aliquam erat volutpat. Aenean elit orci.
-            </Typography>
-            <Button variant="contained" color="primary">
-              Read More
-            </Button>
-          </CardBase>
         </Grid>
       </Grid>
     </div>
