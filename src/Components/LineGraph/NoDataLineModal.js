@@ -39,8 +39,6 @@ function NoDataModal({
 }) {
   const dispatch = useDispatch();
 
-  console.log("show no Data modal");
-
   let reset = {
     0: {
       ...filters[0],

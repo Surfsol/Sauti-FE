@@ -9,41 +9,15 @@ import { allowed } from "../Components/orderedGraphLabels";
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
 import { showNoAccessAction } from "../Components/redux-actions/showNoAccessAction";
-
-//set inital filters
-const filterTemplate = {
-  0: {
-    nameOfFilter: "Data Series",
-    selectedCategory: "",
-    selectableOptions: {},
-    selectedTable: "",
-    selectedTableColumnName: "",
-    showOptions: false
-  },
-
-  1: {
-    nameOfFilter: "Compare SubSamples",
-    selectedCategory: "",
-    selectableOptions: {},
-    selectedTable: "",
-    selectedTableColumnName: "",
-    showOptions: false
-  },
-  2: {
-    nameOfFilter: "Data Filter",
-    selectedCategory: "",
-    selectableOptions: {},
-    selectedTable: "",
-    selectedTableColumnName: "",
-    showOptions: true
-  }
-};
+import { filterTemplate, defaultFilters } from "./DataDashHelpers/filters";
 
 function DashHome() {
   const [noAccess, setNoAccess] = useState(true);
   const token = getToken();
   const history = useHistory();
   const dispatch = useDispatch();
+  const [previous, setPrevious] = useState({});
+  const fromNavReducer = useSelector(state => state.fromNavReducer.navLink);
 
   const graphLabels = useSelector(
     state => state.catLabelReducer.labels.getGraphLabels
@@ -184,33 +158,19 @@ function DashHome() {
     }
   };
 
-  let defaultFilters = {
-    0: {
-      nameOfFilter: "Data Series",
-      selectedCategory: "Country of Residence",
-      selectableOptions: {},
-      selectedTable: "Users",
-      selectedTableColumnName: "country_of_residence",
-      showOptions: false
-    },
-
-    1: {
-      nameOfFilter: "Compare SubSamples",
-      selectedCategory: "",
-      selectableOptions: {},
-      selectedTable: "",
-      selectedTableColumnName: "",
-      showOptions: false
-    },
-    2: {
-      nameOfFilter: "Data Filter",
-      selectedCategory: "",
-      selectableOptions: {},
-      selectedTable: "",
-      selectedTableColumnName: "",
-      showOptions: true
-    }
-  };
+  // coming from anther link show previous search or default
+  if (fromNavReducer) {
+    dispatch(
+      applyAction({
+        apply: true
+      })
+    );
+    return (
+      <>
+        <GraphContainer filters={setupFilter(history)} />
+      </>
+    );
+  }
 
   if (
     tier != "ADMIN" &&
@@ -218,6 +178,7 @@ function DashHome() {
     tier != "GOV_ROLE" &&
     tier != "FREE"
   ) {
+    // console.log("in none");
     dispatch(
       queriesFilters({
         filters: defaultFilters
@@ -231,15 +192,20 @@ function DashHome() {
     );
     return <GraphContainer filters={defaultFilters} />;
   } else if (tier === "FREE") {
-    let cat = "";
+    let cat;
     setupFilter(history);
     for (let i = 0; i < allSelectedCategories.length; i++) {
       if (!allowed.includes(allSelectedCategories[i])) {
         cat = allSelectedCategories[i];
       }
     }
-
-    if (cat != "") {
+    //console.log("cat=", cat, allSelectedCategories);
+    if (cat != undefined) {
+      dispatch(
+        applyAction({
+          apply: false
+        })
+      );
       dispatch(
         queriesFilters({
           filters: defaultFilters
@@ -270,6 +236,7 @@ function DashHome() {
       );
     }
   } else {
+    console.log("in last else");
     dispatch(
       applyAction({
         apply: false

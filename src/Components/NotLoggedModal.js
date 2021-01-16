@@ -59,7 +59,6 @@ const BigContinue = styled.big`
 `;
 
 function SeriesFilterModal({ handleClose }) {
-  console.log("NOtLoggedModal.js");
   const history = useHistory();
 
   const handleSubmit = async (e, input) => {
