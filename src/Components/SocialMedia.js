@@ -78,7 +78,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {access || sub === newSub ? (
+        {access !== "free" || sub === newSub ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader
@@ -140,15 +140,8 @@ const SocialMedia = () => {
           </>
         ) : (
           <>
-            <Grid item>
-              <Tooltip
-                title="Download"
-                arrow
-                classes={{ tooltip: classes.customWidth }}
-              >
-                <DownloadModal />
-              </Tooltip>
-            </Grid>
+            <DownloadModal />
+
             <Grid item className="urlclip">
               <Tooltip
                 title="Copy URL"
