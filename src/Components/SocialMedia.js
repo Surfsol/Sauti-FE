@@ -31,7 +31,7 @@ const SocialMedia = () => {
     keys = chartDataReducer.keys;
     sampleSize = chartDataReducer.sampleSize;
   }
-  console.log("access", access);
+
   const newSub = getSubscription();
   let sub;
   if (newSub) {
@@ -140,15 +140,8 @@ const SocialMedia = () => {
           </>
         ) : (
           <>
-            <Grid item>
-              <Tooltip
-                title="Download"
-                arrow
-                classes={{ tooltip: classes.customWidth }}
-              >
-                <DownloadModal />
-              </Tooltip>
-            </Grid>
+            <DownloadModal />
+
             <Grid item className="urlclip">
               <Tooltip
                 title="Copy URL"
