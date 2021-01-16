@@ -85,17 +85,17 @@ function Download(props) {
       <div>
         <Div>
           <BigX onClick={props.handleClose}>X</BigX>
-          <FormTitle>Want to see this feature?</FormTitle>
+          <FormTitle>This feature requires a Premium account</FormTitle>
           <DownloadText>
-            Click <BigContinue>Continue</BigContinue> if you'd like to upgrade
+            Click <BigContinue>Upgrade</BigContinue> if you'd like to upgrade
             your account to premium.
           </DownloadText>
           <LoginButton type="submit" onClick={handleSubmit}>
-            Continue
+            Upgrade
           </LoginButton>
-          <h1>Already have an account.</h1>
-          <LoginButton type="submit" onClick={handleSignIn}>
-            Sign in
+          <h1>Back to Analytics</h1>
+          <LoginButton type="submit" onClick={props.handleClose}>
+            Continue
           </LoginButton>
         </Div>
       </div>
