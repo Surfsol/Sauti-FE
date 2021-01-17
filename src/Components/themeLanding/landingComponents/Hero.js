@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -9,6 +9,8 @@ import ImgDashboard from "../../../assets/images/dashboard.png";
 import ImgDashboardGif from "../../../assets/images/tradeinsights.gif";
 import SectionHeader from "../../themeStyledComponents/molecules/SectionHeader";
 import { useHistory } from "react-router-dom";
+import { fromNav } from "../../../Components/redux-actions/fromNavAction";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -25,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 const Hero = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
@@ -41,6 +43,10 @@ const Hero = props => {
     e.preventDefault();
     history.push("/pricing");
   };
+
+  useEffect(() => {
+    dispatch(fromNav(true));
+  }, []);
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>

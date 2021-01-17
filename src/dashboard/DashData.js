@@ -9,6 +9,7 @@ import { allowed } from "../Components/orderedGraphLabels";
 import { decodeToken, getToken } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
 import { showNoAccessAction } from "../Components/redux-actions/showNoAccessAction";
+import { selectedFiltersAction } from "../Components/redux-actions/selectedFiltersAction";
 import { filterTemplate, defaultFilters } from "./DataDashHelpers/filters";
 
 function DashHome() {
@@ -16,7 +17,6 @@ function DashHome() {
   const token = getToken();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [previous, setPrevious] = useState({});
   const fromNavReducer = useSelector(state => state.fromNavReducer.navLink);
 
   const graphLabels = useSelector(
@@ -58,6 +58,10 @@ function DashHome() {
       return option;
     }
   };
+
+  const queriesReducer = useSelector(
+    state => state.queriesReducer.queriesFilters
+  );
 
   let allSelectedCategories = [];
   //if nothing in history, set inital filters to Gender
@@ -165,11 +169,19 @@ function DashHome() {
         apply: true
       })
     );
-    return (
-      <>
-        <GraphContainer filters={setupFilter(history)} />
-      </>
+    // allow display selected filters to show
+    dispatch(
+      selectedFiltersAction({
+        selected: true
+      })
     );
+    if (queriesReducer.filters) {
+      return (
+        <>
+          <GraphContainer filters={queriesReducer.filters} />
+        </>
+      );
+    }
   }
 
   if (
@@ -236,7 +248,6 @@ function DashHome() {
       );
     }
   } else {
-    console.log("in last else");
     dispatch(
       applyAction({
         apply: false

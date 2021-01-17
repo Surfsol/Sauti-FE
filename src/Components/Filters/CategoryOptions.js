@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { useDispatch } from "react-redux";
+import { fromNav } from "../../Components/redux-actions/fromNavAction";
 
 const CategoryOptions = ({
   setUpdateUrlFlag,
@@ -13,7 +15,10 @@ const CategoryOptions = ({
   option,
   setDisplayDrop
 }) => {
+  const dispatch = useDispatch();
+
   const changeOption = (i, filters, graphLabels, option) => {
+    dispatch(fromNav(false));
     let optionFlags = {};
 
     graphLabels[`${filters[i].selectedTableColumnName}`].labels.forEach(

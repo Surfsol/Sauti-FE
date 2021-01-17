@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   useMediaQuery,
@@ -17,6 +17,8 @@ import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
 import imgContact from "../../assets/images/SautiBusia_62_2.jpg";
+import { fromNav } from "../../Components/redux-actions/fromNavAction";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -88,6 +90,11 @@ const ContactPageCover = () => {
   });
   console.log("messageC.natuer", messageC.nature);
   const [createMail] = useMutation(NodeMail);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fromNav(true));
+  }, []);
 
   const handleSubmit = async (event, input) => {
     const { email, message } = messageC;
