@@ -237,6 +237,7 @@ class Tools extends Component {
             type="text"
             onInput={this.onQuickFilterChanged.bind(this)}
             id="quickFilterss"
+            style={{ textAlign: "left" }}
             placeholder=" search..."
           />
           {/* <AiOutlineSearch className='searchIcon' /> */}

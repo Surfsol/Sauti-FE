@@ -68,13 +68,13 @@ const MyAccount = props => {
     tier: decoded.tier
   });
 
-  let plan = account.tier;
-  switch (plan) {
+  let planName = account.tier;
+  switch (planName) {
     case "FREE":
-      plan = "Free Trial";
+      planName = "Free Trial";
       break;
     case "PAID":
-      plan = "Premium Access";
+      planName = "Premium Access";
       break;
   }
   const [createUser, editUser, refetch] = useMutation(EDIT);
@@ -124,7 +124,7 @@ const MyAccount = props => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="subtitle1" color="textPrimary">
-            {"Subscription: " + plan}
+            {"Subscription: " + planName}
             <Button
               onClick={() => setPageId("subscriptions")}
               variant="contained"

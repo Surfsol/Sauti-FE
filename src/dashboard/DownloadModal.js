@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-
+import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import Download from "./Download";
 import styled from "styled-components";
@@ -30,13 +30,15 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       opacity: 1
     }
+  },
+  customWidth: {
+    fontSize: "16px"
   }
 }));
 
 export default function DownloadModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -46,8 +48,8 @@ export default function DownloadModal() {
   };
 
   return (
-    <div>
-      <div onClick={handleOpen}>
+    <>
+      <Grid item style={{ cursor: "pointer" }} onClick={handleOpen}>
         <Tooltip
           title="Download"
           arrow
@@ -55,7 +57,7 @@ export default function DownloadModal() {
         >
           <GetAppIcon className={classes.socialMediaLink}></GetAppIcon>
         </Tooltip>
-      </div>
+      </Grid>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -72,6 +74,6 @@ export default function DownloadModal() {
           <Download handleClose={handleClose} />
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }
