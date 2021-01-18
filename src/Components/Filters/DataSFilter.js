@@ -9,6 +9,7 @@ import { Box } from "@material-ui/core";
 import NoAccessModal from "./NoAccessModal";
 import { useDispatch, useSelector } from "react-redux";
 import { clearApplyAction } from "../redux-actions/clearApplyAction";
+import { fromNav } from "../../Components/redux-actions/fromNavAction";
 
 const DataSFilter = ({
   filters,
@@ -32,6 +33,7 @@ const DataSFilter = ({
   );
 
   function changeOption(e) {
+    dispatch(fromNav(false));
     dispatch(
       clearApplyAction({
         clear: false

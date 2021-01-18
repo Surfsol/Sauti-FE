@@ -9,8 +9,6 @@ import { useSelector } from "react-redux";
 const NoDataParent = ({ noDataModal, setNoDataModal }) => {
   const filters = useSelector(state => state.queriesReducer.filters);
 
-  console.log("show no Data modal", noDataModal);
-
   return (
     <>
       <Modal

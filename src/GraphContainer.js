@@ -120,7 +120,7 @@ const GraphContainer = props => {
 
   useEffect(() => {
     setSelectedFilters(false);
-    //only used when url is manually changed
+    //change display only after 'Apply' is pressed
     dispatch(
       selectedFiltersAction({
         selected: false

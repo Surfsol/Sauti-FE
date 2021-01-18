@@ -33,7 +33,6 @@ const BigX = styled.big`
 function NoDataModal({ setNoDataModal, setFilters, filters }) {
   const dispatch = useDispatch();
   function handleClose() {
-    //console.log('filters NoDataModal',filters)
     dispatch(
       queriesFilters({
         filters: {

@@ -117,6 +117,11 @@ Our reasoning behind using the above tools for the back-end build is to make cro
 - [Paypal Subscriptions API](https://developer.paypal.com/docs/subscriptions/)
 - Please see Back-end documentation [here](https://github.com/Lambda-School-Labs/sauti-databank-be/blob/master/README.md).
 
+# Filters Press Apply
+
+- When user comes from login screen. fromNav = true, is set on Login.js. (Press Apply button will not show)
+- When user adjusts filter, fromNav = false. DataSFilter, AddFilter, CompareSubsamples
+
 # Testing
 
 We tested the site in Chrome and Firefox using Jest.

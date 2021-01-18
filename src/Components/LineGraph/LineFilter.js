@@ -26,8 +26,6 @@ const LineFilter = memo(() => {
 
   const [state, setState] = useState(checkedItems);
 
-  //console.log(state);
-
   useEffect(() => {
     setState(checkedItems);
   }, [checkedItems]);

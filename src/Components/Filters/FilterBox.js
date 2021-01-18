@@ -83,7 +83,6 @@ export default function FilterBox(props) {
     } else if (tier !== undefined && tier === "FREE") {
       access = "free";
     }
-    //console.log("tier", tier, "access", access);
     dispatch(tierDefined({ tier: tier, access: access }));
 
     useEffect(() => {
@@ -184,7 +183,6 @@ export default function FilterBox(props) {
     }
   };
   useEffect(() => {
-    // console.log('url Search params',urlSearchParams)
     let keys = Object.keys(urlSearchParams);
     let values = Object.values(urlSearchParams).map(value =>
       inverseConvertOptionUrl(value)

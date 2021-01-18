@@ -9,6 +9,8 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
+import { fromNav } from "../../Components/redux-actions/fromNavAction";
+import { useDispatch } from "react-redux";
 
 const TabPanel = props => {
   const { tier, children, value, index, ...other } = props;
@@ -23,8 +25,10 @@ const TabPanel = props => {
 const Account = ({ decoded, tier }) => {
   const [pageId, setPageId] = useState("myaccount");
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fromNav(true));
     if (decoded.tier === "FREE") {
       setPageId("subscriptions");
     }

@@ -87,9 +87,6 @@ const setCrossedItems = (
     queryType === "Sessions" &&
     crossFilterQuery === "Users"
   ) {
-    // console.log(
-    //   "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
-    // );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
@@ -115,9 +112,6 @@ const setCrossedItems = (
     queryType === "Sessions" &&
     crossFilterQuery === "Users"
   ) {
-    // console.log(
-    //   "IF BOTH HAVE GRAPHLABELS AND FIRST FILTER IS SESSIONS AND 2ND FILTER IS USERS"
-    // );
     dataStructure.map(obj => {
       return keyValueArrIndex.push([
         obj[`${indexBy}`],
@@ -139,9 +133,6 @@ const setCrossedItems = (
 
   // If CrossFilter is "Most Requested" type, and Index is not:
   if (!graphLabels[`${crossFilter}`] && graphLabels[`${indexBy}`]) {
-    // console.log(
-    //   "IF CROSS FILTER HAS NO GRAPHLABELS, AND THE FIRST FILTER DOES"
-    // );
     dataStructure.forEach(obj => {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);
@@ -211,7 +202,6 @@ const setCrossedItems = (
     });
     //Sort Index values and take only the top 7
     keyValueArrIndex = keyValueArrIndex.sort((a, b) => b[1] - a[1]).slice(0, 7);
-    // console.log("keyvalArr", keyValueArrIndex);
     keyValueArrIndex.forEach(arr => {
       newDataStructure.push({ [indexBy]: arr[0] });
     });
@@ -272,7 +262,6 @@ const setCrossedItems = (
   //If both Index and CrossFilter are "Most Requested" type:
 
   if (!graphLabels[`${crossFilter}`] && !graphLabels[`${indexBy}`]) {
-    // console.log("IF BOTH FILTERS HAVE NO GRAPHLABELS");
     //commodityproduct: "Maize", "KEN": 123, "RWA": 200
     //commodityproduct: "Beans", "KEN": 152, "RWA": 478
     dataStructure.map(obj => {

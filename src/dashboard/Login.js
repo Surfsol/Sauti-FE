@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useHistory } from "react-router-dom";
@@ -21,6 +21,8 @@ import InputBase from "@material-ui/core/InputBase";
 import styled from "styled-components";
 
 import market from "../assets/images/market.jpg";
+import { fromNav } from "../Components/redux-actions/fromNavAction";
+import { useDispatch } from "react-redux";
 
 const LOGIN = gql`
   mutation registerNewUser($login: newLoginInput!) {
@@ -41,6 +43,12 @@ export default function SignInSide(props) {
     password: ""
   });
   const [userLoggedIn, { loading, error }] = useMutation(LOGIN);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fromNav(true));
+  }, []);
 
   if (loading) {
     return (

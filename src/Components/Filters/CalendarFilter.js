@@ -60,6 +60,7 @@ const CalendarFilter = ({
   } else if (
     open === "bar" &&
     openCal === false &&
+    filters &&
     filters[0].selectedTable === "Sessions"
   ) {
     return (
