@@ -10,7 +10,6 @@ import {
   getToken,
   getSubscription
 } from "../../dashboard/auth/Auth";
-import { getSelectedOption } from "../../OptionFunctions";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -30,9 +29,10 @@ import Fade from "@material-ui/core/Fade";
 
 import { Box } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { createSearchParams, createUrl } from "./urlEncodeDecode/urlEncode";
 
 export default function FilterBox(props) {
-  const History = useHistory();
+  const history = useHistory();
   const {
     filters,
     setFilters,
@@ -157,46 +157,12 @@ export default function FilterBox(props) {
 
   const [loading, setLoading] = useState(false);
 
-  //make the url based off filters
   let urlSearchParams = {};
-  Object.keys(filters).forEach(filterId => {
-    let options = "";
-    if (getSelectedOption(filters, filterId) !== undefined) {
-      options = `${getSelectedOption(filters, filterId)}`;
-    }
-    if (Number(filterId) <= 1 && filters[filterId].selectedTableColumnName) {
-      urlSearchParams[
-        "filter" + String(filterId)
-      ] = `${filters[filterId].selectedTableColumnName}`;
-    }
-    if (Number(filterId) > 1 && filters[filterId].selectedTableColumnName) {
-      urlSearchParams[
-        "filter" + String(filterId)
-      ] = `${filters[filterId].selectedTableColumnName},${options}`;
-    }
-  });
+  urlSearchParams = createSearchParams(filters, urlSearchParams);
 
-  //let ourSearch = useHistory().location.search;
-  const inverseConvertOptionUrl = option => {
-    // these come from the selection options the user will see
-    // -1 means the search failed
-    if (option.search(/\//) > -1) {
-      return option.replace(/\//g, "forwardslash");
-    } else if (option.search(/ /) > -1) {
-      return option.replace(/ /g, "whitespace");
-    } else {
-      return option;
-    }
-  };
   useEffect(() => {
-    let keys = Object.keys(urlSearchParams);
-    let values = Object.values(urlSearchParams).map(value =>
-      inverseConvertOptionUrl(value)
-    );
-    const filterStrings = keys
-      .map((key, i) => key + "=" + values[i])
-      .join("&&");
-    History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
+    const filterStrings = createUrl(urlSearchParams);
+    history.push("?" + filterStrings);
   }, [updateUrlFlag]);
 
   const dispatch = useDispatch();

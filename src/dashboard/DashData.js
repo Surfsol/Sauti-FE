@@ -126,16 +126,15 @@ function DashHome() {
       // z is in maize
 
       //split on &
-      let split1 = searchString.split("&&");
+      let split1 = searchString.split("&");
       if (!split1[1]?.includes("filter1")) {
         split1.splice(1, 0, `filter1=,`);
       }
-      console.log("split1", split1);
       // making a new set of filters from the url
       let newFilterObject = {};
       for (var i in split1) {
         let split2 = split1[i].split("=");
-        console.log("split1", split1, "split2", split2);
+        split2 = split2.map(value => decodeURIComponent(value));
         let split3 = split2[1].split(",");
         console.log("split3", split3);
         if (split3[0] !== "") {
