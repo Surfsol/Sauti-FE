@@ -11,10 +11,12 @@ const createSearchParams = (filters, urlSearchParams) => {
         "filter" + String(filterId)
       ] = `${filters[filterId].selectedTableColumnName}`;
     }
+    console.log("options", options);
     if (Number(filterId) > 1 && filters[filterId].selectedTableColumnName) {
       urlSearchParams[
         "filter" + String(filterId)
-      ] = `${filters[filterId].selectedTableColumnName},${options}`;
+      ] = `${filters[filterId].selectedTableColumnName}`;
+      urlSearchParams[`filter${filterId}val`] = options;
     }
   });
   return urlSearchParams;
@@ -22,6 +24,7 @@ const createSearchParams = (filters, urlSearchParams) => {
 
 const createUrl = urlSearchParams => {
   let keys = Object.keys(urlSearchParams);
+  console.log("urlSearchParams", urlSearchParams);
   let values = Object.values(urlSearchParams).map(value =>
     encodeURIComponent(value)
   );

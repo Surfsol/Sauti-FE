@@ -107,12 +107,10 @@ function DashHome() {
       });
       return defaultFilter;
     } else {
-      console.log("url", history.location.search);
       let searchString = history.location.search.slice(
         1,
         history.location.search.length
       );
-
       // facebook case
       // prove &fbclid is in the url
       if (searchString.search("&fbclid") > -1) {
@@ -130,13 +128,19 @@ function DashHome() {
       if (!split1[1]?.includes("filter1")) {
         split1.splice(1, 0, `filter1=,`);
       }
+      for (let i = 0; i < split1.length; i++) {
+        if (split1[i].includes("val=")) {
+          let selectedVal = split1[i].slice(11);
+          split1[i - 1] = `${split1[i - 1]},${selectedVal}`;
+        }
+      }
+      split1 = split1.filter(e => !e.includes("val="));
       // making a new set of filters from the url
       let newFilterObject = {};
       for (var i in split1) {
         let split2 = split1[i].split("=");
         split2 = split2.map(value => decodeURIComponent(value));
         let split3 = split2[1].split(",");
-        console.log("split3", split3);
         if (split3[0] !== "") {
           allSelectedCategories.push(
             FilterBoxOptions.tableNamesToCategoryName[split3[0]]
