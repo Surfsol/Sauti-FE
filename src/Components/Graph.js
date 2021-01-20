@@ -234,6 +234,7 @@ const Graph = props => {
         apply: true
       })
     );
+    // will change display of filters selected
     dispatch(
       selectedFiltersAction({
         selected: true

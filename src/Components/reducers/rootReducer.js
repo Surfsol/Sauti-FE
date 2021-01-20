@@ -16,6 +16,7 @@ import chartDataReducer from "./chartDataReducer";
 import setApplyReducer from "./setApplyReducer";
 import clearApplyReducer from "./clearApplyReducer";
 import catLabelReducer from "./catReducer";
+import fromNavReducer from "./fromNavReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   chartDataReducer,
   setApplyReducer,
   clearApplyReducer,
-  catLabelReducer
+  catLabelReducer,
+  fromNavReducer
 });
 export default rootReducer;

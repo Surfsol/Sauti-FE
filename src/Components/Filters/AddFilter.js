@@ -11,6 +11,7 @@ import { clearApplyAction } from "../redux-actions/clearApplyAction";
 import { scrollPosition } from "../redux-actions/scrollAction";
 import { allowed } from "../orderedGraphLabels";
 import NoAccessModal from "./NoAccessModal";
+import { fromNav } from "../../Components/redux-actions/fromNavAction";
 
 const AddFilter = ({
   filters,
@@ -59,6 +60,7 @@ const AddFilter = ({
   }, []);
   //removed document from useEffect, because not an array
   const changeOption = e => {
+    dispatch(fromNav(false));
     dispatch(
       clearApplyAction({
         clear: false

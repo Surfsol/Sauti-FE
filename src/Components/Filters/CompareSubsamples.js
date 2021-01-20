@@ -10,6 +10,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import NoAccessModal from "./NoAccessModal";
 import { allowed } from "../orderedGraphLabels";
 import { clearApplyAction } from "../redux-actions/clearApplyAction";
+import { fromNav } from "../../Components/redux-actions/fromNavAction";
 
 const CompareSubSamples = () => {
   const reducerSub = useSelector(
@@ -37,6 +38,7 @@ const CompareSubSamples = () => {
   const [catValue, setCatValue] = useState("");
 
   function changeOption(e) {
+    dispatch(fromNav(false));
     dispatch(
       clearApplyAction({
         clear: false
