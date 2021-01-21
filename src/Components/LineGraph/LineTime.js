@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { useDispatch } from "react-redux";
 import dynamicText from "../../Components/dynamicText";
-
+import { makeStyles } from "@material-ui/core/styles";
 import CheckBox from "../CheckBox";
 
 import { getHighestSelected } from "../LineGraphHelpers/selectedCheckboxes";
@@ -25,6 +25,20 @@ import { downloadLine } from "./downloadLine";
 
 import NoDataParent from "./NoDataParent";
 
+const useStyles = makeStyles(theme => ({
+  dyContainer: {
+    width: "100%",
+    padding: "0em 2em",
+    fontSize: "1.0em",
+    marginLeft: "-1px",
+    borderLeft: "1px solid #00000045",
+    "& h2": {
+      fontWeight: 600,
+      fontSize: "1.2em",
+      paddingBottom: "10px"
+    }
+  }
+}));
 const GraphTime = ({
   month100,
   quarter100,
@@ -38,7 +52,7 @@ const GraphTime = ({
   const [timeInUse, setTimeInUse] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
   const [noDataModal, setNoDataModal] = useState(true);
-
+  const classes = useStyles();
   useEffect(() => {
     setNoDataModal(true);
   });
@@ -250,8 +264,9 @@ const GraphTime = ({
             </LineChart>
           </ResponsiveContainer>
           <LineRange timeInUse={timeInUse} time={time} setTime={setTime} />
-          <Grid item style={{ margin: "auto" }}>
-            {dyText}
+          <Grid item className={classes.dyContainer}>
+            <h2>Method Notes</h2>
+            <div dangerouslySetInnerHTML={{ __html: dyText }}></div>
           </Grid>
         </Grid>
       </Grid>
