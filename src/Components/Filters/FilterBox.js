@@ -10,7 +10,6 @@ import {
   getToken,
   getSubscription
 } from "../../dashboard/auth/Auth";
-import { getSelectedOption } from "../../OptionFunctions";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -30,9 +29,10 @@ import Fade from "@material-ui/core/Fade";
 
 import { Box } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { createSearchParams, createUrl } from "./urlEncodeDecode/urlEncode";
 
 export default function FilterBox(props) {
-  const History = useHistory();
+  const history = useHistory();
   const {
     filters,
     setFilters,
@@ -83,6 +83,7 @@ export default function FilterBox(props) {
     } else if (tier !== undefined && tier === "FREE") {
       access = "free";
     }
+
     dispatch(tierDefined({ tier: tier, access: access }));
 
     useEffect(() => {
@@ -121,7 +122,6 @@ export default function FilterBox(props) {
             setUpdateUrlFlag={setUpdateUrlFlag}
             FilterBoxOptions={FilterBoxOptions}
             updateUrlFlag={updateUrlFlag}
-            // xVar={xVar}
           />
         </Grid>
       );
@@ -157,41 +157,12 @@ export default function FilterBox(props) {
 
   const [loading, setLoading] = useState(false);
 
-  //make the url based off filters
   let urlSearchParams = {};
-  Object.keys(filters).forEach(filterId => {
-    urlSearchParams = {
-      ...urlSearchParams,
-      ["filter" + String(filterId)]: `${
-        filters[filterId].selectedTableColumnName
-          ? filters[filterId].selectedTableColumnName
-          : // change undefined to null
-            "null"
-      },${getSelectedOption(filters, filterId)}`
-    };
-  });
-  //let ourSearch = useHistory().location.search;
-  const inverseConvertOptionUrl = option => {
-    // these come from the selection options the user will see
-    // -1 means the search failed
-    if (option.search(/\//) > -1) {
-      return option.replace(/\//g, "forwardslash");
-    } else if (option.search(/ /) > -1) {
-      return option.replace(/ /g, "whitespace");
-    } else {
-      return option;
-    }
-  };
+  urlSearchParams = createSearchParams(filters, urlSearchParams);
+
   useEffect(() => {
-    let keys = Object.keys(urlSearchParams);
-    let values = Object.values(urlSearchParams).map(value =>
-      inverseConvertOptionUrl(value)
-    );
-    const filterStrings = keys
-      .map((key, i) => key + "=" + values[i])
-      .join("&&");
-    //console.log(filterStrings)
-    History.push("?" + filterStrings); //new URLSearchParams({ ...urlSearchParams }).toString());
+    const filterStrings = createUrl(urlSearchParams);
+    history.push("?" + filterStrings);
   }, [updateUrlFlag]);
 
   const dispatch = useDispatch();

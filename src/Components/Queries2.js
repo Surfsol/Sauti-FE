@@ -118,7 +118,7 @@ const GetData = (props, { makeValues }) => {
       query getUsers($queryTraders: newTraderInput){
         tradersUsers (input: $queryTraders) {
           ${filters[0].selectedTableColumnName}
-          ${filters[1].selectedTableColumnName}
+          ${filters[1]?.selectedTableColumnName}
 
         }
       }
