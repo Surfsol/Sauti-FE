@@ -15,7 +15,6 @@ const RenderCheckContainer = ({
   setDisplayDrop
 }) => {
   const showOptions = (i, filters, graphLabels) => {
-    console.log("filters[i]", filters[i].showOptions, filters[i]);
     // if (filters[i].showOptions) {
     return graphLabels[
       `${filters[i].selectedTableColumnName}`

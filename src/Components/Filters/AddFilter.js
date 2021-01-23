@@ -197,7 +197,7 @@ const AddFilter = ({
           <Grid
             item
             xs={12}
-            onClick={() => setDisplayDrop(...displayDrop, index)}
+            onClick={() => setDisplayDrop([...displayDrop, index])}
             className={classes.filterButton}
           >
             <Box display="flex" height="100%" alignItems="center">
