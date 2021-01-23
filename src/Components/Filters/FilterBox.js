@@ -14,7 +14,7 @@ import {
 import Grid from "@material-ui/core/Grid";
 
 import DataSFilter from "./DataSFilter";
-import AddFilter from "./AddFilter";
+import AddFilter from "./AddFilters/AddFilter";
 
 import { useDispatch, useSelector } from "react-redux";
 import { compareSubSamples } from "../redux-actions/compareSubSamples";
