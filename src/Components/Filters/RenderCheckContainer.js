@@ -15,39 +15,42 @@ const RenderCheckContainer = ({
   setDisplayDrop
 }) => {
   const showOptions = (i, filters, graphLabels) => {
-    if (filters[i].showOptions) {
-      return graphLabels[
-        `${filters[i].selectedTableColumnName}`
-      ].labels.map(option => (
-        <CategoryOptions
-          i={i}
-          filters={filters}
-          graphLabels={graphLabels}
-          option={option}
-          setUpdateUrlFlag={setUpdateUrlFlag}
-          updateUrlFlag={updateUrlFlag}
-          setFilters={setFilters}
-          setDisplayDrop={setDisplayDrop}
-        />
-      ));
-    } else {
-      return graphLabels[`${filters[i].selectedTableColumnName}`].labels
-        .filter(option => {
-          return filters[i].selectableOptions[option];
-        })
-        .map(option => (
-          <CategoryOptions
-            i={i}
-            filters={filters}
-            graphLabels={graphLabels}
-            option={option}
-            setUpdateUrlFlag={setUpdateUrlFlag}
-            updateUrlFlag={updateUrlFlag}
-            setFilters={setFilters}
-            setDisplayDrop={setDisplayDrop}
-          />
-        ));
-    }
+    console.log("filters[i]", filters[i].showOptions, filters[i]);
+    // if (filters[i].showOptions) {
+    return graphLabels[
+      `${filters[i].selectedTableColumnName}`
+    ].labels.map(option => (
+      <CategoryOptions
+        i={i}
+        filters={filters}
+        graphLabels={graphLabels}
+        option={option}
+        setUpdateUrlFlag={setUpdateUrlFlag}
+        updateUrlFlag={updateUrlFlag}
+        setFilters={setFilters}
+        setDisplayDrop={setDisplayDrop}
+      />
+    ));
+    // } else {
+    //   console.log('in else')
+    //   return graphLabels[`${filters[i].selectedTableColumnName}`].labels
+    //     .filter(option => {
+
+    //       return filters[i].selectableOptions[option];
+    //     })
+    //     .map(option => (
+    //       <CategoryOptions
+    //         i={i}
+    //         filters={filters}
+    //         graphLabels={graphLabels}
+    //         option={option}
+    //         setUpdateUrlFlag={setUpdateUrlFlag}
+    //         updateUrlFlag={updateUrlFlag}
+    //         setFilters={setFilters}
+    //         setDisplayDrop={setDisplayDrop}
+    //       />
+    //     ));
+    // }
   };
 
   if (itemName === filters[i].selectedCategory) {
