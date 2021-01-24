@@ -109,7 +109,6 @@ const REGISTER = gql`
 function CreateUser(props) {
   const [addUser, setAddUser] = useState(initialState);
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
 
   const [createUser, newUser] = useMutation(REGISTER, {
     update(cache, { data: { register } }) {
@@ -169,6 +168,7 @@ function CreateUser(props) {
         swal({ title: "", text: "Success!", icon: "success" });
       }
     }
+    window.location.reload();
   };
 
   if (newUser.loading) {
