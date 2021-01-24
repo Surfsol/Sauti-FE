@@ -10,7 +10,6 @@ const convertOptionUrl = option => {
   if (option.search(/forwardslash/) > -1) {
     return option.replace(/forwardslash/g, "/");
   } else if (option.search(/whitespace/) > -1) {
-    console.log("found whitespace");
     return option.replace(/whitespace/g, " ");
   } else {
     return option;

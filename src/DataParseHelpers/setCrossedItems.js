@@ -153,13 +153,11 @@ const setCrossedItems = (
     });
     dataStructure = newDataStructure;
   }
-  // console.log("CROSS FILTER CROSSED ITEMS", crossFilterQuery);
   if (
     graphLabels[`${crossFilter}`] &&
     graphLabels[`${indexBy}`] &&
     queryType === "Users"
   ) {
-    // console.log("NEW - BOTH GRAPHLABELS - FIRST FILTER IS USERS");
     dataStructure.forEach(obj => {
       let crossKeys = Object.keys(obj);
       let crossValues = Object.values(obj);

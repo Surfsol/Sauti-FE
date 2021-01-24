@@ -5,7 +5,7 @@ import { gql } from "apollo-boost";
 import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
 import LineGraphButton from "./LineGraphButton";
-import NoDataModal from "./NoDataModal";
+import NoDataModal from "./Filters/clearFilters/NoDataModal";
 import NotLoggedInModal from "./NotLoggedInModal";
 import NoAccessModal from "./Filters/NoAccessModal";
 

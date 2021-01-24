@@ -7,7 +7,6 @@ import CancelSubModal from "./CancelSubModal";
 
 const CancelButton = () => {
   const [cancel, setCancelSub] = useState(false);
-  console.log("cancel Button", cancel);
 
   function cancelModal() {
     if (cancel) {
