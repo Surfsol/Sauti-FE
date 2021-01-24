@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useDispatch } from "react-redux";
-import { fromNav } from "../../Components/redux-actions/fromNavAction";
+import { fromNav } from "../../redux-actions/fromNavAction";
 
 const CategoryOptions = ({
   setUpdateUrlFlag,

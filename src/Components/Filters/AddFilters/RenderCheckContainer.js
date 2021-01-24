@@ -2,20 +2,18 @@ import React from "react";
 import CategoryOptions from "./CategoryOptions";
 import styled from "styled-components";
 import RadioGroup from "@material-ui/core/RadioGroup";
-//component - diplays a button to see options when button is clicked
+
 const RenderCheckContainer = ({
   i,
   filters,
   graphLabels,
   itemName,
   setFilters,
-  FilterBoxOptions,
   setUpdateUrlFlag,
   updateUrlFlag,
   setDisplayDrop
 }) => {
   const showOptions = (i, filters, graphLabels) => {
-    console.log("filters[i]", filters[i].showOptions, filters[i]);
     // if (filters[i].showOptions) {
     return graphLabels[
       `${filters[i].selectedTableColumnName}`
