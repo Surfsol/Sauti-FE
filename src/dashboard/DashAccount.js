@@ -13,7 +13,7 @@ import swal from "sweetalert";
 import styled from "styled-components";
 import "../index.css";
 
-import EditModal from "./Tools/EditModal";
+import EditModal from "./Admin/EditModal";
 
 const CANCEL_USER_SUB = gql`
   mutation updateUserToFree(

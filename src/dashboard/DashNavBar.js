@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import { NavLink, Route, withRouter } from "react-router-dom";
 import { HistoryListen, PageView } from "./GoogleAnalytics/index";
-import UsersQuery from "./Tools/UsersQuery";
+import UsersQuery from "./Admin/UsersQuery";
 import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import NoAccount from "../dashboard/DashboardAccount/NoAccount";
 import CreateAccount from "./CreateAccount";
 import LandingPage from "./LandingPage";
 import QueryGraphLabels from "./QueryGraphLabels";
 import DashData from "./DashData";
-
 import DashLogout from "./DashLogout";
 import Login from "./Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -86,7 +85,7 @@ function DashNav() {
             {!SignedIn && <Links to="/pricing">PRICING</Links>}
             <Links to="/contact">CONTACT</Links>
             {!SignedIn && <Links to="/login">LOGIN</Links>}
-            {tier === "ADMIN" && <Links to="/tools">ADMIN</Links>}
+            {tier === "ADMIN" && <Links to="/admin">ADMIN</Links>}
             {SignedIn && <Links to="/logout">LOGOUT</Links>}
             {SignedIn && (
               <div className="loggedInAs">
@@ -107,7 +106,7 @@ function DashNav() {
         path="/data"
         component={labelsRedux ? DashData : QueryGraphLabels}
       />
-      <Route exact path="/tools" component={UsersQuery} />
+      <Route exact path="/admin" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={CreateAccount} />
       <Route exact path="/passwordreset" component={ForgotPassword} />

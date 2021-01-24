@@ -87,7 +87,6 @@ const DeleteAccount = props => {
       });
     }
   });
-
   const deleteHandler = (event, input) => {
     input = { id: input };
     event.preventDefault();

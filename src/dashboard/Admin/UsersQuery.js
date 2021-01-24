@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import Tools from "./Tools";
+import Admin from "./Admin";
 import Loader from "react-loader-spinner";
 
 const Users_Query = gql`
@@ -63,7 +63,7 @@ const UsersQuery = () => {
 
   return (
     <>
-      <Tools allUsers={data.allUsers} />
+      <Admin allUsers={data.allUsers} />
     </>
   );
 };

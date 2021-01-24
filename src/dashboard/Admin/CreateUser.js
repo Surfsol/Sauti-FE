@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles, styled } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -10,11 +10,6 @@ import swal from "sweetalert";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-
-import { Redirect, useHistory } from "react-router-dom";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
 
 const Styles = withStyles(theme => ({
   root: {
@@ -141,14 +136,15 @@ function CreateUser(props) {
   const handleChange = event => {
     setAddUser({ ...addUser, [event.target.name]: event.target.value });
   };
-
   const handleSubmit = async (event, input) => {
     event.preventDefault();
     if (
       email === "" ||
       password === "" ||
       organization_type === "" ||
-      tier === ""
+      tier === "" ||
+      found_by === "" ||
+      organization_type === ""
     ) {
       swal({
         title: "Error",
@@ -193,32 +189,15 @@ function CreateUser(props) {
     return <p>ERROR!</p>;
   }
 
-  const role = [
-    {
-      value: "",
-      label: "Please Select"
-    },
-    {
-      value: "super_user",
-      label: "Super User"
-    },
-    {
-      value: "org_user",
-      label: "Organizationl User"
-    },
-    {
-      value: "operator",
-      label: "operator"
-    }
-  ];
-
   return (
     <>
       <Form className={classes.paper}>
         <FormDiv>
           <InputColumns>
             <ColumnDiv>
-              <Labels for="Name">Email</Labels>
+              <Labels for="Name">
+                <span style={{ color: "blue" }}>*</span>Email
+              </Labels>
               <Inputs
                 type="text"
                 id="email"
@@ -226,7 +205,9 @@ function CreateUser(props) {
                 value={email}
                 onChange={handleChange}
               />
-              <Labels for="Name">Password</Labels>
+              <Labels for="Name">
+                <span style={{ color: "blue" }}>*</span>Password
+              </Labels>
               <Inputs
                 type="text"
                 id="password"
@@ -242,6 +223,8 @@ function CreateUser(props) {
                 value={organization}
                 onChange={handleChange}
               />
+            </ColumnDiv>
+            <ColumnDiv>
               <Labels for="job_position">Job Position</Labels>
               <Inputs
                 type="job_position"
@@ -250,8 +233,6 @@ function CreateUser(props) {
                 value={job_position}
                 onChange={handleChange}
               />
-            </ColumnDiv>
-            <ColumnDiv>
               <Labels for="country">Country</Labels>
               <Inputs
                 type="country"
@@ -268,8 +249,12 @@ function CreateUser(props) {
                 value={interest}
                 onChange={handleChange}
               />
+            </ColumnDiv>
+            <ColumnDiv>
               <FormControl className={classes.margin}>
-                <Labels2 id="User type">Select a User Type</Labels2>
+                <Labels2 id="User type">
+                  <span style={{ color: "blue" }}>*</span>Select a User Type
+                </Labels2>
                 <Select
                   labelId="User type"
                   id="tier"
@@ -279,9 +264,6 @@ function CreateUser(props) {
                   input={<Styles />}
                   placeholder="tier"
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
                   <MenuItem value={"FREE"}>FREE</MenuItem>
                   <MenuItem value={"PAID"}>PAID</MenuItem>
                   <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
@@ -290,7 +272,8 @@ function CreateUser(props) {
               </FormControl>
               <FormControl className={classes.margin}>
                 <Labels2 id="organization_type">
-                  Select an Organization Type
+                  <span style={{ color: "blue" }}>*</span> Select an
+                  Organization Type
                 </Labels2>
                 <Select
                   labelId="organization_type"
@@ -300,9 +283,6 @@ function CreateUser(props) {
                   onChange={handleChange}
                   input={<Styles />}
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
                   <MenuItem value={"RESEARCH"}>RESEARCH</MenuItem>
                   <MenuItem value={"GOVERNMENT"}>GOVERNMENT</MenuItem>
                   <MenuItem value={"NGO"}>NGO</MenuItem>
@@ -311,7 +291,10 @@ function CreateUser(props) {
               </FormControl>
 
               <FormControl className={classes.margin}>
-                <p>How did you hear about us?</p>
+                <Labels2 id="organization_type">
+                  <span style={{ color: "blue" }}>*</span>How did you hear about
+                  us?
+                </Labels2>
                 <Select
                   label="Found By"
                   labelId="demo-customized-select-label"
@@ -330,8 +313,12 @@ function CreateUser(props) {
                   <MenuItem value={"OTHER"}>OTHER</MenuItem>
                 </Select>
               </FormControl>
+              <Labels2 id="organization_type">
+                <span style={{ color: "blue" }}>* required fields</span>
+              </Labels2>
             </ColumnDiv>
           </InputColumns>
+
           <ButtonsDiv className="CreateAccount">
             <CancelButton onClick={props.handleClose}>Cancel</CancelButton>
             <AddButton type="Submit" onClick={e => handleSubmit(e, addUser)}>
