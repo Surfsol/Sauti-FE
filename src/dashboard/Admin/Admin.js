@@ -9,10 +9,11 @@ import CreateUserModal from "./CreateUserModal";
 
 import styled from "styled-components";
 
-class Tools extends Component {
+class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      update: false,
       columnDefs: [
         {
           headerName: "ID",
@@ -212,7 +213,7 @@ class Tools extends Component {
   };
 
   exportToCsv = function() {
-    var params = {
+    let params = {
       skipHeader: true,
       skipFooters: true,
       skipGroups: true,
@@ -270,7 +271,7 @@ class Tools extends Component {
   }
 }
 
-export default Tools;
+export default Admin;
 
 const ToolsHeader = styled.div`
   width: 95%;

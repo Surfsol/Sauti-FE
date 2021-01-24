@@ -68,7 +68,7 @@ export default function CreateUserModal(props) {
         }}
       >
         <Fade in={open}>
-          <CreateUser handleClose={handleClose} api={props.params} />
+          <CreateUser handleClose={handleClose} />
         </Fade>
       </Modal>
     </div>
