@@ -200,7 +200,6 @@ function DashHome() {
     tier != "GOV_ROLE" &&
     tier != "FREE"
   ) {
-    // console.log("in none");
     dispatch(
       queriesFilters({
         filters: defaultFilters

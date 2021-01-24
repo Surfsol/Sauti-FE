@@ -112,8 +112,6 @@ const EditModal = ({ data }) => {
   const [account, setAccount] = useState({});
   //account id added automatically, needed to .put
   account.id = data.id;
-  console.log(data);
-  console.log("data.email", data.email);
 
   const classes = useStyles();
 

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
-import { queriesFilters } from "../redux-actions/queriesAction";
-import { clearApplyAction } from "../redux-actions/clearApplyAction";
+import { queriesFilters } from "../../redux-actions/queriesAction";
+import { clearApplyAction } from "../../redux-actions/clearApplyAction";
+import { filterReset } from "./reset";
 
-const ClearFilters = ({ handleApply, applyClear, setApplyClear }) => {
+const ClearFilters = ({ handleApply }) => {
   const clearReducer = useSelector(state => state.clearReducer.clear);
   const classes = useStyles();
   const {
@@ -24,31 +24,7 @@ const ClearFilters = ({ handleApply, applyClear, setApplyClear }) => {
 
   let reset = {};
   if (filters) {
-    reset = {
-      0: {
-        ...filters[0],
-        nameOfFilter: "Data Series",
-        selectableOptions: {}
-      },
-      1: {
-        nameOfFilter: "Compare SubSamples",
-        selectedCategory: "",
-        selectableOptions: {},
-        selectedTable: "Users",
-        selectedTableColumnName: "",
-        showOptions: false,
-        optionHasBeenSelected: false
-      },
-      2: {
-        nameOfFilter: "Data Filter",
-        selectedCategory: "",
-        selectableOptions: {},
-        selectedTable: "",
-        selectedTableColumnName: "",
-        showOptions: true,
-        optionHasBeenSelected: false
-      }
-    };
+    reset = filterReset(filters);
   }
 
   function handleClear(e) {
@@ -64,7 +40,6 @@ const ClearFilters = ({ handleApply, applyClear, setApplyClear }) => {
         clear: true
       })
     );
-    // setApplyClear(true)
   }
 
   return (

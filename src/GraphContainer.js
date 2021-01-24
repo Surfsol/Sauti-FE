@@ -19,7 +19,7 @@ import SocialMedia from "./Components/SocialMedia";
 
 import CompareSubSamples from "./Components/Filters/CompareSubsamples";
 import CalendarFilter from "./Components/Filters/CalendarFilter";
-import ClearFilters from "./Components/Filters/ClearFilters";
+import ClearFilters from "./Components/Filters/clearFilters/ClearFilters";
 import Apply from "./Components/Filters/Apply";
 import LineFilter from "./Components/LineGraph/LineFilter";
 
