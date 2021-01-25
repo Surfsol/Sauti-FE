@@ -15,6 +15,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
 import swal from "sweetalert";
+import { namePlan } from "../planName";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -68,15 +69,7 @@ const MyAccount = props => {
     tier: decoded.tier
   });
 
-  let planName = account.tier;
-  switch (planName) {
-    case "FREE":
-      planName = "Free Trial";
-      break;
-    case "PAID":
-      planName = "Premium Access";
-      break;
-  }
+  const planName = namePlan(account.tier);
   const [createUser, editUser, refetch] = useMutation(EDIT);
 
   const handleChange = event => {

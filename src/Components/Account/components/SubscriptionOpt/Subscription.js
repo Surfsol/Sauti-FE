@@ -15,6 +15,7 @@ import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPr
 import { useSelector } from "react-redux";
 import PremiumButton from "../PayPal/PremiumButton";
 import CancelButton from "../CancelSub/CancelButton";
+import { namePlan } from "../planName";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -55,19 +56,7 @@ const Subscription = props => {
     defaultMatches: true
   });
 
-  console.log("tier", props.tier);
-
-  //Russ I've used this exact code twice on MyAccount and here. Perhaps this should be global somewhere?
-  let planName = props.tier;
-  switch (planName) {
-    case "FREE":
-      planName = "Free Trial";
-      break;
-    case "PAID":
-      planName = "Premium Access";
-      break;
-  }
-  //------------
+  const planName = namePlan(props.tier);
 
   const yourPlanFree = () => {
     if (props.tier === "FREE") {
