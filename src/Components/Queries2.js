@@ -4,7 +4,7 @@ import { gql } from "apollo-boost";
 
 import Loader from "react-loader-spinner";
 import { getSelectedOption } from "../OptionFunctions";
-import LineGraphButton from "./LineGraphButton";
+import DisplaySelected from "./DisplaySelected";
 import NoDataModal from "./Filters/clearFilters/NoDataModal";
 import NotLoggedInModal from "./NotLoggedInModal";
 import NoAccessModal from "./Filters/NoAccessModal";
@@ -50,7 +50,6 @@ const GetData = (props, { makeValues }) => {
 
   //dispatch ApplyNow
   const dispatch = useDispatch();
-
   dispatch(setApplyAction({ applyNow: applyNow, setApplyNow: setApplyNow }));
 
   const filterIsSelected = (filter, i) => {
@@ -288,7 +287,7 @@ const GetData = (props, { makeValues }) => {
 
   return (
     <>
-      <LineGraphButton
+      <DisplaySelected
         filters={filters}
         queryType={queryType}
         filterBoxStartDate={props.filterBoxStartDate}

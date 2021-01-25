@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LineGraph from "./LineGraph/LineGraph";
 import GraphParse from "./GraphParse";
-import ChoroplethParent from "../Components/ChoroplethMap/ChoroplethParent";
+import ChoroplethParent from "./ChoroplethMap/ChoroplethParent";
 import "./scss/lineGraphButton.scss";
+import { useDispatch } from "react-redux";
+import { buttonsAction } from "../Components/redux-actions/buttonsToShow";
 import { set } from "react-ga";
 
-const LineGraphButton = props => {
+const DisplaySelected = props => {
   const {
     data,
     filters,
@@ -16,9 +18,11 @@ const LineGraphButton = props => {
     filterBoxEndDate,
     setChartDataSM
   } = props;
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(buttonsAction(filters));
+  }, [filters]);
   const renderLine = () => {
-    //list additional filters
     let additionalFiltersArray = [];
     for (let key in filters) {
       if (key > 1) {
@@ -57,17 +61,6 @@ const LineGraphButton = props => {
             queryType={queryType}
             filters={filters}
           />
-        </>
-      );
-    } else {
-    }
-  };
-
-  const renderDotMap = () => {
-    if (open === "dot") {
-      return (
-        <>
-          <h1>Dot Map</h1>
         </>
       );
     } else {
@@ -145,4 +138,4 @@ const LineGraphButton = props => {
   }
 };
 
-export default LineGraphButton;
+export default DisplaySelected;
