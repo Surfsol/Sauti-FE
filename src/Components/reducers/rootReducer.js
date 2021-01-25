@@ -17,6 +17,7 @@ import setApplyReducer from "./setApplyReducer";
 import clearApplyReducer from "./clearApplyReducer";
 import catLabelReducer from "./catReducer";
 import fromNavReducer from "./fromNavReducer";
+import buttonShowReducer from "./buttonsToShowReducer";
 
 const rootReducer = combineReducers({
   barDownloadReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   setApplyReducer,
   clearApplyReducer,
   catLabelReducer,
-  fromNavReducer
+  fromNavReducer,
+  buttonShowReducer
 });
 export default rootReducer;

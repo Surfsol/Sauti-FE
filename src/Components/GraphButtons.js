@@ -3,12 +3,18 @@ import "./scss/graphButtons.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useSelector } from "react-redux";
 
-const GraphButtons = ({ open, setOpen, filters }) => {
+const GraphButtons = ({ open, setOpen }) => {
   const classes = useStyles();
+  const filters = useSelector(state => state.buttonShowReducer);
 
   const lineButton = () => {
-    if (open !== "line" && filters[0].selectedTable === "Sessions") {
+    if (
+      open !== "line" &&
+      filters &&
+      filters[0]?.selectedTable === "Sessions"
+    ) {
       return (
         <div className="all-btn" onClick={() => setOpen("line")}>
           <Tooltip
@@ -68,8 +74,9 @@ const GraphButtons = ({ open, setOpen, filters }) => {
   const choroButton = () => {
     if (
       open !== "choropleth" &&
-      (filters[0]["selectedCategory"] === "Country of Residence" ||
-        filters[0]["selectedCategory"] === "Traders' Destination Country")
+      filters &&
+      (filters[0]?.selectedCategory === "Country of Residence" ||
+        filters[0]?.selectedCategory === "Traders' Destination Country")
     ) {
       return (
         <div className="all-btn" onClick={() => setOpen("choropleth")}>
