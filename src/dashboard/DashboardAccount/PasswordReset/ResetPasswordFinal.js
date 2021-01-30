@@ -55,13 +55,23 @@ const useStyles = makeStyles(theme => ({
       color: "#ffff",
       background: "#eb5e52"
     }
+  },
+  notMatched: {
+    color: "red",
+    fontSize: "2rem"
+  },
+  match: {
+    display: "none"
   }
 }));
 
 const ResetPasswordFinal = props => {
   const [password, setPassword] = useState({
-    password: ""
+    password: "",
+    confirm: ""
   });
+  console.log(password);
+  const [noMatch, setNoMatch] = useState(false);
 
   const [gettingAccount] = useMutation(EDIT);
 
@@ -76,30 +86,31 @@ const ResetPasswordFinal = props => {
     });
   };
 
-  const handleSubmit = async (event, input) => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    await gettingAccount({
-      variables: {
-        editUser: {
-          id: props.props.id,
-          email: props.props.email,
-          password: input.password
-        }
-      }
-    });
 
-    localStorage.clear();
-    swal({ title: "", text: "Password has been changed!", icon: "success" });
-    history.push("/login");
+    if (password.confirm === password.password) {
+      setNoMatch(false);
+      await gettingAccount({
+        variables: {
+          editUser: {
+            id: props.props.id,
+            email: props.props.email,
+            password: password.password
+          }
+        }
+      });
+      localStorage.clear();
+      swal({ title: "", text: "Password has been changed!", icon: "success" });
+      history.push("/login");
+    } else {
+      setNoMatch(true);
+    }
   };
 
   return (
     <ResetPasswordFinalStyles>
-      <form
-        className={classes.root}
-        validate
-        onSubmit={e => handleSubmit(e, password)}
-      >
+      <form className={classes.root} validate onSubmit={e => handleSubmit(e)}>
         <TextField
           required
           variant="outlined"
@@ -123,6 +134,29 @@ const ResetPasswordFinal = props => {
             }
           }}
         />
+        <TextField
+          required
+          variant="outlined"
+          placeholder="********"
+          margin="normal"
+          fullWidth
+          size="large"
+          id="confirm"
+          type="password"
+          label="Confirm Password"
+          name="confirm"
+          autoComplete="Password"
+          autoFocus
+          onChange={handleChange}
+          value={password.confirm}
+          InputProps={{ classes: { root: classes.inputRoot } }}
+          InputLabelProps={{
+            classes: {
+              root: classes.labelRoot,
+              focused: classes.labelFocused
+            }
+          }}
+        />
         <button
           className={classes.button}
           type="submit"
@@ -132,6 +166,9 @@ const ResetPasswordFinal = props => {
         >
           Change Password
         </button>
+        <div className={noMatch ? classes.notMatched : classes.match}>
+          Password and Confirm Password must match.
+        </div>
       </form>
     </ResetPasswordFinalStyles>
   );

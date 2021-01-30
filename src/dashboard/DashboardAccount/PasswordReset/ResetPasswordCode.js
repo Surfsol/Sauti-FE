@@ -1,11 +1,6 @@
 import React, { useState, useRef } from "react";
 import { ResetPasswordCodeStyles } from "../../styledComponents/DashAccount";
 
-// Code Verification
-// Numbers entered into input adds onto the finalCode state, if deleted it removes them
-// Verify button checks finalCode only
-// If code doesnt match, isn't 5 numbers, etc, it pops up an error.
-
 const ResetPasswordCode = ({ length, label, loading, onComplete }) => {
   const [code, setCode] = useState([...Array(length)].map(() => ""));
   const inputs = useRef([]);
