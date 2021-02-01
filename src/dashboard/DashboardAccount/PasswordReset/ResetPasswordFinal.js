@@ -8,8 +8,8 @@ import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 
 const EDIT = gql`
-  mutation editUserData($editUser: newEditUserInput!) {
-    editUser(input: $editUser) {
+  mutation editUserData($resetPassword: newEditUserInput!) {
+    resetPassword(input: $resetPassword) {
       ... on DatabankUser {
         id
         email
@@ -70,11 +70,8 @@ const ResetPasswordFinal = props => {
     password: "",
     confirm: ""
   });
-  console.log(password);
   const [noMatch, setNoMatch] = useState(false);
-
   const [gettingAccount] = useMutation(EDIT);
-
   const history = useHistory();
   const classes = useStyles();
 
@@ -93,7 +90,7 @@ const ResetPasswordFinal = props => {
       setNoMatch(false);
       await gettingAccount({
         variables: {
-          editUser: {
+          resetPassword: {
             id: props.props.id,
             email: props.props.email,
             password: password.password
