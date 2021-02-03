@@ -43,11 +43,11 @@ export default function FilterBox(props) {
     changeYear,
     changeQuarter,
     getCurrentYear,
-    open
+    open,
+    displayDrop,
+    setDisplayDrop
   } = props;
   const [updateUrlFlag, setUpdateUrlFlag] = useState(false);
-  const [displayDrop, setDisplayDrop] = useState([]);
-
   const graphLabels = useSelector(
     state => state.catLabelReducer.labels.getGraphLabels
   );

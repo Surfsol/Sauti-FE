@@ -77,7 +77,8 @@ const useStyles = makeStyles(theme => ({
 const GraphContainer = props => {
   const [filters, setFilters] = useState(props.filters);
   const [queryType, setQueryType] = useState("");
-
+  const [displayDrop, setDisplayDrop] = useState([]);
+  const [compareDrop, setCompareDrop] = useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -191,7 +192,11 @@ const GraphContainer = props => {
                 spacing={2}
                 style={{ height: "30px", padding: "2%" }}
               >
-                <ClearFilters handleApply={handleApply} />
+                <ClearFilters
+                  handleApply={handleApply}
+                  setDisplayDrop={setDisplayDrop}
+                  setCompareDrop={setCompareDrop}
+                />
 
                 <Apply handleApply={handleApply} filters={filters} />
               </Grid>
@@ -231,11 +236,16 @@ const GraphContainer = props => {
                   changeQuarter={changeQuarter}
                   getCurrentYear={getCurrentYear}
                   open={open}
+                  displayDrop={displayDrop}
+                  setDisplayDrop={setDisplayDrop}
                 />
               </Grid>
 
               <Grid container>
-                <CompareSubSamples />
+                <CompareSubSamples
+                  compareDrop={compareDrop}
+                  setCompareDrop={setCompareDrop}
+                />
               </Grid>
 
               <Grid item className={classes.filterCalendar}>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +6,7 @@ import { queriesFilters } from "../../redux-actions/queriesAction";
 import { clearApplyAction } from "../../redux-actions/clearApplyAction";
 import { filterReset } from "./reset";
 
-const ClearFilters = ({ handleApply }) => {
+const ClearFilters = ({ setDisplayDrop, setCompareDrop, handleApply }) => {
   const clearReducer = useSelector(state => state.clearReducer.clear);
   const classes = useStyles();
   const {
@@ -29,6 +28,8 @@ const ClearFilters = ({ handleApply }) => {
 
   function handleClear(e) {
     e.preventDefault();
+    setDisplayDrop([]);
+    setCompareDrop(false);
     setFilters(reset);
     dispatch(queriesFilters(reset));
     setFilterBoxStartDate("2017-01-01");
