@@ -12,7 +12,7 @@ import { allowed } from "../orderedGraphLabels";
 import { clearApplyAction } from "../redux-actions/clearApplyAction";
 import { fromNav } from "../../Components/redux-actions/fromNavAction";
 
-const CompareSubSamples = () => {
+const CompareSubSamples = ({ compareDrop, setCompareDrop }) => {
   const reducerSub = useSelector(
     state => state.compareSubSamplesReducer.compareSub
   );
@@ -28,11 +28,9 @@ const CompareSubSamples = () => {
     open
   } = reducerSub;
   const classes = useStyles();
-
   const graphLabels = useSelector(
     state => state.catLabelReducer.labels.getGraphLabels
   );
-
   const access = useSelector(state => state.tierReducer.access);
   const [noAccess, setNoAccess] = useState(false);
   const [catValue, setCatValue] = useState("");
@@ -63,7 +61,7 @@ const CompareSubSamples = () => {
         ...filters,
         [index]: {
           ...filters[index],
-          selectedCategory: selectedName, //option
+          selectedCategory: selectedName,
           selectedTableColumnName:
             FilterBoxOptions.default[selectedName].value.type,
 
@@ -77,8 +75,6 @@ const CompareSubSamples = () => {
       setCatValue(selectedName);
     }
   }
-
-  const [displayDrop, setDisplayDrop] = useState(false);
 
   function compareOpen() {
     return (
@@ -128,7 +124,7 @@ const CompareSubSamples = () => {
   }
 
   const displayDropOptions = () => {
-    if (displayDrop === true && noAccess === false) {
+    if (compareDrop === true && noAccess === false) {
       return <>{compareOpen()}</>;
     } else if (noAccess === false) {
       return (
@@ -172,9 +168,8 @@ const CompareSubSamples = () => {
   };
 
   if (filterSelectorName === "Compare SubSamples" && open === "bar") {
-    //let allSelectableOptions = Object.keys(FilterBoxOptions.default);
     return (
-      <Grid container onClick={() => setDisplayDrop(!displayDrop)}>
+      <Grid container onClick={() => setCompareDrop(!compareDrop)}>
         {displayDropOptions()}
       </Grid>
     );
