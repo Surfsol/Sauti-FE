@@ -167,26 +167,6 @@ class Admin extends Component {
               </div>
             );
           }
-        },
-
-        {
-          headerName: "DELETE",
-          field: "Delete",
-          sortable: true,
-          filter: true,
-          width: 60,
-          cellRendererFramework: params => {
-            return (
-              <div>
-                <DeleteAccount
-                  params={params}
-                  data={params.data}
-                  otherProps={this.props}
-                  deleteAccount={this.props.deleteAccount}
-                />
-              </div>
-            );
-          }
         }
       ]
     };
