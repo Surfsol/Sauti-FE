@@ -2,18 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import TextField from "@material-ui/core/TextField";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import swal from "sweetalert";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-
-const Users_Query = gql`
-  query UsersQ {
-    allUsers: databankUsers {
-      email
-    }
-  }
-`;
 
 const SEND_EMAIL = gql`
   mutation sendEmail($existingEmail: resetPasswordInput!) {
@@ -116,6 +108,13 @@ const useStyles = makeStyles(theme => ({
       color: "#ffff",
       background: "#eb5e52"
     }
+  },
+  notFound: {
+    color: "red",
+    fontSize: "2rem"
+  },
+  warning: {
+    display: "none"
   }
 }));
 
@@ -125,8 +124,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState({
     email: ""
   });
-
-  const { data } = useQuery(Users_Query);
+  const [emailNotFound, setEmailNotFound] = useState(false);
   const [gettingEmail] = useMutation(SEND_EMAIL);
 
   const handleChange = event => {
@@ -139,27 +137,16 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (event, input) => {
     event.preventDefault();
-
-    await gettingEmail({
-      variables: { existingEmail: input }
-    });
-
-    const validateAgainstDB = data.allUsers.map(user => {
-      return user.email;
-    });
-
-    const matchFound = validateAgainstDB.includes(email.email);
-
-    if (matchFound) {
-      swal({
-        title: "",
-        text: "Success! Please check your email and follow the instructions.",
-        icon: "success"
+    let matchFound;
+    try {
+      matchFound = await gettingEmail({
+        variables: { existingEmail: input }
       });
-      history.push("/");
-    } else {
-      // When it reaches the else statement, it means the email is not present in the DB.
-      // We do not want to show people what exists in our DB and what doesn't
+    } catch (e) {
+      setEmailNotFound(true);
+      return;
+    }
+    if (matchFound) {
       swal({
         title: "",
         text: "Success! Please check your email and follow the instructions.",
@@ -208,6 +195,11 @@ const ForgotPassword = () => {
                   }
                 }}
               />
+              <div
+                className={emailNotFound ? classes.notFound : classes.warning}
+              >
+                Email not found. Please try again.
+              </div>
               <button
                 className={classes.button}
                 type="submit"

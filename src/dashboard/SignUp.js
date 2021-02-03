@@ -4,20 +4,15 @@ import { useHistory } from "react-router-dom";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import swal from "sweetalert";
-
 import { TextField } from "@material-ui/core";
-
 import styled from "styled-components";
-
 import beans from "../assets/images/bean.jpg";
 
 const REGISTER = gql`
@@ -61,7 +56,6 @@ export default function SignInSide(props) {
       user.password === "" ||
       user.organization_type === "" ||
       user.found_by === ""
-      /* || user.tier === "" */
     ) {
       swal({
         title: "Error",
@@ -76,15 +70,19 @@ export default function SignInSide(props) {
       if (createdUser.data.register.id === null) {
         swal({
           title: "Error",
-          text: "Please use a different email.",
+          text:
+            "This email is already in use.  Either reset your password or respond to the verification email that was sent to your account.",
           icon: "warning",
           dangerMode: true
         });
       } else {
-        localStorage.removeItem("token");
-        localStorage.setItem("token", createdUser.data.register.token);
-        history.push("/myaccount");
-        swal({ title: "", text: "Success!", icon: "success" });
+        console.log("create data reg", createdUser.data.register.id);
+        swal({
+          title: `Please confirm your account ${user.email}.`,
+          text: `An email to confirm your account has been sent to ${user.email}.`,
+          icon: "success"
+        });
+        history.push("/");
       }
     }
   };

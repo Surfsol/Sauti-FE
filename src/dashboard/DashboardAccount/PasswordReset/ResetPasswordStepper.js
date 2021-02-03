@@ -10,6 +10,7 @@ import swal from "sweetalert";
 const USER_QUERY = gql`
   query getUser($existingEmail: Email!) {
     User: databankUser(input: $existingEmail) {
+      email
       verification_code
     }
   }
@@ -19,7 +20,6 @@ const ResetPasswordStepper = props => {
   const { data, loading } = useQuery(USER_QUERY, {
     variables: { existingEmail: { email: props.decodedToken.email } }
   });
-
   const [step, setStep] = useState("Step 1");
 
   if (loading) {

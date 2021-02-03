@@ -5,7 +5,7 @@ import { HistoryListen, PageView } from "./GoogleAnalytics/index";
 import UsersQuery from "./Admin/UsersQuery";
 import AccountHandler from "../dashboard/DashboardAccount/AccountHandler";
 import NoAccount from "../dashboard/DashboardAccount/NoAccount";
-import CreateAccount from "./CreateAccount";
+import SignUp from "./SignUp";
 import LandingPage from "./LandingPage";
 import QueryGraphLabels from "./QueryGraphLabels";
 import DashData from "./DashData";
@@ -23,6 +23,7 @@ import Contact from "../Components/themeContact/Contact";
 import About from "../Components/themeAbout/About";
 import Faqs from "../Components/themeFAQs/Faqs";
 import { useSelector } from "react-redux";
+import VerifyEmailContainer from "./DashboardAccount/VerifyEmail/VerifyEmailContainer";
 
 import {
   TopBar,
@@ -108,7 +109,7 @@ function DashNav() {
       />
       <Route exact path="/admin" component={UsersQuery} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={CreateAccount} />
+      <Route exact path="/signup" component={SignUp} />
       <Route exact path="/passwordreset" component={ForgotPassword} />
       <Route exact path="/noaccount" component={NoAccount} />
       <ProtectedRoute exact path="/myaccount" component={AccountHandler} />
@@ -117,6 +118,11 @@ function DashNav() {
         exact
         path="/password-verification"
         component={ResetPasswordContainer}
+      />
+      <CodeRoute
+        exact
+        path="/email-verification"
+        component={VerifyEmailContainer}
       />
     </>
   );
