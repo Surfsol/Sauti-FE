@@ -1,11 +1,7 @@
 import React from "react";
 import { getToken, decodeToken, getSubscription } from "../auth/Auth";
 import { useNewSubName } from "./useNewSubNameHook";
-import DashAccountAdmin from "./DashAccountAdmin";
-import GovAccount from "./GovAccount";
 import NewSubscriberHandler from "./NewSubscriberHandler";
-import NoAccount from "./NoAccount";
-
 import Accounts from "../../Components/Account/index";
 // This component handles the conditionals for the users
 // We can include an else statement if all else fails to throw some error or push them back to login page
@@ -20,11 +16,6 @@ const AccountHandler = () => {
     console.log(newSub, "NEW SUB?");
     sub = newSub;
   }
-  let expiredUser = decoded.tier === "EXPIRED";
-  let freeUser = decoded.tier === "FREE";
-  let paidUser = decoded.tier === "PAID";
-  let govUser = decoded.tier === "GOV_ROLE";
-  let adminUser = decoded.tier === "ADMIN";
 
   let newPaypalSubscriber = useNewSubName(newSub);
 
@@ -32,19 +23,7 @@ const AccountHandler = () => {
     return <NewSubscriberHandler newPaypalSubscriber={newPaypalSubscriber} />;
   }
 
-  if (freeUser) {
-    return <Accounts tier={"FREE"} decoded={decoded} />;
-  } else if (paidUser) {
-    return <Accounts tier={"PAID"} decoded={decoded} />;
-  } else if (adminUser) {
-    return <DashAccountAdmin />;
-  } else if (govUser) {
-    return <GovAccount decoded={decoded} />;
-  } else if (expiredUser) {
-    return <NoAccount decoded={decoded} />;
-  } else {
-    return <div>There has been a problem fetching account details.</div>;
-  }
+  return <Accounts tier={decoded.tier} decoded={decoded} />;
 };
 
 export default AccountHandler;

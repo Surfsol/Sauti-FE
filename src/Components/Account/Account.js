@@ -29,7 +29,7 @@ const Account = ({ decoded, tier }) => {
 
   useEffect(() => {
     dispatch(fromNav(true));
-    if (decoded.tier === "FREE") {
+    if (decoded.tier === "FREE" || decoded.tier === "EXPIRED") {
       setPageId("subscriptions");
     }
   }, []);
