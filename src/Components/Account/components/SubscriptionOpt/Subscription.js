@@ -61,22 +61,7 @@ const Subscription = props => {
       return <PremiumButton />;
       //Pops up modal with Select a Payment Method <MonthlyPayPal />
     } else if (props.tier === "PAID") {
-      return (
-        <>
-          {
-            <Button
-              color="primary"
-              variant="outlined"
-              disabled
-              fullWidth
-              size="large"
-              className={classes.buttonPadding}
-            >
-              Your Plan
-            </Button>
-          }
-        </>
-      );
+      return <CancelButton />;
     }
   };
   return (
