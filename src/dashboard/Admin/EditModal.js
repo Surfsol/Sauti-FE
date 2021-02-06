@@ -202,7 +202,8 @@ const EditModal = props => {
                       <MenuItem value={"FREE"}>FREE</MenuItem>
                       <MenuItem value={"PAID"}>PAID</MenuItem>
                       <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
-                      <MenuItem value={"GOV_ROLE"}>GOVERNMENT</MenuItem>
+                      <MenuItem value={"GOV_ROLE"}>COMPLIMENTARY</MenuItem>
+                      <MenuItem value={"EXPIRED"}>EXPIRED</MenuItem>
                     </Select>
                   </FormControl>
                   <Labels for="Organization">Organization</Labels>
