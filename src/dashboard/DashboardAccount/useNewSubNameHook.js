@@ -14,7 +14,7 @@ export function useNewSubName(newSub) {
     const fetchData = async () => {
       console.log(newSub, "INSIDE USEeffect?");
       try {
-        const url = "https://api.sandbox.paypal.com/v1/oauth2/token";
+        const url = "https://api-m.paypal.com/v1/oauth2/token";
         const oldData = {
           grant_type: "client_credentials"
         };
@@ -49,12 +49,12 @@ export function useNewSubName(newSub) {
           };
 
           const users_subscription = await axios.get(
-            `https://api.sandbox.paypal.com/v1/billing/subscriptions/${newSub}`
+            `https://api-m.paypal.com/v1/billing/subscriptions/${newSub}`
           );
 
           const userPlanID = users_subscription.data.plan_id;
           const users_planIdInformation = await axios.get(
-            `https://api.sandbox.paypal.com/v1/billing/plans/${userPlanID}`
+            `https://api-m.paypal.com/v1/billing/plans/${userPlanID}`
           );
           planIDName = users_planIdInformation.data.name;
         }
