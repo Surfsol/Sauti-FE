@@ -101,6 +101,8 @@ export default function MonthlyPayPal() {
           //     "method": "GET"
           // }
 
+          // once subscription id is confirmed, will update tier to "PAID"
+
           history.push("/data");
         },
         onError: function(err) {
