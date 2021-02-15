@@ -38,7 +38,7 @@ const UPDATE_USER_PLAN_NAME = gql`
   }
 `;
 
-export default function MonthlyPayPal() {
+export default function MonthlyPayPal({ setGetSub }) {
   const [userUpdated] = useMutation(UPDATE_USER_TIER);
   const [addPlan] = useMutation(UPDATE_USER_PLAN_NAME);
 
@@ -67,6 +67,7 @@ export default function MonthlyPayPal() {
             text: "Your account has been upgraded to premium!",
             icon: "success"
           });
+          setGetSub(false);
 
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);

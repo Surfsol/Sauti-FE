@@ -47,7 +47,7 @@ const PayPalModal = ({ setGetSub }) => {
             <FormTitle>Select a payment option</FormTitle>
             <FormTitle>
               {" "}
-              <MonthlyPayPal />
+              <MonthlyPayPal setGetSub={setGetSub} />
             </FormTitle>
           </div>
         </Div>
