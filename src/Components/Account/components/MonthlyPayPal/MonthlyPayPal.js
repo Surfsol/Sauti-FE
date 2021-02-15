@@ -44,6 +44,8 @@ export default function MonthlyPayPal() {
 
   const history = useHistory();
 
+  console.log("before useEffect");
+
   useEffect(function renderPaypalButtons() {
     window.paypal
       .Buttons({
@@ -57,6 +59,10 @@ export default function MonthlyPayPal() {
 
         createSubscription: function(data, actions) {
           return actions.subscription.create({
+            // may need to pay to for recurring billing
+            // https://www.paypalobjects.com/webstatic/mktg/docs/installment_plan_button_guide112012.pdf
+            // will need a plan id
+            // https://www.paypal.com/us/brc/article/setting-up-recurring-payments-for-business#:~:text=Log%20into%20your%20PayPal%20Business,subscription%20plan%2C%20click%20Create%20Plan.
             plan_id: "P-7EN28541UP360613GLZZF7FQ"
           });
         },
@@ -70,6 +76,8 @@ export default function MonthlyPayPal() {
 
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);
+          console.log("decoded token, after pay", decoded);
+          // subscription id generated from onApprove
           decoded.subscription_id = data.subscriptionID;
           localStorage.setItem("xyz", decoded.subscription_id);
           decoded.tier = "PAID";
@@ -85,6 +93,13 @@ export default function MonthlyPayPal() {
           await addPlan({
             variables: { newUserPlan: rest }
           });
+
+          // current error - looks like subscription id is not found
+          //     {
+          //     "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#RESOURCE_NOT_FOUND",
+          //     "rel": "information_link",
+          //     "method": "GET"
+          // }
 
           history.push("/data");
         },
