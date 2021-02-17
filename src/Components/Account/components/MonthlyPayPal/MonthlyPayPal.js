@@ -30,6 +30,7 @@ const UPDATE_USER_PLAN_NAME = gql`
     addPaypalPlan(input: $newUserPlan) {
       ... on DatabankUser {
         email
+        paypal_plan
       }
       ... on Error {
         message
@@ -90,19 +91,17 @@ export default function MonthlyPayPal() {
 
           const { id, tier, subscription_id, ...rest } = decoded;
 
-          await addPlan({
+          const newPlan = await addPlan({
             variables: { newUserPlan: rest }
           });
 
-          // current error - looks like subscription id is not found
-          //     {
-          //     "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#RESOURCE_NOT_FOUND",
-          //     "rel": "information_link",
-          //     "method": "GET"
-          // }
-
-          // once subscription id is confirmed, will update tier to "PAID"
-
+          if (newPlan) {
+            swal({
+              title: "",
+              text: "Your account has been upgraded to premium!",
+              icon: "success"
+            });
+          }
           history.push("/data");
         },
         onError: function(err) {
