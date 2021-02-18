@@ -1,47 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getToken, decodeToken, getSubscription } from "../auth/authorization";
 import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import Loader from "react-loader-spinner";
-import swal from "sweetalert";
-import { Button } from "@material-ui/core";
-
-const CANCEL_USER_SUB = gql`
-  mutation updateUserToFree(
-    $newUpdateUserToFreeInput: newUpdateUserToFreeInput!
-  ) {
-    updateUserToFree(input: $newUpdateUserToFreeInput) {
-      ... on DatabankUser {
-        email
-        subscription_id
-      }
-      ... on Error {
-        message
-      }
-    }
-  }
-`;
+import CancelAccount from "./CancelAccount";
 
 const NewSubscriberHandler = props => {
   const token = getToken();
 
-  const [cancelledSub, setCancelledSub] = useState(false);
-  useEffect(() => {
-    if (cancelledSub) {
-      // reload the page to show the user their subscription expiration date.
-      window.location.reload();
-    }
-  }, [cancelledSub]);
-
-  let tier;
+  let accEmail;
   if (token) {
-    tier = decodeToken(token);
-    tier = tier.tier;
-  }
-  let userEmail;
-  if (token) {
-    userEmail = decodeToken(token);
-    userEmail = userEmail.email;
+    accEmail = decodeToken(token);
+    accEmail = accEmail.email;
   }
   const newSub = getSubscription();
   let sub;
@@ -64,13 +34,12 @@ const NewSubscriberHandler = props => {
   const { loading: fetching, error: err, data, refetch } = useQuery(
     GET_SUBSCRIPTION_ID,
     {
-      variables: { userEmail: userEmail }
+      variables: { userEmail: accEmail }
     }
   );
 
-  const [cancelSub, { loading, error }] = useMutation(CANCEL_USER_SUB);
-
   if (fetching) {
+    console.log("in fetching");
     return (
       <div className="loader-container">
         <Loader
@@ -88,50 +57,7 @@ const NewSubscriberHandler = props => {
     return <h1>ERROR!</h1>;
   }
 
-  const handleSubscriptionCancellation = async e => {
-    // TODO: grab user's subscription_id with a query to DatabankUsers
-    // newSub should be null unless the user has JUST signed up for premium through paypal.
-    // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
-    if (newSub) {
-      console.log(newSub, "NEW SUB SUBSCRIBER HANDLER");
-      await cancelSub({
-        variables: {
-          newUpdateUserToFreeInput: {
-            email: userEmail,
-            subscription_id: data.databankUser.subscription_id
-          }
-        }
-      });
-      // Refetch to get the p_next_billing_time and subscription_id
-      refetch();
-      // trigger a refresh of the page in a useEffect. This is to display to the user their subscription expiration date.
-      setCancelledSub(true);
-      swal({
-        title: "",
-        text: "Subscription cancellation has been processed.",
-        icon: "success"
-      });
-    } else {
-      swal({
-        title: "",
-        text: "Please re-log into your account to perform this action",
-        icon: "warning"
-      });
-    }
-  };
-
-  return (
-    <Button
-      color="primary"
-      variant="contained"
-      fullWidth
-      size="large"
-      className="cancel"
-      onClick={handleSubscriptionCancellation}
-    >
-      Cancel Subscription
-    </Button>
-  );
+  return <CancelAccount data={data} />;
 };
 
 export default NewSubscriberHandler;

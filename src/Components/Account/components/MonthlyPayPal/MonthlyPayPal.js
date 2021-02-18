@@ -30,6 +30,7 @@ const UPDATE_USER_PLAN_NAME = gql`
     addPaypalPlan(input: $newUserPlan) {
       ... on DatabankUser {
         email
+        paypal_plan
       }
       ... on Error {
         message
@@ -44,6 +45,8 @@ export default function MonthlyPayPal({ setGetSub }) {
 
   const history = useHistory();
 
+  console.log("before useEffect");
+
   useEffect(function renderPaypalButtons() {
     window.paypal
       .Buttons({
@@ -57,6 +60,10 @@ export default function MonthlyPayPal({ setGetSub }) {
 
         createSubscription: function(data, actions) {
           return actions.subscription.create({
+            // may need to pay to for recurring billing
+            // https://www.paypalobjects.com/webstatic/mktg/docs/installment_plan_button_guide112012.pdf
+            // will need a plan id
+            // https://www.paypal.com/us/brc/article/setting-up-recurring-payments-for-business#:~:text=Log%20into%20your%20PayPal%20Business,subscription%20plan%2C%20click%20Create%20Plan.
             plan_id: "P-7EN28541UP360613GLZZF7FQ"
           });
         },
@@ -71,6 +78,8 @@ export default function MonthlyPayPal({ setGetSub }) {
 
           const token = localStorage.getItem("token");
           const decoded = decodeToken(token);
+          console.log("decoded token, after pay", decoded);
+          // subscription id generated from onApprove
           decoded.subscription_id = data.subscriptionID;
           localStorage.setItem("xyz", decoded.subscription_id);
           decoded.tier = "PAID";
@@ -83,10 +92,17 @@ export default function MonthlyPayPal({ setGetSub }) {
 
           const { id, tier, subscription_id, ...rest } = decoded;
 
-          await addPlan({
+          const newPlan = await addPlan({
             variables: { newUserPlan: rest }
           });
 
+          if (newPlan) {
+            swal({
+              title: "",
+              text: "Your account has been upgraded to premium!",
+              icon: "success"
+            });
+          }
           history.push("/data");
         },
         onError: function(err) {

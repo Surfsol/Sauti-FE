@@ -23,6 +23,7 @@ import styled from "styled-components";
 import market from "../assets/images/market.jpg";
 import { fromNav } from "../Components/redux-actions/fromNavAction";
 import { useDispatch } from "react-redux";
+import { decodeToken } from "./auth/Auth";
 
 const LOGIN = gql`
   mutation registerNewUser($login: newLoginInput!) {
@@ -83,8 +84,13 @@ export default function SignInSide(props) {
     });
     if (newUser.data.login.token !== null) {
       localStorage.setItem("token", newUser.data.login.token);
+      const token = decodeToken(newUser.data.login.token);
+      if (token.tier === "EXPIRED") {
+        history.push("/myaccount");
+      } else {
+        history.push("/data");
+      }
 
-      history.push("/data");
       swal({ title: "", text: "Success!", icon: "success" });
     } else {
       swal({

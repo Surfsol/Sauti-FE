@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import {
   useMediaQuery,
   Grid,
@@ -12,40 +12,11 @@ import {
 } from "@material-ui/core";
 import Icon from "../../../themeStyledComponents/atoms/Icon";
 import CardPricingStandard from "../../../themeStyledComponents/organisms/CardPricingStandard";
-import { useSelector } from "react-redux";
 import PremiumButton from "../PayPal/PremiumButton";
 import CancelButton from "../CancelSub/CancelButton";
 import { namePlan } from "../planName";
-
-const useStyles = makeStyles(theme => ({
-  root: {},
-  inputTitle: {
-    fontWeight: 700,
-    marginBottom: theme.spacing(1)
-  },
-  switchTitle: {
-    fontWeight: 700
-  },
-  titleCta: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  planText: {
-    color: "#3f51b5",
-    border: "1px solid rgba(63, 81, 181, 0.5)",
-    padding: "0.25em",
-    borderRadius: "4px",
-    textTransform: "uppercase"
-  },
-  buttonPadding: {
-    marginTop: "1.9em"
-  },
-  cardSubTitle: {
-    minHeight: "6em",
-    display: "block"
-  }
-}));
+import Free from "./Free";
+import { useStyles } from "./Styles";
 
 const Subscription = props => {
   const { className, ...rest } = props;
@@ -55,11 +26,18 @@ const Subscription = props => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true
   });
-
+  const [freeView, setFreeView] = useState(false);
   const planName = namePlan(props.tier);
+
+  useEffect(() => {
+    if (props.tier === "FREE" || props.tier === "ADMIN") {
+      setFreeView(true);
+    }
+  }, []);
 
   const yourPlanFree = () => {
     if (props.tier === "FREE") {
+      setFreeView(true);
       return (
         <Button
           color="primary"
@@ -83,22 +61,7 @@ const Subscription = props => {
       return <PremiumButton />;
       //Pops up modal with Select a Payment Method <MonthlyPayPal />
     } else if (props.tier === "PAID") {
-      return (
-        <>
-          {
-            <Button
-              color="primary"
-              variant="outlined"
-              disabled
-              fullWidth
-              size="large"
-              className={classes.buttonPadding}
-            >
-              Your Plan
-            </Button>
-          }
-        </>
-      );
+      return <CancelButton />;
     }
   };
   return (
@@ -117,74 +80,8 @@ const Subscription = props => {
         </Grid>
         <div className={classes.toggleContainer} data-aos="fade-up">
           <Grid container spacing={2}>
-            <Grid item xs={6} className={classes.CardLists}>
-              <CardPricingStandard
-                withShadow
-                liftUp
-                variant="outlined"
-                title="Free Trial"
-                subtitle={
-                  <span className={classes.cardSubTitle}>
-                    Our two week free trial allows you to explore a basic
-                    selection of our Trade Insights Data and try out our
-                    interactive dashboard for free.
-                  </span>
-                }
-                priceComponent={
-                  <div>
-                    <Typography
-                      variant="h3"
-                      component="span"
-                      style={{ fontWeight: 900, minHeight: "6em" }}
-                    >
-                      2 weeks free
-                    </Typography>
-                    {yourPlanFree()}
-                  </div>
-                }
-                features={[
-                  <div>
-                    Demographic Data Series:{" "}
-                    <ul className={classes.seriesList}>
-                      <li>Country of Residence</li>
-                      <li>Age</li>
-                      <li>Education</li>
-                    </ul>
-                  </div>,
-                  <div>
-                    Trade Insights Dataseries:{" "}
-                    <ul className={classes.seriesList}>
-                      <li>Requested Agencies</li>
-                      <li>Requested Procedures, by Destination</li>
-                    </ul>
-                  </div>,
-                  <div>
-                    Business Insights Dataseries:{" "}
-                    <ul className={classes.seriesList}>
-                      <li>Traded Commodity Categories</li>
-                    </ul>
-                  </div>,
-                  "Single data filter",
-                  "Time series views"
-                ]}
-                featureCheckComponent={
-                  <Icon
-                    fontIconClass="far fa-check-circle"
-                    fontIconColor={colors.indigo[500]}
-                  />
-                }
-                cta={
-                  <div
-                    color="primary"
-                    variant="outlined"
-                    fullWidth
-                    size="large"
-                    href="signup"
-                  ></div>
-                }
-              />
-            </Grid>
-            <Grid item xs={6}>
+            {freeView && <Free yourPlanFree={yourPlanFree} />}
+            <Grid item xs={freeView ? 6 : 12}>
               <CardPricingStandard
                 withShadow
                 liftUp
