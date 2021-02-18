@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import gql from "graphql-tag";
 import Loader from "react-loader-spinner";
 import { useMutation } from "@apollo/react-hooks";
-import swal from "sweetalert";
 import { Button } from "@material-ui/core";
+import ShowCancelDate from "./ShowCancelDate";
 
 const CANCEL_USER_SUB = gql`
   mutation updateUserToExpired(
@@ -13,6 +13,7 @@ const CANCEL_USER_SUB = gql`
       ... on DatabankUser {
         email
         subscription_id
+        p_next_billing_time
       }
       ... on Error {
         message
@@ -22,23 +23,22 @@ const CANCEL_USER_SUB = gql`
 `;
 
 const CancelAccount = ({ data }) => {
-  console.log({ data });
+  const [showDate, setShowDate] = useState(false);
   const { subscription_id, email } = data.databankUser;
 
   const [userToCancel, setUserToCancel] = useState({
     email: email,
     subscription_id: subscription_id
   });
-  console.log("in sub cancel");
   const [cancelSub, newUpdateUserToExpiredInput] = useMutation(CANCEL_USER_SUB);
 
   const handleSubscriptionCancellation = async () => {
-    console.log("in handle");
     const subCancel = await cancelSub({
       variables: { newUpdateUserToExpiredInput: userToCancel }
     });
-    console.log({ newUpdateUserToExpiredInput });
-    console.log({ subCancel });
+    if (subCancel) {
+      setShowDate(true);
+    }
 
     if (newUpdateUserToExpiredInput.loading) {
       return (
@@ -59,16 +59,19 @@ const CancelAccount = ({ data }) => {
     }
   };
   return (
-    <Button
-      color="primary"
-      variant="contained"
-      fullWidth
-      size="large"
-      className="cancel"
-      onClick={handleSubscriptionCancellation}
-    >
-      Cancel Subscription
-    </Button>
+    <>
+      <Button
+        color="primary"
+        variant="contained"
+        fullWidth
+        size="large"
+        className="cancel"
+        onClick={handleSubscriptionCancellation}
+      >
+        Cancel Subscription
+      </Button>
+      {showDate && <ShowCancelDate user={email} />}
+    </>
   );
 };
 export default CancelAccount;
