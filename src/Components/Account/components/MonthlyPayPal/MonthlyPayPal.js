@@ -50,32 +50,15 @@ export default function MonthlyPayPal({ setGetSub }) {
   useEffect(function renderPaypalButtons() {
     window.paypal
       .Buttons({
-        // env: "sandbox",
-        // style: {
-        //   shape: "rect",
-        //   size: "responsive",
-        //   color: "blue",
-        //   label: "paypal"
-        // },
-
-        createOrder: (data, actions, err) => {
-          return actions.order.create({
-            intent: "CAPTURE",
-            purchase_units: [
-              {
-                description: "Access to Sauti Trader Insights",
-                amount: {
-                  currency_code: "USD",
-                  value: 60.0
-                }
-              }
-            ]
-            // may need to pay to for recurring billing
-            // https://www.paypalobjects.com/webstatic/mktg/docs/installment_plan_button_guide112012.pdf
-            // will need a plan id
-            // https://www.paypal.com/us/brc/article/setting-up-recurring-payments-for-business#:~:text=Log%20into%20your%20PayPal%20Business,subscription%20plan%2C%20click%20Create%20Plan.
-            // plan_id: "P-6JA0861167729345SVCC4YBI"
-            //plan_id: "P-7EN28541UP360613GLZZF7FQ"
+        style: {
+          shape: "rect",
+          color: "gold",
+          layout: "vertical",
+          label: "subscribe"
+        },
+        createSubscription: function(data, actions) {
+          return actions.subscription.create({
+            plan_id: "P-0RY93884M7582913VMAYEDSY"
           });
         },
 
