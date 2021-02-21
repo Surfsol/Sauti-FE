@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { queriesFilters } from "../Components/redux-actions/queriesAction";
 import { applyAction } from "../Components/redux-actions/applyAction";
 import { allowed } from "../Components/orderedGraphLabels";
-import { decodeToken, getToken } from "../dashboard/auth/Auth";
+import { decodeToken, getToken, getSubscription } from "../dashboard/auth/Auth";
 import { tierDefined } from "../Components/redux-actions/tierAction";
 import { showNoAccessAction } from "../Components/redux-actions/showNoAccessAction";
 import { selectedFiltersAction } from "../Components/redux-actions/selectedFiltersAction";
@@ -36,6 +36,13 @@ function DashHome() {
     access = "paid";
   } else if (tier === "FREE") {
     access = "free";
+  }
+
+  //new subscriber
+  const newSub = getSubscription();
+  if (newSub) {
+    access = "paid";
+    tier = "PAID";
   }
 
   dispatch(tierDefined({ tier: tier, access: access }));
