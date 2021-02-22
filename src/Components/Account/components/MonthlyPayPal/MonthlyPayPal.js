@@ -52,13 +52,14 @@ export default function MonthlyPayPal({ setGetSub }) {
       .Buttons({
         style: {
           shape: "rect",
-          color: "gold",
+          color: "blue",
           layout: "vertical",
           label: "subscribe"
         },
-        createSubscription: function(data, actions) {
+        createSubscription: (data, actions, err) => {
           return actions.subscription.create({
-            plan_id: "P-0RY93884M7582913VMAYEDSY"
+            plan_id: "P-0RY93884M7582913VMAYEDSY" // live
+            // plan_id: "P-7EN28541UP360613GLZZF7FQ" // sandbox
           });
         },
 

@@ -51,9 +51,8 @@ function DashAccount(props) {
     userEmail = userEmail.email;
   }
   const newSub = getSubscription();
-  let sub;
   if (newSub) {
-    sub = newSub;
+    tier = paid;
   }
 
   const GET_SUBSCRIPTION_ID = gql`
@@ -103,7 +102,7 @@ function DashAccount(props) {
     // TODO: grab user's subscription_id with a query to DatabankUsers
 
     // newSub should be null unless the user has JUST signed up for premium through paypal.
-    // Once a user has signed out and returned to the app, the users sub ID is tracked by GET_SUBSCRIPTION_ID.
+    // Once a user has signed out and returned to the app, the users  ID is tracked by GET_SUBSCRIPTION_ID.
     if (newSub === null) {
       await cancelSub({
         variables: {

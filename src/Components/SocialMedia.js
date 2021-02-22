@@ -1,9 +1,6 @@
 import React from "react";
 import CsvDownloader from "react-csv-downloader";
-
-import { getSubscription } from "../dashboard/auth/Auth";
 import DownloadModal from "../dashboard/DownloadModal";
-
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useSelector } from "react-redux";
@@ -32,11 +29,6 @@ const SocialMedia = () => {
     sampleSize = chartDataReducer.sampleSize;
   }
 
-  const newSub = getSubscription();
-  let sub;
-  if (newSub) {
-    sub = newSub;
-  }
   const classes = useStyles();
 
   const socialMediaLink = useHistory().location.search;
@@ -78,7 +70,7 @@ const SocialMedia = () => {
   if (columnsRedux !== undefined) {
     return (
       <>
-        {access !== "free" || sub === newSub ? (
+        {access !== "free" ? (
           <>
             <Grid item style={{ cursor: "pointer" }}>
               <CsvDownloader

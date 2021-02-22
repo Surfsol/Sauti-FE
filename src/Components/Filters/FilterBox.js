@@ -84,6 +84,13 @@ export default function FilterBox(props) {
       access = "free";
     }
 
+    //new subscriber
+    const newSub = getSubscription();
+    if (newSub) {
+      access = "paid";
+      tier = "PAID";
+    }
+
     dispatch(tierDefined({ tier: tier, access: access }));
 
     useEffect(() => {
@@ -149,11 +156,6 @@ export default function FilterBox(props) {
   };
 
   const access = useSelector(state => state.tierReducer.access);
-  const newSub = getSubscription();
-  let sub;
-  if (newSub) {
-    sub = newSub;
-  }
 
   const [loading, setLoading] = useState(false);
 
