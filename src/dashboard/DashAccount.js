@@ -249,7 +249,7 @@ function DashAccount(props) {
             ) : (
               <>
                 <Div>
-                  <H1>Sauti Databank Admin</H1>
+                  <H1>Sauti Trade Insights Admin</H1>
                   <P>Current user type offerings.</P>
                 </Div>
                 <Div2>
