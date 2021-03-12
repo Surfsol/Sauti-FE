@@ -58,7 +58,7 @@ export default function MonthlyPayPal({ setGetSub }) {
         },
         createSubscription: (data, actions, err) => {
           return actions.subscription.create({
-            plan_id: "P-0RY93884M7582913VMAYEDSY" // live
+            plan_id: process.env.REACT_MONTHLY_PLAN_ID // live
             // plan_id: "P-7EN28541UP360613GLZZF7FQ" // sandbox
           });
         },

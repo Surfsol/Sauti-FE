@@ -88,7 +88,7 @@ function SeriesFilterModal({ handleClose }) {
       <div>
         <Div>
           <FormTitle>
-            Welcome to Sauti DataBank, seems you are not logged in.
+            Welcome to Sauti Trade Insights, seems you are not logged in.
           </FormTitle>
           <DownloadText>
             Click <BigContinue>Continue</BigContinue> to learn more or create a
