@@ -44,7 +44,7 @@ const SocialMedia = () => {
 
   function openTwitter() {
     window.open(
-      `https://twitter.com/intent/tweet?text=https://www.https://www.tradeinsights.sautiafrica.org/data${socialMediaLink}`,
+      `https://twitter.com/intent/tweet?text=https://www.tradeinsights.sautiafrica.org/data${socialMediaLink}`,
       "",
       "width=600,height=600"
     );
@@ -52,7 +52,7 @@ const SocialMedia = () => {
 
   function openFace() {
     window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=https://www.https://www.tradeinsights.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`,
+      `https://www.facebook.com/sharer/sharer.php?u=https://www.tradeinsights.sautiafrica.org/data${socialMediaLink}&amp;src=sdkpreparse`,
       "",
       "width=600,height=600"
     );
