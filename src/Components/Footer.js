@@ -64,11 +64,11 @@ export const Footer = () => {
       <div className="col-bot-footer-row">
         <div className="col-bot-footer-row-col-top">
           <p>
-            Sauti Databank is a non-profit organization working to improve the
-            lives of African people trading their goods accross the borders in
-            Kenyan, Ugandan, and Rwandan. We are excited to work with
-            researchers and government officials alike to improve laws and make
-            the lives of traders better.
+            Sauti is a non-profit organization working to improve the lives of
+            African people trading their goods across the borders in Kenyan,
+            Ugandan, and Rwandan. We are excited to work with researchers and
+            government officials alike to improve laws and make the lives of
+            traders better.
           </p>
         </div>
         <div className="col-bot-footer-row-col-bot">
