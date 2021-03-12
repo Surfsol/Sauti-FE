@@ -99,9 +99,9 @@ Other key features include
 - [Material-UI](https://material-ui.com/)
 - [Paypal](https://developer.paypal.com/docs/)
 
-#### Front-end deployed to [AWS](https://www.databank.sautiafrica.org/).
+#### Front-end deployed to [AWS](https://www.tradeinsights.sautiafrica.org/).
 
-#### [Back-end](https://github.com/Lambda-School-Labs/sauti-databank-be) built using:
+#### [Back-end](https://github.com/SautiEastAfrica/Databank_FE/) built using:
 
 - Node.js
 - Apollo-Server-Express
