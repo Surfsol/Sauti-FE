@@ -31,7 +31,7 @@ const Partners = props => {
         <Grid item xs={6} data-aos="fade-up">
           <CardBase variant="outlined" align="left">
             <Typography variant="h4" style={{ paddingBottom: "8px" }}>
-              Demographic, Market, and Trade insights for East Africa's
+              Demographic, market, and trade insights for East Africa's
               cross-border traders
             </Typography>
             <Typography
@@ -54,12 +54,12 @@ const Partners = props => {
         <Grid item xs={6} data-aos="fade-up">
           <SectionHeader
             title="How has cross-border trade behaviour changed during the COVID-19 pandemic?"
-            subtitle="This report presents key findings on the economic impacts of COVID-19 on East Africa's traders. We identify a regional shift of market sourcing from cross-border destinations to local destinations, likely a reflection of national restrictions on cross-border movements."
+            subtitle="This report series presents key findings on the economic impacts of COVID-19 on East Africa's traders. We identify regional shifts in trader's sourcing destinations, the gendered impacts of COVID-19, and the heterogenous speed of economic recovery across East Africa."
             align="left"
-            label="Latest Analysis"
+            label="SAUTI TRADE INSIGHTS COVID-19 BULLETINS"
             ctaGroup={[
               <Button
-                href="https://sautiafrica.org/sauti-trade-insights-covid-19-bulletin/"
+                href="https://sautiafrica.org/category/sauti-trade-insights/"
                 target="_blank"
                 variant="contained"
                 color="primary"

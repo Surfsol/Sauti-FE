@@ -25,6 +25,8 @@ import Faqs from "../Components/themeFAQs/Faqs";
 import { useSelector } from "react-redux";
 import VerifyEmailContainer from "./DashboardAccount/VerifyEmail/VerifyEmailContainer";
 
+import Image from "../../src/Components/themeStyledComponents/atoms/Image/";
+import imgLogo from "../../src/assets/images/web-logo-light.png";
 import {
   TopBar,
   SautiLogo,
@@ -70,11 +72,11 @@ function DashNav() {
               eventLabel="Outbound Link to http://sautiafrica.org/"
               to="http://sautiafrica.org/"
             >
-              <SautiLogoText href="http://sautiafrica.org/">
-                <p>
-                  Sauti<SautiDot>.</SautiDot>
-                </p>
-              </SautiLogoText>
+              <Image
+                src={imgLogo}
+                style={{ marginTop: "4px" }}
+                alt="CBT Insights by Sauti East Africa"
+              />
             </ReactGA.OutboundLink>
           </SautiLogo>
           <Navigation>

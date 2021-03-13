@@ -86,10 +86,12 @@ const AboutPageCover = props => {
                   }
                   subtitle={
                     <span>
-                      The interactive Sauti Trade Insights data portal is
-                      populated through Sauti's mobile-based{" "}
-                      <a href="#">Trade and Market Information Platform</a> for
-                      cross-border traders in East Africa
+                      The interactive Sauti Trade Insights data portal presents
+                      trader survey and behavioural data from Sauti East
+                      Africa's network of{" "}
+                      <a href="http://sautiafrica.org/services-products/trade-market-info-platform/">
+                        Trade and Market Information Platforms
+                      </a>
                     </span>
                   }
                   align="left"
@@ -130,7 +132,13 @@ const AboutPageCover = props => {
                       cross-border traders in Kenya, Rwanda, Uganda and
                       Tanzania. The data is compiled from over 20,000 users and
                       over 60,000 information requests on the Sauti Trade and
-                      Market Information Platform.
+                      Market Information Platform.{" "}
+                      {
+                        <a href="http://sautiafrica.org/services-products/trade-market-info-platform/">
+                          Learn more about Sauti's market and trade infromation
+                          platforms
+                        </a>
+                      }
                     </Typography>
                   </Grid>
                 </Grid>
@@ -196,7 +204,7 @@ const AboutPageCover = props => {
                         "description-list-icon__title"
                       )}
                     >
-                      THE SAUTI TEAM
+                      SAUTI'S EXPERTISE
                     </Typography>
                     <Typography
                       align="left"
@@ -204,11 +212,15 @@ const AboutPageCover = props => {
                     >
                       Sauti is a women-led social enterprise based in Kenya.
                       Together, our team synthesises a wealth of experience
-                      across the agricultural trade and development space. Our
-                      combined experience spans: 10 years of technical
-                      experience in trade and regional integration, 20 years of
-                      business management and operations experience, and 20
-                      years of economic justice and advocacy.
+                      across the agricultural trade and development space.
+                      Drawing from practical experience as a leading innovator
+                      in East Africa, we specialize in engaging hard-to-reach
+                      populations to generate useful insights and analysis.{" "}
+                      {
+                        <a href="http://sautiafrica.org/services-products/research-consulting/">
+                          Learn more about Sauti's research
+                        </a>
+                      }
                     </Typography>
                   </Grid>
                 </Grid>
@@ -225,9 +237,9 @@ const AboutPageCover = props => {
                 title={<span className="text-highlighted">Our Mission</span>}
                 subtitle={
                   <span>
-                    To empower “low technology” environments by reducing the
-                    barrier to information through scalable, sustainable, and
-                    human-centred research and technology solutions.
+                    To empower peripheral and vulnerable populations and reduce
+                    the barriers to information through scalable, sustainable,
+                    and human-centred research and technology solutions.
                   </span>
                 }
                 align="center"
@@ -260,9 +272,11 @@ const AboutPageCover = props => {
                 subtitle={
                   <span>
                     Sauti Trade Insights is updated in real-time from the Sauti
-                    Trade and Market Information Platform. The Sauti Trade
-                    Insights dashboard is under constant review in order to
-                    ensure easy navigation and use.
+                    Trade and Market Information Platform. We work with local
+                    and international experts to find new ways of leveraging our
+                    unique access to East Africa's cross-border traders. Have a
+                    specific area of interest not covered here? Contact us to
+                    discuss our behind-the-scenes work!
                   </span>
                 }
                 ctaGroup={[
