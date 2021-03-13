@@ -154,7 +154,9 @@ const GraphContainer = props => {
           <Grid container xs={12} style={{ height: "50px" }}>
             <Grid item xs={3} className={classes.titleContainer}>
               <Box display="flex" height="100%" alignItems="center">
-                <h1 className={classes.h1}>Sauti Trade Insights</h1>
+                <h1 className={classes.h1}>
+                  Explore Sauti Trade Insights Data
+                </h1>
               </Box>
             </Grid>
             <Grid

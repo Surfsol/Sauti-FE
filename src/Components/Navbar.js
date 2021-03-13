@@ -1,15 +1,12 @@
 import React from "react";
 import "../index.css";
+import imgLogo from "../../../assets/images/web-logo-light.png";
 
 const NavBar = () => {
   return (
     <div className="TopBar">
       <div className="Sauti-Logo">
-        <a href="http://sautiafrica.org/">
-          <p>
-            Sauti<span>.</span>
-          </p>
-        </a>
+        <Image src={imgLogo} alt="CBT Insights by Sauti East Africa" />
       </div>
       <div className="Navigation">
         <a href="http://sautiafrica.org/">HOME</a>
